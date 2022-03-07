@@ -46,4 +46,12 @@ class User extends Authenticatable
 
     protected $table = 'users';
     protected $primaryKey = 'user_id';
+
+    /**
+     * The role of the user
+     */
+    public function role()
+    {
+      return $this->belongsTo(Role::class);
+    }
 }

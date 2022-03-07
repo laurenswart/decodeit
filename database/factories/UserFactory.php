@@ -18,10 +18,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'firstname' => $this->faker->firstname(),
+            'lastname' => $this->faker->lastname(),
             'email' => $this->faker->unique()->safeEmail(),
+            'role_ref' => 2,
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS', // password
             'remember_token' => Str::random(10),
         ];
     }
@@ -36,6 +38,20 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return static
+     */
+    public function role($role='student')
+    {
+        return $this->state(function ($attributes) use ($role) {
+            return [
+                'role_ref' => ($role=='teacher' ? 1 : 2),
             ];
         });
     }
