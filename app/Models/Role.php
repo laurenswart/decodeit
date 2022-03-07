@@ -23,4 +23,5 @@ class Role
 
     protected $timestamps = false;
     protected $table = 'roles';
+    protected $primaryKey = 'role_id';
 }
