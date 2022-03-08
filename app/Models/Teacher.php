@@ -10,7 +10,7 @@ class Teacher extends User
     use HasFactory;
 
     public function students(){
-        return $this->belongsToMany(Student::class, 'teacher_student', 'user_id', 'user_id');
+        return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_ref', 'student_ref', 'user_id', 'user_id');
     }
 
     public function newQuery($excludeDeleted = true)

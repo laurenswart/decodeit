@@ -41,6 +41,8 @@ class UserSeeder extends Seeder
         foreach($users as &$user){
             //set password
             $user['password'] = '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS';
+            $user['created_at'] = $user['created_at'] ?? now(); 
+            $user['updated_at'] = $user['updated_at'] ?? now();
         }
         
         //Insert data in the table
