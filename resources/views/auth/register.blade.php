@@ -1,72 +1,38 @@
 <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
+<div class="guest-form  layer-1 light-card">
+        <h1>Register</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
-            <!-- Name -->
-            <div>
-                <x-label for="firstname" :value="__('Firstname')" />
-
-                <x-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus />
+            <div class="d-flex flex-column flex-md-row">
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter firstname" value="{{ old('firstname') ?? '' }}" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter lastname" :value="{{ old('lastname') ?? '' }}" required >
+                </div>
             </div>
-            <div class="mt-4">
-                <x-label for="lastname" :value="__('Lastname')" />
-
-                <x-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus />
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value=" {{ old('email') ?? '' }}" required >
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required autocomplete="new-password">
             </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
+            <div class="form-group">
+                <label for="password-conf">Confirm Password</label>
+                <input type="password" class="form-control" id="password_confirmation-conf" placeholder="Enter confirmation" name="password_confirmation" required>
             </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="isTeacher" name="isTeacher">
+                <label class="form-check-label" for="isTeacher">I'm a teacher</label>
             </div>
-            <!-- IsTeacher -->
-            <div class="mt-4">
-                <x-label for="isTeacher" :value="__('I am a teacher')" />
-
-                <x-input id="isTeacher" class="block mt-1 w-full"
-                                type="checkbox"
-                                name="isTeacher" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
+            <button type="submit" class="btn myButton">Register</button>
+            <!-- Validation Errors -->
+            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+            <a href="{{ route('login') }}">Already registered ?</a>
         </form>
-    </x-auth-card>
+    </div>
 </x-guest-layout>

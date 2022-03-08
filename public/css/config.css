@@ -1,0 +1,125 @@
+	
+/****************************************************************/
+/** Colors **/
+/****************************************************************/
+:root {
+	--color-veryLightPurple:#9044b9;
+	--color-lightPurple:#702c94;
+	--color-mediumPurple:#4f2271;
+	--color-darkPurple:#352751;
+	--color-veryDarkPurple:#211734;
+	--color-darkestPurple:#170f26;
+	--color-black:#0c0717;
+	--color-whitest:#FBFBFB;
+	--color-lightWhite:#f4f4f4;
+	--color-mediumWhite:#ededed;
+	--color-darkWhite:#d6c3e0;
+	--color-orange:#fdb03d;
+}
+
+/*ligh mode colors *********************************************************/
+
+.palette-light{
+	background-color:var(--color-lightPurple);
+	color:var(--color-lightWhite);
+}
+.palette-medium{
+	background-color:var(--color-mediumPurple);
+	color:var(--color-lightWhite);
+}
+.background{
+	background-color:var(--color-mediumWhite);
+	color:var(--color-veryDarkPurple);
+}
+.layer-1{
+	background-color:var(--color-lightWhite);
+	color:var(--color-darkPurple);
+}
+.layer-2{
+	background-color:var(--color-whitest);
+	color:var(--color-darkPurple);
+}
+.foreground{
+	background-color:var(--color-darkPurple);
+	color:var(--color-mediumWhite);
+}
+
+/*dark mode colors *********************************************************/
+.dark-mode .palette-light{
+	background-color:var(--color-lightPurple);
+	color:var(--color-lightWhite);
+}
+.dark-mode .palette-medium{
+	background-color:var(--color-mediumPurple);
+	color:var(--color-lightWhite);
+}
+.dark-mode .background, .dark-mode.background{
+	background-color:var(--color-darkestPurple);
+	color:var(--color-mediumWhite);
+}
+.dark-mode .layer-1{
+	background-color:var(--color-veryDarkPurple);
+	color:var(--color-mediumWhite);
+}
+.dark-mode .layer-2{
+	background-color:var(--color-darkPurple);
+	color:var(--color-lightWhite);
+}
+.dark-mode .foreground{
+	background-color:var(--color-mediumWhite);
+	color:var(--color-darkestPurple);
+}
+
+
+/**General colors ***************************************************************/
+.palette-highlight{
+	background-color:var(--color-orange);
+	color:var(--color-black);
+}
+.palette-black{
+	background-color:var(--color-black);
+}
+
+.text-white{
+	color:var(--color-mediumWhite);
+}
+
+	
+/****************************************************************/
+/** Fonts **/
+/****************************************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=family=Ubuntu:wght@500&family=Montserrat:wght@700&family=Kanit:wght@200&display=swap');
+
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Montserrat', Arial, sans-serif;
+	color:var(--color-main);
+	border-radius:10px;
+	margin-top:15px;
+	margin-bottom:10px;
+	font-size:1.2rem;
+}	
+
+
+h2{
+	padding:10px 30px;
+	filter: drop-shadow(3px 3px 5px, var(--color-mediumPurple));
+}
+
+
+
+p {
+	font-family:'Kanit Light', 'Kanit';
+	font-size:17px;
+}
+
+nav a , a, label{
+	font-family:'Ubuntu', Arial, sans-serif;
+	font-size:1.2rem;
+}	
+		
+
+
+
+
