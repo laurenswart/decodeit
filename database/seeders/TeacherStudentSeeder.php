@@ -58,31 +58,26 @@ class TeacherStudentSeeder extends Seeder
         }
         */
 
+        //add lswart as student of bobsull
+        $testStudent = User::whereEmail('lswart@gmail.com')->first();
+        $testTeacher = User::whereEmail('bsull@gmail.com')->first();
+        $rows[] = ['student_ref'=>$testStudent->user_id, 'teacher_ref'=>$testTeacher->user_id];
+
         foreach($teachers as $teacher){
             //find max number of students for this teacher
-            $subscription = Payments::where([
-                    ['teacher_ref', '=', $teacher['user_id']],
-                    ['start_date', '<=', now()],
-                    ['expires', '>=', now()],
-                ])
-                ->join('subscriptions', 'payments.subscription_ref', '=', 'subscriptions.subscription_id')
-                ->select('subscriptions.nb_students')
-                ->get();
-            ;
-            if($subscription->empty()) continue;
-            $max_students = $subscription['nb_students'];
+            $subscription = $teacher->currentSubscription();
+            if(empty($subscription)) continue;
+            $max_students = $subscription->nb_students;
             //choose a random amount of students within range
             $nbStudents = rand(0,$max_students);
             if($nbStudents==0) continue;
-            $chosenStudentIds = $students->random($nbStudents)->lists('user_id')->toArray();
+            $chosenStudentIds = $students->random($nbStudents)->pluck('user_id')->toArray();
             //add to db
-            $teacher->students()->sync($chosenStudentIds); // array of student ids
+            //$teacher->students()->sync($chosenStudentIds); // array of student ids  
+            foreach($chosenStudentIds as $chosenStudentId){
+                $rows[] = ['student_ref'=>$chosenStudentId, 'teacher_ref'=>$teacher->user_id];
+            } 
         }
-
-        //add lswart as student of bobsull if not already
-        $testStudent = User::whereEmail('lswart@gmail.com')->first();
-        $testTeacher = User::whereEmail('bsull@gmail.com')->first();
-        $rows[] = ['student_ref'=>$testStudent['user_id'], 'teacher_ref'=>$testTeacher['user_id']];
 
         //insert into table
         DB::table('teacher_student')->insert($rows);

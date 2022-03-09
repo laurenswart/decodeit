@@ -13,6 +13,20 @@ class Teacher extends User
         return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_ref', 'student_ref', 'user_id', 'user_id');
     }
 
+    public function payments(){
+        return $this->hasMany(Payments::class, 'user_id', 'teacher_ref');
+    }
+
+    public function currentSubscription(){
+        $payment =  Payments::where([
+            ['teacher_ref', '=', $this->user_id],
+            ['start_date', '<=', now()],
+            ['expires', '>=', now()],
+        ])->first();
+            //var_dump(empty($payment) ? 'empty' : $payment->subscription_ref );
+        return empty($payment) ? null : Subscriptions::find($payment->subscription_ref);
+    }
+
     public function newQuery($excludeDeleted = true)
     {
         return parent::newQuery($excludeDeleted)
