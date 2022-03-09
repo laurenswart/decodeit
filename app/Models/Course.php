@@ -27,10 +27,14 @@ class Course extends Model
     public $timestamps = true;
 
     protected function teacher(){
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'teacher_ref', 'course_id' );
     }
 
     protected function chapters(){
-        return $this->hasMany(Chapter::class);
+        return $this->hasMany(Chapter::class, 'course_id', 'course_ref' );
+    }
+
+    protected function messages(){
+        return $this->hasMany(Message::class, 'course_id', 'course_ref' );
     }
 }

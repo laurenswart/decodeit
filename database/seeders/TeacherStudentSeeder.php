@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Payments;
+use App\Models\Payment;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;

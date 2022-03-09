@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payments extends Model
+class Payment extends Model
 {
     use HasFactory;
 
@@ -28,4 +28,20 @@ class Payments extends Model
     ];
 
     public $timestamps = false;
+
+    /**
+     * The users that made the payment
+     */
+    public function teacher()
+    {
+      return $this->belongsTo(Teacher::class, 'teacher_ref', 'user_id');
+    }
+
+    /**
+     * The users that made the payment
+     */
+    public function subscription()
+    {
+      return $this->belongsTo(Subscription::class, 'subscription_ref', 'subscription_id');
+    }
 }

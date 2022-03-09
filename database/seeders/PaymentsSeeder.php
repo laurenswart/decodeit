@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Payments;
-use App\Models\Subscriptions;
+use App\Models\Payment;
+use App\Models\Subscription;
 use App\Models\Teacher;
-use Faker\Provider\Payment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +20,7 @@ class PaymentsSeeder extends Seeder
     {
         //Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Payments::truncate();
+        Payment::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //get teachers
@@ -49,7 +48,7 @@ class PaymentsSeeder extends Seeder
             } else {
                 $subscriptionRef = rand(2,4);
             }
-            $subscriptionInfo = Subscriptions::find($subscriptionRef);
+            $subscriptionInfo = Subscription::find($subscriptionRef);
             $paymentDurationId = array_rand($paymentsDurations);
             $payments[] = [
                 'teacher_ref'=> $teacher['user_id'],

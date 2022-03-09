@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Subscriptions;
+use App\Models\Subscription;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +18,7 @@ class SubscriptionsSeeder extends Seeder
     {
         //Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Subscriptions::truncate();
+        Subscription::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //create subscriptions

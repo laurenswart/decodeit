@@ -55,4 +55,12 @@ class User extends Authenticatable
     {
       return $this->belongsTo(Role::class);
     }
+
+    /**
+     * The role of the user
+     */
+    public function messages()
+    {
+      return $this->hasMany(Message::class, 'user_id', 'user_ref');
+    }
 }
