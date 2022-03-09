@@ -24,6 +24,7 @@ class UserFactory extends Factory
             'role_ref' => 2,
             'email_verified_at' => now(),
             'password' => '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS', // password
+            'created_at' => $this->faker->dateTimeBetween('15-10-2021 14:35:26', now()),
             'remember_token' => Str::random(10),
         ];
     }

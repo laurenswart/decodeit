@@ -75,7 +75,9 @@ class TeacherStudentSeeder extends Seeder
             //add to db
             //$teacher->students()->sync($chosenStudentIds); // array of student ids  
             foreach($chosenStudentIds as $chosenStudentId){
-                $rows[] = ['student_ref'=>$chosenStudentId, 'teacher_ref'=>$teacher->user_id];
+                if($chosenStudentId!=113 || $teacher['email']!='bsull@gmail.com'){
+                    $rows[] = ['student_ref'=>$chosenStudentId, 'teacher_ref'=>$teacher->user_id];
+                }
             } 
         }
 

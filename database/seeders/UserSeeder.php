@@ -41,14 +41,11 @@ class UserSeeder extends Seeder
         foreach($users as &$user){
             //set password
             $user['password'] = '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS';
-            $user['created_at'] = $user['created_at'] ?? now(); 
-            $user['updated_at'] = $user['updated_at'] ?? now();
+            $user['created_at'] = $user['created_at'] ?? date("Y-m-d H:i:s", mktime(14, 35, 22, 1, 24, 2022)); 
+            $user['updated_at'] = $user['updated_at'] ?? now(); 
         }
         
         //Insert data in the table
         DB::table('users')->insert($users);
-        
-
-        
     }
 }

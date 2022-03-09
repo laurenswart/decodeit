@@ -33,12 +33,13 @@ class PaymentsSeeder extends Seeder
         $paymentsDurations = [1=>'monthly_price', 6=>'semiyearly_price', 12=>'yearly_price'];
         foreach($teachers as $teacher){
             //free trial
+            $freeTrialDays = rand(0,3);
             $payments[] = [
                 'teacher_ref'=> $teacher['user_id'],
                 'subscription_ref'=> $freeTrialRef,
                 'amount'=>0,
-                'start_date'=>$teacher['created_at']->subDays(5),
-                'expires'=>$teacher['created_at']->subDays(2),
+                'start_date'=>$teacher['created_at'],
+                'expires'=>$teacher['created_at']->addDays($freeTrialDays),
                 'created'=>now(),
             ];
             //paying subscription
@@ -54,8 +55,8 @@ class PaymentsSeeder extends Seeder
                 'teacher_ref'=> $teacher['user_id'],
                 'subscription_ref'=> $subscriptionRef,
                 'amount'=>$subscriptionInfo[$paymentsDurations[$paymentDurationId]],
-                'start_date'=>$teacher['created_at']->subDays(1),
-                'expires'=>$teacher['created_at']->addMonths($paymentDurationId)->subDays(1),
+                'start_date'=>$teacher['created_at']->addDays($freeTrialDays),
+                'expires'=>$teacher['created_at']->addDays($freeTrialDays)->addMonths($paymentDurationId),
                 'created'=>now(),
             ];
         }
