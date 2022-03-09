@@ -23,10 +23,10 @@ class UserSeeder extends Seeder
         
         // INSERT STUDENTS
         User::factory()
-            ->count(105)
+            ->count(700)
             ->create();
         User::factory()->role('teacher')
-            ->count(7)
+            ->count(50)
             ->create();
 
         

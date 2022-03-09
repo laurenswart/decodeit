@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             SubscriptionsSeeder::class,
             PaymentsSeeder::class,
             TeacherStudentSeeder::class,
+            CourseSeeder::class,
             
         ]);
         
