@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Chapter extends Model
 {
     use HasFactory;
 
-    protected $table = 'courses';
+    protected $table = 'chapters';
 
-    protected $primaryKey = 'course_id';
+    protected $primaryKey = 'chapter_id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,18 +19,16 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'teacher_ref',
+        'course_ref',
         'title',
+        'content',
         'is_active',
+        'order_id'
     ];
 
     public $timestamps = true;
 
-    protected function teacher(){
-        return $this->belongsTo(Teacher::class);
-    }
-
-    protected function chapters(){
-        return $this->hasMany(Chapter::class);
+    protected function course(){
+        return $this->belongsTo(Course::class);
     }
 }
