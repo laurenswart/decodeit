@@ -47,7 +47,10 @@ class TeacherStudentSeeder extends Seeder
             //$teacher->students()->sync($chosenStudentIds); // array of student ids  
             foreach($chosenStudents as $chosenStudent){
                 if($chosenStudent['email']!='lswart@gmail.com' || $teacher['email']!='bsull@gmail.com'){
-                    $rows[] = ['student_ref'=>$chosenStudent['user_id'], 'teacher_ref'=>$teacher['user_id']];
+                    $rows[] = [
+                        'student_ref'=>$chosenStudent['user_id'], 
+                        'teacher_ref'=>$teacher['user_id']
+                    ];
                 }
             } 
         }

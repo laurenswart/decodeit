@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teacher_student', function (Blueprint $table) {
+        Schema::create('enrolments', function (Blueprint $table) {
+            $table->id('enrolment_id');
+            $table->foreignId('course_ref');
             $table->foreignId('student_ref');
-            $table->foreignId('teacher_ref');
-            $table->primary(['student_ref', 'teacher_ref']);
+            $table->integer('final_mark')->nullable();
+            $table->timestamp('marked_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
 
+            $table->foreign('course_ref')->references('course_id')->on('courses');
             $table->foreign('student_ref')->references('user_id')->on('users');
-            $table->foreign('teacher_ref')->references('user_id')->on('users');
         });
     }
 
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teacher_student');
+        Schema::dropIfExists('enrolments');
     }
 };

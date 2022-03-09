@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             PaymentsSeeder::class,
             TeacherStudentSeeder::class,
             CourseSeeder::class,
-            
+            EnrolmentSeeder::class,
         ]);
         
         

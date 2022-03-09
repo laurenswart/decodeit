@@ -37,4 +37,8 @@ class Course extends Model
     protected function messages(){
         return $this->hasMany(Message::class, 'course_id', 'course_ref' );
     }
+
+    protected function students(){
+        return $this->belongsToMany(Course::class, 'users', 'course_ref', 'student_ref', 'course_id', 'user_id');
+    }
 }

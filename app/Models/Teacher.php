@@ -16,8 +16,9 @@ class Teacher extends User
     public function payments(){
         return $this->hasMany(Payment::class, 'user_id', 'teacher_ref');
     }
+    //tested
     public function courses(){
-        return $this->hasMany(Course::class, 'user_id', 'teacher_ref');
+        return $this->hasMany(Course::class, 'teacher_ref', 'user_id' );
     }
 
     public function currentSubscription(){

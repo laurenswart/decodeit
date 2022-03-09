@@ -18,4 +18,8 @@ class Student extends User
         return parent::newQuery($excludeDeleted)
             ->whereRoleRef(2);
     }
+
+    protected function courses(){
+        return $this->belongsToMany(Course::class, 'courses', 'student_ref', 'course_ref', 'user_id', 'course_id');
+    }
 }
