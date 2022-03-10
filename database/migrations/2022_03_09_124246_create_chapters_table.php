@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('chapter_id');
             $table->foreignId('course_ref');
             $table->string('title', 100);
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->boolean('is_active')->default(true);
             $table->integer('order_id');
             $table->timestamps();

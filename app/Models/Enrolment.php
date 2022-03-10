@@ -26,4 +26,11 @@ class Enrolment extends Model
     ];
 
     public $timestamps = true;
+
+    /**
+     * The course associated to this enrolment
+     */
+    protected function course(){
+        return $this->belongsTo(Course::class, 'course_ref', 'course_id');
+    }
 }
