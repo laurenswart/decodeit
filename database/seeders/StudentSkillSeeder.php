@@ -28,9 +28,12 @@ class StudentSkillSeeder extends Seeder
         foreach($enrolments as $enrolment){
             //get the skills in that course
             $skills = $enrolment->course->skills;
-            if(empty($skills) || $skills->empty()) continue;
+            //var_dump($skills);
+            //var_dump($enrolment->course);
+            //if($skills->empty()) continue;
             $skills = $skills->toArray();
             $nbSkillsMarked = rand(0, count($skills));
+            var_dump($nbSkillsMarked);
             if($nbSkillsMarked==0) continue;
             //mark some skills
             $skillsMarkedIds = array_rand($skills, $nbSkillsMarked);
@@ -38,7 +41,7 @@ class StudentSkillSeeder extends Seeder
             foreach($skillsMarkedIds as $skillMarkedId){
                 $rows[] = [
                     'enrolment_ref'=>$enrolment->enrolment_id,
-                    'skill_ref'=>$skills[$skillMarkedId]['chapter_id'],
+                    'skill_ref'=>$skills[$skillMarkedId]['skill_id'],
                     'mark'=> rand(10, 100),
                 ];
             }

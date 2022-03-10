@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             EnrolmentSeeder::class,
             ChapterSeeder::class,
             ChaptersReadSeeder::class,
+            SkillSeeder::class,
+            StudentSkillSeeder::class,
         ]);
         
         

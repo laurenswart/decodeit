@@ -33,6 +33,9 @@ class Course extends Model
     protected function chapters(){
         return $this->hasMany(Chapter::class, 'course_ref', 'course_id' );
     }
+    protected function skills(){
+        return $this->hasMany(Skill::class, 'course_ref', 'course_id' );
+    }
 
     protected function messages(){
         return $this->hasMany(Message::class, 'course_id', 'course_ref' );
