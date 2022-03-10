@@ -27,7 +27,7 @@ class Course extends Model
     public $timestamps = true;
 
     protected function teacher(){
-        return $this->belongsTo(Teacher::class, 'teacher_ref', 'course_id' );
+        return $this->belongsTo(Teacher::class, 'teacher_ref', 'user_id' );
     }
 
     protected function chapters(){

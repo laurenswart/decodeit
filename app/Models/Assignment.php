@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chapter extends Model
+class Assignment extends Model
 {
     use HasFactory;
 
-    protected $table = 'chapters';
+    protected $table = 'assignments';
 
-    protected $primaryKey = 'chapter_id';
+    protected $primaryKey = 'assignment_id';
 
     /**
      * The attributes that are mass assignable.
@@ -21,9 +21,20 @@ class Chapter extends Model
     protected $fillable = [
         'course_ref',
         'title',
-        'content',
-        'is_active',
-        'order_id'
+        'description',
+        'nb_submissions',
+        'test_script',
+        'max_mark',
+        'course_weight',
+        'start_time',
+        'end_time',
+        'is_test', 
+        'can_execute',
+        'submission_size',
+        'language',
+        'created_at',
+        'updated_at',
+        'deleted_at'
     ];
 
     public $timestamps = true;
