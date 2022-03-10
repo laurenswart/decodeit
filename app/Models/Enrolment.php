@@ -33,4 +33,9 @@ class Enrolment extends Model
     protected function course(){
         return $this->belongsTo(Course::class, 'course_ref', 'course_id');
     }
+
+    
+    protected function studentSkills(){
+        return $this->hasMany(Skill::class, 'skill_ref', 'skill_id');
+    }
 }
