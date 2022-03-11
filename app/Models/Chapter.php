@@ -31,4 +31,8 @@ class Chapter extends Model
     protected function course(){
         return $this->belongsTo(Course::class, 'course_ref', 'course_id');
     }
+
+    protected function assignments(){
+        return $this->belongsToMany(Assignment::class, 'assignment_chapter', 'chapter_ref', 'assignment_ref', 'chapter_id', 'assignment_id');
+    }
 }
