@@ -42,6 +42,11 @@ class Course extends Model
     }
 
     protected function students(){
-        return $this->belongsToMany(Course::class, 'users', 'course_ref', 'student_ref', 'course_id', 'user_id');
+        return $this->belongsToMany(Student::class, 'enrolments','course_ref', 'student_ref','course_id','user_id'   );
+        //return $this->belongsToMany(Student::class, 'enrolments','course_id', 'course_ref','user_id', 'student_ref'  );
+        //return $this->belongsToMany(Student::class, 'enrolments','course_id','user_id', 'course_ref', 'student_ref'  )
+       //return $this->belongsToMany(Student::class, 'enrolments','course_ref','course_id', 'student_ref','user_id'   )
+           // ->withTimestamps()
+            //->wherePivotNull('deleted_at');
     }
 }

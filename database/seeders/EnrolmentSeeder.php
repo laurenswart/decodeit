@@ -6,6 +6,7 @@ use App\Models\Enrolment;
 use App\Models\Teacher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class EnrolmentSeeder extends Seeder
@@ -35,8 +36,11 @@ class EnrolmentSeeder extends Seeder
             foreach($students as $student){
                 $nbCoursesChosen = rand(0,count($courses));
                 if($nbCoursesChosen == 0) continue;
+                /*
                 $chosenCoursesIndexes = array_rand($courses, $nbCoursesChosen);
                 $chosenCoursesIndexes = is_int($chosenCoursesIndexes) ? [$chosenCoursesIndexes] : $chosenCoursesIndexes;
+                */
+                $chosenCoursesIndexes = Arr::random($courses, $nbCoursesChosen);
                 foreach($chosenCoursesIndexes as $chosenCourseIndex){
                     Enrolment::factory()->create([
                         'course_ref' => $courses[$chosenCourseIndex]['course_id'],
