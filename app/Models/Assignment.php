@@ -43,6 +43,10 @@ class Assignment extends Model
         return $this->belongsTo(Course::class, 'course_ref', 'course_id');
     }
 
+    protected function notes(){
+        return $this->hasMany(AssignmentNote::class, 'assignment_ref', 'assignment_id');
+    }
+
     protected function chapters(){
         return $this->belongsToMany(Chapter::class, 'assignment_chapter', 'assignment_ref', 'chapter_ref', 'assignment_id', 'chapter_id');
     }

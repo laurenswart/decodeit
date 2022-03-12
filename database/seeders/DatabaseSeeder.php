@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             StudentSkillSeeder::class,
             AssignmentSeeder::class,
             MessageSeeder::class,
+            AssignmentNoteSeeder::class,
         ]);
         
         
