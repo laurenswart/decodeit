@@ -25,27 +25,24 @@ class UserSeeder extends Seeder
         User::factory()
             ->count(700)
             ->create();
+        // INSERT TEACHERS
         User::factory()->role('teacher')
             ->count(50)
             ->create();
 
         
-        //Define data
-        $users = [
-            //teachers
-            ['firstname'=>'lauren', 'lastname'=>'swart', 'email'=>'lswart@gmail.com', 'role_ref'=>2],
-            //students
-            ['firstname'=>'bob', 'lastname'=>'sull', 'email'=>'bsull@gmail.com', 'role_ref'=>1],
-        ];
-
-        foreach($users as &$user){
-            //set password
-            $user['password'] = '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS';
-            $user['created_at'] = $user['created_at'] ?? date("Y-m-d H:i:s", mktime(14, 35, 22, 1, 24, 2022)); 
-            $user['updated_at'] = $user['updated_at'] ?? now(); 
-        }
-        
-        //Insert data in the table
-        DB::table('users')->insert($users);
+        //Constant users for testing
+        User::factory()->create([
+            'firstname'=>'lauren', 
+            'lastname'=>'swart', 
+            'email'=>'lswart@gmail.com', 
+            'role_ref'=>2
+        ]);
+        User::factory()->create([
+            'firstname'=>'bob', 
+            'lastname'=>'sull', 
+            'email'=>'bsull@gmail.com', 
+            'role_ref'=>1
+        ]);
     }
 }

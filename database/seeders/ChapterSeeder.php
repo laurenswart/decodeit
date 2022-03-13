@@ -4,8 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Chapter;
 use App\Models\Teacher;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ChapterSeeder extends Seeder
@@ -51,7 +53,7 @@ class ChapterSeeder extends Seeder
 
         //find teachers
         $teachers = Teacher::all();
-
+        $rows = [];
         foreach($teachers as $teacher){
             
             //get the current subscription max number of chapters per lesson
@@ -61,6 +63,7 @@ class ChapterSeeder extends Seeder
             $courses = $teacher->courses;
 
             foreach($courses as $course){
+                $titles = [];
                 $nbChaptersToAdd= rand(0, $nbChaptersMax);
                 if($nbChaptersToAdd==0) continue;
                 //choose an intro chapter
@@ -69,31 +72,35 @@ class ChapterSeeder extends Seeder
                 //choose extra chapters
                 if($nbChaptersToAdd > 0 ){
                     $nbChaptersToAdd = min(count(self::TITLES), $nbChaptersToAdd);
-                    $titleIdsToAdd = array_rand(self::TITLES,$nbChaptersToAdd);
-                    $titleIdsToAdd = is_int($titleIdsToAdd) ? [$titleIdsToAdd] : $titleIdsToAdd;
-                    foreach($titleIdsToAdd as $titleIdToAdd){
-                        $titles[] = self::TITLES[$titleIdToAdd];
-                    }
+                    $titles = array_merge($titles, Arr::random(self::TITLES,$nbChaptersToAdd));
                 }
             
                 //prepare chapters for that course
                 foreach($titles as $index=>$title){
-                    $extraTime = rand(60, (4*24*3600));
+                    $minDate = Carbon::today()->subMonth(4);
+                    $maxDate = date_create($teacher->currentSubscription()->expires);
+                    $randomCreationTime = $minDate
+                        ->addDays(rand(1,28))
+                        ->addHours(rand(0,23))
+                        ->addMinutes(rand(0,59))
+                        ->addSeconds(rand(0,59));
+                    $randomCreationTime = min($randomCreationTime, $maxDate);
+
                     $rows[] = [
                         'course_ref'=>$course->course_id,
                         'title'=>$title,
                         'content'=> null,
                         'is_active'=> (rand(0,10)<8),
                         'order_id' => $index, 
-                        'created_at' => date( 'Y-m-d H:i:s', $course->created_at->timestamp+$extraTime), 
-                        'updated_at' => ( rand(0,10)<3 ?  date( 'Y-m-d H:i:s', $course->created_at->timestamp+$extraTime) : null), 
+                        'created_at' => $randomCreationTime, 
+                        'updated_at' => ( rand(0,10)<3 ?  $randomCreationTime : null), 
                     ];
                 }
-                //insert into table
-                DB::table('chapters')->insert($rows);
-                unset($rows);
+                
             }
-            
+            //insert into table
+            DB::table('chapters')->insert($rows);
+            unset($rows);
         }
         
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,14 +18,17 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $timestamp = $this->faker->dateTimeBetween(new DateTime('-6 months'), new DateTime('-5 months'));
         return [
             'firstname' => $this->faker->firstname(),
             'lastname' => $this->faker->lastname(),
             'email' => $this->faker->unique()->safeEmail(),
             'role_ref' => 2,
-            'email_verified_at' => now(),
-            'password' => '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS', // password
-            'created_at' => $this->faker->dateTimeBetween('15-10-2021 14:35:26', now()),
+            'email_verified_at' => $timestamp,
+            'password' => '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS',
+            'created_at' => $timestamp,
+            'updated_at' => null,
+            'deleted_at' => null,
             'remember_token' => Str::random(10),
         ];
     }

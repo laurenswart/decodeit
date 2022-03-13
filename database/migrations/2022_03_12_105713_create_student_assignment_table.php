@@ -13,22 +13,24 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('student_skills', function (Blueprint $table) {
+         Schema::create('student_assignment', function (Blueprint $table) {
+            $table->id('student_assignment_id');
             $table->foreignId('enrolment_ref');
-            $table->foreignId('skill_ref');
-            $table->primary(['enrolment_ref', 'skill_ref']);
+            $table->foreignId('assignment_ref');
+            $table->boolean('to_mark')->default(false);
+            $table->boolean('help_needed')->default(false);
             $table->integer('mark')->nullable()->default(null);
+            $table->timestamp('marked_at')->nullable()->default(null);
+            
 
+            $table->foreign('assignment_ref')
+                ->references('assignment_id')->on('assignments')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
             $table->foreign('enrolment_ref')
                 ->references('enrolment_id')->on('enrolments')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-                
-            $table->foreign('skill_ref')
-                ->references('skill_id')->on('skills')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
         });
     }
 
@@ -39,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_skill');
+        Schema::dropIfExists('student_assignment');
     }
 };

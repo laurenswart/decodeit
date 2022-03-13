@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\Skill;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class SkillSeeder extends Seeder
@@ -70,19 +71,17 @@ class SkillSeeder extends Seeder
             //add a random set of skills
             $nbSkills = rand(0, 6);
             if($nbSkills==0) continue;
-            $skillsIds = array_rand(self::SKILLS, $nbSkills);
-            $skillsIds = is_int($skillsIds) ? [$skillsIds] : $skillsIds;
-            foreach($skillsIds as $skillsId){
+            $skills = Arr::random(self::SKILLS, $nbSkills);
+            foreach($skills as $skill){
                 $rows[] = [
                     'course_ref'=>$course->course_id,
-                    'title'=>self::SKILLS[$skillsId]['title'],
-                    'description'=> self::SKILLS[$skillsId]['description'],
+                    'title'=> $skill['title'],
+                    'description'=> $skill['description'],
                 ];
             }
-            //insert into table
-            DB::table('skills')->insert($rows);
-            $rows = [];
-            unset($rows);
+           
         }
+        //insert into table
+        DB::table('skills')->insert($rows);
     }
 }

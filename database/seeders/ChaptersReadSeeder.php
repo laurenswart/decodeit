@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Enrolment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class ChaptersReadSeeder extends Seeder
@@ -23,28 +24,30 @@ class ChaptersReadSeeder extends Seeder
 
         //find enrolments
         $enrolments = Enrolment::all();
-
+        $rows = [];
         foreach($enrolments as $enrolment){
             //get the chapters in that course
             $chapters = $enrolment->course->chapters->where('is_active', 1)->toArray();
             $nbChaptersRead = rand(0, count($chapters));
             if($nbChaptersRead==0) continue;
             //mark some chapters as read
-            $chaptersReadIds = array_rand($chapters, $nbChaptersRead);
-            $chaptersReadIds = is_int($chaptersReadIds) ? [$chaptersReadIds] : $chaptersReadIds;
-            foreach($chaptersReadIds as $chapterReadId){
-                $extraTime = rand(10, (4*24*3600));
+            $chaptersRead = Arr::random($chapters, $nbChaptersRead);
+            foreach($chaptersRead as $chapterRead){
+                $randomTime = now()
+                    ->subMonths(3)
+                    ->addDays(rand(1,26))
+                    ->addHours(rand(0,23))
+                    ->addMinutes(rand(0,59))
+                    ->addSeconds(rand(0,59));
                 $rows[] = [
                     'enrolment_ref'=>$enrolment->enrolment_id,
-                    'chapter_ref'=>$chapters[$chapterReadId]['chapter_id'],
-                    'read_at'=> date( 'Y-m-d H:i:s', strtotime(max($enrolment->created_at,$chapters[$chapterReadId]['created_at']))+$extraTime),
+                    'chapter_ref'=>$chapterRead['chapter_id'],
+                    'read_at'=> $randomTime,
                 ];
             }
-            //insert into table
-            DB::table('chapters_read')->insert($rows);
-            $rows = [];
-            unset($rows);
+           
         }
-        
+        //insert into table
+        DB::table('chapters_read')->insert($rows);
     }
 }

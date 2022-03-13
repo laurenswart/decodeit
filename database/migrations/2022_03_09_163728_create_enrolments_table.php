@@ -17,13 +17,19 @@ return new class extends Migration
             $table->id('enrolment_id');
             $table->foreignId('course_ref');
             $table->foreignId('student_ref');
-            $table->integer('final_mark')->nullable();
-            $table->timestamp('marked_at')->nullable();
+            $table->integer('final_mark')->nullable()->default(null);
+            $table->timestamp('marked_at')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_ref')->references('course_id')->on('courses');
-            $table->foreign('student_ref')->references('user_id')->on('users');
+            $table->foreign('course_ref')
+                ->references('course_id')->on('courses')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+            $table->foreign('student_ref')
+                ->references('user_id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

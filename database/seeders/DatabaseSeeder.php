@@ -25,12 +25,13 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             EnrolmentSeeder::class,
             ChapterSeeder::class,
-            ChaptersReadSeeder::class,
+            ChaptersReadSeeder::class,//no need to check from here further
             SkillSeeder::class,
-            StudentSkillSeeder::class,
+            StudentSkillSeeder::class,//done
             AssignmentSeeder::class,
             MessageSeeder::class,
             AssignmentNoteSeeder::class,
+            AssignmentChapterSeeder::class,
         ]);
         
         

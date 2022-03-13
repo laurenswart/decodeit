@@ -19,11 +19,18 @@ return new class extends Migration
             $table->foreignId('subscription_ref');
             $table->decimal('amount', 6, 2);
             $table->timestamp('start_date')->default(now());
-            $table->timestamp('expires')->nullable();
-            $table->timestamp('created')->default(now());
+            $table->timestamp('expires')->nullable()->default(null);
+            $table->timestamp('created_at')->default(now());
 
-            $table->foreign('subscription_ref')->references('subscription_id')->on('subscriptions');
-            $table->foreign('teacher_ref')->references('user_id')->on('users');
+            $table->foreign('subscription_ref')
+                ->references('subscription_id')->on('subscriptions')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('teacher_ref')
+                ->references('user_id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

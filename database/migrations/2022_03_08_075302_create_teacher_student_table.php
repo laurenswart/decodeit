@@ -18,8 +18,14 @@ return new class extends Migration
             $table->foreignId('teacher_ref');
             $table->primary(['student_ref', 'teacher_ref']);
 
-            $table->foreign('student_ref')->references('user_id')->on('users');
-            $table->foreign('teacher_ref')->references('user_id')->on('users');
+            $table->foreign('student_ref')
+                ->references('user_id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+            $table->foreign('teacher_ref')
+                ->references('user_id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

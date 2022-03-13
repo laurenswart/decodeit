@@ -6,6 +6,7 @@ use App\Models\Enrolment;
 use App\Models\StudentSkill;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class StudentSkillSeeder extends Seeder
@@ -33,12 +34,11 @@ class StudentSkillSeeder extends Seeder
             
             if($nbSkillsMarked==0) continue;
             //mark some skills
-            $skillsMarkedIds = array_rand($skills, $nbSkillsMarked);
-            $skillsMarkedIds = is_int($skillsMarkedIds) ? [$skillsMarkedIds] : $skillsMarkedIds;
-            foreach($skillsMarkedIds as $skillMarkedId){
+            $skillsMarked = Arr::random($skills, $nbSkillsMarked);
+            foreach($skillsMarked as $skillMarked){
                 $rows[] = [
                     'enrolment_ref'=>$enrolment->enrolment_id,
-                    'skill_ref'=>$skills[$skillMarkedId]['skill_id'],
+                    'skill_ref'=>$skillMarked['skill_id'],
                     'mark'=> rand(10, 100),
                 ];
             }

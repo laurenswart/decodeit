@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('forum_messages', function (Blueprint $table) {
-            $table->id('message_id');
-            $table->foreignId('course_ref');
-            $table->foreignId('user_ref');
+        Schema::create('submissions', function (Blueprint $table) {
+            $table->id('submission_id');
+            $table->foreignId('student_assignment_ref');
+            $table->enum('status', ['errored', 'ran', 'passed tests'])->nullable(); //todo more statuses ?
+            $table->text('feedback')->nullable();
             $table->text('content');
             $table->timestamps();
+            
 
-            $table->foreign('course_ref')
-                ->references('course_id')->on('courses')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
-            $table->foreign('user_ref')
-                ->references('user_id')->on('users')
+            $table->foreign('student_assignment_ref')
+                ->references('student_assignment_id')->on('student_assignment')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });
@@ -38,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forum_messages');
+        Schema::dropIfExists('submissions');
     }
 };

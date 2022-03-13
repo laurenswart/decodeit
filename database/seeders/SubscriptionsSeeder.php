@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Subscription;
+use Carbon\Carbon;
+use Database\Factories\SubscriptionFactory;
+use DateTime;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +40,6 @@ class SubscriptionsSeeder extends Seeder
                 'yearly_price'=>0,
                 'is_custom'=>true,
                 'is_active'=>true,
-                'created_at'=>now(),   
             ],
             [
                 'title'=>'starter',
@@ -53,7 +55,6 @@ class SubscriptionsSeeder extends Seeder
                 'yearly_price'=>199.99,
                 'is_custom'=>false,
                 'is_active'=>true,
-                'created_at'=>now(),   
             ],
             [
                 'title'=>'standard',
@@ -69,7 +70,6 @@ class SubscriptionsSeeder extends Seeder
                 'yearly_price'=>299.99,
                 'is_custom'=>false,
                 'is_active'=>true,
-                'created_at'=>now(),   
             ],
             [
                 'title'=>'advanced',
@@ -85,7 +85,6 @@ class SubscriptionsSeeder extends Seeder
                 'yearly_price'=>499.99,
                 'is_custom'=>false,
                 'is_active'=>true,
-                'created_at'=>now(),   
             ],
             [
                 'title'=>'Bob Sull',
@@ -101,9 +100,17 @@ class SubscriptionsSeeder extends Seeder
                 'yearly_price'=>99.99,
                 'is_custom'=>true,
                 'is_active'=>true,
-                'created_at'=>now(),   
             ],
         ];
+
+        foreach( $subscriptions as &$subscription ){
+            $subscription['created_at']  = Carbon::today()
+                        ->subMonths(5)
+                        ->subDays(rand(1,28))
+                        ->subHours(rand(0,23))
+                        ->subMinutes(rand(0,59))
+                        ->subSeconds(rand(0,59));
+        }
 
         DB::table('subscriptions')->insert($subscriptions);
     }

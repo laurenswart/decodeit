@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Payment;
 use App\Models\Subscription;
 use App\Models\Teacher;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,7 @@ class PaymentsSeeder extends Seeder
                 'amount'=>0,
                 'start_date'=>$teacher['created_at'],
                 'expires'=>$teacher['created_at']->addDays($freeTrialDays),
-                'created'=>now(),
+                'created_at'=> $teacher['created_at'],
             ];
             //paying subscription
             if($teacher['email']=='bsull@gmail.com'){
@@ -56,7 +57,7 @@ class PaymentsSeeder extends Seeder
                 'amount'=>$subscriptionInfo[$paymentsDurations[$paymentDurationId]],
                 'start_date'=>$teacher['created_at']->addDays($freeTrialDays),
                 'expires'=>$teacher['created_at']->addDays($freeTrialDays)->addMonths($paymentDurationId),
-                'created'=>now(),
+                'created_at'=>now(),
             ];
         }
 

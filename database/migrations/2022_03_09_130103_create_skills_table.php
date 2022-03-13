@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id('skill_id');
             $table->foreignId('course_ref');
             $table->string('title', 100);
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable()->default(null);
 
-            $table->foreign('course_ref')->references('course_id')->on('courses');
+            $table->foreign('course_ref')
+                ->references('course_id')->on('courses')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

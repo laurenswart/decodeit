@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreignId('course_ref');
             $table->string('title', 100);
             $table->string('description', 255);
-            $table->integer('nb_submissions');
+            $table->integer('nb_submissions')->default(1);
             $table->text('test_script')->nullable();
-            $table->integer('max_mark');
-            $table->integer('course_weight');
+            $table->integer('max_mark')->default(100);
+            $table->integer('course_weight')->default(0);
             $table->timestamp('start_time')->default(now());
             $table->timestamp('end_time')->nullable()->default(null);
             $table->boolean('is_test')->default(false);
@@ -31,7 +31,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_ref')->references('course_id')->on('courses');
+            $table->foreign('course_ref')
+                ->references('course_id')->on('courses')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

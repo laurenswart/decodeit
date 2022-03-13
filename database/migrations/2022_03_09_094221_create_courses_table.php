@@ -21,7 +21,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('teacher_ref')->references('user_id')->on('users');
+            $table->foreign('teacher_ref')
+                ->references('user_id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 
