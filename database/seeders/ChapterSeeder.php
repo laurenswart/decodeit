@@ -53,7 +53,6 @@ class ChapterSeeder extends Seeder
 
         //find teachers
         $teachers = Teacher::all();
-        $rows = [];
         foreach($teachers as $teacher){
             
             //get the current subscription max number of chapters per lesson
@@ -61,7 +60,7 @@ class ChapterSeeder extends Seeder
             $nbChaptersMax = $teacher->currentSubscription()->nb_chapters;
             //get the courses by that teacher
             $courses = $teacher->courses;
-
+            $rows= [];
             foreach($courses as $course){
                 $titles = [];
                 $nbChaptersToAdd= rand(0, $nbChaptersMax);

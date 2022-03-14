@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
             ChapterSeeder::class,
             ChaptersReadSeeder::class,//no need to check from here further
             SkillSeeder::class,
-            StudentSkillSeeder::class,//done
+            StudentSkillSeeder::class,
             AssignmentSeeder::class,
-            MessageSeeder::class,
+            MessageSeeder::class,//done
             AssignmentNoteSeeder::class,
             AssignmentChapterSeeder::class,
         ]);

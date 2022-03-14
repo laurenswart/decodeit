@@ -42,6 +42,7 @@ class PaymentsSeeder extends Seeder
                 'expires'=>$teacher['created_at']->addDays($freeTrialDays),
                 'created_at'=> $teacher['created_at'],
             ];
+            
             //paying subscription
             if($teacher['email']=='bsull@gmail.com'){
                 //custom payment for bob sull
@@ -50,15 +51,23 @@ class PaymentsSeeder extends Seeder
                 $subscriptionRef = rand(2,4);
             }
             $subscriptionInfo = Subscription::find($subscriptionRef);
-            $paymentDurationId = array_rand($paymentsDurations);
-            $payments[] = [
-                'teacher_ref'=> $teacher['user_id'],
-                'subscription_ref'=> $subscriptionRef,
-                'amount'=>$subscriptionInfo[$paymentsDurations[$paymentDurationId]],
-                'start_date'=>$teacher['created_at']->addDays($freeTrialDays),
-                'expires'=>$teacher['created_at']->addDays($freeTrialDays)->addMonths($paymentDurationId),
-                'created_at'=>now(),
-            ];
+            
+            //pay until subscription passes today
+            $passedCurrentDate = false;
+            $endPreviousExpires = $teacher['created_at']->addDays($freeTrialDays);
+            while(!$passedCurrentDate){
+                $paymentDurationId = array_rand($paymentsDurations);
+                $payments[] = [
+                    'teacher_ref'=> $teacher['user_id'],
+                    'subscription_ref'=> $subscriptionRef,
+                    'amount'=>$subscriptionInfo[$paymentsDurations[$paymentDurationId]],
+                    'start_date'=> clone $endPreviousExpires,
+                    'expires'=> (clone $endPreviousExpires)->addMonths($paymentDurationId),
+                    'created_at'=> clone $endPreviousExpires,
+                ];
+                $passedCurrentDate = $teacher['created_at']->addDays($freeTrialDays)->addMonths($paymentDurationId) > now();
+                $endPreviousExpires = $endPreviousExpires->addMonths($paymentDurationId);
+            }
         }
 
         //insert into table

@@ -27,8 +27,9 @@ class EnrolmentSeeder extends Seeder
         //get teachers
         $teachers = Teacher::all();
         $rows = [];
-
+        
         foreach($teachers as $teacher){
+            $rows = [];
             //get teacher's students
             $students = $teacher->students;
             //get teacher's courses that are not deleted
@@ -69,8 +70,10 @@ class EnrolmentSeeder extends Seeder
                 }
             }
 
-        //insert into table
-        DB::table('enrolments')->insert($rows);
+            //insert into table
+            DB::table('enrolments')->insert($rows);
+            $rows = [];
+            unset($rows);
         }
     }
 }

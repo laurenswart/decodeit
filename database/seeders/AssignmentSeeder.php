@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Assignment;
 use App\Models\Chapter;
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -34,10 +35,22 @@ class AssignmentSeeder extends Seeder
         foreach($chapters as $chapter){
             $currentSubscription = $chapter->course->teacher->currentSubscription();
             if(empty($currentSubscription)) continue;
-            $start =$chapter->created_at->timestamp+rand(3600, 134525);
-            $end = $start+rand(3600, 3600*24*5);
             $canExecute = (rand(0,10)<3);
             $language = $canExecute ? self::LANGUAGES[array_rand(self::LANGUAGES, 1)] : null;
+            $minDate = Carbon::today()->subMonth(3);
+            $maxDate = Carbon::today()->subMonth(2);
+            $randomCreationTime = $minDate
+                ->addDays(rand(1,28))
+                ->addHours(rand(0,23))
+                ->addMinutes(rand(0,59))
+                ->addSeconds(rand(0,59));
+            $randomCreationTime = min($randomCreationTime, $maxDate);
+            $randomEndTime = $randomCreationTime
+                ->addDays(rand(1,5))
+                ->addHours(rand(0,23))
+                ->addMinutes(rand(0,59))
+                ->addSeconds(rand(0,59));
+            $randomEndTime = min($randomEndTime, $maxDate);
             $rows[] = [
                 'course_ref'=>$chapter->course->course_id,
                 'title'=>'First assignment',
@@ -47,13 +60,13 @@ class AssignmentSeeder extends Seeder
                 'test_script'=>'some test script here',
                 'max_mark'=> rand(1,10)*10,
                 'course_weight'=>rand(1,10)/10,
-                'start_time'=>  date( 'Y-m-d H:i:s', $start),
-                'end_time'=>  date( 'Y-m-d H:i:s', $end),
+                'start_time'=>  $randomCreationTime,
+                'end_time'=>  $randomEndTime,
                 'is_test' => (rand(0,10)<3), 
                 'can_execute'=> $canExecute,
                 'submission_size'=> $currentSubscription->max_upload_size,
                 'language'=>$language,
-                'created_at'=>  date( 'Y-m-d H:i:s', rand($chapter->created_at->timestamp , $start)),
+                'created_at'=>  date( 'Y-m-d H:i:s', rand($chapter->created_at->timestamp , $randomCreationTime->timestamp)),
             ];
         }
 

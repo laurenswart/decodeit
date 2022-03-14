@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Enrolment;
+use App\Models\Student;
 use App\Models\StudentSkill;
+use App\Models\Teacher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
@@ -18,15 +20,16 @@ class StudentSkillSeeder extends Seeder
      */
     public function run()
     {
+        ini_set('memory_limit', '2048M');
         //Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         StudentSkill::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        //find enrolments
+        //find enrolments per teacher to avoid memory size exhaustion
         $enrolments = Enrolment::all();
-
         foreach($enrolments as $enrolment){
+            $rows = [];
             //get the skills in that course
             $skills = $enrolment->course->skills;
             $skills = $skills->toArray();
@@ -44,7 +47,7 @@ class StudentSkillSeeder extends Seeder
             }
             //insert into table
             DB::table('student_skills')->insert($rows);
-            $rows = [];
+            
             unset($rows);
         }
     }

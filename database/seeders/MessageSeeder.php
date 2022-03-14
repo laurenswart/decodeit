@@ -17,6 +17,7 @@ class MessageSeeder extends Seeder
      */
     public function run()
     {
+        ini_set('memory_limit', '2048M');
         //Empty the table
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Message::truncate();
@@ -34,7 +35,7 @@ class MessageSeeder extends Seeder
             $users[] = $course->teacher;
 
             foreach($users as $user){
-                $nbMessages = rand(1,5);
+                $nbMessages = rand(1,3);
                 Message::factory()->count($nbMessages)->create([
                     'user_ref'=>$user->user_id,
                     'course_ref'=>$course->course_id,

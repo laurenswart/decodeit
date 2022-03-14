@@ -41,6 +41,10 @@ class Course extends Model
         return $this->hasMany(Message::class, 'course_id', 'course_ref' );
     }
 
+    protected function assignments(){
+        return $this->hasMany(Assignment::class, 'course_ref' , 'course_id');
+    }
+
     protected function students(){
         return $this->belongsToMany(Student::class, 'enrolments','course_ref', 'student_ref','course_id','user_id'   );
         //return $this->belongsToMany(Student::class, 'enrolments','course_id', 'course_ref','user_id', 'student_ref'  );

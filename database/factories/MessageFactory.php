@@ -18,7 +18,8 @@ class MessageFactory extends Factory
     public function definition(){
         return [
             'content'=>$this->faker->realText(500),
-            'created_at'=>$this->faker->dateTimeThisMonth(),
+            'created_at'=>$this->faker->dateTimeBetween($startDate = '-3 months', $endDate = '-2 months'),
+            'updated_at'=>null,
         ];
     }
 }

@@ -39,15 +39,19 @@ class Assignment extends Model
 
     public $timestamps = true;
 
-    protected function course(){
+    public function course(){
         return $this->belongsTo(Course::class, 'course_ref', 'course_id');
     }
 
-    protected function notes(){
+    public function notes(){
         return $this->hasMany(AssignmentNote::class, 'assignment_ref', 'assignment_id');
     }
 
-    protected function chapters(){
+    public function chapters(){
         return $this->belongsToMany(Chapter::class, 'assignment_chapter', 'assignment_ref', 'chapter_ref', 'assignment_id', 'chapter_id');
+    }
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class, 'assignment_skills', 'assignment_ref', 'skill_ref', 'assignment_id', 'skill_id');
     }
 }
