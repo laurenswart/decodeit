@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -31,16 +31,16 @@
     <body class="u-body background">
         <header class="navbar-default layer-1">
             <nav class="navbar navbar-expand-lg navbar-light container">
-                <a href="#" class="logo navbar-header navbar-nav ">
+                <a href="{{ route('welcome') }}" class="logo navbar-header navbar-nav ">
                 <img src="images/logo.png">
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul class="nav nav-horizontal my-2 my-lg-0">
-                        <li class="nav-item "><a class="nav-link animate-h" href="index.php#teachers">Teachers</a></li>
-                        <li class="nav-item"><a class="nav-link animate-h" href="index.php#students">Students</a></li>
-                        <li class="nav-item"><a class="nav-link animate-h" href="index.php#pricing">Pricing</a></li>
-                        <li class="nav-item"><a class="nav-link animate-h" href="login.php">Sign In</a></li>
+                        <li class="nav-item "><a class="nav-link animate-h" href="{{ route('welcome') }}#teachers">Teachers</a></li>
+                        <li class="nav-item"><a class="nav-link animate-h" href="{{ route('welcome') }}#students">Students</a></li>
+                        <li class="nav-item"><a class="nav-link animate-h" href="{{ route('welcome') }}#pricing">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link animate-h" href="{{ route('login') }}">Sign In</a></li>
                         <li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>
                     </ul>
                 </div>
@@ -59,19 +59,19 @@
                 <div class="offcanvas-body">
                     <div class="dropdown mt-3">
                         <ul >
-                            <li><a href="index.php#teachers">Teachers</a></li>
-                            <li><a href="index.php#students">Students</a></li>
-                            <li><a href="index.php#pricing">Pricing</a></li>
-                            <li><a href="login.php">Sign In</a></li>
+                            <li><a href="{{ route('welcome') }}#teachers">Teachers</a></li>
+                            <li><a href="{{ route('welcome') }}#students">Students</a></li>
+                            <li><a href="{{ route('welcome') }}#pricing">Pricing</a></li>
+                            <li><a href="{{ route('login') }}">Sign In</a></li>
                             <li><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </header> 
-        <div class="container padder">
-            {{ $slot }}
-        </div>
+        
+        {{ $slot }}
+
         <button onclick="topFunction()" id="scrollToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
         <footer class="u-align-center u-clearfix u-footer  layer-1 u-footer" id="sec-e3f5">
             <div class="u-clearfix u-sheet u-sheet-1">
