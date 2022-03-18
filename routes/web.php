@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
-Route::get('/dashboard', function () {
-    return Auth::user()->role_ref==1 ?  view('teacher.dashboard') : view('student.dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 //ADMIN
 Route::get('/admin/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');

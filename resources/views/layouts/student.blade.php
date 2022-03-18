@@ -32,13 +32,13 @@
 
         <header class="navbar-default sticky-top layer-1">
           <nav class="navbar navbar-expand-lg navbar-light container">
-            <a href="{{ route('dashboard') }}" class="logo navbar-header navbar-nav ">
+            <a href="{{ route('studentDashboard') }}" class="logo navbar-header navbar-nav ">
                 <img src="{{ asset('img/logo.png') }}">
             </a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="nav nav-horizontal my-2 my-lg-0">
-              <li class="nav-item "><a class="nav-link animate-h" href="{{ route('dashboard') }}">Dashboard</a></li>
+              <li class="nav-item "><a class="nav-link animate-h" href="{{ route('studentDashboard') }}">Dashboard</a></li>
               <li class="nav-item"><a class="nav-link animate-h" href="#">Courses</a></li>
               <li class="nav-item">
                 <!-- Authentication -->

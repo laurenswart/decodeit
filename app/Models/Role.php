@@ -22,7 +22,7 @@ class Role extends Model
         'name'
     ];
 
-    protected $timestamps = false;
+    public $timestamps = false;
     protected $table = 'roles';
     protected $primaryKey = 'role_id';
 
