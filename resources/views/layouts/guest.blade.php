@@ -32,7 +32,7 @@
         <header class="navbar-default layer-1">
             <nav class="navbar navbar-expand-lg navbar-light container">
                 <a href="{{ route('welcome') }}" class="logo navbar-header navbar-nav ">
-                <img src="images/logo.png">
+                <img src="{{ asset('img/logo.png') }}">
                 </a>
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
