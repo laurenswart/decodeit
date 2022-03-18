@@ -31,7 +31,7 @@ class Course extends Model
     }
 
     protected function chapters(){
-        return $this->hasMany(Chapter::class, 'course_ref', 'course_id' );
+        return $this->hasMany(Chapter::class, 'course_ref', 'course_id' )->orderBy('order_id');
     }
     protected function skills(){
         return $this->hasMany(Skill::class, 'course_ref', 'course_id' );

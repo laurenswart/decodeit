@@ -20,6 +20,6 @@ class Student extends User
     }
 
     protected function courses(){
-        return $this->belongsToMany(Course::class, 'courses', 'student_ref', 'course_ref', 'user_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'enrolments', 'student_ref', 'course_ref', 'user_id', 'course_id');
     }
 }

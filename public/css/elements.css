@@ -297,6 +297,8 @@ a.btn-right{
 	align-items:stretch;
 	background-color: var(--color-mediumPurple);
 	border: 1px solid var(--color-mediumPurple);
+	text-decoration: none;
+    margin-bottom: 15px;
 }
 
 .zoom:hover{
