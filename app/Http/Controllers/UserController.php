@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,6 +16,13 @@ class UserController extends Controller
             'nbTeachers'=>$nbTeachers,
             'nbStudents'=>$nbStudents,
             'nbDeletes'=>$nbDeletes,
+        ]);
+    }
+
+    public function deletedAccounts(){
+        $users = User::all()->whereNotNull('deleted_at');
+        return view('admin.user.deleted', [
+            'users'=>$users
         ]);
     }
 }

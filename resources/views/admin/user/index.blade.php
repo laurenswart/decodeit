@@ -15,7 +15,7 @@
       <h3>Students</h3><a href="{{ route('adminStudentsIndex')}}">{{ $nbStudents }}<i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <h3>Deleted Accounts</h3><a href="{{ route('adminTeachersIndex')}}">{{ $nbDeletes }}<i class="fas fa-arrow-right"></i></a>
+      <h3>Deleted Accounts</h3><a href="{{ route('adminUsersDeletedAccounts')}}">{{ $nbDeletes }}<i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </div>
@@ -25,7 +25,9 @@
 </div>
 
 <div id="studentsPerTeacher" style="height: 300px;" class="layer-2 admin-box"></div>
+
 @endsection
+
   
 @section('endScripts')
   <script>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-  Teachers
+  Deleted Accounts
 @endsection
 
 @section('content')
@@ -17,14 +17,14 @@
         </tr>
     </thead>
     <tbody>
-      @foreach($teachers as $teacher)
+      @foreach($users as $user)
         
         <tr>
-            <td>{{ $teacher->user_id }}</td>
-            <td>{{ $teacher->firstname }}</td>
-            <td>{{ $teacher->lastname }}</td>
-            <td>{{ $teacher->email }}</td>
-            <td>{{ $teacher->created_at }}<td>
+            <td>{{ $user->user_id }}</td>
+            <td>{{ $user->firstname }}</td>
+            <td>{{ $user->lastname }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->created_at }}<td>
         </tr>
        
       @endforeach

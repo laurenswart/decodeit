@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('users', [UserController::class, 'adminIndex'])
         ->name('adminUsersIndex');
+    Route::get('users/deleted', [UserController::class, 'deletedAccounts'])
+        ->name('adminUsersDeletedAccounts');
+
     Route::get('students', [StudentController::class, 'adminIndex'])
         ->name('adminStudentsIndex');
     Route::get('teachers', [TeacherController::class, 'adminIndex'])

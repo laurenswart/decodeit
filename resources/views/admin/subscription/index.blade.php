@@ -25,7 +25,7 @@
             <td><a href="{{ route('adminSubscriptionsShow', $subscription->subscription_id) }}">{{ $subscription->title }}</a></td>
             <td>{{ $subscription->description }}</td>
             <td>{{ $subscription->is_custom }}</td>
-            <td>{{ $subscription->is_active }}</td>
+            <td><i class="fas fa-{{ $subscription->is_active ? 'check-circle' : 'times' }}"></i></td>
             <td>{{ $subscription->nbUsers() }}<td>
         </tr>
        
@@ -33,5 +33,43 @@
   </tbody>
 </table>
 </div>
+<div id="nbPaymentsPerSubscription" style="height: 300px;" class="layer-2 admin-box col"></div>
+<div class="row">
+  <div id="profitPerSubscription" style="height: 300px;" class="layer-2 admin-box col-7"></div>
+  <div class="layer-2 admin-box col">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3>Paying Monthly</h3><span>{{ $nbMonthly }}</span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <h3>Paying SemiYearly</h3><span>{{ $nbSemiyearly }}</span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <h3>Paying Yearly</h3><span>{{ $nbYearly }}</span>
+    </div>
+  </div>
+</div>
+
+@endsection
+@section('endScripts')
+  <script>
+  const nbPaymentsPerSubscription = new Chartisan({
+  el: '#nbPaymentsPerSubscription',
+  url: "@chart('nbPaymentsPerSubscription')",
+  hooks: new ChartisanHooks()
+    .colors(['#fdb03d', '#702c94'])
+    .legend({ position: 'bottom'})
+    .title('Nb Payments per Subscription')
+    .datasets(['bar', 'bar'])
+    });
+    const profitPerSubscription = new Chartisan({
+  el: '#profitPerSubscription',
+  url: "@chart('profitPerSubscription')",
+  hooks: new ChartisanHooks()
+    .colors(['#fdb03d', '#702c94'])
+    .legend({ position: 'bottom'})
+    .title('Total Profit per Subscription')
+    .datasets(['bar', 'bar'])
+    });
+    </script>
 @endsection
 
