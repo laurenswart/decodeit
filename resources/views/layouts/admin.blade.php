@@ -23,9 +23,10 @@
         <link rel="stylesheet" href="{{ asset('css//config.css') }}" >
         <link rel="stylesheet" href="{{ asset('css/border.css') }}" >
         <link rel="stylesheet" href="{{ asset('css/elements.css') }}" >
-        <link rel="stylesheet" href="{{ asset('css/admin.css') }}" >
+        
 
         <link rel="stylesheet" href="{{ asset('css/index.css') }}" media="screen">
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}" >
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -56,7 +57,7 @@
                         <a class="nav-link animate-v" href="#">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link animate-v" href="#">Subscriptions</a>
+                        <a class="nav-link animate-v" href="{{ route('adminSubscriptionsIndex') }}">Subscriptions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link animate-v" href="#">Statistics</a>
@@ -76,15 +77,11 @@
                 </ul>
             </header>
             <div class="col main-content">
-                <h1></h1>
-                <div class="row">
-                
-
-                    <!-- Page Content -->
-                    <main>
-                    @yield('content')
-                    </main>
-                </div>
+                <h1 class=" block-title  layer-2"> @yield('title')</h1>
+                <!-- Page Content -->
+                <main>
+                @yield('content')
+                </main>
             </div>
         </div>
     </body>

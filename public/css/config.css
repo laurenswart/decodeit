@@ -92,7 +92,7 @@
 @import url('https://fonts.googleapis.com/css2?family=family=Ubuntu:wght@500&family=Montserrat:wght@700&family=Kanit:wght@200&display=swap');
 
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, caption{
 	font-family: 'Montserrat', Arial, sans-serif;
 	color:var(--color-main);
 	border-radius:10px;
@@ -109,7 +109,7 @@ h2{
 
 
 
-p {
+p, td {
 	font-family:'Kanit Light', 'Kanit';
 	font-size:17px;
 }

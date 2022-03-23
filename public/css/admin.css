@@ -20,11 +20,21 @@ body > .row {
 }
 
 #navigation {
-	height: calc(100vh - 67px);
+	min-height: calc(100vh - 67px);
     position: relative;
     transform: translateX(-100%);
     -webkit-transform: translateX(-100%);
 }
+h1.block-title{
+	margin:0;	
+}
+
+td a {
+	font-family: 'Kanit Light', 'Kanit';
+    font-size: 17px;
+	color:var(--color-lightPurple);
+}
+
 
 .slide-in {
     animation: slide-in 0.5s forwards;
@@ -41,7 +51,32 @@ body > .row {
 	opacity: 0;
 	transition: opacity 1000ms;*/
 }
+
+.admin-box{
+	padding: 2rem;
+    border-radius: 10px;
+	
+}
+.admin-box{
+	margin: 5px;
+}
+
+.admin-box table{
+
+}
+
+.admin-box th{
+	font-weight: 500;
+}
     
+.admin-box thead{
+    border-top: none!important;
+	border-bottom: none!important;
+}
+.admin-box .table>:not(:first-child) {
+    border-top: 2px solid var(--color-lightPurple);
+}
+
 @keyframes slide-in {
     100% { transform: translateX(0%);}
 }

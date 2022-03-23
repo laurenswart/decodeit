@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Faker\Provider\ar_EG\Payment;
+use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -38,5 +39,22 @@ class Subscription extends Model
 
     protected function payments(){
         return $this->hasMany(Payment::class, 'subscription_id', 'subscription_ref');
+    }
+
+    public function nbUsers(){
+        return Payment::all()
+        ->where('subscription_ref', '=', $this->subscription_id)
+        ->filter(function($item) {
+            if (Carbon::now()->between($item->start_date, $item->expires)) {
+              return $item;
+            }
+          })
+        ->count();
+    }
+
+    public function nbRelatedPayments(){
+        return Payment::all()
+        ->where('subscription_ref', '=', $this->subscription_id)
+        ->count();
     }
 }
