@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,5 +19,12 @@ use Illuminate\Support\Facades\Route;
     Route::get('subscriptions/{id}', [SubscriptionController::class, 'adminShow'])
         ->where('id', '[0-9]+')
         ->name('adminSubscriptionsShow');
+
+    Route::get('users', [UserController::class, 'adminIndex'])
+        ->name('adminUsersIndex');
+    Route::get('students', [StudentController::class, 'adminIndex'])
+        ->name('adminStudentsIndex');
+    Route::get('teachers', [TeacherController::class, 'adminIndex'])
+        ->name('adminTeachersIndex');
 //});
 

@@ -54,7 +54,7 @@
                         <a class="nav-link active animate-v" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link animate-v" href="#">Users</a>
+                        <a class="nav-link animate-v" href="{{ route('adminUsersIndex') }}">Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link animate-v" href="{{ route('adminSubscriptionsIndex') }}">Subscriptions</a>
@@ -85,5 +85,11 @@
             </div>
         </div>
     </body>
+    <!-- Charting library -->
+    <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
+    <!-- Chartisan -->
+    <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
+    <script></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+    @yield('endScripts')
 </html>
