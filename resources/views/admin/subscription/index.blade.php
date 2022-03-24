@@ -56,7 +56,7 @@
   el: '#nbPaymentsPerSubscription',
   url: "@chart('nbPaymentsPerSubscription')",
   hooks: new ChartisanHooks()
-    .colors(['#fdb03d', '#702c94'])
+    .colors(['#fdb03d', '#702c94', '#d6c3e0'])
     .legend({ position: 'bottom'})
     .title('Nb Payments per Subscription')
     .datasets(['bar', 'bar'])
@@ -65,10 +65,10 @@
   el: '#profitPerSubscription',
   url: "@chart('profitPerSubscription')",
   hooks: new ChartisanHooks()
-    .colors(['#fdb03d', '#702c94'])
+    .colors(['#9044b9'])
     .legend({ position: 'bottom'})
     .title('Total Profit per Subscription')
-    .datasets(['bar', 'bar'])
+    .datasets(['bar'])
     });
     </script>
 @endsection

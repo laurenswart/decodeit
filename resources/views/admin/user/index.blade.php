@@ -52,7 +52,7 @@ const teachersPerStudent = new Chartisan({
   el: '#teachersPerStudent',
   url: "@chart('teachersPerStudent')",
   hooks: new ChartisanHooks()
-    .colors(['#9044b9'])
+    .colors(['#d6c3e0'])
     .legend({ position: 'bottom' })
     .title('Number of Teachers per Student')
     

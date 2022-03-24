@@ -33,9 +33,9 @@
     </head>
     <body class="home background antialiased">
         <div class="layer-2" id="top-bar">
-            <button class="admin-toggler" type="button" style="visibility:hidden">
-                <span><i class="fas fa-bars"></i></span>
-            </button>
+            <button class="admin-toggler close"  type="button"><i class="fas fa-times"></i></button>
+            <button class="admin-toggler open" type="button" style="display:none"><i class="fas fa-bars"></i></button>
+            
             <div>
             Hello {{auth()->guard('admin')->user()->username }}
             </div>
@@ -46,12 +46,9 @@
         </div>
         <div class="row">
             <header class="col-md-2 col-sm-1 layer-1 slide-in" id="navigation">
-                
                 <ul class="nav flex-column" >
-                    <button class="admin-toggler"><i class="fas fa-times"></i></button>
-
                     <li class="nav-item">
-                        <a class="nav-link active animate-v" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active animate-v" aria-current="page" href="{{ route('adminDashboard') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link animate-v" href="{{ route('adminUsersIndex') }}">Users</a>
@@ -60,11 +57,8 @@
                         <a class="nav-link animate-v" href="{{ route('adminSubscriptionsIndex') }}">Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link animate-v" href="#">Statistics</a>
-                    </li>
-                    <li class="nav-item">
                         <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('adminLogout') }}">
                             @csrf
 
                             <a class="nav-link animate-v" href="{{ route('logout') }}"
