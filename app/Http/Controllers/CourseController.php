@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Student;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,10 @@ class CourseController extends Controller
     }
 
     public function studentCourse($id){
+        if (! Gate::allows('view-course', $id)) {
+            abort(403);
+        }
+
         $course = Course::find($id);
 
         $assignments = Assignment::all()
