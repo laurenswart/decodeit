@@ -19,9 +19,9 @@
 		<nav class="back-nav">
 			<a href="{{ route('studentCourse', $chapter->course_ref)}}"><i class="fas fa-arrow-circle-left greyed"></i>Back</a>
 		</nav>
-		<section>
+		<section id="chapter-content">
 			<h2 class="light-card block-title layer-2">Chapter Name</h2>
-			<div class="listElement-v light-card row no-border">
+			<div class="listElement-v light-card row">
 				<span class="listElementTitle palette-medium col-12">Section I</span>
 				<span class="listElementContent col background">
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
@@ -33,7 +33,7 @@
 				</span>
 			</div>
 
-			<div class="listElement-v light-card row no-border">
+			<div class="listElement-v light-card row">
 				<span class="listElementTitle palette-medium col-12">Section II</span>
 				<span class="listElementContent col background">
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
@@ -51,7 +51,7 @@
 				</span>
 			</div>
 
-			<div class="listElement-v light-card row no-border">
+			<div class="listElement-v light-card row">
 				<span class="listElementTitle palette-medium col-12">Section III</span>
 				<span class="listElementContent col background">
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
@@ -60,24 +60,42 @@
 				</span>
 			</div>
 			<div class="d-flex justify-content-center btn-box">
-				<button class="btn btn-left myButton btn-highlight">Read</button>
+				<button class="btn-left myButton btn-highlight">Read</button>
 			</div>
 			
 		</section>
 
 
+		@if( count($chapter->assignments) !=0 )
 		<section id="coming-up">
-			<h2 class="light-card block-title layer-2">Assignments</h2>
-			@foreach($chapter->assignments as $assignment)
-			<a href="{{ route('studentAssignment', $assignment->assignment_id)}}" class="listElement-h light-card row zoom">
-				<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time }}</span>
-				<span class="listElementContent col background">
-					<span class=""><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
-					<span><i class="fas fa-check-circle greyed"></i></span>
+		<h2 class="light-card block-title layer-2">Assignments</h2>
+        @foreach($chapter->assignments as $assignment)
+		<a href="{{ route('studentAssignment', $assignment->assignment_id)}}" class="listElement-h light-card row zoom">
+			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time }}</span>
+			<span class="listElementContent col background">
+				<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
+				<span>
+					{{ ucwords($assignment->statusForAuth()) }}
+					@switch( $assignment->statusForAuth() )
+						@case('to do')
+							<i class="fas fa-exclamation-circle"></i>
+							@break
+						@case('marked')
+							<i class="fas fa-inbox-in greyed"></i>
+							@break
+						@case('done')
+							<i class="fas fa-check-circle greyed"></i>
+							@break
+						@default
+							<i class="fas fa-question-circle"></i>
+					@endswitch
 				</span>
-			</a>
-			@endforeach
-		</section>
+			</span>
+		</a>
+        @endforeach
+		
+	</section>
+		@endif
 	</div>
 
 </div>

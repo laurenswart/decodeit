@@ -68,7 +68,7 @@ class Assignment extends Model
             ->first();
 
         if (empty($attempt)){
-            return 'not done';
+            return 'to do';
         }
         if($attempt->to_mark === null){
             return 'incomplete';

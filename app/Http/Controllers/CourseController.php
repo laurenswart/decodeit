@@ -19,14 +19,12 @@ class CourseController extends Controller
         $courses = Student::find(Auth::id())->courses
             ->whereNull('deleted_at');
 
-        $assignments = DB::table('assignments')
-            ->orderBy('start_time')
-            ->orderBy('end_time')
-            ->whereIn('course_ref', $courses->pluck('course_id'))
-            ->get()
-            ;
-
         
+        $assignments = Assignment::all()
+            ->sortBy('start_time')
+            ->sortBy('end_time')
+            ->whereIn('course_ref', $courses->pluck('course_id'));
+
         return view('student.courses', [
             'courses'=>$courses,
             'assignments'=>$assignments
@@ -40,11 +38,8 @@ class CourseController extends Controller
             ->sortBy('start_time')
             ->sortBy('end_time')
             ->where('course_ref', $id)
-            ;
         ;
 
-        //dd($assignments);
-        
         return view('student.course', [
             'course'=>$course,
             'assignments'=>$assignments

@@ -138,6 +138,7 @@ a.animate-v:hover:after {
 a.animate-v{
 	position: relative;
 	color:var(--color-darkPurple);
+	text-decoration: none;
 }
 
 a.animate-h:after {    
@@ -222,7 +223,7 @@ a.btn-right{
 
 .myButton {
     padding: 15px 25px;
-    border: unset;
+    border: none;
     border-radius: 15px;
     color:  var(--color-white);
     z-index: 1;
@@ -279,7 +280,9 @@ a.btn-right{
 /********************************/
 
 
-
+#chapter-content .listElementContent{
+	padding:1.5rem;
+}
 
 .listElement-h{
 	justify-content:space-between;
@@ -302,7 +305,7 @@ a.btn-right{
 	
 }
 
-.row.listElement-h{
+.row.listElement-h, .row.listElement-v{
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -557,18 +560,24 @@ nav.back-nav{
     margin-top: 20px;
 }
 
+nav.back-nav a{
+	text-decoration: none;
+}
+
 .label{
 	font-weight: bold;
 	padding-right:10px;
 }
 
 .accordion-button {
-	padding:0;
+	padding: 0!important;;
 	border-radius: 8px!important;
+	margin-bottom: 0;
 }
 .accordion-item {
     background-color: none;;
     border: none;
+	margin-bottom: 10px;;
 }
 
 .accordion-button.collapsed {
@@ -576,6 +585,10 @@ nav.back-nav{
 }
 .accordion-button:not(.collapsed) {
     background:var(--color-mediumWhite);
+}
+.accordion-header{
+	margin-left: 0!important;
+	margin-right: 0!important;
 }
 
 .accordion-button:not(.collapsed)::after {
@@ -593,7 +606,7 @@ nav.back-nav{
 	flex-direction: column;
 	justify-content: flex-end;
 }
-#submission .btn-box button{
+#submission .btn-box button:not(:first-of-type){
 	margin-top:5px;
 }
 .container.padder{
@@ -679,3 +692,68 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	margin-left:5px;
 }
 
+#info #details span{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 5px;;
+}
+
+#info #description{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#info .listElementContent > .row{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#console{
+	padding-left: 0;
+	padding-right: 0;
+	margin-bottom: 0;
+}
+#editor{
+	min-height: 200px;
+}
+#submission > .row{
+	margin-left: 0;	
+	margin-right: 0;
+}
+#console .listElementContent{
+	min-height: 200px;
+    background-color: var(--color-black);
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+#console .listElementContent ul{
+	padding-left: 0;;
+}
+
+#console .listElementContent li{ 
+	color:var(--color-mediumWhite);
+	font-family: 'Consolas';
+}
+#console .listElementContent li::before{
+	content:">>";
+} 
+
+
+
+
+@media (max-width: 768px) {
+		#accordion .listElementContent{
+			min-width: 100%;
+		}
+		#accordion .accordion-button{
+			flex-direction: column;	
+		}
+		#accordion .listElementTitle{
+			height: auto;
+		}
+		#submission .myButton{
+			margin-top: 5px;;
+		}
+	}

@@ -118,7 +118,16 @@ nav a , a, label{
 	font-family:'Ubuntu', Arial, sans-serif;
 	font-size:1.2rem;
 }	
-		
+
+.back-nav a {
+	color:var(--color-darkPurple);
+}
+.back-nav a:hover *, .back-nav a:hover {
+	color:var(--color-orange);
+}
+.dark-mode a{
+	color:var(--color-mediumWhite);
+}
 
 
 

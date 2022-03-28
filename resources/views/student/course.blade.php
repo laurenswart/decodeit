@@ -33,8 +33,8 @@
 				<span>
 					{{ ucwords($assignment->statusForAuth()) }}
 					@switch( $assignment->statusForAuth() )
-						@case('not done')
-							<i class="fas fa-times-circle"></i>
+						@case('to do')
+							<i class="fas fa-exclamation-circle"></i>
 							@break
 						@case('marked')
 							<i class="fas fa-inbox-in greyed"></i>
