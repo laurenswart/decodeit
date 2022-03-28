@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model
 {
@@ -45,7 +46,7 @@ class Course extends Model
         return $this->hasMany(Assignment::class, 'course_ref' , 'course_id');
     }
 
-    protected function students(){
+    public function students(){
         return $this->belongsToMany(Student::class, 'enrolments','course_ref', 'student_ref','course_id','user_id'   );
         //return $this->belongsToMany(Student::class, 'enrolments','course_id', 'course_ref','user_id', 'student_ref'  );
         //return $this->belongsToMany(Student::class, 'enrolments','course_id','user_id', 'course_ref', 'student_ref'  )
@@ -53,4 +54,13 @@ class Course extends Model
            // ->withTimestamps()
             //->wherePivotNull('deleted_at');
     }
+
+    public function enrolmentForAuth(){
+        $enrolment = Enrolment::all()
+            ->where('student_ref', Auth::id())
+            ->where('course_ref', $this->course_id)
+            ->first();
+        return $enrolment->enrolment_id;
+    }
+    
 }

@@ -36,12 +36,14 @@ class CourseController extends Controller
     public function studentCourse($id){
         $course = Course::find($id);
 
-        $assignments = DB::table('assignments')
-            ->orderBy('start_time')
-            ->orderBy('end_time')
+        $assignments = Assignment::all()
+            ->sortBy('start_time')
+            ->sortBy('end_time')
             ->where('course_ref', $id)
-            ->get()
+            ;
         ;
+
+        //dd($assignments);
         
         return view('student.course', [
             'course'=>$course,

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Assignment extends Model
 {
@@ -53,5 +54,29 @@ class Assignment extends Model
 
     public function skills(){
         return $this->belongsToMany(Skill::class, 'assignment_skills', 'assignment_ref', 'skill_ref', 'assignment_id', 'skill_id');
+    }
+
+    /**
+     * returns not done, incomplete, done, marked 
+     */
+    public function statusForAuth(){
+        $enrolmentId = $this->course->enrolmentForAuth();
+
+        $attempt = DB::table('student_assignment')
+            ->where('enrolment_ref', $enrolmentId)
+            ->where('assignment_ref', $this->assignment_id)
+            ->first();
+
+        if (empty($attempt)){
+            return 'not done';
+        }
+        if($attempt->to_mark === null){
+            return 'incomplete';
+        }
+        if($attempt->mark === null){
+            return 'done';
+        }
+        return 'marked';
+
     }
 }

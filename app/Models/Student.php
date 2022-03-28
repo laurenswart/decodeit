@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,4 +23,5 @@ class Student extends User
     protected function courses(){
         return $this->belongsToMany(Course::class, 'enrolments', 'student_ref', 'course_ref', 'user_id', 'course_id');
     }
+
 }

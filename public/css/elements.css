@@ -299,6 +299,12 @@ a.btn-right{
 	border: 1px solid var(--color-mediumPurple);
 	text-decoration: none;
     margin-bottom: 15px;
+	
+}
+
+.row.listElement-h{
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .zoom:hover{
@@ -322,6 +328,9 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	}
 	a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle{
 		transform: scale(1);
+	}
+	a.listElement-h .listElementContent{
+		border-radius:0 0 8px 8px ;
 	}
 }
 .dark-mode .listElement-h, .darkmode .listElement-v {
