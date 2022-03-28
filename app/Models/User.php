@@ -93,4 +93,12 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function isStudent(){
+        return $this->role_ref === 2;
+    }
+
+    public function isTeacher(){
+        return $this->role_ref === 1;
+    }
 }

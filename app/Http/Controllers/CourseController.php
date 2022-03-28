@@ -15,7 +15,7 @@ class CourseController extends Controller
     
 
     public function studentCourses(){
-
+        $this->authorize('viewAny', Course::class);
         
         $courses = Student::find(Auth::id())->courses
             ->whereNull('deleted_at');
@@ -33,9 +33,7 @@ class CourseController extends Controller
     }
 
     public function studentCourse($id){
-        if (! Gate::allows('view-course', $id)) {
-            abort(403);
-        }
+        Gate::authorize('view-course', $id);
 
         $course = Course::find($id);
 
@@ -49,5 +47,17 @@ class CourseController extends Controller
             'course'=>$course,
             'assignments'=>$assignments
         ]);
+    }
+
+    public function update(Request $request, Course $course){
+        $this->authorize('update', $course);
+ 
+        // The current user can update the course...
+    }
+
+    public function create(Request $request){
+        $this->authorize('create', Course::class);
+    
+        // The current user can create blog posts...
     }
 }
