@@ -4,6 +4,12 @@
         <div class="guest-form layer-1 light-card">
             
             <h1>Reset my Password</h1>
+             <!-- Session Status -->
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+
+            <!-- Validation Errors -->
+            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
             <div class="mb-4 text-sm text-gray-600">
                 {{ __('Forgot your password? No problem. Let us know your email address and we will email you a password reset link.') }}
             </div>

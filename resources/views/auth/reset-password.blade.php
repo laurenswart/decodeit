@@ -4,6 +4,7 @@
         <div class="guest-form layer-1 light-card">
             
             <h1>Reset my Password</h1>
+           
 
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
@@ -28,6 +29,9 @@
                     <label for="password">Confirm</label>
                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required>
                 </div>
+
+                 <!-- Validation Errors -->
+                <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                 <button type="submit" class="myButton">Reset Password</button>
 
