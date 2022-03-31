@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="u-align-center u-container-style u-image u-layout-cell u-right-cell u-size-33 u-image-1" data-image-width="1000" data-image-height="1233">
-                            <div class="u-container-layout u-valign-top u-container-layout-2"><img src="images/onespot.png"></div>
+                            <div class="u-container-layout u-valign-top u-container-layout-2"><img src="{{ asset('img/onespot.png') }}"></div>
                         </div>
                     </div>
                 </div>

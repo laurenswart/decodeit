@@ -21,7 +21,7 @@
                     <label class="form-check-label" for="remember">Remember Me</label>
                 </div>
                 
-                <button type="submit" class="btn myButton">Log in</button>
+                <button type="submit" class="myButton">Log in</button>
                 <!-- Validation Errors -->
             <x-auth-validation-errors class="mt-4" :errors="$errors" />
                 @if (Route::has('password.request'))

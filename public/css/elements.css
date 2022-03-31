@@ -616,6 +616,7 @@ nav.back-nav a{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	max-width: 750px;
 }
 
 .u-body{
@@ -630,6 +631,7 @@ nav.back-nav a{
 }
 .guest-form{
 	padding: 2rem 6rem;
+	width: 100%;
 }
 .guest-form .form-group, .guest-form .form-check{
 	margin-top:10px;
