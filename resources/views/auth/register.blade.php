@@ -4,7 +4,7 @@
             <h1>Register</h1>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-                <div class="d-flex flex-column flex-md-row">
+                <div class="d-flex flex-column flex-md-row justify-content-between">
                     <div class="form-group">
                         <label for="firstname">Firstname</label>
                         <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Enter firstname" value="{{ old('firstname') ?? '' }}" required autofocus>

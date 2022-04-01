@@ -235,6 +235,7 @@ a.btn-right{
     box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms;
     overflow: hidden;
+	color: var(--color-mediumWhite);
 }
    
    
@@ -255,6 +256,9 @@ a.btn-right{
    
 .myButton:hover {
     color: var(--color-white);
+}
+.dark-mode .myButton:hover{
+	color: var(--color-darkPurple);
 }
    
 .myButton:hover::before {
