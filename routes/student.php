@@ -9,18 +9,23 @@ use App\Models\Chapter;
 use Illuminate\Support\Facades\Route;
 
 
-
+//GENERAL
 Route::get('dashboard', ([StudentController::class, 'dashboard']))
     ->name('studentDashboard');
 
-Route::get('courses', ([CourseController::class, 'studentCourses']))
-    ->name('studentCourses');
+//COURSE
+Route::get('courses', ([CourseController::class, 'studentIndex']))
+    ->name('course_studentIndex');
+Route::get('courses/{id}', ([CourseController::class, 'studentShow']))
+    ->where('id', '[0-9]+')
+    ->name('course_studentShow');
 
-Route::get('courses/{id}', ([CourseController::class, 'studentCourse']))
-    ->where('id', '[0-9]+')->name('studentCourse');
-    
-Route::get('chapter/{id}', ([ChapterController::class, 'studentChapter']))
-    ->where('id', '[0-9]+')->name('studentChapter');
+//CHAPTER
+Route::get('chapter/{id}', ([ChapterController::class, 'studentShow']))
+    ->where('id', '[0-9]+')
+    ->name('chapter_studentShow');
 
-Route::get('assignment/{id}', ([AssignmentController::class, 'studentAssignment']))
-    ->where('id', '[0-9]+')->name('studentAssignment');
+//ASSIGNMENT
+Route::get('assignment/{id}', ([AssignmentController::class, 'studentShow']))
+    ->where('id', '[0-9]+')
+    ->name('assignment_studentShow');

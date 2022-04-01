@@ -8,26 +8,25 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+//GENERAL
+Route::get('dashboard',[AdminController::class, 'dashboard'])->name('adminDashboard');	
+Route::post('logout', [AdminAuthController::class, 'logout'])->name('adminLogout');
 
+//SUBSCRIPTIONS
+Route::get('subscriptions', [SubscriptionController::class, 'adminIndex'])
+    ->name('subscription_adminIndex');
+Route::get('subscriptions/{id}', [SubscriptionController::class, 'adminShow'])
+    ->where('id', '[0-9]+')
+    ->name('subscription_adminShow');
 
-//Route::group(['prefix' => 'admin','middleware' => 'adminauth'], function () {
-    // Admin Dashboard
-    Route::get('dashboard',[AdminController::class, 'dashboard'])->name('adminDashboard');	
-    Route::post('logout', [AdminAuthController::class, 'logout'])->name('adminLogout');
-    Route::get('subscriptions', [SubscriptionController::class, 'adminIndex'])
-        ->name('adminSubscriptionsIndex');
-    Route::get('subscriptions/{id}', [SubscriptionController::class, 'adminShow'])
-        ->where('id', '[0-9]+')
-        ->name('adminSubscriptionsShow');
+//USERS
+Route::get('users', [UserController::class, 'adminIndex'])
+    ->name('user_adminIndex');
+Route::get('users/deleted', [UserController::class, 'adminDeletedAccounts'])
+    ->name('user_adminDeletedAccounts');
+Route::get('students', [StudentController::class, 'adminIndex'])
+    ->name('student_adminIndex');
+Route::get('teachers', [TeacherController::class, 'adminIndex'])
+    ->name('teacher_adminIndex');
 
-    Route::get('users', [UserController::class, 'adminIndex'])
-        ->name('adminUsersIndex');
-    Route::get('users/deleted', [UserController::class, 'deletedAccounts'])
-        ->name('adminUsersDeletedAccounts');
-
-    Route::get('students', [StudentController::class, 'adminIndex'])
-        ->name('adminStudentsIndex');
-    Route::get('teachers', [TeacherController::class, 'adminIndex'])
-        ->name('adminTeachersIndex');
-//});
 

@@ -51,10 +51,10 @@
                         <a class="nav-link active animate-v" aria-current="page" href="{{ route('adminDashboard') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link animate-v" href="{{ route('adminUsersIndex') }}">Users</a>
+                        <a class="nav-link animate-v" href="{{ route('user_adminIndex') }}">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link animate-v" href="{{ route('adminSubscriptionsIndex') }}">Subscriptions</a>
+                        <a class="nav-link animate-v" href="{{ route('subscription_adminIndex') }}">Subscriptions</a>
                     </li>
                     <li class="nav-item">
                         <!-- Authentication -->

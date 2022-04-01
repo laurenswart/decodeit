@@ -39,8 +39,8 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
           <ul class="nav nav-horizontal my-2 my-lg-0">
               <li class="nav-item "><a class="nav-link animate-h" href="{{ route('teacherDashboard') }}">Dashboard</a></li>
-              <li class="nav-item"><a class="nav-link animate-h" href="#">Courses</a></li>
-              <li class="nav-item"><a class="nav-link animate-h" href="#">Students</a></li>
+              <li class="nav-item"><a class="nav-link animate-h" href="{{ route('course_teacherIndex')}}">Courses</a></li>
+              <li class="nav-item"><a class="nav-link animate-h" href="{{ route('student_teacherIndex') }}">Students</a></li>
               <li class="nav-item">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

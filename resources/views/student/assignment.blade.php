@@ -4,7 +4,7 @@
 <!-- MAIN RIGHT SECTION -->
 <div>
 	<nav class="back-nav">
-		<a href="{{ route('studentChapter', $assignment->chapters[0]->chapter_id) }}"><i class="fas fa-arrow-circle-left greyed"></i>Back to chapter</a>
+		<a href="{{ route('chapter_studentShow', $assignment->chapters[0]->chapter_id) }}"><i class="fas fa-arrow-circle-left greyed"></i>Back to chapter</a>
 	</nav>
 	<section id="info">
 		<h2 class="light-card block-title layer-2">{{ $assignment->title }}</h2>

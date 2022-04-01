@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
 {
+    /**
+     * Show subscriptions for the authenticated admin
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function adminIndex(){
         $subscriptions = Subscription::all();
 
@@ -41,9 +46,14 @@ class SubscriptionController extends Controller
         
     }
 
+    /**
+     * Show subscription for the authenticated admin
+     *
+     * @param int $id Id of the subscription
+     * @return \Illuminate\Http\Response
+     */
     public function adminShow(int $id){
         $subscription = Subscription::find($id);
-
         return view('admin.subscription.show', [
             'subscription' => $subscription
         ]);

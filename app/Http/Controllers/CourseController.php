@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,14 +14,17 @@ use Illuminate\Support\Facades\DB;
 class CourseController extends Controller
 {
     
-
-    public function studentCourses(){
-        $this->authorize('viewAny', Course::class);
+    /**
+     * Show courses for the authenticated student
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentIndex(){
+        $this->authorize('studentViewAny', Course::class);
         
         $courses = Student::find(Auth::id())->courses
             ->whereNull('deleted_at');
 
-        
         $assignments = Assignment::all()
             ->sortBy('start_time')
             ->sortBy('end_time')
@@ -32,10 +36,33 @@ class CourseController extends Controller
         ]);
     }
 
-    public function studentCourse($id){
-        Gate::authorize('view-course', $id);
+    /**
+     * Show courses for the authenticated teacher
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherIndex(){
+        $this->authorize('teacherViewAny', Course::class);
 
+        $courses = Teacher::find(Auth::id())->courses
+            ->whereNull('deleted_at');
+
+        return view('teacher.course.index', [
+            'courses'=>$courses,
+        ]);
+    }
+
+
+    /**
+     * Show a course for the authenticated student
+     *
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function studentShow($id){
         $course = Course::find($id);
+
+        $this->authorize('studentView', $course);
 
         $assignments = Assignment::all()
             ->sortBy('start_time')
@@ -49,15 +76,27 @@ class CourseController extends Controller
         ]);
     }
 
-    public function update(Request $request, Course $course){
-        $this->authorize('update', $course);
- 
-        // The current user can update the course...
+    /**
+     * Show a course for the authenticated teacher
+     *
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherShow($id){
+        $course = Course::find($id);
+
+        $this->authorize('teacherView', $course);
+
+        $assignments = Assignment::all()
+            ->sortBy('start_time')
+            ->sortBy('end_time')
+            ->where('course_ref', $id)
+        ;
+
+        return view('teacher.course.show', [
+            'course'=>$course,
+            'assignments'=>$assignments
+        ]);
     }
 
-    public function create(Request $request){
-        $this->authorize('create', Course::class);
-    
-        // The current user can create blog posts...
-    }
 }

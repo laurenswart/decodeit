@@ -9,13 +9,13 @@
   <div class="layer-2 admin-box col-7"></div>
   <div class="layer-2 admin-box col">
     <div class="d-flex justify-content-between align-items-center">
-      <h3>Teachers</h3><a href="{{ route('adminTeachersIndex')}}">{{ $nbTeachers }}<i class="fas fa-arrow-right"></i></a>
+      <h3>Teachers</h3><a href="{{ route('teacher_adminIndex')}}">{{ $nbTeachers }}<i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <h3>Students</h3><a href="{{ route('adminStudentsIndex')}}">{{ $nbStudents }}<i class="fas fa-arrow-right"></i></a>
+      <h3>Students</h3><a href="{{ route('student_adminIndex')}}">{{ $nbStudents }}<i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <h3>Deleted Accounts</h3><a href="{{ route('adminUsersDeletedAccounts')}}">{{ $nbDeletes }}<i class="fas fa-arrow-right"></i></a>
+      <h3>Deleted Accounts</h3><a href="{{ route('user_adminDeletedAccounts')}}">{{ $nbDeletes }}<i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </div>
