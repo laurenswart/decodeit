@@ -2,15 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Subscription;
+use App\Models\Plan;
 use Carbon\Carbon;
-use Database\Factories\SubscriptionFactory;
-use DateTime;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SubscriptionsSeeder extends Seeder
+class PlansSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,7 +18,7 @@ class SubscriptionsSeeder extends Seeder
     {
         //Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Subscription::truncate();
+        Plan::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //create subscriptions
@@ -38,6 +35,9 @@ class SubscriptionsSeeder extends Seeder
                 'monthly_price'=>0,
                 'semiyearly_price'=>0,
                 'yearly_price'=>0,
+                'monthly_link'=>'',
+                'semiyearly_link'=>'',
+                'yearly_link'=>'',
                 'is_custom'=>true,
                 'is_active'=>true,
             ],
@@ -53,6 +53,9 @@ class SubscriptionsSeeder extends Seeder
                 'monthly_price'=>19.99,
                 'semiyearly_price'=>104.99,
                 'yearly_price'=>199.99,
+                'monthly_link'=>'https://buy.stripe.com/test_cN28y455rg3yczS8wx',
+                'semiyearly_link'=>'https://buy.stripe.com/test_5kA29GcxT2cI9nG002',
+                'yearly_link'=>'https://buy.stripe.com/test_dR6cOkdBXcRmczS7ss',
                 'is_custom'=>false,
                 'is_active'=>true,
             ],
@@ -68,6 +71,9 @@ class SubscriptionsSeeder extends Seeder
                 'monthly_price'=>29.99,
                 'semiyearly_price'=>157.99,
                 'yearly_price'=>299.99,
+                'monthly_link'=>'https://buy.stripe.com/test_4gw3dK0Pb8B6bvO28b',
+                'semiyearly_link'=>'https://buy.stripe.com/test_bIY29G2Xj9Fa43mbIN',
+                'yearly_link'=>'https://buy.stripe.com/test_7sI3dKbtPcRm7fy3cg',
                 'is_custom'=>false,
                 'is_active'=>true,
             ],
@@ -83,6 +89,9 @@ class SubscriptionsSeeder extends Seeder
                 'monthly_price'=>49.99,
                 'semiyearly_price'=>263.99,
                 'yearly_price'=>499.99,
+                'monthly_link'=>'https://buy.stripe.com/test_bIY9C855rcRm0Ra4gm',
+                'semiyearly_link'=>'https://buy.stripe.com/test_5kA15C0Pbg3y57q3ck',
+                'yearly_link'=>'https://buy.stripe.com/test_cN25lScxT3gM9nG9AH',
                 'is_custom'=>false,
                 'is_active'=>true,
             ],
@@ -98,6 +107,9 @@ class SubscriptionsSeeder extends Seeder
                 'monthly_price'=>9.99,
                 'semiyearly_price'=>52.99,
                 'yearly_price'=>99.99,
+                'monthly_link'=>'https://buy.stripe.com/test_eVa9C80PbdVq8jC4gp',
+                'semiyearly_link'=>'https://buy.stripe.com/test_7sIeWs55r2cIbvOfZ9',
+                'yearly_link'=>'https://buy.stripe.com/test_00g5lSeG1g3yeI0aEO',
                 'is_custom'=>true,
                 'is_active'=>true,
             ],
@@ -112,6 +124,6 @@ class SubscriptionsSeeder extends Seeder
                         ->subSeconds(rand(0,59));
         }
 
-        DB::table('subscriptions')->insert($subscriptions);
+        DB::table('plans')->insert($subscriptions);
     }
 }

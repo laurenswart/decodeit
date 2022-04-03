@@ -16,14 +16,15 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id('payment_id');
             $table->foreignId('teacher_ref');
-            $table->foreignId('subscription_ref');
-            $table->decimal('amount', 6, 2);
-            $table->timestamp('start_date')->default(now());
-            $table->timestamp('expires')->nullable()->default(null);
-            $table->timestamp('created_at')->default(now());
+            $table->foreignId('plan_ref');
+            $table->string('stripe_id');
+            $table->decimal('subtotal', 6, 2);
+            $table->integer('tax')->default(0);
+            $table->decimal('total', 6, 2);
+            $table->timestamps();
 
-            $table->foreign('subscription_ref')
-                ->references('subscription_id')->on('subscriptions')
+            $table->foreign('plan_ref')
+                ->references('plan_id')->on('plans')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 

@@ -6,14 +6,16 @@ use App\Models\Payment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Cashier\SubscriptionItem as CashierSubscriptionItem;
 
-class Subscription extends Model
+
+class Plan extends Model
 {
     use HasFactory;
 
-    protected $table = 'subscriptions';
+    protected $table = 'plans';
 
-    protected $primaryKey = 'subscription_id';
+    protected $primaryKey = 'plan_id';
 
     /**
      * The attributes that are mass assignable.
@@ -32,11 +34,15 @@ class Subscription extends Model
         'monthly_price',
         'semiyearler_price',
         'yearly_price',
+        'monthly_link',
+        'semiyearler_link',
+        'yearly_link',
         'is_custom',
         'is_active',
         'created_at'
     ];
 
+    /*
     protected function payments(){
         return $this->hasMany(Payment::class, 'subscription_id', 'subscription_ref');
     }
@@ -57,4 +63,5 @@ class Subscription extends Model
         ->where('subscription_ref', '=', $this->subscription_id)
         ->count();
     }
+    */
 }

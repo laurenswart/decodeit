@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Cashier\Subscription as CashierSubscription;
 
 class Payment extends Model
 {
@@ -20,14 +21,14 @@ class Payment extends Model
      */
     protected $fillable = [
         'teacher_ref',
-        'subscription_ref',
-        'amount',
-        'start_date',
-        'expires',
-        'created'
+        'plan_ref',
+        'stripe_id',
+        'subtotal',
+        'tax',
+        'total',
     ];
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The users that made the payment
@@ -37,11 +38,13 @@ class Payment extends Model
       return $this->belongsTo(Teacher::class, 'teacher_ref', 'user_id');
     }
 
+    
     /**
      * The users that made the payment
      */
+    /*
     public function subscription()
     {
       return $this->belongsTo(Subscription::class, 'subscription_ref', 'subscription_id');
-    }
+    }*/
 }

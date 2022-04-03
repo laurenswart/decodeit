@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id('subscription_id');
+        Schema::create('plans', function (Blueprint $table) {
+            $table->id('plan_id');
             $table->string('title',100);
             $table->string('description', 255);
             $table->integer('nb_courses');
@@ -26,6 +26,9 @@ return new class extends Migration
             $table->decimal('monthly_price', 6, 2);
             $table->decimal('semiyearly_price', 6, 2);
             $table->decimal('yearly_price', 6, 2);
+            $table->text('monthly_link', 255);
+            $table->text('semiyearly_link', 255);
+            $table->text('yearly_link', 255);
             $table->boolean('is_custom');
             $table->boolean('is_active');
             $table->timestamps();
@@ -40,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('plans');
     }
 };

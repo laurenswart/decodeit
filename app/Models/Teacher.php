@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Teacher extends User
 {
@@ -39,4 +40,5 @@ class Teacher extends User
         return parent::newQuery($excludeDeleted)
             ->whereRoleRef(1);
     }
+
 }

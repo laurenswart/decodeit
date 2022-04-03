@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -26,6 +27,17 @@ class TeacherController extends Controller
         $teachers = Teacher::all();
         return view('admin.teacher.index', [
             'teachers'=>$teachers
+        ]);
+    }
+
+    
+    public function myAccount(){
+        return view('teacher.myAccount', []);
+    }
+
+    public function updatePaymentMethod(){
+        return view('teacher.stripe.updatePaymentMethod', [
+            'intent' => Auth::user()->createSetupIntent()
         ]);
     }
 }

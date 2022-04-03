@@ -41,6 +41,7 @@
               <li class="nav-item "><a class="nav-link animate-h" href="{{ route('teacherDashboard') }}">Dashboard</a></li>
               <li class="nav-item"><a class="nav-link animate-h" href="{{ route('course_teacherIndex')}}">Courses</a></li>
               <li class="nav-item"><a class="nav-link animate-h" href="{{ route('student_teacherIndex') }}">Students</a></li>
+              <li class="nav-item"><a class="nav-link animate-h" href="{{ route('teacher_myAccount') }}">My Account</a></li>
               <li class="nav-item">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
