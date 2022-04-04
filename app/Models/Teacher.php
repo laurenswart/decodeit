@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Laravel\Cashier\Subscription;
 
 class Teacher extends User
 {
@@ -25,14 +27,21 @@ class Teacher extends User
         return $this->hasMany(Course::class, 'teacher_ref', 'user_id' );
     }
 
-    public function currentSubscription(){
-        $payment =  Payment::where([
-            ['teacher_ref', '=', $this->user_id],
-            ['start_date', '<=', now()],
-            ['expires', '>=', now()],
-        ])->first();
-            //var_dump(empty($payment) ? 'empty' : $payment->subscription_ref );
-        return empty($payment) ? null : Subscription::find($payment->subscription_ref);
+    public function currentSubscriptionPlan(){
+        $plans = Plan::all();
+        foreach($plans as $plan){
+            if(Auth::user()->subscribed($plan->title)){
+                return $plan;
+            }
+        }
+        return null;
+    }
+    public function currentStripeSubscriptionPlan(){
+        $subscription = Auth::user()->subscriptions->whereActive(true);
+        if(!$subscription) return null;
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        //$stripe->
+        return Http::get('http://example.com/v1/plans/'.$subscription->stripe_price);
     }
 
     public function newQuery($excludeDeleted = true)

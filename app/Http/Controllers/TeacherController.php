@@ -31,8 +31,12 @@ class TeacherController extends Controller
     }
 
     
-    public function myAccount(){
-        return view('teacher.myAccount', []);
+    public function account(){
+        $plan = Teacher::find(Auth::id())->currentSubscriptionPlan();
+
+        return view('teacher.account', [
+            'plan' => $plan
+        ]);
     }
 
     public function updatePaymentMethod(){

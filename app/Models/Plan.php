@@ -34,9 +34,9 @@ class Plan extends Model
         'monthly_price',
         'semiyearler_price',
         'yearly_price',
-        'monthly_link',
-        'semiyearler_link',
-        'yearly_link',
+        'monthly_stripe_id',
+        'semiyearly_stripe_id',
+        'yearly_stripe_id',
         'is_custom',
         'is_active',
         'created_at'

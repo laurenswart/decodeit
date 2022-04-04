@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 //GENERAL
 Route::get('dashboard', ([TeacherController::class, 'dashboard']))
     ->name('teacherDashboard');
-Route::get('account', ([TeacherController::class, 'myAccount']))
-    ->name('teacher_myAccount');
+Route::get('account', ([TeacherController::class, 'account']))
+    ->name('teacher_account');
 
 //COURSE
 Route::get('courses', ([CourseController::class, 'teacherIndex']))
@@ -50,7 +50,5 @@ Route::get('subscriptions/fail', ([SubscriptionController::class, 'teacherFail']
     ->name('subscription_teacherFail');
 Route::get('subscriptions/success', ([SubscriptionController::class, 'teacherSuccess']))
     ->name('subscription_teacherSuccess');
-Route::post('subscriptions/checkout', ([SubscriptionController::class, 'teacherCreate']))
-    ->name('subscription_teacherCreate');
-    Route::post('create-checkout-session', ([SubscriptionController::class, 'createCheckoutSession']))
+Route::post('create-checkout-session', ([SubscriptionController::class, 'createCheckoutSession']))
     ->name('create-checkout-session');

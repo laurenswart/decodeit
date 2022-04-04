@@ -1,6 +1,8 @@
 <?php
 
 use App\Jobs\StripeWebhooks\ChargeSucceededJob;
+use App\Jobs\StripeWebhooks\CustomerSubscriptionCreatedJob;
+use App\Jobs\StripeWebhooks\CustomerSubscriptionUpdatedJob;
 use App\Jobs\StripeWebhooks\InvoicePaymentSucceededJob;
 use App\Jobs\StripeWebhooks\PaymentMethodAttached;
 use App\Jobs\StripeWebhooks\PaymentMethodAttachedJob;
@@ -21,9 +23,10 @@ return [
      */
     'jobs' => [
         'charge_succeeded' => ChargeSucceededJob::class,
-        'invoice_payment_succeeded' => InvoicePaymentSucceededJob::class,
-        'payment_method_attached' => PaymentMethodAttachedJob::class,
-        
+        //'invoice_payment_succeeded' => InvoicePaymentSucceededJob::class,
+        //'payment_method_attached' => PaymentMethodAttachedJob::class,
+        'customer_subscription_created' => CustomerSubscriptionCreatedJob::class,
+        'customer_subscription_updated' => CustomerSubscriptionUpdatedJob::class,
         // 'source_chargeable' => \App\Jobs\StripeWebhooks\HandleChargeableSource::class,
         // 'charge_failed' => \App\Jobs\StripeWebhooks\HandleFailedCharge::class,
     ],

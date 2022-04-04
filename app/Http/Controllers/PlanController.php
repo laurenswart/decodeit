@@ -7,6 +7,7 @@ use App\Models\Plan;
 use App\Models\Subscription;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
@@ -61,6 +62,11 @@ class PlanController extends Controller
     }
 
     public function teacherIndex(){
+       
+        //todo redirect if user already has a valid running subscription
+        if(Teacher::find(Auth::id())->currentSubscriptionPlan()){
+            redirect( route('teacher_account') );
+        }
         $plans = Plan::all()->where('is_active', true)->where('is_custom', false);
         return view('teacher.plan.index', [
             'plans'=>$plans

@@ -95,6 +95,10 @@ a.highlight:hover, a.highlight:hover i{
 	color:var(--color-white);
 }
 
+a.text{
+	font-size:1rem;
+}
+
 /*Animated links */
 a.animate-v:after {    
 	/*background: none repeat scroll 0 0 transparent;*/
@@ -168,7 +172,7 @@ a.animate-h:hover, a.animate-v:hover{
 
 a:hover{
 	text-decoration:none;
-	color:black;
+	color:var(--color-darkPurple);
 }
 
 /*Links that look like buttons*/
@@ -762,4 +766,9 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		#submission .myButton{
 			margin-top: 5px;;
 		}
+	}
+
+	.p-sides-10{
+		padding-left: 10px;
+    	padding-right: 10px;
 	}

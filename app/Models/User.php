@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $table = 'users';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'id';
 
     /**
      * The role of the user
