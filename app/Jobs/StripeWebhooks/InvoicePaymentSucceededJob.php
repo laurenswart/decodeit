@@ -4,6 +4,7 @@ namespace App\Jobs\StripeWebhooks;
 
 use App\Models\Payment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,24 +31,33 @@ class InvoicePaymentSucceededJob implements ShouldQueue
 
     public function handle()
     {
-        // Payment is successful and the subscription is created.
-        // You should provision the subscription and save the customer ID to your database.
+        //save in payments table that an invoice was succesfully paid
         $charge = $this->webhookCall->payload['data']['object'];
-        $stripe = new StripeClient(env('STRIPE_SECRET'));
-        $customer_stripe_id = $charge['customer'];
+       
         
-        $price = $charge['lines']['data'][0]['plan']['id'];
-        $payment_intent = $charge['payment_intent'];
-        $user = User::where('stripe_id', $charge['customer'])->first();
-        /*
-        Subscription::create([
-            'customer' =>  $customer_stripe_id,
-            'items' => [
-              ['price' => $price],
-            ],
-          ]);*/
-        $user->newSubscription(
-            'default', $price 
-        )->create();
+        $userId = User::where('stripe_id', $charge['customer'])->first()->id;
+        $priceDue = $charge['amount_due'];
+        $pricePaid = $charge['amount_paid'];
+        $invoiceId = $charge['id'];
+        $country = $charge['account_country'];
+        $reason = $charge['billing_reason'];
+        $created = $charge['created'];
+        $currency = $charge['currency'];
+        $status = $charge['status'];
+        $subscriptionId = $charge['subscription'];
+
+        //save to DB
+        Payment::create([
+            'teacher_ref' => $userId,
+            'amount_due' => $priceDue,
+            'amount_paid' => $pricePaid,
+            'stripe_invoice_id' => $invoiceId,
+            'country' => $country,
+            'reason' => $reason,
+            'created_at' => Carbon::createFromTimestamp($created),
+            'currency' => $currency,
+            'status' => $status,
+            'subscription_ref' => $subscriptionId,
+        ]);
     }
 }

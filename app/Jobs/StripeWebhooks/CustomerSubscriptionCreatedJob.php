@@ -34,7 +34,7 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
         // Payment is successful and the subscription is created.
         // You should provision the subscription and save the customer ID to your database.
         $charge = $this->webhookCall->payload['data']['object'];
-        $stripe = new StripeClient(env('STRIPE_SECRET'));
+       
         
         $customer_stripe_id = $charge['customer'];
     

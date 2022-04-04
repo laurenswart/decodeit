@@ -14,22 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id('payment_id');
+            $table->id('id');
             $table->foreignId('teacher_ref');
-            $table->foreignId('plan_ref');
-            $table->string('stripe_id');
-            $table->decimal('subtotal', 6, 2);
-            $table->integer('tax')->default(0);
-            $table->decimal('total', 6, 2);
-            $table->timestamps();
 
-            $table->foreign('plan_ref')
-                ->references('plan_id')->on('plans')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
+            $table->integer('amount_due');
+            $table->integer('amount_paid');
+            $table->string('stripe_invoice_id');
+            $table->string('country');
+            $table->string('reason');
+            $table->string('currency');
+            $table->string('status');
+            $table->string('subscription_ref');
+            $table->timestamp('created_at');
 
             $table->foreign('teacher_ref')
-                ->references('user_id')->on('users')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

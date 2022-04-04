@@ -12,7 +12,7 @@ class Payment extends Model
 
     protected $table = 'payments';
 
-    protected $primaryKey = 'payment_id';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -20,12 +20,16 @@ class Payment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'teacher_ref',
-        'plan_ref',
-        'stripe_id',
-        'subtotal',
-        'tax',
-        'total',
+      'teacher_ref',
+      'amount_due',
+      'amount_paid',
+      'stripe_invoice_id',
+      'country',
+      'reason',
+      'created_at',
+      'currency',
+      'status',
+      'subscription_ref',
     ];
 
     public $timestamps = true;
@@ -35,7 +39,7 @@ class Payment extends Model
      */
     public function teacher()
     {
-      return $this->belongsTo(Teacher::class, 'teacher_ref', 'user_id');
+      return $this->belongsTo(Teacher::class, 'teacher_ref', 'id');
     }
 
     
