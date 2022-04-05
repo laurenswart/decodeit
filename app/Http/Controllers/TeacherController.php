@@ -34,8 +34,10 @@ class TeacherController extends Controller
     public function account(){
         $plan = Teacher::find(Auth::id())->currentSubscriptionPlan();
 
+        $subscription = Teacher::find(Auth::id())->currentSubscription();
         return view('teacher.account', [
-            'plan' => $plan
+            'plan' => $plan,
+            'subscription' => $subscription
         ]);
     }
 

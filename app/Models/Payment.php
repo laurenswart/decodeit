@@ -32,7 +32,7 @@ class Payment extends Model
       'subscription_ref',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     /**
      * The users that made the payment

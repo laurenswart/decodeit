@@ -2,6 +2,8 @@
 
 use App\Jobs\StripeWebhooks\ChargeSucceededJob;
 use App\Jobs\StripeWebhooks\CustomerSubscriptionCreatedJob;
+use App\Jobs\StripeWebhooks\CustomerSubscriptionDeleted;
+use App\Jobs\StripeWebhooks\CustomerSubscriptionDeletedJob;
 use App\Jobs\StripeWebhooks\CustomerSubscriptionUpdatedJob;
 use App\Jobs\StripeWebhooks\InvoicePaymentSucceededJob;
 use App\Jobs\StripeWebhooks\PaymentMethodAttached;
@@ -27,6 +29,7 @@ return [
         //'payment_method_attached' => PaymentMethodAttachedJob::class,
         'customer_subscription_created' => CustomerSubscriptionCreatedJob::class,
         'customer_subscription_updated' => CustomerSubscriptionUpdatedJob::class,
+        'customer_subscription_deleted' => CustomerSubscriptionDeletedJob::class,
         // 'source_chargeable' => \App\Jobs\StripeWebhooks\HandleChargeableSource::class,
         // 'charge_failed' => \App\Jobs\StripeWebhooks\HandleFailedCharge::class,
     ],

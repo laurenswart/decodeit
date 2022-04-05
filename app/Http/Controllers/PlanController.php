@@ -64,12 +64,12 @@ class PlanController extends Controller
     public function teacherIndex(){
        
         //todo redirect if user already has a valid running subscription
-        if(Teacher::find(Auth::id())->currentSubscriptionPlan()){
-            redirect( route('teacher_account') );
-        }
+        $hasSubscription = Teacher::find(Auth::id())->currentSubscription() ? true : false;
+
         $plans = Plan::all()->where('is_active', true)->where('is_custom', false);
         return view('teacher.plan.index', [
-            'plans'=>$plans
+            'plans'=>$plans,
+            'hasSubscription'=>$hasSubscription 
         ]);
     }
 }

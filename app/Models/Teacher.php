@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -36,13 +37,20 @@ class Teacher extends User
         }
         return null;
     }
-    public function currentStripeSubscriptionPlan(){
-        $subscription = Auth::user()->subscriptions->whereActive(true);
-        if(!$subscription) return null;
-        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
-        //$stripe->
-        return Http::get('http://example.com/v1/plans/'.$subscription->stripe_price);
+
+    public function currentSubscription(){
+        $subscription = Subscription::all()
+            ->filter(function($item) {
+                if (Carbon::now()->between($item->created_at, $item->ends_at)) {
+                  return $item;
+                }
+              })
+              ->where('user_id', Auth::id())
+              ->first();
+        return $subscription;
     }
+
+    
 
     public function newQuery($excludeDeleted = true)
     {

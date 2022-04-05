@@ -43,10 +43,27 @@
             <div class="listElement-v light-card row">
                 <span class="listElementTitle palette-medium col-12 col-md-4">Subscription Details</span>
                 <span class="listElementContent col background">
-                    Some Text here
-                    <div class="d-flex justify-content-end">
-                    <a href="{{ route('billingPortal') }}" class="highlight"><i class="fas fa-arrow-circle-right"></i>Manage My Subscription</a>
-                </div>
+                    <div class="align-self-stretch d-flex justify-content-between align-items-center">
+                        <span>Created</span>
+                        <span>{{ $subscription->created_at }}</span>
+                    </div>
+                    <div class="align-self-stretch d-flex justify-content-between align-items-center">
+                        <span>Ends</span>
+                        <span>{{ $subscription->ends_at }}</span>
+                    </div>
+                    <div class="align-self-stretch d-flex justify-content-between align-items-center">
+                        <span>Status</span>
+                        <span>{{ ucfirst($subscription->stripe_status) }}
+                        </span>
+                    </div>
+                    @if($subscription->stripe_status=='canceled')
+                        <p class="text-end w-100">My subscription is canceled?<br>
+                        You may still use our subscription plan until the end of the billing period.<br>
+                        No new automatic payment will be made.</p>
+                    @endif
+                    <div class="text-end w-100">
+                        <a href="{{ route('billingPortal') }}" class="highlight"><i class="fas fa-arrow-circle-right"></i>Manage My Subscription</a>
+                    </div>
                 </span>
                 
             </div>
