@@ -36,6 +36,9 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="text-end w-100">
+                        <a href="{{ route('plan_teacherIndex') }}" class="highlight"><i class="fas fa-arrow-circle-right"></i>Other Subscription Plans</a>
+                    </div>
                 </span>
             </div>
         </div>
@@ -61,9 +64,7 @@
                         You may still use our subscription plan until the end of the billing period.<br>
                         No new automatic payment will be made.</p>
                     @endif
-                    <div class="text-end w-100">
-                        <a href="{{ route('billingPortal') }}" class="highlight"><i class="fas fa-arrow-circle-right"></i>Manage My Subscription</a>
-                    </div>
+                        <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-3">Manage My Subscription</a>
                 </span>
                 
             </div>

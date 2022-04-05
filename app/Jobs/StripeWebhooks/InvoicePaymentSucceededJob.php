@@ -31,11 +31,8 @@ class InvoicePaymentSucceededJob implements ShouldQueue
 
     public function handle()
     {
-        //save in payments table that an invoice was succesfully paid
+        // Get info from stripe
         $charge = $this->webhookCall->payload['data']['object'];
-       
-        
-        $userId = User::where('stripe_id', $charge['customer'])->first()->id;
         $priceDue = $charge['amount_due'];
         $pricePaid = $charge['amount_paid'];
         $invoiceId = $charge['id'];
@@ -45,7 +42,10 @@ class InvoicePaymentSucceededJob implements ShouldQueue
         $currency = $charge['currency'];
         $status = $charge['status'];
         $subscriptionId = $charge['subscription'];
-
+       
+        //get relevant subscription in our db
+        $userId = User::where('stripe_id', $charge['customer'])->first()->id;
+       
         //save to DB
         Payment::create([
             'teacher_ref' => $userId,

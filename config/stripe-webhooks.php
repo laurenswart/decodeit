@@ -24,9 +24,7 @@ return [
      * https://stripe.com/docs/api#event_types.
      */
     'jobs' => [
-        //'charge_succeeded' => ChargeSucceededJob::class,
         'invoice_payment_succeeded' => InvoicePaymentSucceededJob::class,
-        //'payment_method_attached' => PaymentMethodAttachedJob::class,
         'customer_subscription_created' => CustomerSubscriptionCreatedJob::class,
         'customer_subscription_updated' => CustomerSubscriptionUpdatedJob::class,
         'customer_subscription_deleted' => CustomerSubscriptionDeletedJob::class,

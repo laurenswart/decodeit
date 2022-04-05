@@ -32,26 +32,28 @@ class  CustomerSubscriptionUpdatedJob implements ShouldQueue
 
     public function handle()
     {
-        // Payment is successful and the subscription is created.
-        // You should provision the subscription and save the customer ID to your database.
+        // Get info from stripe
         $charge = $this->webhookCall->payload['data']['object'];
-        $stripe = new StripeClient(env('STRIPE_SECRET'));
-        
-        $customer_stripe_id = $charge['customer'];
-        
-        //$payment_intent = $charge['payment_intent'];
-        $user = User::where('stripe_id', $customer_stripe_id)->first();
-        /*
-        $subscription = Subscription::
-            where('created_at', Carbon::createFromTimestamp($charge['start_date']) )
-            ->where('stripe_price', $charge['plan']['id'])
-            ->where('user_id', $user->id);
-        */
+
+        //get relevant subscription in our db
         $subscription = Subscription::
             where('stripe_id', $charge['id'] );
 
+        if(!$subscription){
+            //return relevant error code
+            return;
+        }
+        
+        //if user decided to cancel subscription, mark it as canceled
+        //they will still have access to the application until end_at
+        $status = $charge['status'];
+        if($charge["cancel_at_period_end"]){
+            $status = 'canceled';
+        }
+
+        //update our database
         $subscription->update([
-            'stripe_status' => $charge['status'],
+            'stripe_status' => $status,
             'ends_at'=> Carbon::createFromTimestamp($charge['current_period_end']),
             'updated_at' => Carbon::now()
         ]);

@@ -31,14 +31,11 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
 
     public function handle()
     {
-        // Payment is successful and the subscription is created.
-        // You should provision the subscription and save the customer ID to your database.
+        // Get info from stripe
         $charge = $this->webhookCall->payload['data']['object'];
-       
-        
-        $customer_stripe_id = $charge['customer'];
-    
         $stripe_price = $charge['plan']['id'];
+
+        //get relevant subscription in our db
         $plan = Plan::firstWhere(function($q) use ($stripe_price) {
             $q->where('monthly_stripe_id', $stripe_price)
             ->orWhere('semiyearly_stripe_id', $stripe_price)
@@ -46,12 +43,8 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
         });
         $planName = $plan ? $plan->title : 'unknown';
         $planName = str_replace(' ', '_', strtolower($planName));
-      
-        //$payment_intent = $charge['payment_intent'];
-        //$user = User::where('stripe_id', $charge['customer'])->first();
-
-        file_put_contents('test.php', $planName);
-        
+       
+        //update our database
         Subscription::create([
             'user_id' =>  User::where('stripe_id', $charge['customer'])->first()->id,
             'name' => $planName,
