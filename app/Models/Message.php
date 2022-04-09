@@ -11,15 +11,13 @@ class Message extends Model
 
     protected $table = 'forum_messages';
 
-    protected $primaryKey = 'message_id';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'course_ref',
+        'course_id',
         'user_id',
         'content',
     ];
@@ -27,10 +25,10 @@ class Message extends Model
     public $timestamps = true;
 
     protected function course(){
-        return $this->belongsTo(Course::class, 'course_ref', 'course_id' );
+        return $this->belongsTo(Course::class, 'course_id', 'id' );
     }
 
     protected function user(){
-        return $this->belongsTo(User::class, 'user_ref', 'user_id' );
+        return $this->belongsTo(User::class, 'user_id', 'id' );
     }
 }

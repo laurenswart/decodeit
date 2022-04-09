@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('assignment_skills', function (Blueprint $table) {
             
-            $table->foreignId('assignment_ref');
-            $table->foreignId('skill_ref');
-            $table->primary(['assignment_ref', 'skill_ref']);
+            $table->foreignId('assignment_id');
+            $table->foreignId('skill_id');
+            $table->primary(['assignment_id', 'skill_id']);
 
-            $table->foreign('assignment_ref')
-                ->references('assignment_id')->on('assignments')
+            $table->foreign('assignment_id')
+                ->references('id')->on('assignments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('skill_ref')
-                ->references('skill_id')->on('skills')
+            $table->foreign('skill_id')
+                ->references('id')->on('skills')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

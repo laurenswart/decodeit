@@ -6,6 +6,7 @@ use App\Models\Payment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Cashier\Subscription;
 use Laravel\Cashier\SubscriptionItem as CashierSubscriptionItem;
 
 
@@ -14,8 +15,6 @@ class Plan extends Model
     use HasFactory;
 
     protected $table = 'plans';
-
-    protected $primaryKey = 'plan_id';
 
     /**
      * The attributes that are mass assignable.
@@ -42,14 +41,14 @@ class Plan extends Model
         'created_at'
     ];
 
-    /*
-    protected function payments(){
-        return $this->hasMany(Payment::class, 'subscription_id', 'subscription_ref');
+    
+    protected function subscriptions(){
+        return $this->hasMany( Subscription::class, 'title', 'name');
     }
 
     public function nbUsers(){
         return Payment::all()
-        ->where('subscription_ref', '=', $this->subscription_id)
+        ->where('name', '=', $this->title)
         ->filter(function($item) {
             if (Carbon::now()->between($item->start_date, $item->expires)) {
               return $item;
@@ -58,10 +57,4 @@ class Plan extends Model
         ->count();
     }
 
-    public function nbRelatedPayments(){
-        return Payment::all()
-        ->where('subscription_ref', '=', $this->subscription_id)
-        ->count();
-    }
-    */
 }

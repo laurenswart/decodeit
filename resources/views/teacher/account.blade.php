@@ -64,7 +64,7 @@
                         You may still use our subscription plan until the end of the billing period.<br>
                         No new automatic payment will be made.</p>
                     @endif
-                        <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-3">Manage My Subscription</a>
+                        <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-5 align-self-end">Manage My Subscription</a>
                 </span>
                 
             </div>
@@ -75,9 +75,10 @@
     <div class="listElement-v light-card row">
         <span class="listElementTitle palette-medium col-12 col-md-4">No Current Subscription</span>
         <span class="listElementContent col background">
-            <p>You don't currently have an active subscription. 
-            Select a subscription plan from our <a href="{{ route('plan_teacherIndex') }}" class="highlight text">different options</a> 
+            <p class="w-100">You don't currently have an active subscription. 
+            Select a subscription plan from our different options
             to start fulling enjoying DecodeIt</p>
+            <a href="{{ route('plan_teacherIndex') }}" class="myButton align-self-end mr-3 mb-3">View Plans</a>
         </span>
     </div>
     @endif

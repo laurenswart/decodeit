@@ -41,8 +41,8 @@ class InscriptionsPerMonth extends BaseChart
         });
         foreach ($sorted as $key => $value) {
             //seperate into teacher/student
-            $teachers[] = count($value->where('role_ref', '=', '1'));
-            $students[] = count($value->where('role_ref', '=', '2'));
+            $teachers[] = count($value->where('role_id', '=', '1'));
+            $students[] = count($value->where('role_id', '=', '2'));
             $bits = explode(' ',$key);
             $keys[] =  date('M Y', mktime(0, 0, 0, intval($bits[0]), 2, intval($bits[1])));
         }

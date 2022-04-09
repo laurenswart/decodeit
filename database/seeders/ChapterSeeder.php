@@ -51,6 +51,7 @@ class ChapterSeeder extends Seeder
         Chapter::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        /*
         //find teachers
         $teachers = Teacher::all();
         foreach($teachers as $teacher){
@@ -77,7 +78,7 @@ class ChapterSeeder extends Seeder
                 //prepare chapters for that course
                 foreach($titles as $index=>$title){
                     $minDate = Carbon::today()->subMonth(4);
-                    $maxDate = date_create($teacher->currentSubscription()->expires);
+                    $maxDate = date_create($teacher->currentSubscriptionPlan()->expires);
                     $randomCreationTime = $minDate
                         ->addDays(rand(1,28))
                         ->addHours(rand(0,23))
@@ -86,7 +87,7 @@ class ChapterSeeder extends Seeder
                     $randomCreationTime = min($randomCreationTime, $maxDate);
 
                     $rows[] = [
-                        'course_ref'=>$course->course_id,
+                        'course_id'=>$course->id,
                         'title'=>$title,
                         'content'=> null,
                         'is_active'=> (rand(0,10)<8),
@@ -97,10 +98,12 @@ class ChapterSeeder extends Seeder
                 }
                 
             }
+        }
             //insert into table
             DB::table('chapters')->insert($rows);
             unset($rows);
-        }
+            */
+        
         
     }
 }

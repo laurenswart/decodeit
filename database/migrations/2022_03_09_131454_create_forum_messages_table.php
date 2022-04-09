@@ -14,18 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('forum_messages', function (Blueprint $table) {
-            $table->id('message_id');
-            $table->foreignId('course_ref');
-            $table->foreignId('user_ref');
+            $table->id('id');
+            $table->foreignId('course_id');
+            $table->foreignId('user_id');
             $table->text('content');
             $table->timestamps();
 
-            $table->foreign('course_ref')
-                ->references('course_id')->on('courses')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->foreign('user_ref')
-                ->references('user_id')->on('users')
+            $table->foreign('user_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'firstname',
         'lastname',
         'email',
-        'role_ref',
+        'role_id',
         'password',
         'created_at',
     ];
@@ -49,14 +49,13 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $table = 'users';
-    protected $primaryKey = 'id';
 
     /**
      * The role of the user
      */
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role_ref', 'role_id');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -64,7 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function messages()
     {
-        return $this->hasMany(Message::class, 'user_id', 'user_ref');
+        return $this->hasMany(Message::class, 'user_id', 'id');
     }
 
     public function authorizeRoles($roles)
@@ -98,11 +97,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function isStudent(){
-        return $this->role_ref === 2;
+        return $this->role_id === 2;
     }
 
     public function isTeacher(){
-        return $this->role_ref === 1;
+        return $this->role_id === 1;
     }
 
     /**

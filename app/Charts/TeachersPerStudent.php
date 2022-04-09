@@ -22,10 +22,10 @@ class TeachersPerStudent extends BaseChart
     public function handler(Request $request): Chartisan
     {
         //get number of users enrolled per month
-        /*
+        
         $teachersPerStudent = DB::table('teacher_student')
-            ->select(DB::raw('student_ref, count(*) as nbTeachers'))
-            ->groupBy('student_ref')
+            ->select(DB::raw('student_id, count(*) as nbTeachers'))
+            ->groupBy('student_id')
             ->orderBy('nbTeachers')
             ->pluck('nbTeachers');
 
@@ -35,13 +35,13 @@ class TeachersPerStudent extends BaseChart
             //seperate into teacher/student
             $data[$value.' teacher'] = isset($data[$value.' teacher']) ? ($data[$value.' teacher'] + 1) : 1;
         }
-        */
+        
         $results = DB::select( DB::raw("
             select t2.nbTeachers , count(*) 'occurences'
             from
                 (select count(*) 'nbTeachers'
                 from enrolments
-                group by student_ref) as t2
+                group by student_id) as t2
             group by t2.nbTeachers
             order by t2.nbTeachers"));
 

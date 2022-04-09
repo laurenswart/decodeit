@@ -11,16 +11,14 @@ class Enrolment extends Model
 
     protected $table = 'enrolments';
 
-    protected $primaryKey = 'enrolment_id';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'course_ref',
-        'student_ref',
+        'course_id',
+        'student_id',
         'final_mark',
         'marked_at'
     ];
@@ -31,11 +29,11 @@ class Enrolment extends Model
      * The course associated to this enrolment
      */
     protected function course(){
-        return $this->belongsTo(Course::class, 'course_ref', 'course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
     
     protected function studentSkills(){
-        return $this->hasMany(Skill::class, 'skill_ref', 'skill_id');
+        return $this->hasMany(Skill::class, 'skill_id', 'id');
     }
 }

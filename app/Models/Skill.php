@@ -11,15 +11,13 @@ class Skill extends Model
 
     protected $table = 'skills';
 
-    protected $primaryKey = 'skill_id';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'course_ref',
+        'course_id',
         'title',
         'description'
     ];

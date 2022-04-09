@@ -52,7 +52,7 @@
                   @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
                     @csrf
-                    <input type="text" name="plan_id" value="{{ $plan->plan_id }}" hidden>
+                    <input type="text" name="plan_id" value="{{ $plan->id }}" hidden>
                     <input type="text" name="duration" value="monthly" hidden>
                     <input type="hidden" name="price_id" value="{{  $plan->monthly_stripe_id }}" />
                     <button id="checkout-and-portal-button" class="myButton" type="submit">Subscribe</button>
@@ -64,7 +64,7 @@
                 @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
                     @csrf
-                    <input type="text" name="plan_id" value="{{ $plan->plan_id }}" hidden>
+                    <input type="text" name="plan_id" value="{{ $plan->id }}" hidden>
                     <input type="text" name="duration" value="semiyearly" hidden>
                     <input type="hidden" name="price_id" value="{{  $plan->semiyearly_stripe_id }}" />
                     <button id="checkout-and-portal-button" class="myButton" type="submit">Subscribe</button>
@@ -72,11 +72,11 @@
                   @endif
               </div>
               <div class="align-self-stretch d-flex justify-content-between align-items-center">
-                <div><h3 class="d-inline-block">{{ $plan->yearly_price }} &#8364</h3>/ Year</div>
+                <div><h3 class="d-inline-block">{{ $plan->yearly_price }} &#8364</h3>/ YEAR</div>
                 @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
                     @csrf
-                    <input type="text" name="plan_id" value="{{ $plan->plan_id }}" hidden>
+                    <input type="text" name="plan_id" value="{{ $plan->id }}" hidden>
                     <input type="text" name="duration" value="yearly" hidden>
                     <input type="hidden" name="price_id" value="{{  $plan->yearly_stripe_id }}" />
                     <button id="checkout-and-portal-button" class="myButton" type="submit">Subscribe</button>
@@ -88,4 +88,20 @@
       </div>
   </div>
   @endforeach
+  @if(!$hasSubscription)
+  <h2 class="light-card block-title layer-2">Custom Plan</h2>
+    <div class="col p-sides-10">
+      <div class="listElement-v light-card row">
+        <span class="listElementTitle palette-medium col-12 col-md-4 ">What's that ?</span>
+        <span class="listElementContent col background">
+          <p class="w-100">If none of the plans above seem to suit your needs, please get in touch with us and we can determine
+          an offer adapted specifically to you. </p>
+          <span class="text-end w-100">
+              <a href="#" class="highlight"><i class="fas fa-arrow-circle-right"></i>Get in Touch</a>
+          </div>
+        </span>
+      </div>
+    </div>
+  @endif
+  
 @endsection

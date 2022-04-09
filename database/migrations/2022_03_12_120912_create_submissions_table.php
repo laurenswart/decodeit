@@ -14,16 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('submissions', function (Blueprint $table) {
-            $table->id('submission_id');
-            $table->foreignId('student_assignment_ref');
+            $table->id('id');
+            $table->foreignId('student_assignment_id');
             $table->enum('status', ['errored', 'ran', 'passed tests'])->nullable(); //todo more statuses ?
             $table->text('feedback')->nullable();
             $table->text('content');
             $table->timestamps();
             
 
-            $table->foreign('student_assignment_ref')
-                ->references('student_assignment_id')->on('student_assignment')
+            $table->foreign('student_assignment_id')
+                ->references('id')->on('student_assignment')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

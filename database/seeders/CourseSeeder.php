@@ -49,32 +49,32 @@ class CourseSeeder extends Seeder
         Course::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        //get students and teachers
-        $teachers = Teacher::get();
+        // //get students and teachers
+        // $teachers = Teacher::get();
 
-         //add students to teachers
-         foreach($teachers as $teacher){
-            //find max number of students for this teacher
-            $subscription = $teacher->currentSubscription();
-            if(empty($subscription)) continue;
-            $max_courses = $subscription->nb_courses;
-            //choose a random amount of courses within range
-            $nbCourses = rand(1,$max_courses);
-            if($nbCourses==0) continue;
-            //choose courses
-            $courseTitles = array_rand(self::TITLES, $nbCourses);
-            $courseTitles = is_int($courseTitles) ? [$courseTitles] : $courseTitles;
-            //create the courses
-            foreach($courseTitles as $title){
-                //course code
-                $code = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 5));
-                Course::factory()->create([
-                    'teacher_ref' => $teacher->user_id,
-                    'title'=>$code.' '.self::TITLES[$title]
-                ]);
-            }
+        //  //add students to teachers
+        //  foreach($teachers as $teacher){
+        //     //find max number of students for this teacher
+        //     $subscription = $teacher->currentSubscriptionPlan();
+        //     if(empty($subscription)) continue;
+        //     $max_courses = $subscription->nb_courses;
+        //     //choose a random amount of courses within range
+        //     $nbCourses = rand(1,$max_courses);
+        //     if($nbCourses==0) continue;
+        //     //choose courses
+        //     $courseTitles = array_rand(self::TITLES, $nbCourses);
+        //     $courseTitles = is_int($courseTitles) ? [$courseTitles] : $courseTitles;
+        //     //create the courses
+        //     foreach($courseTitles as $title){
+        //         //course code
+        //         $code = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 5));
+        //         Course::factory()->create([
+        //             'teacher_id' => $teacher->id,
+        //             'title'=>$code.' '.self::TITLES[$title]
+        //         ]);
+        //     }
             
-        }
+        // }
     }
 
     

@@ -11,7 +11,6 @@ class AssignmentNote extends Model
 
     protected $table = 'assignment_notes';
 
-    protected $primaryKey = 'note_id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +18,7 @@ class AssignmentNote extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'assignment_ref',
+        'assignment_id',
         'message',
         'created_at',
         'deleted_at'
@@ -28,7 +27,7 @@ class AssignmentNote extends Model
     public $timestamps = true;
 
     protected function assignment(){
-        return $this->belongsTo(Assignment::class, 'assignment_ref', 'assignment_id');
+        return $this->belongsTo(Assignment::class, 'assignment_id', 'id');
     }
 
 }

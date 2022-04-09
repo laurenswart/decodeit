@@ -13,15 +13,13 @@ class Chapter extends Model
 
     protected $table = 'chapters';
 
-    protected $primaryKey = 'chapter_id';
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'course_ref',
+        'course_id',
         'title',
         'content',
         'is_active',
@@ -31,18 +29,18 @@ class Chapter extends Model
     public $timestamps = true;
 
     protected function course(){
-        return $this->belongsTo(Course::class, 'course_ref', 'course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
     protected function assignments(){
-        return $this->belongsToMany(Assignment::class, 'assignment_chapter', 'chapter_ref', 'assignment_ref', 'chapter_id', 'assignment_id');
+        return $this->belongsToMany(Assignment::class, 'assignment_chapter', 'chapter_id', 'assignment_id', 'id', 'id');
     }
 
     public function read(){
         $enrolmentId = $this->course->enrolmentForAuth();
         $read = DB::table('chapters_read')
-            ->where('enrolment_ref', $enrolmentId)
-            ->where('chapter_ref', $this->chapter_id)
+            ->where('enrolment_id', $enrolmentId)
+            ->where('chapter_id', $this->id)
             ->count();
         ;
         return $read == 1;
@@ -53,8 +51,8 @@ class Chapter extends Model
         $enrolmentId = $this->course->enrolmentForAuth();
 
         $nbDone = DB::table('student_assignment')
-            ->where('enrolment_ref', $enrolmentId)
-            ->whereIn('assignment_ref', $assignmentIds)
+            ->where('enrolment_id', $enrolmentId)
+            ->whereIn('assignment_id', $assignmentIds)
             ->where('to_mark', true)->count();
 
         return $nbDone;

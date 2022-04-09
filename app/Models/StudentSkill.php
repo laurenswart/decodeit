@@ -18,14 +18,14 @@ class StudentSkill extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'enrolment_ref',
-        'skill_ref',
+        'enrolment_id',
+        'skill_id',
         'mark',
     ];
 
     public $timestamps = false;
 
     protected function skill(){
-        return $this->belongsTo(Skill::class, 'skill_ref', 'skill_id');
+        return $this->belongsTo(Skill::class, 'skill_id', 'id');
     }
 }

@@ -20,7 +20,7 @@ class ChapterPolicy
      */
     public function StudentView(User $user, Chapter $chapter)
     {
-        return $user->isStudent() && Student::find($user->user_id)->courses->contains($chapter->course);
+        return $user->isStudent() && Student::find($user->id)->courses->contains($chapter->course);
     }
 
     /**

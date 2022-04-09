@@ -25,7 +25,7 @@ class NbPaymentsPerSubscription extends BaseChart
         //payments
         $payments = DB::table('subscriptions')
             ->select('subscription_ref', 'amount', DB::raw('count(*) as counts'))
-            ->leftJoin('payments', 'payments.subscription_ref', '=', 'subscriptions.subscription_id')
+            ->leftJoin('payments', 'payments.subscription_ref', '=', 'subscriptions.id')
             ->where('amount', '!=', '0')
             ->groupBy(['subscription_ref', 'amount'])
             ->orderBy('subscription_ref')
@@ -34,17 +34,17 @@ class NbPaymentsPerSubscription extends BaseChart
 
         //retrieve and format subscription prices
         $subscriptions = DB::table('subscriptions')
-            ->select('subscription_id', 'title', 'monthly_price', 'semiyearly_price', 'yearly_price')
+            ->select('id', 'title', 'monthly_price', 'semiyearly_price', 'yearly_price')
             ->where('title', '!=', 'free')
-            ->orderBy('subscription_id')
+            ->orderBy('id')
             ->get();
         foreach ($subscriptions as $subscription) {
-            $subscriptionPrices[$subscription->subscription_id]['monthly'] = $subscription->monthly_price;
-            $subscriptionPrices[$subscription->subscription_id]['semiyearly'] = $subscription->semiyearly_price;
-            $subscriptionPrices[$subscription->subscription_id]['yearly'] = $subscription->yearly_price;
-            $data['monthly'][$subscription->subscription_id] = 0;
-            $data['semiyearly'][$subscription->subscription_id] = 0;
-            $data['yearly'][$subscription->subscription_id] = 0;
+            $subscriptionPrices[$subscription->id]['monthly'] = $subscription->monthly_price;
+            $subscriptionPrices[$subscription->id]['semiyearly'] = $subscription->semiyearly_price;
+            $subscriptionPrices[$subscription->id]['yearly'] = $subscription->yearly_price;
+            $data['monthly'][$subscription->id] = 0;
+            $data['semiyearly'][$subscription->id] = 0;
+            $data['yearly'][$subscription->id] = 0;
             $labels[] = $subscription->title;
         }
 

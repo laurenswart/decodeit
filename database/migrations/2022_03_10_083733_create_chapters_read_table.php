@@ -15,18 +15,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chapters_read', function (Blueprint $table) {
-            $table->foreignId('enrolment_ref');
-            $table->foreignId('chapter_ref');
-            $table->primary(['enrolment_ref', 'chapter_ref']);
+            $table->foreignId('enrolment_id');
+            $table->foreignId('chapter_id');
+            $table->primary(['enrolment_id', 'chapter_id']);
             $table->timestamp('read_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 
-            $table->foreign('enrolment_ref')
-                ->references('enrolment_id')->on('enrolments')
+            $table->foreign('enrolment_id')
+                ->references('id')->on('enrolments')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
                 
-            $table->foreign('chapter_ref')
-                ->references('chapter_id')->on('chapters')
+            $table->foreign('chapter_id')
+                ->references('id')->on('chapters')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

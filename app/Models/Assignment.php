@@ -12,7 +12,6 @@ class Assignment extends Model
 
     protected $table = 'assignments';
 
-    protected $primaryKey = 'assignment_id';
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +19,7 @@ class Assignment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'course_ref',
+        'course_id',
         'title',
         'description',
         'nb_submissions',
@@ -41,19 +40,19 @@ class Assignment extends Model
     public $timestamps = true;
 
     public function course(){
-        return $this->belongsTo(Course::class, 'course_ref', 'course_id');
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
     public function notes(){
-        return $this->hasMany(AssignmentNote::class, 'assignment_ref', 'assignment_id');
+        return $this->hasMany(AssignmentNote::class, 'assignment_id', 'id');
     }
 
     public function chapters(){
-        return $this->belongsToMany(Chapter::class, 'assignment_chapter', 'assignment_ref', 'chapter_ref', 'assignment_id', 'chapter_id');
+        return $this->belongsToMany(Chapter::class, 'assignment_chapter', 'assignment_id', 'chapter_id', 'id', 'id');
     }
 
     public function skills(){
-        return $this->belongsToMany(Skill::class, 'assignment_skills', 'assignment_ref', 'skill_ref', 'assignment_id', 'skill_id');
+        return $this->belongsToMany(Skill::class, 'assignment_skills', 'assignment_id', 'skill_id', 'id', 'id');
     }
 
     /**
@@ -63,8 +62,8 @@ class Assignment extends Model
         $enrolmentId = $this->course->enrolmentForAuth();
 
         $attempt = DB::table('student_assignment')
-            ->where('enrolment_ref', $enrolmentId)
-            ->where('assignment_ref', $this->assignment_id)
+            ->where('enrolment_id', $enrolmentId)
+            ->where('assignment_id', $this->id)
             ->first();
 
         if (empty($attempt)){

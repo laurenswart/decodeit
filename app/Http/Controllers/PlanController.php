@@ -21,19 +21,19 @@ class PlanController extends Controller
         $subscriptions = Plan::all();
 
         $nbSemiyearly = DB::table('payments')
-            ->join('subscriptions', 'subscription_id', '=', 'subscription_ref')
+            ->join('subscriptions', 'subscriptions.id', '=', 'subscription_id')
             ->whereRaw('semiyearly_price = `amount`')
             ->where('start_date', '<=', now())
             ->where('expires', '>=', now())
             ->count();
         $nbMonthly = DB::table('payments')
-            ->join('subscriptions', 'subscription_id', '=', 'subscription_ref')
+            ->join('subscriptions', 'subscriptions.id', '=', 'subscription_id')
             ->whereRaw('monthly_price = `amount`')
             ->where('start_date', '<=', now())
             ->where('expires', '>=', now())
             ->count();
         $nbYearly = DB::table('payments')
-            ->join('subscriptions', 'subscription_id', '=', 'subscription_ref')
+            ->join('subscriptions', 'subscriptions.id', '=', 'subscription_id')
             ->whereRaw('yearly_price = `amount`')
             ->where('start_date', '<=', now())
             ->where('expires', '>=', now())

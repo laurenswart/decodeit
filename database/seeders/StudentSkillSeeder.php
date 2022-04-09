@@ -40,8 +40,8 @@ class StudentSkillSeeder extends Seeder
             $skillsMarked = Arr::random($skills, $nbSkillsMarked);
             foreach($skillsMarked as $skillMarked){
                 $rows[] = [
-                    'enrolment_ref'=>$enrolment->enrolment_id,
-                    'skill_ref'=>$skillMarked['skill_id'],
+                    'enrolment_id'=>$enrolment->id,
+                    'skill_id'=>$skillMarked['id'],
                     'mark'=> rand(10, 100),
                 ];
             }

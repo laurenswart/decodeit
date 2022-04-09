@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Charts\NbPaymentsPerSubscription;
 use App\Models\Payment;
+use App\Models\Student;
 use App\Models\Subscription;
 use App\Models\Teacher;
 use ConsoleTVs\Charts\Registrar as Charts;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
 
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\ProfitPerSubscription::class,
         ]);
 
+       
         //Cashier::useSubscriptionModel(Payment::class);
         //Cashier::useSubscriptionItemModel(Subscription::class);
     }

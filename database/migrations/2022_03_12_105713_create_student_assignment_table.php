@@ -14,21 +14,21 @@ return new class extends Migration
     public function up()
     {
          Schema::create('student_assignment', function (Blueprint $table) {
-            $table->id('student_assignment_id');
-            $table->foreignId('enrolment_ref');
-            $table->foreignId('assignment_ref');
+            $table->id('id');
+            $table->foreignId('enrolment_id');
+            $table->foreignId('assignment_id');
             $table->boolean('to_mark')->default(false);
             $table->boolean('help_needed')->default(false);
             $table->integer('mark')->nullable()->default(null);
             $table->timestamp('marked_at')->nullable()->default(null);
             
 
-            $table->foreign('assignment_ref')
-                ->references('assignment_id')->on('assignments')
+            $table->foreign('assignment_id')
+                ->references('id')->on('assignments')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->foreign('enrolment_ref')
-                ->references('enrolment_id')->on('enrolments')
+            $table->foreign('enrolment_id')
+                ->references('id')->on('enrolments')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

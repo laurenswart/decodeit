@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('assignment_notes', function (Blueprint $table) {
-            $table->id('note_id');
-            $table->foreignId('assignment_ref');
+            $table->id('id');
+            $table->foreignId('assignment_id');
             $table->text('content');
 
-            $table->foreign('assignment_ref')
-                ->references('assignment_id')->on('assignments')
+            $table->foreign('assignment_id')
+                ->references('id')->on('assignments')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

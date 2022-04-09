@@ -82,6 +82,12 @@
 			<main  class="container" style="padding-bottom: 175px;">
         @yield('content')
 			</main>
+            <button onclick="topFunction()" id="scrollToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+        <footer class="u-align-center u-clearfix u-footer  layer-1 u-footer" id="sec-e3f5">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <p class="u-text  u-text-1">Some footer to add</p>
+            </div>
+        </footer>
 		</div>
     </body>
 </html>

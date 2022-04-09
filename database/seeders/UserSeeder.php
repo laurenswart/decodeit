@@ -36,13 +36,13 @@ class UserSeeder extends Seeder
             'firstname'=>'lauren', 
             'lastname'=>'swart', 
             'email'=>'lswart@gmail.com', 
-            'role_ref'=>2
+            'role_id'=>2
         ]);
         User::factory()->create([
             'firstname'=>'bob', 
             'lastname'=>'sull', 
             'email'=>'bsull@gmail.com', 
-            'role_ref'=>1
+            'role_id'=>1
         ]);
     }
 }

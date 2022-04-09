@@ -14,15 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id('course_id');
-            $table->foreignId('teacher_ref');
+            $table->id('id');
+            $table->foreignId('teacher_id');
             $table->string('title', 100);
             $table->boolean('is_active')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('teacher_ref')
-                ->references('user_id')->on('users')
+            $table->foreign('teacher_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

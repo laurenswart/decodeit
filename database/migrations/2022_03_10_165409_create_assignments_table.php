@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('assignments', function (Blueprint $table) {
-            $table->id('assignment_id');
-            $table->foreignId('course_ref');
+            $table->id('id');
+            $table->foreignId('course_id');
             $table->string('title', 100);
             $table->string('description', 255);
             $table->integer('nb_submissions')->default(1);
@@ -31,8 +31,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_ref')
-                ->references('course_id')->on('courses')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

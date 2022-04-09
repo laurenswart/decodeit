@@ -22,17 +22,17 @@ class AssignmentNoteSeeder extends Seeder
         AssignmentNote::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        //choose a course
-        $assignments = Assignment::all();
+        // //choose a course
+        // $assignments = Assignment::all();
 
-        foreach($assignments as $assignment){
-            $nbNotes = rand(0,3);
-            //var_dump($course->students);
-            if($nbNotes==0) continue;
+        // foreach($assignments as $assignment){
+        //     $nbNotes = rand(0,3);
+        //     //var_dump($course->students);
+        //     if($nbNotes==0) continue;
             
-            AssignmentNote::factory()->count($nbNotes)->create([
-                'assignment_ref' => $assignment->assignment_id,
-            ]);
-        }
+        //     AssignmentNote::factory()->count($nbNotes)->create([
+        //         'assignment_id' => $assignment->id,
+        //     ]);
+        // }
     }
 }

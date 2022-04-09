@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('skills', function (Blueprint $table) {
-            $table->id('skill_id');
-            $table->foreignId('course_ref');
+            $table->id('id');
+            $table->foreignId('course_id');
             $table->string('title', 100);
             $table->string('description', 255)->nullable()->default(null);
 
-            $table->foreign('course_ref')
-                ->references('course_id')->on('courses')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

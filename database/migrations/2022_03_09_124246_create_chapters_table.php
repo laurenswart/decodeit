@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chapters', function (Blueprint $table) {
-            $table->id('chapter_id');
-            $table->foreignId('course_ref');
+            $table->id('id');
+            $table->foreignId('course_id');
             $table->string('title', 100);
             $table->text('content')->nullable()->default(null);
             $table->boolean('is_active')->default(true);
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_ref')
-                ->references('course_id')->on('courses')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

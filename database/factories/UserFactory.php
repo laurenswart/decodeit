@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'firstname' => $this->faker->firstname(),
             'lastname' => $this->faker->lastname(),
             'email' => $this->faker->unique()->safeEmail(),
-            'role_ref' => 2,
+            'role_id' => 2,
             'email_verified_at' => $timestamp,
             'password' => '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS',
             'created_at' => $timestamp,
@@ -56,7 +56,7 @@ class UserFactory extends Factory
     {
         return $this->state(function ($attributes) use ($role) {
             return [
-                'role_ref' => ($role=='teacher' ? 1 : 2),
+                'role_id' => ($role=='teacher' ? 1 : 2),
             ];
         });
     }

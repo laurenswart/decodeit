@@ -17,7 +17,7 @@
 	<!-- MAIN RIGHT SECTION -->
 	<div class="col" >
 		<nav class="back-nav">
-			<a href="{{ route('course_studentShow', $chapter->course_ref)}}"><i class="fas fa-arrow-circle-left greyed"></i>Back</a>
+			<a href="{{ route('course_studentShow', $chapter->course_id)}}"><i class="fas fa-arrow-circle-left greyed"></i>Back</a>
 		</nav>
 		<section id="chapter-content">
 			<h2 class="light-card block-title layer-2">Chapter Name</h2>
@@ -70,7 +70,7 @@
 		<section id="coming-up">
 		<h2 class="light-card block-title layer-2">Assignments</h2>
         @foreach($chapter->assignments as $assignment)
-		<a href="{{ route('assignment_studentShow', $assignment->assignment_id)}}" class="listElement-h light-card row zoom">
+		<a href="{{ route('assignment_studentShow', $assignment->id)}}" class="listElement-h light-card row zoom">
 			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time }}</span>
 			<span class="listElementContent col background">
 				<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>

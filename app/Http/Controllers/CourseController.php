@@ -28,7 +28,7 @@ class CourseController extends Controller
         $assignments = Assignment::all()
             ->sortBy('start_time')
             ->sortBy('end_time')
-            ->whereIn('course_ref', $courses->pluck('course_id'));
+            ->whereIn('course_id', $courses->pluck('id'));
 
         return view('student.courses', [
             'courses'=>$courses,
@@ -67,7 +67,7 @@ class CourseController extends Controller
         $assignments = Assignment::all()
             ->sortBy('start_time')
             ->sortBy('end_time')
-            ->where('course_ref', $id)
+            ->where('course_id', $id)
         ;
 
         return view('student.course', [
@@ -90,7 +90,7 @@ class CourseController extends Controller
         $assignments = Assignment::all()
             ->sortBy('start_time')
             ->sortBy('end_time')
-            ->where('course_ref', $id)
+            ->where('course_id', $id)
         ;
 
         return view('teacher.course.show', [

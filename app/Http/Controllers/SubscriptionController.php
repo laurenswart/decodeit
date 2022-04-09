@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plan;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -25,14 +26,17 @@ class SubscriptionController extends Controller
 
     public function createCheckoutSession(Request $request){
         if(empty( $request->post('price_id'))){
-            //todo
-            return;
+            return abort(403);
+        } else if (!empty(Teacher::find(Auth::id())->currentSubscription())){
+            //user already has a subscription
+            return abort(403);
         }
+
         $stripeUser = Auth::user()->createOrGetStripeCustomer();
         $stripe = new StripeClient(env('STRIPE_SECRET'));
         $session = $stripe->checkout->sessions->create([
             'success_url' => 'http://localhost:8000/teacher/account',
-            'cancel_url' => 'http://localhost:8000/teacher/subscriptions/fail',
+            'cancel_url' => 'http://localhost:8000/teacher/subscriptions/payment_failed',
             'line_items' => [
               [
                 'price' => $request->post('price_id'),
@@ -48,13 +52,8 @@ class SubscriptionController extends Controller
 
     }
 
-    public function teacherSuccess(Request $request){
-        var_dump('payment succeeded');
-
-    }
-
     public function teacherFail(){
-        var_dump('payment failed');
+        return view('teacher.subscriptions.payment_failed');
     }
 
 }

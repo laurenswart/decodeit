@@ -21,8 +21,8 @@
       @foreach($subscriptions as $subscription)
         
         <tr>
-            <td>{{ $subscription->subscription_id }}</td>
-            <td><a href="{{ route('subscription_adminShow', $subscription->subscription_id) }}">{{ $subscription->title }}</a></td>
+            <td>{{ $subscription->id }}</td>
+            <td><a href="{{ route('subscription_adminShow', $subscription->id) }}">{{ $subscription->title }}</a></td>
             <td>{{ $subscription->description }}</td>
             <td>{{ $subscription->is_custom }}</td>
             <td><i class="fas fa-{{ $subscription->is_active ? 'check-circle' : 'times' }}"></i></td>

@@ -37,8 +37,8 @@ class MessageSeeder extends Seeder
             foreach($users as $user){
                 $nbMessages = rand(1,3);
                 Message::factory()->count($nbMessages)->create([
-                    'user_ref'=>$user->user_id,
-                    'course_ref'=>$course->course_id,
+                    'user_id'=>$user->id,
+                    'course_id'=>$course->id,
                 ]);
             }
         }

@@ -21,6 +21,7 @@ class AssignmentChapterSeeder extends Seeder
         DB::table('assignment_chapter')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        /*
         //find assignments
         $assignments = Assignment::all();
 
@@ -28,13 +29,14 @@ class AssignmentChapterSeeder extends Seeder
             
             //get the course it belongs to, and prepare assignment for chapter 2
             $course = $assignment->course;
-            $chapterRef = $course->chapters->where('order_id', 2)->first()->chapter_id;
+            $chapterRef = $course->chapters->where('order_id', 2)->first()->id;
               
             $rows[] = [
-                'chapter_ref'=>$chapterRef,
-                'assignment_ref'=>$assignment->assignment_id,
+                'chapter_id'=>$chapterRef,
+                'assignment_id'=>$assignment->id,
             ];
         }
         DB::table('assignment_chapter')->insert($rows);
+        */
     }
 }

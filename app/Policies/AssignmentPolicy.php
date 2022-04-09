@@ -20,7 +20,7 @@ class AssignmentPolicy
      */
     public function studentView(User $user, Assignment $assignment)
     {
-        return $user->isStudent() && Student::find($user->user_id)->courses->contains($assignment->course);
+        return $user->isStudent() && Student::find($user->id)->courses->contains($assignment->course);
     }
 
     /**

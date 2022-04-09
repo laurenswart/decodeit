@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Payment;
+use App\Models\Plan;
 use App\Models\Subscription;
 use App\Models\Teacher;
 use Carbon\Carbon;
@@ -24,6 +25,7 @@ class PaymentsSeeder extends Seeder
         Payment::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
+        /*
         //get teachers
         $teachers = Teacher::get();
         //free trial id
@@ -35,7 +37,7 @@ class PaymentsSeeder extends Seeder
             //free trial
             $freeTrialDays = rand(0,3);
             $payments[] = [
-                'teacher_ref'=> $teacher['user_id'],
+                'teacher_id'=> $teacher['id'],
                 'subscription_ref'=> $freeTrialRef,
                 'amount'=>0,
                 'start_date'=>$teacher['created_at'],
@@ -46,11 +48,11 @@ class PaymentsSeeder extends Seeder
             //paying subscription
             if($teacher['email']=='bsull@gmail.com'){
                 //custom payment for bob sull
-                $subscriptionRef = 5;
+                $planRef = 5;
             } else {
-                $subscriptionRef = rand(2,4);
+                $planRef = rand(2,4);
             }
-            $subscriptionInfo = Subscription::find($subscriptionRef);
+            $planInfo = Plan::find($planRef);
             
             //pay until subscription passes today
             $passedCurrentDate = false;
@@ -58,9 +60,9 @@ class PaymentsSeeder extends Seeder
             while(!$passedCurrentDate){
                 $paymentDurationId = array_rand($paymentsDurations);
                 $payments[] = [
-                    'teacher_ref'=> $teacher['user_id'],
-                    'subscription_ref'=> $subscriptionRef,
-                    'amount'=>$subscriptionInfo[$paymentsDurations[$paymentDurationId]],
+                    'teacher_id'=> $teacher['id'],
+                    'subscription_ref'=> $planRef,
+                    'amount'=>$planInfo[$paymentsDurations[$paymentDurationId]],
                     'start_date'=> clone $endPreviousExpires,
                     'expires'=> (clone $endPreviousExpires)->addMonths($paymentDurationId),
                     'created_at'=> clone $endPreviousExpires,
@@ -72,5 +74,6 @@ class PaymentsSeeder extends Seeder
 
         //insert into table
         DB::table('payments')->insert($payments);
+        */
     }
 }

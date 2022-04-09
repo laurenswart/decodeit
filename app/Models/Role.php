@@ -24,7 +24,6 @@ class Role extends Model
 
     public $timestamps = false;
     protected $table = 'roles';
-    protected $primaryKey = 'role_id';
 
     /**
      * The users with that role

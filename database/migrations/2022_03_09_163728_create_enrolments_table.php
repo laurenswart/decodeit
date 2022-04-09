@@ -14,20 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enrolments', function (Blueprint $table) {
-            $table->id('enrolment_id');
-            $table->foreignId('course_ref');
-            $table->foreignId('student_ref');
+            $table->id('id');
+            $table->foreignId('course_id');
+            $table->foreignId('student_id');
             $table->integer('final_mark')->nullable()->default(null);
             $table->timestamp('marked_at')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_ref')
-                ->references('course_id')->on('courses')
+            $table->foreign('course_id')
+                ->references('id')->on('courses')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->foreign('student_ref')
-                ->references('user_id')->on('users')
+            $table->foreign('student_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

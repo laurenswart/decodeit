@@ -11,7 +11,7 @@
   <tbody>
       <tr>
         <th>Id</th>
-        <td>{{ $subscription->subscription_id }}</td>
+        <td>{{ $subscription->id }}</td>
       </tr>
       <tr>
         <th>Nb Courses</th>

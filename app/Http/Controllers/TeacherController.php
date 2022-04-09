@@ -15,7 +15,9 @@ class TeacherController extends Controller
      */
     public function dashboard()
     {
-        return view('teacher.dashboard');
+        return view('teacher.dashboard', [
+            'teacher' => Teacher::find(Auth::id())
+        ]);
     }
 
     /**
@@ -41,9 +43,4 @@ class TeacherController extends Controller
         ]);
     }
 
-    public function updatePaymentMethod(){
-        return view('teacher.stripe.updatePaymentMethod', [
-            'intent' => Auth::user()->createSetupIntent()
-        ]);
-    }
 }

@@ -12,7 +12,6 @@ class Course extends Model
 
     protected $table = 'courses';
 
-    protected $primaryKey = 'course_id';
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +19,7 @@ class Course extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'teacher_ref',
+        'teacher_id',
         'title',
         'is_active',
     ];
@@ -28,39 +27,34 @@ class Course extends Model
     public $timestamps = true;
 
     protected function teacher(){
-        return $this->belongsTo(Teacher::class, 'teacher_ref', 'user_id' );
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id' );
     }
 
     protected function chapters(){
-        return $this->hasMany(Chapter::class, 'course_ref', 'course_id' )->orderBy('order_id');
+        return $this->hasMany(Chapter::class, 'course_id', 'id' )->orderBy('order_id');
     }
     protected function skills(){
-        return $this->hasMany(Skill::class, 'course_ref', 'course_id' );
+        return $this->hasMany(Skill::class, 'course_id', 'id' );
     }
 
     protected function messages(){
-        return $this->hasMany(Message::class, 'course_id', 'course_ref' );
+        return $this->hasMany(Message::class,  'course_id', 'id' );
     }
 
     protected function assignments(){
-        return $this->hasMany(Assignment::class, 'course_ref' , 'course_id');
+        return $this->hasMany(Assignment::class, 'course_id' , 'id');
     }
 
     public function students(){
-        return $this->belongsToMany(Student::class, 'enrolments','course_ref', 'student_ref','course_id','user_id'   );
-        //return $this->belongsToMany(Student::class, 'enrolments','course_id', 'course_ref','user_id', 'student_ref'  );
-        //return $this->belongsToMany(Student::class, 'enrolments','course_id','user_id', 'course_ref', 'student_ref'  )
-       //return $this->belongsToMany(Student::class, 'enrolments','course_ref','course_id', 'student_ref','user_id'   )
-           // ->withTimestamps()
-            //->wherePivotNull('deleted_at');
+        return $this->belongsToMany(Student::class, 'enrolments','course_id', 'student_id','id','id');
     }
 
     public function enrolmentForAuth(){
         $enrolment = Enrolment::all()
-            ->where('student_ref', Auth::id())
-            ->where('course_ref', $this->course_id)
+            ->where('student_id', Auth::id())
+            ->where('course_id', $this->id)
             ->first();
-        return $enrolment->enrolment_id;
+        return $enrolment->id;
     }
     
 }

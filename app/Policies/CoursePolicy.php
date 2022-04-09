@@ -44,7 +44,7 @@ class CoursePolicy
      */
     public function teacherView(User $user, Course $course)
     {
-        return $user->isTeacher() && $course->teacher_ref === $user->user_id;
+        return $user->isTeacher() && $course->teacher_id === $user->id;
     }
 
     /**
@@ -56,7 +56,7 @@ class CoursePolicy
      */
     public function studentView(User $user, Course $course)
     {
-        return $user->isStudent() && Student::find($user->user_id)->courses->contains($course);
+        return $user->isStudent() && Student::find($user->id)->courses->contains($course);
     }
 
     /**
@@ -79,7 +79,7 @@ class CoursePolicy
      */
     public function update(User $user, Course $course)
     {
-        return $user->isTeacher() && $course->teacher_ref === $user->user_id;
+        return $user->isTeacher() && $course->teacher_id=== $user->id;
     }
 
     /**
@@ -91,7 +91,7 @@ class CoursePolicy
      */
     public function delete(User $user, Course $course)
     {
-        return $user->isTeacher() && $course->teacher_ref === $user->user_id;
+        return $user->isTeacher() && $course->teacher_id === $user->id;
     }
 
     /**

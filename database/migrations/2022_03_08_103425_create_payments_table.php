@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('teacher_ref');
+            $table->foreignId('teacher_id');
 
             $table->integer('amount_due');
             $table->integer('amount_paid');
@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('reason');
             $table->string('currency');
             $table->string('status');
-            $table->string('subscription_ref');
+            $table->string('subscription_stripe_id');
             $table->timestamp('created_at');
 
-            $table->foreign('teacher_ref')
+            $table->foreign('teacher_id')
                 ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');

@@ -48,7 +48,7 @@ class InvoicePaymentSucceededJob implements ShouldQueue
        
         //save to DB
         Payment::create([
-            'teacher_ref' => $userId,
+            'teacher_id' => $userId,
             'amount_due' => $priceDue,
             'amount_paid' => $pricePaid,
             'stripe_invoice_id' => $invoiceId,
@@ -57,7 +57,7 @@ class InvoicePaymentSucceededJob implements ShouldQueue
             'created_at' => Carbon::createFromTimestamp($created),
             'currency' => $currency,
             'status' => $status,
-            'subscription_ref' => $subscriptionId,
+            'subscription_stripe_id' => $subscriptionId,
         ]);
     }
 }

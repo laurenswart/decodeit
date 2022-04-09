@@ -66,7 +66,7 @@ class SkillSeeder extends Seeder
 
         //find courses
         $courses = Course::all();
-
+        $rows = [];
         foreach($courses as $course){
             //add a random set of skills
             $nbSkills = rand(0, 6);
@@ -74,7 +74,7 @@ class SkillSeeder extends Seeder
             $skills = Arr::random(self::SKILLS, $nbSkills);
             foreach($skills as $skill){
                 $rows[] = [
-                    'course_ref'=>$course->course_id,
+                    'course_id'=>$course->id,
                     'title'=> $skill['title'],
                     'description'=> $skill['description'],
                 ];

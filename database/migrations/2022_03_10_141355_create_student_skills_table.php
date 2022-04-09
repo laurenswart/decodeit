@@ -14,18 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('student_skills', function (Blueprint $table) {
-            $table->foreignId('enrolment_ref');
-            $table->foreignId('skill_ref');
-            $table->primary(['enrolment_ref', 'skill_ref']);
+            $table->foreignId('enrolment_id');
+            $table->foreignId('skill_id');
+            $table->primary(['enrolment_id', 'skill_id']);
             $table->integer('mark')->nullable()->default(null);
 
-            $table->foreign('enrolment_ref')
-                ->references('enrolment_id')->on('enrolments')
+            $table->foreign('enrolment_id')
+                ->references('id')->on('enrolments')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
                 
-            $table->foreign('skill_ref')
-                ->references('skill_id')->on('skills')
+            $table->foreign('skill_id')
+                ->references('id')->on('skills')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

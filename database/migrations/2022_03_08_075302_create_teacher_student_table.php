@@ -14,16 +14,16 @@ return new class extends Migration
     public function up()
     {
         Schema::create('teacher_student', function (Blueprint $table) {
-            $table->foreignId('student_ref');
-            $table->foreignId('teacher_ref');
-            $table->primary(['student_ref', 'teacher_ref']);
+            $table->foreignId('student_id');
+            $table->foreignId('teacher_id');
+            $table->primary(['student_id', 'teacher_id']);
 
-            $table->foreign('student_ref')
-                ->references('user_id')->on('users')
+            $table->foreign('student_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-            $table->foreign('teacher_ref')
-                ->references('user_id')->on('users')
+            $table->foreign('teacher_id')
+                ->references('id')->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

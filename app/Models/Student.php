@@ -11,17 +11,17 @@ class Student extends User
     use HasFactory;
 
     public function teachers(){
-        return $this->belongsToMany(Student::class, 'teacher_student', 'student_ref', 'teacher_ref', 'user_id', 'user_id', );
+        return $this->belongsToMany(Student::class, 'teacher_student', 'student_id', 'teacher_id', 'id', 'id', );
     }
 
     public function newQuery($excludeDeleted = true)
     {
         return parent::newQuery($excludeDeleted)
-            ->whereRoleRef(2);
+            ->whereRoleId(2);
     }
 
     protected function courses(){
-        return $this->belongsToMany(Course::class, 'enrolments', 'student_ref', 'course_ref', 'user_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'enrolments', 'student_id', 'course_id', 'id', 'id');
     }
 
 }

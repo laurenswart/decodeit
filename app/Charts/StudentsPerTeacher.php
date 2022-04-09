@@ -25,8 +25,8 @@ class StudentsPerTeacher extends BaseChart
     {
         //get number of users enrolled per month
         $studentsPerTeacher = DB::table('teacher_student')
-            ->select(DB::raw('teacher_ref, count(*) as nbStudents'))
-            ->groupBy('teacher_ref')
+            ->select(DB::raw('teacher_id, count(*) as nbStudents'))
+            ->groupBy('teacher_id')
             ->orderBy('nbStudents')
             ->pluck('nbStudents');
 

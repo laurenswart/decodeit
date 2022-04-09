@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'role_ref' => $request->isTeacher ? 1 : 2,
+            'role_id' => $request->isTeacher ? 1 : 2,
             'password' => Hash::make($request->password),
         ]);
 
@@ -53,8 +53,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);      
         
-        $user->sendEmailVerificationNotification();
-
         return redirect( route('verification.notice'));
     }
 }

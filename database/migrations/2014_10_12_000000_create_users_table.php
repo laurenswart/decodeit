@@ -14,19 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id('id');
             $table->string('firstname', 50);
             $table->string('lastname', 50);
             $table->string('email', 255)->unique();
-            $table->foreignId('role_ref');
+            $table->foreignId('role_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('role_ref')
-                ->references('role_id')->on('roles')
+            $table->foreign('role_id')
+                ->references('id')->on('roles')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

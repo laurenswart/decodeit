@@ -23,8 +23,8 @@ class RoleSeeder extends Seeder
 
         //Define data
         $roles = [
-            ['role_id'=>1,'name'=>'teacher'],
-            ['role_id'=>2,'name'=>'student'],
+            ['id'=>1,'name'=>'teacher'],
+            ['id'=>2,'name'=>'student'],
         ];
         
         //Insert data in the table

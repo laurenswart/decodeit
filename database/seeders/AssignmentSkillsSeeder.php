@@ -20,14 +20,14 @@ class AssignmentSkillsSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('assignment_skills')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
-        $courses = Course::all();
-        foreach($courses as $course){
-            $assignments = $course->assignments;
-            $skills = $course->skills->pluck('skill_id')->toArray();
-            foreach($assignments as $assignment){
-                $chosenSkills = Arr::random($skills, rand(0,count($skills)));
-                $assignment->skills()->syncWithPivotValues($chosenSkills, ['assignment_ref' =>  $assignment->assignment_id]);
-            }
-        }
+        // $courses = Course::all();
+        // foreach($courses as $course){
+        //     $assignments = $course->assignments;
+        //     $skills = $course->skills->pluck('skills.id')->toArray();
+        //     foreach($assignments as $assignment){
+        //         $chosenSkills = Arr::random($skills, rand(0,count($skills)));
+        //         $assignment->skills()->syncWithPivotValues($chosenSkills, ['assignment_id' =>  $assignment->id]);
+        //     }
+        // }
     }
 }

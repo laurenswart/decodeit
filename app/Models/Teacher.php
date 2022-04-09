@@ -14,18 +14,18 @@ class Teacher extends User
     use HasFactory;
 
     public function students(){
-        return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_ref', 'student_ref', 'user_id', 'user_id');
+        return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_id', 'student_id', 'id', 'id');
     }
 
     public function payments(){
-        return $this->hasMany(Payment::class, 'teacher_ref', 'user_id' );
+        return $this->hasMany(Payment::class, 'teacher_id', 'id' );
     }
     
     /**
      * The courses create by this teacher
      */
     public function courses(){
-        return $this->hasMany(Course::class, 'teacher_ref', 'user_id' );
+        return $this->hasMany(Course::class, 'teacher_id', 'id' );
     }
 
     public function currentSubscriptionPlan(){
@@ -55,7 +55,12 @@ class Teacher extends User
     public function newQuery($excludeDeleted = true)
     {
         return parent::newQuery($excludeDeleted)
-            ->whereRoleRef(1);
+            ->whereRoleId(1);
+    }
+
+    public function isOnFreeTrial(){
+        return $this->currentSubscription() == null 
+            && Auth::user()->created_at->diffInDays(Carbon::now()) <= 3;
     }
 
 }

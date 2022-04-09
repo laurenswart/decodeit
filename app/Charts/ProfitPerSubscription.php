@@ -24,7 +24,7 @@ class ProfitPerSubscription extends BaseChart
         //payments
         $datas = DB::table('subscriptions')
             ->select('subscriptions.title', DB::raw('sum(amount) as total'))
-            ->leftJoin('payments', 'payments.subscription_ref', '=', 'subscriptions.subscription_id')
+            ->leftJoin('payments', 'payments.subscription_ref', '=', 'subscriptions.id')
             ->where('title', '!=', 'free')
             ->groupBy(['title'])
             ->orderBy('subscription_ref')
