@@ -27,6 +27,11 @@ Route::get('courses', ([CourseController::class, 'teacherIndex']))
 Route::get('courses/{id}', ([CourseController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
     ->name('course_teacherShow');
+Route::get('courses/new', ([CourseController::class, 'teacherCreate']))
+    ->name('course_teacherCreate');
+Route::post('courses', ([CourseController::class, 'teacherStore']))
+    ->name('course_teacherStore');
+
     
 //CHAPTER
 Route::get('chapter/{id}', ([ChapterController::class, 'chapter_teacherShow']))

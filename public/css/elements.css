@@ -88,10 +88,10 @@ header .offcanvas a{
 	padding:10px 5px;
 }
 
-a.highlight{
+a.highlight, button.highlight{
 	color:var(--color-orange);
 }
-a.highlight:hover, a.highlight:hover i{
+a.highlight:hover, a.highlight:hover i,  button.highlight:hover,  button.highlight:hover i{
 	color:var(--color-white);
 }
 
@@ -572,6 +572,14 @@ nav.back-nav a{
 	text-decoration: none;
 }
 
+a {
+	color: var(--color-mediumPurple);
+}
+
+a:hover{
+	color: var(--color-orange);
+}
+
 .label{
 	font-weight: bold;
 	padding-right:10px;
@@ -702,6 +710,12 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	margin-left:5px;
 }
 
+.form-section{
+	padding:10px 20px;
+	border-radius:10px;
+	margin-bottom:20px;
+}
+
 #info #details span{
 	display:flex;
 	flex-direction: row;
@@ -771,4 +785,14 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	.p-sides-10{
 		padding-left: 10px;
     	padding-right: 10px;
+	}
+	label.title-3{
+		color: #494399;
+		font-size: 1.875rem;
+		line-height: 1.2;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		font-weight: 700;
+		font-family: 'Montserrat', Arial, sans-serif;
+		white-space: nowrap;
 	}

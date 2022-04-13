@@ -35,6 +35,9 @@ class Teacher extends User
                 return $plan;
             }
         }
+        if(Teacher::find(Auth::id())->isOnFreeTrial()){
+            return Plan::firstWhere('title', 'free');
+        }
         return null;
     }
 

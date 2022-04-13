@@ -67,7 +67,7 @@ class CoursePolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isTeacher();
     }
 
     /**

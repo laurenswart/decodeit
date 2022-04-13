@@ -10,9 +10,9 @@
         <!--bootstrap-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
-        <!-- Styles -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>        <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="{{ asset('css//config.css') }}" >
@@ -80,14 +80,38 @@
 			</header>
 			<!-- Page Content -->
 			<main  class="container" style="padding-bottom: 175px;">
-        @yield('content')
+                @yield('content')
 			</main>
+
+            <!-- Modal for Flash messages -->
+            @if (session('status'))
+                <div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="flashModalLabel">Request Failed</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{ session('status') }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn myButton" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+                </div>
+            @endif
+
             <button onclick="topFunction()" id="scrollToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-        <footer class="u-align-center u-clearfix u-footer  layer-1 u-footer" id="sec-e3f5">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <p class="u-text  u-text-1">Some footer to add</p>
-            </div>
-        </footer>
+            <footer class="u-align-center u-clearfix u-footer  layer-1 u-footer" id="sec-e3f5">
+                <div class="u-clearfix u-sheet u-sheet-1">
+                    <p class="u-text  u-text-1">Some footer to add</p>
+                </div>
+            </footer>
 		</div>
+        @yield('scripts')
     </body>
 </html>
