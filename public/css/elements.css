@@ -332,6 +332,7 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	transform: scale(1.015);
 }
 
+
 @media (max-width: 768px) {
 /*@include media-breakpoint-down(md) {*/
 	.listElement-h .listElementTitle.col-12.col-md-4{
@@ -364,6 +365,28 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	height:100%;	
 }
 
+.label-value{
+	display:flex;
+	justify-content:space-between;
+	align-items: center;
+	align-self:stretch;
+}
+
+.h-end-link{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.h-end-link a{
+	color: var(--color-mediumPurple);
+	padding-right: 20px;
+}
+.h-end-link h2{
+	margin-top:0;
+	margin-bottom: 0;
+}
 
 .listElement-v  .listElementTitle{
 	

@@ -92,8 +92,7 @@ class CourseController extends Controller
         $assignments = Assignment::all()
             ->sortBy('start_time')
             ->sortBy('end_time')
-            ->where('course_id', $id)
-        ;
+            ->where('course_id', $id);
 
         return view('teacher.course.show', [
             'course'=>$course,
@@ -125,8 +124,10 @@ class CourseController extends Controller
     }
 
     /**
-     * Show form to create a new course
-     *
+     * Save new course
+     * 
+     * @param \Illuminate\Http\Request $request
+     * 
      * @return \Illuminate\Http\Response
      */
     public function teacherStore(Request $request){
@@ -135,15 +136,17 @@ class CourseController extends Controller
             'title' => 'required|max:100',
         ];
 
-        foreach($request->post('skills') as $key => $val) { 
-            if(empty($val['description'])){
-                $rules['skills.'.$key.'.title'] = 'max:100'; 
-            } else {
-                $rules['skills.'.$key.'.title'] = 'required|max:100'; 
-            }
-            $rules['skills.'.$key.'.description'] = 'max:255'; 
+        if(!empty($request->post('skills'))){
+            foreach($request->post('skills') as $key => $val) { 
+                if(empty($val['description'])){
+                    $rules['skills.'.$key.'.title'] = 'max:100'; 
+                } else {
+                    $rules['skills.'.$key.'.title'] = 'required|max:100'; 
+                }
+                $rules['skills.'.$key.'.description'] = 'max:255'; 
 
-          }
+            }
+        }
         $validated = $request->validate($rules);
 
         try { 
@@ -155,25 +158,137 @@ class CourseController extends Controller
             ]);
 
             //create skills
-            $newSkills = [];
-            foreach($validated['skills'] as $skill){
-                if(empty( $skill['title'])){
-                    continue;
+            if(!empty($validated['skills'])){
+                $newSkills = [];
+                foreach($validated['skills'] as $skill){
+                    if(empty( $skill['title'])){
+                        continue;
+                    }
+                    $newSkills[] = [
+                        'course_id' => $course->id,
+                        'title' => $skill['title'],
+                        'description' => $skill['description'],
+                    ];
                 }
-                $newSkills[] = [
-                    'course_id' => $course->id,
-                    'title' => $skill['title'],
-                    'description' => $skill['description'],
-                ];
-            }
-            if(!empty( $newSkills)){
-                Skill::insert($newSkills);  
+                if(!empty( $newSkills)){
+                    Skill::insert($newSkills);  
+                }
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            dd($exception);
             return redirect( route('course_teacherIndex') )->with('status', "Something went wrong and we're sorry to say your new course could not be created");    
         }
         return redirect( route('course_teacherIndex') );
     }
 
+    /**
+     * Show form to edit a course
+     *
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherEdit(int $id){
+        $course = Course::find($id);
+
+        $this->authorize('update', $course);
+
+        return view("teacher.course.edit", [
+            "course" =>$course
+        ]);
+    }
+
+    /**
+     * Save the course
+     *
+     * @param int $id Id of the course
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherUpdate(Request $request,int $id){
+        //find the course to update
+        $course = Course::find($id);
+        if(empty($course)){
+            return redirect( route('course_teacherIndex')) 
+                ->with('status', 'Could not find the course to update.');
+        }
+
+        //validate inputs
+        $rules = [
+            'title' => 'required|max:100',
+        ];
+
+        //old skills
+        //dd($request->post());
+        if($request->post('oldSkills') != null){
+            foreach($request->post('oldSkills') as $key => $val) { 
+                if(empty($val['description'])){
+                    $rules['oldSkills.'.$key.'.title'] = 'max:100'; 
+                } else {
+                    $rules['oldSkills.'.$key.'.title'] = 'required|max:100'; 
+                }
+                $rules['oldSkills.'.$key.'.description'] = 'max:255'; 
+            }
+        }
+        //new skills
+        if($request->post('skills') != null){
+            foreach($request->post('skills') as $key => $val) { 
+                if(empty($val['description'])){
+                    $rules['skills.'.$key.'.title'] = 'max:100'; 
+                } else {
+                    $rules['skills.'.$key.'.title'] = 'required|max:100'; 
+                }
+                $rules['skills.'.$key.'.description'] = 'max:255'; 
+            }
+        }
+        $validated = $request->validate($rules);
+
+        try { 
+            //update course details
+            $course->title = $validated['title'];
+            $course->is_active = $request->post('active')==='on' ? 1 : 0;
+            $course->save();
+
+            //create new skills
+            if(!empty($validated['skills'])){
+                $newSkills = [];
+                
+                foreach($validated['skills'] as $skill){
+                    if(empty( $skill['title'])){
+                        continue;
+                    }
+                    $newSkills[] = [
+                        'course_id' => $course->id,
+                        'title' => $skill['title'],
+                        'description' => $skill['description'],
+                    ];
+                }
+                if(!empty( $newSkills)){
+                    Skill::insert($newSkills);  
+                }
+            }
+            //remove old or update old
+            if(!empty($validated['oldSkills'])){
+                foreach($validated['oldSkills'] as $skillId => $skill){
+                    $existingSkill = Skill::find($skillId);
+                    if(empty($existingSkill)) continue;
+
+                    if(empty( $skill['title'])){
+                        //delete
+                        $existingSkill->delete();
+                    } else {
+                        //update
+                        $existingSkill->title = $skill['title'];
+                        $existingSkill->description = $skill['description'];
+                        $existingSkill->save();
+                    }
+                }
+            }
+            
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return redirect( route('course_teacherShow', $id) )->with('status', "Something went wrong and we're sorry to say your new course could not be created");    
+        }
+        return view("teacher.course.show", [
+            'course'=>$course
+        ]);
+    }
 }

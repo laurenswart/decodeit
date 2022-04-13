@@ -15,7 +15,7 @@ function newEnrolment(){
     nbEnrolments++;
     let newDiv = document.createElement('div');
     newDiv.classList.add('mb-3');
-    newDiv.innerHTML = '<input type="text" class="form-control" id="skills['+nbEnrolments+']" placeholder="Student">';
+    newDiv.innerHTML = '<input type="text" class="form-control" id="enrolments['+nbEnrolments+']" placeholder="Student">';
     enrolmentsDiv.appendChild(newDiv);
 }
 
@@ -23,15 +23,7 @@ function newSkill(){
     nbSkills++;
     let newDiv = document.createElement('div');
     newDiv.classList.add('mb-2');
-    newDiv.innerHTML = '<div class="mb-2"><div class="mb-3"><input type="text" class="form-control" name="skills['+nbSkills+'][title]" placeholder="Skill Name"></div><div class="mb-3 ml-4"><textarea class="form-control" name="skills['+nbSkills+'][description]" rows="3" placeholder="Skill Description .. "></textarea></div></div>';
+    newDiv.innerHTML = '<div class="mb-3"><input type="text" class="form-control" name="skills['+nbSkills+'][title]" placeholder="Skill Name"></div><div class="mb-3 ml-4"><textarea class="form-control" name="skills['+nbSkills+'][description]" rows="3" placeholder="Skill Description .. "></textarea></div>';
     skillsDiv.appendChild(newDiv);
 }
 
-newEnrolment();
-newEnrolment();
-newEnrolment();
-newEnrolment();
-
-newSkill();
-newSkill();
-newSkill();

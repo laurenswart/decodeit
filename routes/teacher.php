@@ -31,17 +31,29 @@ Route::get('courses/new', ([CourseController::class, 'teacherCreate']))
     ->name('course_teacherCreate');
 Route::post('courses', ([CourseController::class, 'teacherStore']))
     ->name('course_teacherStore');
+Route::get('courses/{id}/edit', ([CourseController::class, 'teacherEdit']))
+    ->where('id', '[0-9]+')
+    ->name('course_teacherEdit');
+Route::post('courses/{id}', ([CourseController::class, 'teacherUpdate']))
+    ->where('id', '[0-9]+')
+    ->name('course_teacherUpdate');
 
     
 //CHAPTER
 Route::get('chapter/{id}', ([ChapterController::class, 'chapter_teacherShow']))
     ->where('id', '[0-9]+')
     ->name('chapter_teacherShow');
+Route::get('course/{id}/chapters/new', ([ChapterController::class, 'teacherCreate']))
+    ->where('id', '[0-9]+')
+    ->name('chapter_teacherCreate');
 
 //ASSIGNMENT
 Route::get('assignment/{id}', ([AssignmentController::class, 'assignment_teacherShow']))
     ->where('id', '[0-9]+')
     ->name('assignment_teacherShow');
+Route::get('course/{id}/assignment/new', ([AssignmentController::class, 'teacherCreate']))
+    ->where('id', '[0-9]+')
+    ->name('assignment_teacherCreate');
 
 //STUDENT
 Route::get('students', ([StudentController::class, 'teacherIndex']))
