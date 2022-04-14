@@ -29,7 +29,7 @@
         
     </head>
     <body class="font-sans antialiased">
-      <div class="background" style="position: relative;min-height: 100vh;">
+      <div class="background">
 
         <header class="navbar-default sticky-top layer-1">
           <nav class="navbar navbar-expand-lg navbar-light container">
@@ -80,7 +80,7 @@
   </div>
 			</header>
 			<!-- Page Content -->
-			<main  class="container" style="padding-bottom: 175px;">
+			<main  class="container" >
                 @yield('content')
 			</main>
 

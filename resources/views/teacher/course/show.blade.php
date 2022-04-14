@@ -4,7 +4,7 @@
 <section>
 
 		<h2 class="light-card block-title layer-2">{{ $course->title }}</h2>
-		<div class="row g-3">
+		<div class="row">
 			<div class="form-section layer-2 col mx-2">
 				<div class="h-end-link">
 					<h3 class="title-3">Chapters</h3>

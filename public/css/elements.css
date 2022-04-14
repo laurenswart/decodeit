@@ -658,6 +658,18 @@ a:hover{
 	max-width: 750px;
 }
 
+main.container{
+	padding-bottom: 175px;
+	flex-grow:1;
+}
+
+body > div.background{
+	position: relative;
+	min-height: 100vh; 
+	display:flex;
+	flex-direction:column;
+}
+
 .u-body{
 	display:flex;
 	flex-direction: column;

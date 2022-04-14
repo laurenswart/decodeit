@@ -58,8 +58,14 @@ Route::get('course/{id}/assignment/new', ([AssignmentController::class, 'teacher
 //STUDENT
 Route::get('students', ([StudentController::class, 'teacherIndex']))
     ->name('student_teacherIndex');
+    Route::post('students/search', ([StudentController::class, 'teacherSearch']))
+    ->name('student_teacherSearch');
 
-
+//ENROLMENTS
+Route::get('students/new', ([StudentController::class, 'teacherCreate']))
+    ->name('student_teacherCreate');
+Route::post('students', ([StudentController::class, 'teacherStore']))
+    ->name('student_teacherStore');
 
 Route::get('plans', ([PlanController::class, 'teacherIndex']))
     ->name('plan_teacherIndex');
