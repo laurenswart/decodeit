@@ -21,7 +21,11 @@
             </div>
             <h3 class="title-3">Remove From My Students</h3>
             <p>Removing a student from your list will delete all associated data, such as marks, submissions, etc. This cannot be undone</p>
-            <a class="align-self-end mb-2 highlight"><i class="fas fa-trash-alt"></i>Remove Student</a>
+            <form method="POST" action="{{ route('student_teacherDelete') }}">
+                @csrf
+                <input type="hidden" value="{{ $student->id }}" name="student" >
+                <button class="align-self-end mb-2 highlight"><i class="fas fa-trash-alt"></i>Remove Student</button>
+            </form>
       </div>
       <div class="col form-section layer-2 ml-4 d-flex flex-col justify-content-between">
         <div>

@@ -102,10 +102,10 @@
                   let data = JSON.parse(this.responseText);
                   if(data.success){
                     let student = data.student;
-                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td><td><i class=\"fas fa-trash-alt\"></i>Remove</td></tr>";
+                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td><td></td>";
                     body.innerHTML += tr;
                     //show message
-                    createFlashPopUp('Student added successfully');
+                    createFlashPopUp('Student Successfully Added');
                   }
                 } else if(this.status === 403) {
                   let data = JSON.parse(this.responseText);

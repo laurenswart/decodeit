@@ -159,4 +159,48 @@ class StudentController extends Controller
            
         }
     }
+
+    /**
+     * Add a student to list of teacher's students, by ajax request
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function teacherDelete(Request $request){
+        
+        if($request->post('student') ) {
+            //check teacher has room in subscription
+            $teacher = Teacher::find(Auth::id());
+            
+            //find student to add
+            $studentId = $request->post('student');
+            
+            $student = Student::firstWhere('id', $studentId);
+            //dd($student);
+            if(empty($student)){
+                return redirect( route('student_teacherIndex')) 
+                ->with('flash_modal', 'Could not find the student to remove.');
+            }
+
+            $this->authorize('teacherSoftDelete', $student);
+
+            //delete enrolments for this student and teacher
+            $enrolments = DB::table('enrolments')
+                ->where('student_id', $student->id)
+                ->whereIn('course_id', $teacher->courses->pluck('id'))
+                ->update(array('deleted_at' => DB::raw('NOW()')));
+            
+            $teacher->students()->detach($studentId);
+
+            if($teacher->students->contains($student)){
+                return redirect( route('student_teacherIndex')) 
+                    ->with('flash_modal', 'Could not remove the student from your list.');
+            } else {
+                return redirect( route('student_teacherIndex'))
+                    ->with('success', 'Student Successfully Removed');;
+            }
+
+           
+        }
+    }
 }

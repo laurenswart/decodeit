@@ -94,7 +94,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            {{ session('status') }}
+                            {{ session('flash_modal') }}
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn myButton" data-bs-dismiss="modal">Close</button>
@@ -108,13 +108,11 @@
 
             <!-- flash message bottom right -->
             @if( session('success') )
-                <div class="alert alert-success alert-block" role="alert" id="flash-success">
-                    <button class="close" data-dismiss="alert"></button>
+                <div class="alert alert-success flash-popup" role="alert">
                     {{ session('success') }}
                 </div>
                 @elseif( session('error') )
-                <div class="alert alert-danger alert-block" role="alert" id="flash-error">
-                    <button class="close" data-dismiss="alert"></button>
+                <div class="alert alert-danger flash-popup" role="alert">
                     {{ session('error') }}
                 </div>
             @endif

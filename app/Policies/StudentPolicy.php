@@ -58,15 +58,15 @@ class StudentPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the teacher can soft delete the student enrolments.
      *
      * @param  \App\Models\User  $user
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Student $student)
+    public function teacherSoftDelete(User $user, Student $student)
     {
-        //
+        return $student!=null && $user->isTeacher() && Teacher::find($user->id)->students->contains($student);
     }
 
     /**

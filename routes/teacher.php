@@ -65,10 +65,14 @@ Route::post('students/store', ([StudentController::class, 'teacherStore']))
 Route::get('students/{id}', ([StudentController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
     ->name('student_teacherShow');
+Route::post('students/delete', ([StudentController::class, 'teacherDelete']))
+    ->name('student_teacherDelete');
 
 //ENROLMENTS
 Route::post('students', ([StudentController::class, 'teacherStore']))
     ->name('student_teacherStore');
+
+
 
 Route::get('plans', ([PlanController::class, 'teacherIndex']))
     ->name('plan_teacherIndex');

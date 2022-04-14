@@ -22,7 +22,9 @@ class Student extends User
     }
 
     public function courses(){
-        return $this->belongsToMany(Course::class, 'enrolments', 'student_id', 'course_id', 'id', 'id')->withPivot('final_mark', 'created_at');
+        return $this->belongsToMany(Course::class, 'enrolments', 'student_id', 'course_id', 'id', 'id')
+            ->withPivot('final_mark', 'created_at', 'deleted_at')
+            ->whereNull('enrolments.deleted_at');
     }
 
     public function coursesForTeacher(){
