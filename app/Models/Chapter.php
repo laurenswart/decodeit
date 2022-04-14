@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class Chapter extends Model
 {
@@ -56,6 +57,19 @@ class Chapter extends Model
             ->where('to_mark', true)->count();
 
         return $nbDone;
+    }
+
+    public function isRead($userId){
+        $enrolmentId = Enrolment::where('student_id', $userId)
+            ->where('course_id', $this->course_id)->first();
+        if(empty($enrolmentId)) return false;
+        
+        $row = DB::table('chapters_read')
+            ->where('enrolment_id', $enrolmentId)
+            ->where('chapter_id', $this->id)
+            ->all();
+        
+        return count($row)==1;
     }
 
     

@@ -48,20 +48,20 @@ class StudentController extends Controller
     }
 
     /**
-     * Show form to manage current student list
+     * Show students for the authenticated teacher
      *
+     * @param int $id Student id
      * @return \Illuminate\Http\Response
      */
-    public function teacherCreate(){
-        //$this->authorize('teacherViewAny', Student::class);
+    public function teacherShow(int $id){
+        $student = Student::find($id);
+        $this->authorize('teacherView', $student);
 
-        $students = Teacher::find(Auth::id())
-            ->students
-            ->sortBy('firstname');
-        return view('teacher.student.create', [
-            'students'=>$students
+        return view('teacher.student.show', [
+            'student'=>$student
         ]);
     }
+
 
     /**
      * Return list of students which firstname or lastname in search data of ajax request

@@ -13,6 +13,7 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Email</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                     <td>{{ $student->firstname }}</td>
                     <td>{{ $student->lastname }}</td>
                     <td>{{ $student->email }}</td>
+                    <td><a href="{{ route('student_teacherShow', $student->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage</a></td>
                 </tr>
               
               @endforeach
@@ -100,7 +102,7 @@
                   let data = JSON.parse(this.responseText);
                   if(data.success){
                     let student = data.student;
-                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td></tr>";
+                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td><td><i class=\"fas fa-trash-alt\"></i>Remove</td></tr>";
                     body.innerHTML += tr;
                     //show message
                     createFlashPopUp('Student added successfully');

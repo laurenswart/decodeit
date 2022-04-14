@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Student extends User
 {
@@ -20,8 +21,12 @@ class Student extends User
             ->whereRoleId(2);
     }
 
-    protected function courses(){
-        return $this->belongsToMany(Course::class, 'enrolments', 'student_id', 'course_id', 'id', 'id');
+    public function courses(){
+        return $this->belongsToMany(Course::class, 'enrolments', 'student_id', 'course_id', 'id', 'id')->withPivot('final_mark', 'created_at');
+    }
+
+    public function coursesForTeacher(){
+        return $this->courses->where('teacher_id', Auth::id());
     }
 
 }

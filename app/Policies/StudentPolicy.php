@@ -31,7 +31,7 @@ class StudentPolicy
      */
     public function teacherView(User $user, Student $student)
     {
-        return $user->isTeacher() && Teacher::find($user->id)->students->contains($student);
+        return $student!=null && $user->isTeacher() && Teacher::find($user->id)->students->contains($student);
     }
 
     /**

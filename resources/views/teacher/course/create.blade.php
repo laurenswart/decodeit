@@ -70,6 +70,6 @@
 @endsection
 
 @section('scripts')
-	<script src="{{ asset('js/course/create.js') }}"></script>
+	<script src="{{ asset('js/teacher/manageCourse.js') }}"></script>
 @endsection
 
