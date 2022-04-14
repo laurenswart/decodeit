@@ -831,3 +831,12 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		font-family: 'Montserrat', Arial, sans-serif;
 		white-space: nowrap;
 	}
+
+	.flash-popup{
+		width: 400px;
+		z-index: 9000;
+
+		position:fixed;
+		top:80px;
+		right:10px;
+	}

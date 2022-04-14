@@ -114,10 +114,10 @@ class CourseController extends Controller
          
         if ($plan === null){
             return redirect( route('course_teacherIndex')) 
-                ->with('status', 'You do not have an active subscription. Please choose one of our subscription plans, or renew your previous subscription.');
+                ->with('flash_modal', 'You do not have an active subscription. Please choose one of our subscription plans, or renew your previous subscription.');
         } else if (count($teacher->courses) >=  $plan->nb_courses){
             return redirect( route('course_teacherIndex'))
-                ->with('status', 'You have reached your subscription limit! Please upgrade to a subscription with a higher number of courses allowed, or delete one of your current courses.
+                ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription with a higher number of courses allowed, or delete one of your current courses.
                     Please be aware that this will remove all associated data, such as assignments, student attempts, etc.');
         }
         return view('teacher.course.create');
@@ -175,7 +175,7 @@ class CourseController extends Controller
                 }
             }
         } catch (\Illuminate\Database\QueryException $exception) {
-            return redirect( route('course_teacherIndex') )->with('status', "Something went wrong and we're sorry to say your new course could not be created");    
+            return redirect( route('course_teacherIndex') )->with('flash_modal', "Something went wrong and we're sorry to say your new course could not be created");    
         }
         return redirect( route('course_teacherIndex') );
     }
@@ -209,7 +209,7 @@ class CourseController extends Controller
         $course = Course::find($id);
         if(empty($course)){
             return redirect( route('course_teacherIndex')) 
-                ->with('status', 'Could not find the course to update.');
+                ->with('flash_modal', 'Could not find the course to update.');
         }
 
         //validate inputs

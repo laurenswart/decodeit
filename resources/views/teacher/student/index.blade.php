@@ -3,38 +3,36 @@
 
 @section('content')
 
-		<div class="h-end-link light-card  mt-4 layer-2 mb-4">
-			<h2 class=" block-title">Students</h2>
-			<a href="{{ route('student_teacherCreate') }}"><i class="fas fa-plus-square"></i>New</a>
-		</div>
+		<h2 class=" block-title light-card layer-2">Students</h2>
 
-    <div class="form-section layer-2">
-    <table class="table" id="students">
-        <thead>
-            <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Created</th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach($students as $student)
-            
-            <tr>
-                <td>{{ $student->firstname }}</td>
-                <td>{{ $student->lastname }}</td>
-                <td>{{ $student->email }}</td>
-                <td>{{ $student->created_at }}<td>
-            </tr>
-          
-          @endforeach
-      </tbody>
-    </table>
-    </div>
+    
+      <div class="form-section layer-2">
+        <table class="table" id="students">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+              @foreach($students as $student)
+                
+                <tr>
+                    <td>{{ $student->firstname }}</td>
+                    <td>{{ $student->lastname }}</td>
+                    <td>{{ $student->email }}</td>
+                </tr>
+              
+              @endforeach
+          </tbody>
+        </table>
+      </div>
+      
+
 
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col">
         <div class="form-section layer-2">
           <h3 class="title-3">Add New Students</h3>
           <div class="form-group">
@@ -43,6 +41,9 @@
           </div>
           <div id="options"></div>
         </div>
+      </div>
+      <div class="col-12 col-xl-3 col-md-4 form-section layer-2 ml-4">
+        <h3 class="title-3">Details</h3>
       </div>
     </div>
 
@@ -85,19 +86,43 @@
                 xhr.send(data);
                 // end of ajax call
               });
+            
+            let body = document.querySelector('tbody');
 
-              function addStudent(email){
-                  console.log('adding student: '+email);
-                  options.innerHTML = "";
-                  searchInput.value = "";
+            function addStudent(email){
+              options.innerHTML = "";
+              searchInput.value = "";
+
+              let xhr = new XMLHttpRequest();
+
+              xhr.onload = function() { //Fonction de rappel
+                if(this.status === 200) {
+                  let data = JSON.parse(this.responseText);
+                  if(data.success){
+                    let student = data.student;
+                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td></tr>";
+                    body.innerHTML += tr;
+                    //show message
+                    createFlashPopUp('Student added successfully');
+                  }
+                } else if(this.status === 403) {
+                  let data = JSON.parse(this.responseText);
+                  createFlashPopUp(data.msg, true);
+                } else {
+                  createFlashPopUp('Oops, Something Went Wrong', true);
                 }
+              };
+              const data = JSON.stringify({
+                email:email,
+                _token: "<?= csrf_token() ?>"
+              });
 
-              
-            };
-
-            function add(userId){
-              newStudents.innerHTML += chosen;
+              xhr.open('POST', "{{ route('student_teacherStore') }}");
+              xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+              xhr.setRequestHeader("Content-Type", "application/json");
+              xhr.send(data);
             }
+          };
         </script>
 @endsection
 

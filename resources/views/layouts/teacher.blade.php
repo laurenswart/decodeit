@@ -85,7 +85,7 @@
 			</main>
 
             <!-- Modal for Flash messages -->
-            @if (session('status'))
+            @if (session('flash_modal'))
                 <div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -103,6 +103,19 @@
                     </div>
                     </div>
                     
+                </div>
+            @endif
+
+            <!-- flash message bottom right -->
+            @if( session('success') )
+                <div class="alert alert-success alert-block" role="alert" id="flash-success">
+                    <button class="close" data-dismiss="alert"></button>
+                    {{ session('success') }}
+                </div>
+                @elseif( session('error') )
+                <div class="alert alert-danger alert-block" role="alert" id="flash-error">
+                    <button class="close" data-dismiss="alert"></button>
+                    {{ session('error') }}
                 </div>
             @endif
 
