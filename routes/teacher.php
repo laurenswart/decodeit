@@ -9,6 +9,7 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TypeaheadController;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,3 +81,7 @@ Route::get('subscriptions/payment_failed', ([SubscriptionController::class, 'tea
     ->name('subscription_teacherFail');
 Route::post('create-checkout-session', ([SubscriptionController::class, 'createCheckoutSession']))
     ->name('create-checkout-session');
+
+//TYPEAHEAD
+Route::post('/searchMyStudents', [TypeaheadController::class, 'newEnrolmentByTeacher'])
+    ->name('search_newEnrolmentByTeacher');

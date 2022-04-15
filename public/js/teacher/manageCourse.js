@@ -1,23 +1,16 @@
-let nbEnrolments = -1;
+
 let nbSkills = -1;
-let enrolmentsDiv = document.getElementById('enrolments');
+
 let skillsDiv = document.getElementById('skills');
-let addEnrolmentBtn = document.getElementById('addEnrolment');
+
 let addSkillBtn = document.getElementById('addSkill');
 
 
-addEnrolmentBtn.addEventListener('click', newEnrolment);
+
 
 addSkillBtn.addEventListener('click', newSkill);
 
 
-function newEnrolment(){
-    nbEnrolments++;
-    let newDiv = document.createElement('div');
-    newDiv.classList.add('mb-3');
-    newDiv.innerHTML = '<input type="text" class="form-control" id="enrolments['+nbEnrolments+']" placeholder="Student">';
-    enrolmentsDiv.appendChild(newDiv);
-}
 
 function newSkill(){
     nbSkills++;

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Course;
+use App\Models\Enrolment;
 use App\Models\Skill;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CourseController extends Controller
 {
@@ -111,6 +114,7 @@ class CourseController extends Controller
         //TODO send back to index, with message 
         $teacher = Teacher::find(Auth::id());
         $plan = $teacher->currentSubscriptionPlan();
+        $students = $teacher->students;
          
         if ($plan === null){
             return redirect( route('course_teacherIndex')) 
@@ -120,7 +124,7 @@ class CourseController extends Controller
                 ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription with a higher number of courses allowed, or delete one of your current courses.
                     Please be aware that this will remove all associated data, such as assignments, student attempts, etc.');
         }
-        return view('teacher.course.create');
+        return view('teacher.course.create', [ 'students' => $students ]);
     }
 
     /**
@@ -147,8 +151,30 @@ class CourseController extends Controller
 
             }
         }
+        Validator::extend('custom_rule', function ($attribute, $value) {
+
+            $query = User::join('teacher_student', function ($join) {
+                $join->on('users.id', 'student_id')
+                    ->where('teacher_student.teacher_id', Auth::id());
+            })->where('users.email', '=', $value);
+    
+            // True means pass, false means fail validation.
+            // If count is 0, that means the unique constraint passes.
+            return $query->count();
+        });
+
+
+        //dd($request->post('students'));
+        if(!empty($request->post('students'))){
+            foreach($request->post('students') as $key => $val) { 
+                $rules['students.'.$key] = 'required|custom_rule';
+            }
+        }
+
+
         $validated = $request->validate($rules);
 
+        //dd($validated['students']);
         try { 
             //create course
             $course = Course::create([
@@ -174,10 +200,32 @@ class CourseController extends Controller
                     Skill::insert($newSkills);  
                 }
             }
+
+            //create enrolments
+            if(!empty($validated['students'])){
+                $newEnrolments = [];
+                foreach($validated['students'] as $studentEmail){
+
+                    $student = Student::firstWhere('email', $studentEmail);
+                    $newEnrolment = [
+                        'student_id'=>$student->id,
+                        'course_id' => $course->id,
+                    ];
+                    //don't add new enrolment twice
+                    if(!in_array($newEnrolment, $newEnrolments)){
+                         $newEnrolments[] = $newEnrolment;
+                    }
+                   
+                }
+                if(!empty( $newEnrolments)){
+                   Enrolment::insert($newEnrolments);
+                }
+            }
+
         } catch (\Illuminate\Database\QueryException $exception) {
             return redirect( route('course_teacherIndex') )->with('flash_modal', "Something went wrong and we're sorry to say your new course could not be created");    
         }
-        return redirect( route('course_teacherIndex') );
+        return redirect( route('course_teacherShow', $course->id) );
     }
 
     /**

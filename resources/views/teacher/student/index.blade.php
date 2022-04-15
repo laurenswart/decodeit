@@ -102,7 +102,7 @@
                   let data = JSON.parse(this.responseText);
                   if(data.success){
                     let student = data.student;
-                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td><td></td>";
+                    let tr = "<tr><td>"+student.firstname+"</td><td>"+student.lastname+"</td><td>"+student.email+"</td><td><a href='/teacher/students/"+student.id+"'><i class='fas fa-arrow-alt-square-right'></i>Manage</a></td>";
                     body.innerHTML += tr;
                     //show message
                     createFlashPopUp('Student Successfully Added');

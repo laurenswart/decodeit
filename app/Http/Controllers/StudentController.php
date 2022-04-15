@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class StudentController extends Controller
 {
@@ -72,18 +73,15 @@ class StudentController extends Controller
     public function teacherSearch(Request $request){
         
         if($request->ajax('search')) {
-            DB::enableQueryLog(); // Enable query log
 
-            // Your Eloquent query executed by using get()
-            
-            
             $teacher = Teacher::find(Auth::id());
             $search = $request->post('search');
+           
             $data = Student::
                 where('firstname', 'LIKE', $search.'%')
                 ->orWhere('lastname', 'LIKE', $search.'%')
                 ->get();
-
+            
             $existingStudents = $teacher->students->pluck('id')->toArray();
             $output = '';
             if (count($data)>0) {

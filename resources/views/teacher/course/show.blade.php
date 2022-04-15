@@ -112,8 +112,8 @@
 				<h3 class="title-3">Enrolments</h3>
 				@foreach($course->students as $student)
 				<div class="label-value">
-					<span>Image</span>
 					<span>{{ $student->firstname.' '.$student->lastname }}</span>
+					<span>{{ $student->email }}</span>
 				</div>
 				@endforeach
 			</div>
