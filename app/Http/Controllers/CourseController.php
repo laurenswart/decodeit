@@ -140,6 +140,8 @@ class CourseController extends Controller
             'title' => 'required|max:100',
         ];
 
+        $this->authorize('store', Course::class);
+
         if(!empty($request->post('skills'))){
             foreach($request->post('skills') as $key => $val) { 
                 if(empty($val['description'])){

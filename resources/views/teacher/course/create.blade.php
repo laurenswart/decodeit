@@ -26,7 +26,7 @@
 	@csrf
 	<div class="row justify-content-between">
 		<!--LEFT-->
-		<div class="col col-md-6">
+		<div class="col col-xl-6">
 			<div class="form-section layer-2">
 				<!--TITLE-->
 				<div class="mb-3 row d-flex align-items-center">
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<!--SKILLS-->
-		<div class="col-12 col-md-5">
+		<div class="col-12 col-xl-5">
 			<div class="form-section layer-2 d-flex flex-column">
 				<h3>Enrolments</h3>
 				<input type="text" id="search" placeholder="Find Student">
@@ -67,7 +67,7 @@
 	</div>
 	
 	<div class="d-flex justify-content-end">
-		<button type="submit" class="myButton highlight">Create</button>
+		<button type="submit" class="myButton bigButton highlight">Create</button>
 	</div>
 </form>
 	
