@@ -41,7 +41,7 @@ Route::post('courses/{id}', ([CourseController::class, 'teacherUpdate']))
 
     
 //CHAPTER
-Route::get('chapters/{id}', ([ChapterController::class, 'chapter_teacherShow']))
+Route::get('chapters/{id}', ([ChapterController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
     ->name('chapter_teacherShow');
 Route::get('courses/{id}/chapters/new', ([ChapterController::class, 'teacherCreate']))

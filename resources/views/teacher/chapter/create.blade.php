@@ -32,7 +32,7 @@
 
 		<div class="form-section layer-2">
 			<label class="title-3" for="textEditor">Content</label>
-			<textarea id="textEditor">Hello, World!</textarea>
+			<textarea id="textEditor" name="content">{{ old('content') ?? 'Hello World !' }}</textarea>
 		</div>
 
 		<button type="submit" class="myButton bigButton align-self-center">Create</button>

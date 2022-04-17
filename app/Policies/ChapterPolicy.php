@@ -4,8 +4,10 @@ namespace App\Policies;
 
 use App\Models\Chapter;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class ChapterPolicy
 {
@@ -24,6 +26,18 @@ class ChapterPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Course  $course
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function teacherView(User $user, Chapter $chapter)
+    {
+        return $user->isTeacher() && $chapter->course->teacher_id === $user->id;
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
@@ -31,8 +45,24 @@ class ChapterPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isTeacher();
     }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function store(User $user, $courseId)
+    {
+        $teacher = Teacher::find($user->id);
+        $plan = $teacher->currentSubscriptionPlan();
+        $course = $teacher->courses()->firstWhere('courses.id', $courseId);
+        
+        return $user->isTeacher() && $plan !== null && count($course->chapters) <  $plan->nb_chapters;
+    }
+
 
     /**
      * Determine whether the user can update the model.

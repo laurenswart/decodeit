@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use App\Models\Chapter;
 use App\Models\Course;
 use App\Models\Teacher;
@@ -29,13 +30,34 @@ class ChapterController extends Controller
     }
 
     /**
+     * Show a course for the authenticated teacher
+     *
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherShow($id){
+        $chapter = Chapter::find($id);
+
+        $this->authorize('teacherView', $chapter);
+
+        $assignments = $chapter->assignments
+            ->sortBy('start_time')
+            ->sortBy('end_time');
+
+        return view('teacher.chapter.show', [
+            'chapter'=>$chapter,
+            'assignments'=>$assignments
+        ]);
+    }
+
+    /**
      * Show form to create a new chapter
      *
      * @param int $id Course id
      * @return \Illuminate\Http\Response
      */
     public function teacherCreate(int $id){
-        //$this->authorize('create', Course::class);
+        $this->authorize('create', Course::class);
         //if no more available chapters in subscription
         $teacher = Teacher::find(Auth::id());
         $course = Course::find($id);
@@ -51,4 +73,45 @@ class ChapterController extends Controller
         }
         return view('teacher.chapter.create', ['course'=>$course]);
     }
+
+    /**
+     * Save new chapter
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $id Course id
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherStore(Request $request, int $id){
+        //validate inputs
+        $rules = [
+            'title' => 'required|max:100',
+            'content' => 'required|max:65535'
+        ];
+
+        //check teacher has this course
+        $this->authorize('store', [Chapter::class, $id]);
+
+        $validated = $request->validate($rules);
+
+        $teacher = Teacher::find(Auth::id());
+
+
+        //dd($validated);
+        try { 
+            //create chapter
+            $chapter = Chapter::create([
+                'course_id'=>$id,
+                'title' => $validated['title'],
+                'is_active' => $request->post('active')==='on' ? 1 : 0,
+                'content' => $validated['content'],
+                'order_id' => count($teacher->courses)+1
+            ]);
+
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return redirect( route('course_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your new chapter could not be created");    
+        }
+        return redirect( route('chapter_teacherShow', $chapter->id) );
+    }
+
 }

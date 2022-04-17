@@ -53,7 +53,7 @@
 					<h3 class="title-3">Assignments</h3>
 					<a href="{{ route('assignment_teacherCreate', $course->id) }}"><i class="fas fa-plus-square"></i>New Assignment</a>
 				</div>
-				@if(count($course->chapters)==0)
+				@if(count($assignments)==0)
 					<p>No Assignments Created in this Course</p>
 				@else
 					@foreach($assignments as $assignment)
