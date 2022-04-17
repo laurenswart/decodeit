@@ -23257,20 +23257,3 @@ process.umask = function() { return 0; };
 /******/ 	
 /******/ })()
 ;
-
-function createFlashPopUp(msg, error=false){
-  let string = msg+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-  let div = document.createElement('div');
-  div.classList.add('alert');
-  div.classList.add('flash-popup');
-  if(error){
-    div.classList.add('alert-danger');
-  } else {
-    div.classList.add('alert-success');
-  }
-  div.innerHTML = string;
-  setTimeout(function(){
-    div.remove()
-  }, 7000);
-  document.querySelector('body').appendChild(div);
-}
