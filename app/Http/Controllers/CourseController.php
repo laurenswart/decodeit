@@ -335,10 +335,8 @@ class CourseController extends Controller
             }
             
         } catch (\Illuminate\Database\QueryException $exception) {
-            return redirect( route('course_teacherShow', $id) )->with('status', "Something went wrong and we're sorry to say your new course could not be created");    
+            return redirect( route('course_teacherShow', $id) )->with('status', "Something went wrong and we're sorry to say your changes could not be saved");    
         }
-        return view("teacher.course.show", [
-            'course'=>$course
-        ]);
+        return redirect(route('course_teacherShow', $course->id));
     }
 }

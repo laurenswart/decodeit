@@ -43,14 +43,14 @@
 					<span>{{ $chapter->is_active ? 'Yes' : 'No' }}</span>
 				</div>
 				<div class="label-value mt-4">
-					<span><a href="#"><i class="fas fa-pen-square"></i>Edit Chapter</a></span>
+					<span><a href="{{ route('chapter_teacherEdit', $chapter->id) }}"><i class="fas fa-pen-square"></i>Edit Chapter</a></span>
 					<span><a href="#"><i class="fas fa-trash-alt"></i>Delete Chapter</a></span>
 				</div>
 			</div>
 		</div>
-		<div class="form-section layer-2 col-12 col-xl-4   mx-2">
+		<div class="form-section layer-2   mx-2">
 			<h3 class="title-3">Content</h3>
-			{{ $chapter->content }}
+			{!! $chapter->content !!}
 		</div>
 	</section>
 

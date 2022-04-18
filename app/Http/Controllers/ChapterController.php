@@ -114,4 +114,58 @@ class ChapterController extends Controller
         return redirect( route('chapter_teacherShow', $chapter->id) );
     }
 
+    /**
+     * Show form to edit a chapter
+     *
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherEdit(int $id){
+        $chapter = Chapter::find($id);
+
+        $this->authorize('update', $chapter);
+
+        return view("teacher.chapter.edit", [
+            "chapter" =>$chapter
+        ]);
+    }
+
+    /**
+     * Save the course
+     *
+     * @param int $id Id of the chapter
+     * @param \Illuminate\Http\Request $request
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherUpdate(Request $request,int $id){
+        //find the course to update
+        $chapter = Chapter::find($id);
+        if(empty($chapter)){
+            return redirect( route('chapter_teacherIndex')) 
+                ->with('flash_modal', 'Could not find the chapter to update.');
+        }
+
+        $this->authorize('update', $chapter);
+        
+        //validate inputs
+        $rules = [
+            'title' => 'required|max:100',
+            'content' => 'required|max:65535'
+        ];
+
+        $validated = $request->validate($rules);
+
+        try { 
+            //update chapter details
+            $chapter->title = $validated['title'];
+            $chapter->is_active = $request->post('active')==='on' ? 1 : 0;
+            $chapter->content = $validated['content'];
+            $chapter->save();
+            
+        } catch (\Illuminate\Database\QueryException $exception) {
+            return redirect( route('chapter_teacherShow', $id) )->with('status', "Something went wrong and we're sorry to say your changes could not be saved");    
+        }
+        return redirect(route('chapter_teacherShow', $id));
+    }
 }
