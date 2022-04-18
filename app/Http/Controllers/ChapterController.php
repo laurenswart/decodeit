@@ -147,7 +147,7 @@ class ChapterController extends Controller
         }
 
         $this->authorize('update', $chapter);
-        
+
         //validate inputs
         $rules = [
             'title' => 'required|max:100',

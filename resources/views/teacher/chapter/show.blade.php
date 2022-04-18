@@ -50,7 +50,7 @@
 		</div>
 		<div class="form-section layer-2   mx-2">
 			<h3 class="title-3">Content</h3>
-			{!! $chapter->content !!}
+			{!! clean($chapter->content) !!}
 		</div>
 	</section>
 

@@ -32,7 +32,7 @@
 
 		<div class="form-section layer-2">
 			<label class="title-3" for="textEditor">Content</label>
-			<textarea id="textEditor" name="content">{{ old('content') ?? $chapter->content }}</textarea>
+			<textarea id="textEditor" name="content">{!!  old('content') ?  clean(old('content')) : clean($chapter->content) !!}</textarea>
 		</div>
 
 		<button type="submit" class="myButton bigButton align-self-center">Save</button>
