@@ -48,8 +48,8 @@
 				</div>
 			</div>
 		</div>
+		<h2 class="light-card block-title layer-2">Content</h2>
 		<div class="form-section layer-2   mx-2">
-			<h3 class="title-3">Content</h3>
 			{!! clean($chapter->content) !!}
 		</div>
 	</section>
