@@ -21,10 +21,10 @@
         <link rel="stylesheet" href="{{ asset('css/elements.css') }}" >
         
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        
         <script src="{{ asset('js/responsive.js') }}" defer></script>
         <script src="{{ asset('js/scrollToTop.js') }}" defer></script>
-        
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
       <div class="background">
@@ -123,6 +123,9 @@
                     
                 </div>
             @endif
+            <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
+        <!--<script src="{{ asset('js/app.js') }}"></script>-->
+        
     </body>
 </html>

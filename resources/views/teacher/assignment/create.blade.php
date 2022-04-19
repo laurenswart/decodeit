@@ -98,7 +98,7 @@
 				</span>
 			</div>
 			<div class="row justify-content-between">
-				
+				<div id="editor"></div>
 			</div>
 		</div>
 		<button type="submit" class="myButton bigButton align-self-center">Create</button>
