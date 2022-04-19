@@ -8,7 +8,7 @@
 			<div class="form-section layer-2 col mx-2">
 					<div class="h-end-link">
 						<h3 class="title-3">Assignments</h3>
-						<a href="#"><i class="fas fa-plus-square"></i>New Assignment</a>
+						<a href="{{ route('assignment_teacherCreate', $chapter->id) }}"><i class="fas fa-plus-square"></i>New Assignment</a>
 					</div>
 					@if(count($assignments)==0)
 						<p>No Assignments Related to this Chapter</p>

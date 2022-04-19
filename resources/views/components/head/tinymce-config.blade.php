@@ -1,5 +1,6 @@
 <!--<script src="{{ asset('vendor/tinymce/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>-->
 
+@props(['height'])
 <script src="https://cdn.tiny.cloud/1/oht48wgk2stebbc1dkrmn32ccl5yz36hogrvv7d17rm9tfb1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
@@ -9,6 +10,6 @@
     toolbar: 'undo redo | formatselect fontselect fontsizeselect textcolorselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | table | preview print',
     menubar: 'format',
     block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3; Header 4=h4',
-    height: 800
+    height: {{$height}}
   });
 </script>

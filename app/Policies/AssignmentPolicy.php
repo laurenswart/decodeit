@@ -3,7 +3,9 @@
 namespace App\Policies;
 
 use App\Models\Assignment;
+use App\Models\Chapter;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -23,15 +25,32 @@ class AssignmentPolicy
         return $user->isStudent() && Student::find($user->id)->courses->contains($assignment->course);
     }
 
+   /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function create(User $user, Chapter $chapter)
+    {
+        return $user->isTeacher() && $chapter->course->teacher_id === $user->id;
+    }
+
     /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function store(User $user, $chapter)
     {
-        //
+        $teacher = Teacher::find($user->id);
+        $plan = $teacher->currentSubscriptionPlan();
+                
+        return $user->isTeacher() 
+            && $plan !== null 
+            && $chapter->course->teacher_id === $user->id 
+            && count($chapter->course->assignments) <  $plan->nb_assignments;
     }
 
     /**

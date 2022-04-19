@@ -43,9 +43,9 @@ class ChapterPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, $course)
     {
-        return $user->isTeacher();
+        return $user->isTeacher() && $course->teacher_id === $user->id;
     }
 
     /**
@@ -54,13 +54,15 @@ class ChapterPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function store(User $user, $courseId)
+    public function store(User $user, $course)
     {
         $teacher = Teacher::find($user->id);
         $plan = $teacher->currentSubscriptionPlan();
-        $course = $teacher->courses()->firstWhere('courses.id', $courseId);
-        
-        return $user->isTeacher() && $plan !== null && count($course->chapters) <  $plan->nb_chapters;
+                
+        return $user->isTeacher() 
+            && $plan !== null 
+            && $course->teacher_id === $user->id 
+            && count($course->chapters) <  $plan->nb_chapters;
     }
 
 

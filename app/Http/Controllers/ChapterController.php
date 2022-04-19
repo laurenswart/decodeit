@@ -57,18 +57,19 @@ class ChapterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function teacherCreate(int $id){
-        $this->authorize('create', Course::class);
+        
         //if no more available chapters in subscription
         $teacher = Teacher::find(Auth::id());
         $course = Course::find($id);
         $plan = $teacher->currentSubscriptionPlan();
+        $this->authorize('create', [Course::class, $course ]);
          
         if ($plan === null){
             return redirect( route('course_teacherShow', $id)) 
                 ->with('flash_modal', 'You do not have an active subscription. Please choose one of our subscription plans, or renew your previous subscription.');
         } else if (count($course->chapters) >=  $plan->nb_chapters){
             return redirect( route('course_teacherShow', $id))
-                ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription with a higher number of courses allowed, or delete one of your current courses.
+                ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription with a higher number of chapters allowed, or delete one of your current chapters.
                     Please be aware that this will remove all associated data, such as assignments, student attempts, etc.');
         }
         return view('teacher.chapter.create', ['course'=>$course]);
@@ -90,7 +91,8 @@ class ChapterController extends Controller
         ];
 
         //check teacher has this course
-        $this->authorize('store', [Chapter::class, $id]);
+        $course = Course::find($id);
+        $this->authorize('store', [Chapter::class, $course]);
 
         $validated = $request->validate($rules);
 

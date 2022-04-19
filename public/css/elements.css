@@ -720,13 +720,47 @@ input[type="week"]:focus,
 input[type="number"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
+input[type="checkbox"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
+.uneditable-input:focus
+select:focus {   
   border-color: var(--color-lightPurple);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #9044b966;
   outline: 0 none;
+ 
+}
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+input[type="checkbox"],
+.uneditable-input, 
+select {  
+	border-radius: 5px;
+	
+}
+
+input:checked {
+	background-color: var(--color-orange);
+}
+
+select:focus{
+	--tw-ring-color: var(--color-lightPurple);
+	border-color: var(--color-lightPurple);
+  	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #9044b966;
 }
 
 /* Change the white to any color */

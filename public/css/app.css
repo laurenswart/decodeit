@@ -491,7 +491,7 @@ select {
   --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
   --tw-ring-offset-width: 2px;
   --tw-ring-offset-color: #fff;
-  --tw-ring-color: #2563eb;
+  --tw-ring-color: var(--color-orange);
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -499,7 +499,7 @@ select {
 
 [type='checkbox']:checked,[type='radio']:checked {
   border-color: transparent;
-  background-color: currentColor;
+  background-color: var(--color-orange);
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -515,13 +515,13 @@ select {
 
 [type='checkbox']:checked:hover,[type='checkbox']:checked:focus,[type='radio']:checked:hover,[type='radio']:checked:focus {
   border-color: transparent;
-  background-color: currentColor;
+  background-color: var(--color-orange);
 }
 
 [type='checkbox']:indeterminate {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
   border-color: transparent;
-  background-color: currentColor;
+  background-color: var(--color-orange);
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;

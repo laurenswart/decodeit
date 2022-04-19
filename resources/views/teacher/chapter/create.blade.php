@@ -14,7 +14,7 @@
 	</div>
 	@endif
 	
-	<x-head.tinymce-config/>
+	<x-head.tinymce-config :height="800"/>
 	<form method="post" action="{{ route('chapter_teacherStore', $course->id)}}" class="d-flex flex-col">
 		@csrf
 		<div class="row justify-content-between">
