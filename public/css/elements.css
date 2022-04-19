@@ -821,7 +821,7 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		padding-left: 10px;
     	padding-right: 10px;
 	}
-	label.title-3{
+	.title-3{
 		color: #494399;
 		font-size: 1.875rem;
 		line-height: 1.2;

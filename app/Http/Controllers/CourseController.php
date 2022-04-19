@@ -257,6 +257,8 @@ class CourseController extends Controller
     public function teacherUpdate(Request $request,int $id){
         //find the course to update
         $course = Course::find($id);
+
+        $this->authorize('update', $course);
         if(empty($course)){
             return redirect( route('course_teacherIndex')) 
                 ->with('flash_modal', 'Could not find the course to update.');

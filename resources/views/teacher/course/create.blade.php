@@ -22,16 +22,16 @@
 	@endif
 
 
-	<form action="{{ route('course_teacherStore') }}" method="post">
+	<form action="{{ route('course_teacherStore') }}" method="post"  class="d-flex flex-col">
 	@csrf
 	<div class="row justify-content-between">
 		<!--LEFT-->
-		<div class="col col-xl-6">
+		<div class="col-12 col-xl-7">
 			<div class="form-section layer-2">
 				<!--TITLE-->
 				<div class="mb-3 row d-flex align-items-center">
 					<label for="title" class="col col-form-label title-3">Course Title</label>
-					<div class="col">
+					<div class="col-12 col-md-8">
 						<input type="text" class="form-control-plaintext col" id="title" name="title" value="{{ old('title') ?? '' }}">
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 			</div>	
 			<div class="form-section layer-2">
 				<!--SKILLS-->
-				<h3>Skills</h3>
+				<h3 class="title-3">Skills</h3>
 				<div id="skills">
 				</div>
 				<div class="d-flex justify-content-end">
@@ -54,9 +54,9 @@
 			</div>
 		</div>
 		<!--SKILLS-->
-		<div class="col-12 col-xl-5">
+		<div class="col ml-4">
 			<div class="form-section layer-2 d-flex flex-column">
-				<h3>Enrolments</h3>
+				<h3 class="title-3">Enrolments</h3>
 				<input type="text" id="search" placeholder="Find Student">
 				<ul class="list-group" id="options" style="display:block;position:relative;z-index:1;"></ul>
 				<div id="students" class="mt-4 d-flex flex-column">
@@ -66,9 +66,9 @@
 		</div>
 	</div>
 	
-	<div class="d-flex justify-content-end">
-		<button type="submit" class="myButton bigButton highlight">Create</button>
-	</div>
+
+	<button type="submit" class="myButton bigButton align-self-center">Create</button>
+
 </form>
 	
 @endsection

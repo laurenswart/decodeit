@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h2 class="light-card block-title layer-2 ">New Chapter</h2>
+	<h2 class="light-card block-title layer-2 ">Editing {{ $chapter->title }}</h2>
 	@if($errors->any())
 	<div class="form-section errors alert alert-danger">
 		@if($errors->get('title'))
@@ -17,16 +17,25 @@
 	<x-head.tinymce-config/>
 	<form method="post" action="{{ route('chapter_teacherUpdate', $chapter->id)}}" class="d-flex flex-col">
 		@csrf
-		<div class="form-section layer-2 row">
-			<!--TITLE-->
-			<div class="mb-3 col-12 d-flex align-items-center">
-				<label for="title" class="col col-form-label title-3">Chapter Title</label>
-				<input type="text" class="form-control-plaintext" id="title" name="title" value="{{ old('title') ?? $chapter->title }}">
-			</div>
-			<!--ACTIVE-->
-			<div class="form-check col-12 col-md-2 d-flex align-items-center">
-				<input class="form-check-input" type="checkbox" id="active" name="active" {{ old('active')=='on' ? 'checked' : ($chapter->is_active ? 'checked' : '' )}}>
-				<label class="form-check-label title-3 ml-4" for="active">Active</label>
+		<div class="row justify-content-between">
+			<!--LEFT-->
+			<div class="col col-xl-8">
+				<div class="form-section layer-2">
+					<!--TITLE-->
+					<div class="mb-3 row d-flex align-items-center">
+						<label for="title" class="col col-form-label title-3">Chapter Title</label>
+						<div class="col-12 col-md-8">
+							<input type="text" class="form-control-plaintext col" id="title" name="title" value="{{ old('title') ?? $chapter->title }}">
+						</div>
+					</div>
+					<!--ACTIVE-->
+					<div class="form-check d-flex align-items-center">
+						<input class="form-check-input" type="checkbox" id="active" name="active" {{ old('active')=='on' ? 'checked' : ($chapter->is_active ? 'checked' : '') }}>
+						<label class="form-check-label title-3 ml-4" for="active">
+							Active
+						</label>
+					</div>
+				</div>
 			</div>
 		</div>
 
