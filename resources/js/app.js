@@ -5,14 +5,17 @@ import Alpine from 'alpinejs';
 import 'ace-builds';
 import 'ace-builds/webpack-resolver';
 
-let editorElement = document.getElementById('editor');
+let testScriptEditor = document.getElementById('testScriptEditor');
+let testLanguage = document.getElementById('language');
+let newMode;
 
-console.log('hello');
+let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
+
 // If we have an editor element
-if(editorElement){
+if(testScriptEditor){
     // pass options to ace.edit
-    let editor = ace.edit(document.getElementById('editor'), {
-        mode: "ace/mode/python",
+    let editor = ace.edit(document.getElementById('testScriptEditor'), {
+        mode: "ace/mode/javascript",
         theme: "ace/theme/dracula",
         maxLines: 50,
         minLines: 10,
@@ -23,8 +26,31 @@ if(editorElement){
         autoScrollEditorIntoView: true,
         copyWithEmptySelection: true,
     });
+
+    
+    testLanguage.onchange = function(){
+        newMode = this.value;
+        //console.log(newMode);
+        if(acceptedModes.indexOf(newMode)!=-1){
+            //console.log(1);
+            //change the mode
+            editor.session.setMode("ace/mode/" + newMode);
+            editor.setReadOnly(false);
+            testScriptEditor.style.display = 'block';
+        } else if(newMode == ''){
+            //hide the editor
+            //console.log(2);
+            editor.setReadOnly(true);
+            testScriptEditor.style.display = 'none';
+        } else {
+            //error
+            //console.log(3);
+            editor.setReadOnly(true);
+            testScriptEditor.style.display = 'none';
+        }
+        
+    }
 }
-//// END ACE
 
 
 window.Alpine = Alpine;

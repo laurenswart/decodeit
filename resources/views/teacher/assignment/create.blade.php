@@ -67,9 +67,11 @@
 				<div class="label-value mt-3">
 					<label for="language">Language</label>
 					<select name="language" id="language">
-						<option value="js">Javascript</option>
+						<option value="">None</option>
+						<option value="javascript">Javascript</option>
 						<option value="python">Python</option>
 						<option value="java">Java</option>
+						<option value="html">HTML</option>
 					</select>
 				</div>
 			</div>
@@ -98,7 +100,7 @@
 				</span>
 			</div>
 			<div class="row justify-content-between">
-				<div id="editor"></div>
+				<div id="testScriptEditor"></div>
 			</div>
 		</div>
 		<button type="submit" class="myButton bigButton align-self-center">Create</button>
