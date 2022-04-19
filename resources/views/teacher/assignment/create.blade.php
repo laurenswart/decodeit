@@ -95,12 +95,13 @@
 			<div class="h-end-link">
 				<h3 class="title-3">Script For Testing</h3>
 				<span>
-					<input type="checkbox" name="script" id="script">
-					<label for="script" class="ml-3">Provide Editor and Console</label>
+					<input type="checkbox" name="executable" id="executable">
+					<label for="executable" class="ml-3">Provide Editor and Console</label>
 				</span>
 			</div>
 			<div class="row justify-content-between">
-				<div id="testScriptEditor"></div>
+				<p id="testScriptInfo">Before writing a test script, you must select a valid language and enable the editor and console</p>
+				<div id="testScriptEditor" style="display:none;"></div>
 			</div>
 		</div>
 		<button type="submit" class="myButton bigButton align-self-center">Create</button>

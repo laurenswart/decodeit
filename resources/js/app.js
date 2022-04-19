@@ -7,14 +7,15 @@ import 'ace-builds/webpack-resolver';
 
 let testScriptEditor = document.getElementById('testScriptEditor');
 let testLanguage = document.getElementById('language');
-let newMode;
-
+let executableCheck = document.getElementById('executable');
+let editor;
 let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
+let testScriptInfo = document.getElementById('testScriptInfo');
 
 // If we have an editor element
 if(testScriptEditor){
     // pass options to ace.edit
-    let editor = ace.edit(document.getElementById('testScriptEditor'), {
+    editor = ace.edit(document.getElementById('testScriptEditor'), {
         mode: "ace/mode/javascript",
         theme: "ace/theme/dracula",
         maxLines: 50,
@@ -29,29 +30,31 @@ if(testScriptEditor){
 
     
     testLanguage.onchange = function(){
-        newMode = this.value;
+        let newMode = this.value;
         //console.log(newMode);
         if(acceptedModes.indexOf(newMode)!=-1){
-            //console.log(1);
             //change the mode
             editor.session.setMode("ace/mode/" + newMode);
-            editor.setReadOnly(false);
-            testScriptEditor.style.display = 'block';
-        } else if(newMode == ''){
-            //hide the editor
-            //console.log(2);
-            editor.setReadOnly(true);
-            testScriptEditor.style.display = 'none';
-        } else {
-            //error
-            //console.log(3);
-            editor.setReadOnly(true);
-            testScriptEditor.style.display = 'none';
         }
-        
+        adaptEditorDisplay();
     }
+    executableCheck.onchange = adaptEditorDisplay;
 }
 
+
+
+function adaptEditorDisplay(){
+    let validLanguage = acceptedModes.indexOf(testLanguage.value)!=-1;
+    if(executableCheck.checked && validLanguage){
+        testScriptEditor.style.display = 'block';
+        testScriptInfo.style.display = 'none';
+        editor.setReadOnly(false);
+    } else {
+        testScriptEditor.style.display = 'none';
+        testScriptInfo.style.display = 'block';
+        editor.setReadOnly(true);
+    }
+}
 
 window.Alpine = Alpine;
 
