@@ -49,10 +49,7 @@
 		</div>
 		<div class="row">
 			<div class="form-section layer-2 col mx-2">
-				<div class="h-end-link">
-					<h3 class="title-3">Assignments</h3>
-					<a href="{{ route('assignment_teacherCreate', $course->id) }}"><i class="fas fa-plus-square"></i>New Assignment</a>
-				</div>
+				<h3 class="title-3">Assignments</h3>
 				@if(count($assignments)==0)
 					<p>No Assignments Created in this Course</p>
 				@else

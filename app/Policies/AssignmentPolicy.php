@@ -31,9 +31,20 @@ class AssignmentPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, Chapter $chapter)
+    public function create(User $user, $chapter)
     {
-        return $user->isTeacher() && $chapter->course->teacher_id === $user->id;
+        return $user->isTeacher() && $chapter!=null && $chapter->course->teacher_id === $user->id;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function teacherView(User $user, Assignment $assignment)
+    {
+        return $user->isTeacher() && $assignment!=null && Teacher::find($user->id)->courses->contains($assignment->course);
     }
 
     /**
@@ -49,6 +60,7 @@ class AssignmentPolicy
                 
         return $user->isTeacher() 
             && $plan !== null 
+            && $chapter!=null 
             && $chapter->course->teacher_id === $user->id 
             && count($chapter->course->assignments) <  $plan->nb_assignments;
     }
@@ -62,7 +74,7 @@ class AssignmentPolicy
      */
     public function update(User $user, Assignment $assignment)
     {
-        //
+        return $user->isTeacher() && $assignment!=null && Teacher::find($user->id)->courses->contains($assignment->course);
     }
 
     /**

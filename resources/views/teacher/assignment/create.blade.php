@@ -63,10 +63,14 @@
 					<label for="language">Language</label>
 					<select name="language" id="language">
 						<option value="">None</option>
-						<option value="javascript">Javascript</option>
-						<option value="python">Python</option>
-						<option value="java">Java</option>
+						<option value="css">CSS</option>
 						<option value="html">HTML</option>
+						<option value="java">Java</option>
+						<option value="javascript">Javascript</option>
+						<option value="json">JSON</option>
+						<option value="php">PHP</option>
+						<option value="python">Python</option>
+						<option value="xml">XML</option>
 					</select>
 				</div>
 			</div>

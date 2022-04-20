@@ -30,7 +30,7 @@ class AssignmentController extends Controller
     }
 
     /**
-     * Show an assignment for the authenticated student
+     * Show an assignment for the authenticated teacher
      *
      * @param int $id Id of the assignment
      * @return \Illuminate\Http\Response
@@ -95,14 +95,15 @@ class AssignmentController extends Controller
             'submissions' => 'required|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
             'max-mark' => 'required|max:500',
             'weight' => 'required|max:100',
-            'start' => 'required|date|after:now',
+            'start' => 'required|date',
             'end' => 'required|date|after:start',
             'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
             'language' => [
-                'required',
+                'required_with:script',
                 Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
             ],
-            'script' => 'max:65535|required_without_all:executable, language',
+            'script' => 'max:65535',
+            'executable' => 'required_with:script'
         ];
         //skills validation
         if(!empty($request->post('skills'))){
@@ -133,10 +134,97 @@ class AssignmentController extends Controller
 
             //attach skills
             $assignment->skills()->attach($validated['skills']);
+            //attach chapter
+            $assignment->chapters()->attach($id);
 
         } catch (\Illuminate\Database\QueryException $exception) {
             dd($exception);
             return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your new assignment could not be created");    
+        }
+        return view('teacher.assignment.show', [
+            'assignment'=>$assignment,
+        ]);
+    }
+
+    /**
+     * Show edit form for the authenticated teacher
+     *
+     * @param int $id Id of the assignment
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherEdit(int $id){
+        $assignment = Assignment::find($id);
+
+        $this->authorize('update', $assignment);
+        return view('teacher.assignment.edit', [
+            'assignment'=>$assignment,
+        ]);
+    }
+
+    /**
+     * Save changes to an assignment
+     *      
+     * @param int $id Id of the assignment
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherUpdate(Request $request, int $id){
+        $teacher = Teacher::find(Auth::id());
+        $assignment = Assignment::find($id);
+
+        //dd($request->post());
+ 
+        $this->authorize('update', $assignment);
+
+        //form validation
+        $rules = [
+            'title' => 'required|max:100',
+            'description' => 'required|max:65535',
+            'submissions' => 'required|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
+            'max-mark' => 'required|max:500',
+            'weight' => 'required|max:100',
+            'start' => 'required|date',
+            'end' => 'required|date|after:start',
+            'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
+            'language' => [
+                'required_with:script',
+                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+            ],
+            'script' => 'max:65535',
+            'executable' => 'required_with:script'
+        ];
+        //skills validation
+        if(!empty($request->post('skills'))){
+            foreach($request->post('skills') as $skillId => $val) { 
+                $rules['skills.'.$skillId] = Rule::in($assignment->course->skills->pluck('id')); 
+            }
+        }
+
+        $validated = $request->validate($rules);
+
+         try { 
+            //create chapter
+            $assignment->title = $validated['title'];
+            $assignment->description = $validated['description'];
+            $assignment->nb_submissions = $validated['submissions'];
+            $assignment->test_script = $validated['script'];
+            $assignment->max_mark = $validated['max-mark'];
+            $assignment->course_weight = $validated['weight'];
+            $assignment->start_time = date('Y-m-d H:i:s', strtotime($validated['start']));
+            $assignment->end_time = date('Y-m-d H:i:s', strtotime($validated['end']));
+            $assignment->is_test = $request->post('test')==='on' ? 1 : 0;
+            $assignment->can_execute = $request->post('executable')==='on' ? 1 : 0;
+            $assignment->submission_size = $validated['size'] ?? $teacher->currentSubscriptionPlan()->max_upload_size;
+            $assignment->language = $validated['language'];
+
+            $assignment->save();
+
+            //attach skills
+            $assignment->skills()->sync($validated['skills']);
+
+
+        } catch (\Illuminate\Database\QueryException $exception) {
+            dd($exception);
+            return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your changes could not be created");    
         }
         return view('teacher.assignment.show', [
             'assignment'=>$assignment,

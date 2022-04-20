@@ -11,6 +11,7 @@ let executableCheck = document.getElementById('executable');
 let editor;
 let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
 let testScriptInfo = document.getElementById('testScriptInfo');
+let hiddenScript = document.getElementById("script");
 
 // If we have an editor element
 if(testScriptEditor){
@@ -28,6 +29,10 @@ if(testScriptEditor){
         copyWithEmptySelection: true,
     });
 
+    if(hiddenScript.value!=null && hiddenScript.value !='' && executableCheck.checked ){
+        editor.setValue(hiddenScript.value, 1);
+    }
+    adaptEditorDisplay();
     
     testLanguage.onchange = function(){
         let newMode = this.value;
@@ -41,7 +46,7 @@ if(testScriptEditor){
     executableCheck.onchange = adaptEditorDisplay;
 
     document.getElementById("newAssignment").onsubmit = function(evt) {
-        document.getElementById("script").value = editor.getValue();
+        hiddenScript.value = editor.getValue();
       }
 }
 
