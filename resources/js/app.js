@@ -39,6 +39,10 @@ if(testScriptEditor){
         adaptEditorDisplay();
     }
     executableCheck.onchange = adaptEditorDisplay;
+
+    document.getElementById("newAssignment").onsubmit = function(evt) {
+        document.getElementById("script").value = editor.getValue();
+      }
 }
 
 

@@ -161,7 +161,6 @@ class CourseController extends Controller
             })->where('users.email', '=', $value);
     
             // True means pass, false means fail validation.
-            // If count is 0, that means the unique constraint passes.
             return $query->count();
         });
 

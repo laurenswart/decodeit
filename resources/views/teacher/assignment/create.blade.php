@@ -5,17 +5,12 @@
 	<h2 class="light-card block-title layer-2 ">New Assignment</h2>
 	@if($errors->any())
 	<div class="form-section errors alert alert-danger">
-		@if($errors->get('title'))
-			<p>The chapter title is required and must have less than 100 characters</p>
-		@endif
-	 	@if($errors->get('description'))
-			<p>Error in description</p>
-		@endif
+		<p>{{$errors->all()}}</p>
 	</div>
 	@endif
 	
 	<x-head.tinymce-config :height="400"/>
-	<form method="post" action="{{ route('assignment_teacherStore', $chapter->id)}}" class="d-flex flex-col">
+	<form method="post" action="{{ route('assignment_teacherStore', $chapter->id)}}" class="d-flex flex-col" id="newAssignment">
 		@csrf
 		<div class="row justify-content-between">
 			<!--LEFT-->
@@ -32,7 +27,7 @@
 				<!--DESCRIPTION-->
 				<div class="form-section layer-2 mt-3">
 					<label class="title-3" for="textEditor">Description</label>
-					<textarea id="textEditor" name="content">{{ old('content') ?? '' }}</textarea>
+					<textarea id="textEditor" name="description">{{ old('description') ?? '' }}</textarea>
 				</div>
 			</div>
 			<div class="col form-section layer-2 ml-4">
@@ -83,7 +78,7 @@
 			<div class="row justify-content-between">
 				@foreach($chapter->course->skills as $skill)
 					<span>
-						<input type="checkbox" name="skills[{{ $skill->id }}]" id="skills[{{ $skill->id }}]">
+						<input type="checkbox" name="skills[{{ $skill->id }}]" id="skills[{{ $skill->id }}]" value="{{ $skill->id }}">
 						<label class="ml-3" for="skills[{{ $skill->id }}]">{{ $skill->title }}</label>
 					</span>
 				@endforeach
@@ -101,6 +96,7 @@
 			</div>
 			<div class="row justify-content-between">
 				<p id="testScriptInfo">Before writing a test script, you must select a valid language and enable the editor and console</p>
+				<input name="script" type="text" hidden id="script">
 				<div id="testScriptEditor" style="display:none;"></div>
 			</div>
 		</div>
