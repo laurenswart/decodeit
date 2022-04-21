@@ -168,7 +168,7 @@ class CourseController extends Controller
         //dd($request->post('students'));
         if(!empty($request->post('students'))){
             foreach($request->post('students') as $key => $val) { 
-                $rules['students.'.$key] = 'required|custom_rule';
+                $rules['students.'.$key.'.email'] = 'required|custom_rule';
             }
         }
 

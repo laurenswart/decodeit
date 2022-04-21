@@ -14,7 +14,9 @@
 		@if($errors->get('skills.*.description'))
 			<p>Skill descriptions must have less than 255 characters</p>
 		@endif
-		
+		@if($errors->get('students.*.*'))
+			<p>We are unable to add these students.</p>
+		@endif
 		
 	</div>
 	@endif

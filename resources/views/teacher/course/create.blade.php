@@ -17,7 +17,9 @@
 		@if($errors->get('students.*'))
 			<p>Chosen user could not be found within your students. Please chose a student from your list of added students.</p>
 		@endif
-		
+		@if($errors->get('students.*.*'))
+			<p>We are unable to add these students.</p>
+		@endif
 	</div>
 	@endif
 
@@ -47,21 +49,41 @@
 				<!--SKILLS-->
 				<h3 class="title-3">Skills</h3>
 				<div id="skills">
+
+					@if(old('skills'))
+						@foreach(old('skills') as $newSkillId => $newSkillData)
+							<div class="mb-2">
+								<div class="mb-3">
+									<input type="text" class="form-control" name="skills[{{ $newSkillId }}][title]" placeholder="Skill Name" value="{{ old('skills.'.$newSkillId.'.title') ?? '' }}">
+								</div>
+								<div class="mb-3 ml-4">
+									<textarea class="form-control" name="skills[{{ $newSkillId }}][description]" rows="3" placeholder="Skill Description .. ">{{ old("skills.$newSkillId.description") ?? ''}}</textarea>
+								</div>
+							</div>
+						@endforeach
+					@endif
 				</div>
-				<div class="d-flex justify-content-end">
-					<button type="button" class="highlight" id="addSkill"><i class="fas fa-plus-square"></i>More Skills</button>
-				</div>
+				<button type="button" class="highlight" id="addSkill"><i class="fas fa-plus-square"></i>More Skills</button>
 			</div>
 		</div>
 		<!--ENFORLMENTS-->
 		<div class="col ml-4">
 			<div class="form-section layer-2 d-flex flex-column">
-				<h3 class="title-3">Enrolments</h3>
+				<h3 class="title-3">New Enrolments</h3>
 				<input type="text" id="search" placeholder="Find Student">
 				<ul class="list-group" id="options" style="display:block;position:relative;z-index:1;"></ul>
 				<div id="students" class="mt-4 d-flex flex-column">
+					@if(old('students'))
+						@foreach(old('students') as $newStudentId => $newStudent)
+						<div class="d-flex justify-content-between mt-2 newStudent">
+							<input type="hidden" name="students[{{$newStudentId}}][name]" value="{{ old('students.'.$newStudentId.'.name') ?? '' }}"  class="mt-3 d-block">
+							<input type="hidden" name="students[{{$newStudentId}}][email]" value="{{ old('students.'.$newStudentId.'.email') ?? '' }}"  class="mt-3 d-block">
+							<span>{{ old('students.'.$newStudentId.'.name') ?? '' }}</span>
+							<button type="button" class="btn btn-outline-danger" onclick="remove(this)">x</button>
+						</div>
+						@endforeach
+					@endif
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -80,6 +102,12 @@
              let options = document.getElementById('options');
 			 let students = document.getElementById('students');
 			 let searchInput = document.getElementById('search');
+			 
+
+			 let nbNewStudentsInPage = document.querySelectorAll('#students div.newStudent');
+
+			 let nbNewStudents = nbNewStudentsInPage!=null ? nbNewStudentsInPage.length : 0;
+
 
 			 searchInput.addEventListener('keyup', function(){
 			   var query = this.value; 
@@ -115,13 +143,14 @@
 			   xhr.send(data);
 			   // end of ajax call
 			 });
-
+			 
 			 function addStudent(name, email){
+				nbNewStudents++;
 				options.innerHTML = "";
               	searchInput.value = "";
 				let div = document.createElement('div');
-				div.classList.add('d-flex', 'justify-content-between', 'mt-2');
-				let string = '<input type="hidden" name="students[]" value="'+email+'"  class="mt-3 d-block"><span>'+name+'</span><button type="button" class="btn btn-outline-danger" onclick="remove(this)">x</button>';
+				div.classList.add('d-flex', 'justify-content-between', 'mt-2', 'newStudent');
+				let string = '<input type="hidden" name="students['+nbNewStudents+'][name]" value="'+name+'"><input type="hidden" name="students['+nbNewStudents+'][email]" value="'+email+'"><span>'+name+'</span><button type="button" class="btn btn-outline-danger" onclick="remove(this)">x</button>';
 				div.innerHTML = string;
 				students.appendChild(div);
 			 }
