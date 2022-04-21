@@ -86,7 +86,7 @@ class AssignmentPolicy
      */
     public function delete(User $user, Assignment $assignment)
     {
-        //
+        return $user->isTeacher() && $assignment!=null && Teacher::find($user->id)->courses->contains($assignment->course);
     }
 
     /**

@@ -240,8 +240,8 @@ class AssignmentController extends Controller
         if(empty($assignment)){
             return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
         }
-
-        $message = "<p>You have chosen to delete the following assignment: ".$assignment->title."</p>";
+        $this->authorize('delete', $assignment);
+        $message = "<p>You have chosen to delete the following assignment: <strong>".$assignment->title."</strong></p>";
         $message .= "<ul><li>Course: ".$assignment->course->title."</li><li>Chapter: ".$assignment->chapters[0]->title."</li></ul>";
         $message .= "<p>Please be aware that this will remove all associated data, such as student attempts, marks, assingment notes, etc.</p>";
         $message .= "<p>Sure you want to delete ?</p>";
@@ -264,6 +264,7 @@ class AssignmentController extends Controller
         if(empty($assignment)){
             return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
         }
+        $this->authorize('delete', $assignment);
 
         $deleted = $assignment->delete();
         if ($deleted){
