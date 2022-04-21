@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class Course extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'courses';
 
@@ -55,6 +57,17 @@ class Course extends Model
             ->where('course_id', $this->id)
             ->first();
         return $enrolment->id;
+    }
+
+    public function hasNewMessages(){
+        //todo
+        return false;
+        //return count($this->messages->where('created_at', '>=', Auth::user()->lastConnected())) > 0 ;
+    }
+
+    public function hasNewSubmissions(){
+        //todo
+        return false;
     }
     
 }

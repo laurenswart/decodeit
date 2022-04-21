@@ -43,7 +43,7 @@
 				</div>
 				<div class="label-value mt-4">
 					<span><a href="{{ route('course_teacherEdit', $course->id) }}"><i class="fas fa-pen-square"></i>Edit Course</a></span>
-					<span><a href=""><i class="fas fa-trash-alt"></i>Delete Course</a></span>
+					<span><a href="{{ route('course_teacherConfirmDelete', $course->id) }}"><i class="fas fa-trash-alt"></i>Delete Course</a></span>
 				</div>
 			</div>
 		</div>

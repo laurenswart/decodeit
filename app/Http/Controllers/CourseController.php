@@ -381,4 +381,51 @@ class CourseController extends Controller
         }
         return redirect(route('course_teacherShow', $course->id));
     }
+
+    /**
+     * Shows the confirmation page for deletion
+     * 
+     * @param int $id Assignment Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherConfirmDelete($id){
+        $course = Course::find($id);
+        if(empty($course)){
+            return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+        $this->authorize('delete', $course);
+        $message = "<p>You have chosen to delete the following course: <strong>".$course->title."</strong></p>";
+        $message .= "<p>Please be aware that this will remove all associated data, such as chapters, assignments, student attempts, marks, etc.</p>";
+        $message .= "<p>Sure you want to delete ?</p>";
+        return view('teacher.confirmDelete', [
+            'route'=> route('course_teacherDelete', $id),
+            'message'=>$message,
+            'backRoute'=> route('course_teacherShow', $id),
+            'resource'=>'course'
+        ]);
+    }
+
+    /**
+     * Soft Deleted the course
+     * 
+     * @param int $id Course Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherDelete($id){
+        $course = Course::find($id);
+        if(empty($course)){
+            return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+        $this->authorize('delete', $course);
+        $enrolments = Enrolment::where('course_id', $id)->whereNull('deleted_at');
+        
+        //delete the course and the enrolments
+        $deleted = $course->delete();
+        if ($deleted){
+            $enrolments->delete();
+            return redirect(route('course_teacherIndex'))->with('success', 'Course Deleted');
+        } else {
+            return redirect(route('chapter_teacherShow', $id))->with('error', 'Course Could not be Deleted');
+        }
+    }
 }

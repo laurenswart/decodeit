@@ -38,7 +38,10 @@ Route::get('courses/{id}/edit', ([CourseController::class, 'teacherEdit']))
 Route::post('courses/{id}', ([CourseController::class, 'teacherUpdate']))
     ->where('id', '[0-9]+')
     ->name('course_teacherUpdate');
-
+Route::get('courses/{id}/delete', ([CourseController::class, 'teacherConfirmDelete']))
+    ->name('course_teacherConfirmDelete');
+Route::delete('courses/{id}/delete', ([CourseController::class, 'teacherDelete']))
+    ->name('course_teacherDelete');
     
 //CHAPTER
 Route::get('chapters/{id}', ([ChapterController::class, 'teacherShow']))
