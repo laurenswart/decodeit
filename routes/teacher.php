@@ -57,7 +57,11 @@ Route::get('chapters/{id}/edit', ([ChapterController::class, 'teacherEdit']))
     ->name('chapter_teacherEdit');
 Route::post('chapters/{id}', ([ChapterController::class, 'teacherUpdate']))
     ->name('chapter_teacherUpdate');  
-
+Route::get('chapters/{id}/delete', ([ChapterController::class, 'teacherConfirmDelete']))
+    ->name('chapter_teacherConfirmDelete');
+Route::delete('chapters/{id}/delete', ([ChapterController::class, 'teacherDelete']))
+    ->name('chapter_teacherDelete');
+    
 //ASSIGNMENT
 Route::get('assignments/{id}', ([AssignmentController::class, 'teacherShow']))
     ->where('id', '[0-9]+')

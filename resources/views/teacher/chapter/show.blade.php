@@ -44,7 +44,7 @@
 				</div>
 				<div class="label-value mt-4">
 					<span><a href="{{ route('chapter_teacherEdit', $chapter->id) }}"><i class="fas fa-pen-square"></i>Edit Chapter</a></span>
-					<span><a href="#"><i class="fas fa-trash-alt"></i>Delete Chapter</a></span>
+					<span><a href="{{ route('chapter_teacherConfirmDelete', $chapter->id) }}"><i class="fas fa-trash-alt"></i>Delete Chapter</a></span>
 				</div>
 			</div>
 		</div>

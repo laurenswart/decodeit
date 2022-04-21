@@ -385,7 +385,7 @@ class CourseController extends Controller
     /**
      * Shows the confirmation page for deletion
      * 
-     * @param int $id Assignment Id
+     * @param int $id Course Id
      * @return \Illuminate\Http\Response
      */
     public function teacherConfirmDelete($id){

@@ -87,7 +87,7 @@ class ChapterPolicy
      */
     public function delete(User $user, Chapter $chapter)
     {
-        //
+        return $user->isTeacher() && $chapter->course->teacher_id === $user->id;
     }
 
     /**

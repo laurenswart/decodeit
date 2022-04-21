@@ -170,4 +170,50 @@ class ChapterController extends Controller
         }
         return redirect(route('chapter_teacherShow', $id));
     }
+
+    /**
+     * Shows the confirmation page for deletion
+     * 
+     * @param int $id Chapter Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherConfirmDelete($id){
+        $chapter = Chapter::find($id);
+        if(empty($chapter)){
+            return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+        $this->authorize('delete', $chapter);
+        $message = "<p>You have chosen to delete the following chapter: <strong>".$chapter->title."</strong></p>";
+        $message .= "<ul><li>Course: ".$chapter->course->title."</li></ul>";
+        $message .= "<p>Please be aware that this will remove all associated data, such as assignments, student attempts, marks, etc.</p>";
+        $message .= "<p>Sure you want to delete ?</p>";
+        return view('teacher.confirmDelete', [
+            'route'=> route('chapter_teacherDelete', $id),
+            'message'=>$message,
+            'backRoute'=> route('chapter_teacherShow', $id),
+            'resource'=>'chapter'
+        ]);
+    }
+
+    /**
+     * Soft Deleted the chapter
+     * 
+     * @param int $id Chapter Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherDelete($id){
+        $chapter = Chapter::find($id);
+        if(empty($chapter)){
+            return redirect(route('course_teacherIndex'))->with("flash_modal", "Sorry, we were unable to handle your request.");
+        }
+        $this->authorize('delete', $chapter);
+        
+        //delete the course and the enrolments
+        $deleted = $chapter->delete();
+        if ($deleted){
+            return redirect(route('course_teacherShow', $chapter->course->id))->with('success', 'Chapter Deleted');
+        } else {
+            return redirect(route('course_teacherShow', $chapter->course->id))->with('error', 'Chapter Could not be Deleted');
+        }
+    }
 }
