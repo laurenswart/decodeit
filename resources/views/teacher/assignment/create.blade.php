@@ -5,7 +5,9 @@
 	<h2 class="light-card block-title layer-2 ">New Assignment</h2>
 	@if($errors->any())
 	<div class="form-section errors alert alert-danger">
-		<p>{{$errors->all()}}</p>
+		@foreach($errors->all() as $error)
+			<p>{{ $error }}</p>
+		@endforeach
 	</div>
 	@endif
 	
@@ -62,15 +64,15 @@
 				<div class="label-value mt-3">
 					<label for="language">Language</label>
 					<select name="language" id="language">
-						<option value="">None</option>
-						<option value="css">CSS</option>
-						<option value="html">HTML</option>
-						<option value="java">Java</option>
-						<option value="javascript">Javascript</option>
-						<option value="json">JSON</option>
-						<option value="php">PHP</option>
-						<option value="python">Python</option>
-						<option value="xml">XML</option>
+						<option value="" {{ old('language') === '' ? 'selected' : '' }}>None</option>
+						<option value="css" {{ old('language') === 'css' ? 'selected' : '' }}>CSS</option>
+						<option value="html" {{ old('language') === 'html' ? 'selected' : '' }}>HTML</option>
+						<option value="java" {{ old('language') === 'java' ? 'selected' : '' }}>Java</option>
+						<option value="javascript" {{ old('language') === 'javascript' ? 'selected' : '' }}>Javascript</option>
+						<option value="json" {{ old('language') === 'json' ? 'selected' : '' }}>JSON</option>
+						<option value="php" {{ old('language') === 'php' ? 'selected' : '' }}>PHP</option>
+						<option value="python" {{ old('language') === 'python' ? 'selected' : '' }}>Python</option>
+						<option value="xml" {{ old('language') === 'xml' ? 'selected' : '' }}>XML</option>
 					</select>
 				</div>
 			</div>
@@ -82,7 +84,7 @@
 			<div class="row justify-content-between">
 				@foreach($chapter->course->skills as $skill)
 					<span>
-						<input type="checkbox" name="skills[{{ $skill->id }}]" id="skills[{{ $skill->id }}]" value="{{ $skill->id }}">
+						<input type="checkbox" name="skills[{{ $skill->id }}]" id="skills[{{ $skill->id }}]" value="{{ $skill->id }}" {{ old('skills.'.$skill->id) ? 'checked' : '' }}>
 						<label class="ml-3" for="skills[{{ $skill->id }}]">{{ $skill->title }}</label>
 					</span>
 				@endforeach
@@ -94,14 +96,14 @@
 			<div class="h-end-link">
 				<h3 class="title-3">Script For Testing</h3>
 				<span>
-					<input type="checkbox" name="executable" id="executable">
+					<input type="checkbox" name="executable" id="executable" {{ old('executable') ? 'checked' : '' }}>
 					<label for="executable" class="ml-3">Provide Editor and Console</label>
 				</span>
 			</div>
 			<div class="row justify-content-between">
 				<p id="testScriptInfo">Before writing a test script, you must select a valid language and enable the editor and console</p>
-				<input name="script" type="text" hidden id="script">
-				<div id="testScriptEditor" style="display:none;"></div>
+				<input name="script" type="text" hidden id="script" value="{{ old('script') ?? '' }}">
+				<div id="testScriptEditor"></div>
 			</div>
 		</div>
 		<button type="submit" class="myButton bigButton align-self-center">Create</button>
