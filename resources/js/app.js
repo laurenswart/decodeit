@@ -34,8 +34,10 @@ if(testScriptEditor){
     }
     adaptEditorDisplay();
     
-    testLanguage.onchange = function(){
-        let newMode = this.value;
+    testLanguage.onchange = changeMode;
+
+    function changeMode(){
+        let newMode = testLanguage.value;
         //console.log(newMode);
         if(acceptedModes.indexOf(newMode)!=-1){
             //change the mode
@@ -43,6 +45,7 @@ if(testScriptEditor){
         }
         adaptEditorDisplay();
     }
+    changeMode();//for page load
     executableCheck.onchange = adaptEditorDisplay;
 
     document.getElementById("newAssignment").onsubmit = function(evt) {

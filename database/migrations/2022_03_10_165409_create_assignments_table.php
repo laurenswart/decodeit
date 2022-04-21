@@ -27,7 +27,7 @@ return new class extends Migration
             $table->boolean('is_test')->default(false);
             $table->boolean('can_execute')->default(false);
             $table->integer('submission_size');
-            $table->enum('language', ['php', 'javascript', 'python', 'java'])->nullable();
+            $table->enum('language', ['php', 'javascript', 'python', 'java', 'xml', 'html', 'css', 'json'])->nullable();
             $table->timestamps();
             $table->softDeletes();
 
