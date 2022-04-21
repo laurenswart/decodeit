@@ -272,11 +272,7 @@ class CourseController extends Controller
         //dd($request->post());
         if($request->post('oldSkills') != null){
             foreach($request->post('oldSkills') as $key => $val) { 
-                if(empty($val['description'])){
-                    $rules['oldSkills.'.$key.'.title'] = 'max:100'; 
-                } else {
-                    $rules['oldSkills.'.$key.'.title'] = 'required|max:100'; 
-                }
+                $rules['oldSkills.'.$key.'.title'] = 'required|max:100'; 
                 $rules['oldSkills.'.$key.'.description'] = 'max:255'; 
             }
         }
@@ -291,6 +287,25 @@ class CourseController extends Controller
                 $rules['skills.'.$key.'.description'] = 'max:255'; 
             }
         }
+
+        Validator::extend('custom_rule', function ($attribute, $value) {
+            $query = User::join('teacher_student', function ($join) {
+                $join->on('users.id', 'student_id')
+                    ->where('teacher_student.teacher_id', Auth::id());
+            })->where('users.email', '=', $value);
+    
+            // True means pass, false means fail validation.
+            return $query->count();
+        });
+
+
+        //dd($request->post('students'));
+        if(!empty($request->post('students'))){
+            foreach($request->post('students') as $key => $val) { 
+                $rules['students.'.$key.'.email'] = 'required|custom_rule';
+            }
+        }
+
         $validated = $request->validate($rules);
 
         try { 
@@ -332,6 +347,32 @@ class CourseController extends Controller
                         $existingSkill->description = $skill['description'];
                         $existingSkill->save();
                     }
+                }
+            }
+
+            //create new enrolments
+            if(!empty($validated['students'])){
+                $newEnrolments = [];
+                foreach($validated['students'] as $studentEmail){
+
+                    $student = Student::firstWhere('email', $studentEmail);
+                   
+                    if($course->students->contains($student)) {
+                        //already have an enrolment
+                        continue;
+                    }
+                    $newEnrolment = [
+                        'student_id'=>$student->id,
+                        'course_id' => $course->id,
+                    ];
+                    //don't add new enrolment twice
+                    if(!in_array($newEnrolment, $newEnrolments)){
+                         $newEnrolments[] = $newEnrolment;
+                    }
+                   
+                }
+                if(!empty( $newEnrolments)){
+                   Enrolment::insert($newEnrolments);
                 }
             }
             

@@ -10,7 +10,11 @@ let addSkillBtn = document.getElementById('addSkill');
 
 addSkillBtn.addEventListener('click', newSkill);
 
+let nbNewSkillsInPage = document.querySelectorAll('#skills input[name="skills[*][title]"]');
 
+if(nbNewSkillsInPage!=null){
+    nbSkills = nbNewSkillsInPage.length-1;
+}
 
 function newSkill(){
     nbSkills++;

@@ -53,7 +53,7 @@
 				</div>
 			</div>
 		</div>
-		<!--SKILLS-->
+		<!--ENFORLMENTS-->
 		<div class="col ml-4">
 			<div class="form-section layer-2 d-flex flex-column">
 				<h3 class="title-3">Enrolments</h3>
