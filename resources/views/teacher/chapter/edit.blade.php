@@ -9,7 +9,7 @@
 			<p>The chapter title is required and must have less than 100 characters</p>
 		@endif
 	 	@if($errors->get('content'))
-			<p>Error in content</p>
+			<p>Error in required content field</p>
 		@endif
 	</div>
 	@endif
@@ -25,12 +25,12 @@
 					<div class="mb-3 row d-flex align-items-center">
 						<label for="title" class="col col-form-label title-3">Chapter Title</label>
 						<div class="col-12 col-md-8">
-							<input type="text" class="form-control-plaintext col" id="title" name="title" value="{{ old('title') ?? $chapter->title }}">
+							<input type="text" class="form-control-plaintext col" id="title" name="title" value="{{ old('title') ?? ( !$errors->any() ? $chapter->title : '') }}">
 						</div>
 					</div>
 					<!--ACTIVE-->
 					<div class="form-check d-flex align-items-center">
-						<input class="form-check-input" type="checkbox" id="active" name="active" {{ old('active')=='on' ? 'checked' : ($chapter->is_active ? 'checked' : '') }}>
+						<input class="form-check-input" type="checkbox" id="active" name="active" {{ old('active') ? 'checked' : ( !$errors->any() && $chapter->is_active ? 'checked' : '') }}>
 						<label class="form-check-label title-3 ml-4" for="active">
 							Active
 						</label>
@@ -41,7 +41,7 @@
 
 		<div class="form-section layer-2">
 			<label class="title-3" for="textEditor">Content</label>
-			<textarea id="textEditor" name="content">{!!  old('content') ?  clean(old('content')) : clean($chapter->content) !!}</textarea>
+			<textarea id="textEditor" name="content">{{  old('content') ?? ( !$errors->any() ? clean($chapter->content) : '' ) }}</textarea>
 		</div>
 
 		<button type="submit" class="myButton bigButton align-self-center">Save</button>

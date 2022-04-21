@@ -9,7 +9,7 @@
 			<p>The chapter title is required and must have less than 100 characters</p>
 		@endif
 	 	@if($errors->get('content'))
-			<p>Error in content</p>
+			<p>Error in required content field</p>
 		@endif
 	</div>
 	@endif
@@ -43,7 +43,7 @@
 
 		<div class="form-section layer-2">
 			<label class="title-3" for="textEditor">Content</label>
-			<textarea id="textEditor" name="content">{{ old('content') ?? 'Hello World !' }}</textarea>
+			<textarea id="textEditor" name="content">{{ old('content') ?? '' }}</textarea>
 		</div>
 
 		<button type="submit" class="myButton bigButton align-self-center">Create</button>
