@@ -595,6 +595,10 @@ nav.back-nav a{
 	text-decoration: none;
 }
 
+.top-right{
+	float:right;
+}
+
 a {
 	color: var(--color-mediumPurple);
 }

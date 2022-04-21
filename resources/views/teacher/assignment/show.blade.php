@@ -38,7 +38,7 @@
 				</div>
 				<div class="label-value mt-4">
 					<span><a href="{{ route('assignment_teacherEdit', $assignment->id) }}"><i class="fas fa-pen-square"></i>Edit Assignment</a></span>
-					<span><a href="#"><i class="fas fa-trash-alt"></i>Delete Assignment</a></span>
+					<span><a href="{{ route('assignment_teacherConfirmDelete', $assignment->id) }}"><i class="fas fa-trash-alt"></i>Delete Assignment</a></span>
 				</div>
 			</div>
 		</div>

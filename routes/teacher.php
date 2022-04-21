@@ -69,6 +69,10 @@ Route::get('assignments/{id}/edit', ([AssignmentController::class, 'teacherEdit'
     ->name('assignment_teacherEdit');
 Route::post('assignments/{id}', ([AssignmentController::class, 'teacherUpdate']))
     ->name('assignment_teacherUpdate');
+Route::get('assignments/{id}/delete', ([AssignmentController::class, 'teacherConfirmDelete']))
+    ->name('assignment_teacherConfirmDelete');
+Route::delete('assignments/{id}/delete', ([AssignmentController::class, 'teacherDelete']))
+    ->name('assignment_teacherDelete');
 
 //STUDENT
 Route::get('students', ([StudentController::class, 'teacherIndex']))

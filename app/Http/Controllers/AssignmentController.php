@@ -138,7 +138,6 @@ class AssignmentController extends Controller
             $assignment->chapters()->attach($id);
 
         } catch (\Illuminate\Database\QueryException $exception) {
-            dd($exception);
             return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your new assignment could not be created");    
         }
         return view('teacher.assignment.show', [
@@ -223,11 +222,54 @@ class AssignmentController extends Controller
 
 
         } catch (\Illuminate\Database\QueryException $exception) {
-            dd($exception);
             return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your changes could not be created");    
         }
         return view('teacher.assignment.show', [
             'assignment'=>$assignment,
         ]);
+    }
+
+    /**
+     * Shows the confirmation page for deletion
+     * 
+     * @param int $id Assignment Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherConfirmDelete($id){
+        $assignment = Assignment::find($id);
+        if(empty($assignment)){
+            return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+
+        $message = "<p>You have chosen to delete the following assignment: ".$assignment->title."</p>";
+        $message .= "<ul><li>Course: ".$assignment->course->title."</li><li>Chapter: ".$assignment->chapters[0]->title."</li></ul>";
+        $message .= "<p>Please be aware that this will remove all associated data, such as student attempts, marks, assingment notes, etc.</p>";
+        $message .= "<p>Sure you want to delete ?</p>";
+        return view('teacher.confirmDelete', [
+            'route'=> route('assignment_teacherDelete', $id),
+            'message'=>$message,
+            'backRoute'=> route('assignment_teacherShow', $id),
+            'resource'=>'assignment'
+        ]);
+    }
+
+    /**
+     * Soft Deleted the assignment
+     * 
+     * @param int $id Assignment Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherDelete($id){
+        $assignment = Assignment::find($id);
+        if(empty($assignment)){
+            return redirect(route('course_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+
+        $deleted = $assignment->delete();
+        if ($deleted){
+            return redirect(route('chapter_teacherShow', $assignment->chapters[0]->id))->with('success', 'Assignment Deleted');
+        } else {
+            return redirect(route('chapter_teacherShow', $assignment->chapters[0]->id))->with('error', 'Assignment Could not be Deleted');
+        }
     }
 }
