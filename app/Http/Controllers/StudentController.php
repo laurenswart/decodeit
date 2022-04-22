@@ -159,7 +159,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Add a student to list of teacher's students, by ajax request
+     * Remove a student to list of teacher's students, by ajax request
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response 

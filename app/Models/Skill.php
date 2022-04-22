@@ -23,4 +23,11 @@ class Skill extends Model
     ];
 
     public $timestamps = false;
+
+    /**
+     * The course associated to this enrolment
+     */
+    protected function course(){
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
 }

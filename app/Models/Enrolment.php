@@ -32,6 +32,13 @@ class Enrolment extends Model
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
+    /**
+     * The student associated to this enrolment
+     */
+    protected function student(){
+        return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
     
     protected function studentSkills(){
         return $this->hasMany(Skill::class, 'skill_id', 'id');

@@ -91,6 +91,7 @@
 							<tr>
 							<th scope="col">Name</th>
 							<th scope="col">Description</th>
+							<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -98,6 +99,7 @@
 							<tr>
 								<td>{{ $skill->title }}</td>
 								<td>{{ $skill->description }}</td>
+								<td><a href="{{ route('skill_teacherConfirmDelete', $skill->id) }}" class="btsp btn btn-outline-danger">x</a></td>
 							</tr>
 						@endforeach
 						</tbody>
@@ -108,9 +110,10 @@
 			<div class="form-section layer-2 col-12 col-xl-6  mx-2">
 				<h3 class="title-3">Enrolments</h3>
 				@foreach($course->students as $student)
-				<div class="label-value">
+				<div class="label-value mt-1">
 					<span>{{ $student->firstname.' '.$student->lastname }}</span>
 					<span>{{ $student->email }}</span>
+					<span><a href="{{ route('enrolment_teacherConfirmDelete', $student->pivot->id) }}" class="btsp btn btn-outline-danger">x</a></span>
 				</div>
 				@endforeach
 			</div>

@@ -176,7 +176,7 @@ a:hover{
 }
 
 /*Links that look like buttons*/
-a.btn{
+a.btn:not(.btsp){
 	text-transform:uppercase;
 	font-weight:700;
 	border-style:none;
@@ -199,7 +199,7 @@ a.btn{
 	pointer-events:initial;
 }
 
-a.btn:hover{
+a.btn:hover:not(.btsp){
 	color:#ededed;
 	background-color:#fdb03d;
 }

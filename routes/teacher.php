@@ -4,7 +4,9 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EnrolmentController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubscriptionController;
@@ -97,8 +99,17 @@ Route::post('students/delete', ([StudentController::class, 'teacherDelete']))
 //ENROLMENTS
 Route::post('students', ([StudentController::class, 'teacherStore']))
     ->name('student_teacherStore');
+Route::get('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherConfirmDelete']))
+    ->name('enrolment_teacherConfirmDelete');
+Route::delete('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherDelete']))
+    ->name('enrolment_teacherDelete');
 
 
+//SKILLS
+Route::get('skills/{id}/delete', ([SkillController::class, 'teacherConfirmDelete']))
+    ->name('skill_teacherConfirmDelete');
+Route::delete('skills/{id}/delete', ([SkillController::class, 'teacherDelete']))
+    ->name('skill_teacherDelete');
 
 Route::get('plans', ([PlanController::class, 'teacherIndex']))
     ->name('plan_teacherIndex');
