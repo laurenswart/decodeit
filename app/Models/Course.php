@@ -56,7 +56,11 @@ class Course extends Model
             ->where('student_id', Auth::id())
             ->where('course_id', $this->id)
             ->first();
-        return $enrolment->id;
+        return $enrolment;
+    }
+
+    public function enrolmentIdForAuth(){
+        return $this->enrolmentForAuth()->id;
     }
 
     public function hasNewMessages(){

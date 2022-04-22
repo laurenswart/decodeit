@@ -242,6 +242,11 @@ a.btn-right{
 	color: var(--color-mediumWhite);
 }
    
+.myButton.empty{
+	background-color: #00000000;
+    color: var(--color-darkPurple);
+}
+
    
 .myButton::before {
     content: "";

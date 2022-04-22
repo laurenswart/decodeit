@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Enrolment extends Model
 {
@@ -42,5 +43,9 @@ class Enrolment extends Model
     
     protected function studentSkills(){
         return $this->hasMany(Skill::class, 'skill_id', 'id');
+    }
+
+    public function chaptersRead(){
+        return $this->belongsToMany(Chapter::class, 'chapters_read', 'enrolment_id', 'chapter_id', 'id', 'id');
     }
 }

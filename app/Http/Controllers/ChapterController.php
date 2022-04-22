@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Chapter;
 use App\Models\Course;
+use App\Models\Student;
 use App\Models\Teacher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -215,5 +217,47 @@ class ChapterController extends Controller
         } else {
             return redirect(route('course_teacherShow', $chapter->course->id))->with('error', 'Chapter Could not be Deleted');
         }
+    }
+
+    /**
+     * Toggle between chapter read and unread
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $id Chapter Id
+     * @return json 
+     */
+    public function studentRead(Request $request, int $id){
+        if($request->ajax('')) {
+            //find chapter
+            $chapter = Chapter::find($id);
+            $student = Student::find(Auth::id());
+            if(empty($chapter) || empty($student)){
+                return response()->json([
+                    'success' => false, 
+                ], 403);
+            }
+
+            //check student is enrolled in course
+            if (!$student->courses->contains($chapter->course)){
+                return response()->json([
+                    'success' => false, 
+                ], 403);
+            }
+
+            //update DB
+            $enrolment = $chapter->course->enrolmentForAuth();
+            if($chapter->isRead($student->id)){
+                $enrolment->chaptersRead()->detach($chapter);
+            } else {
+                $enrolment->chaptersRead()->attach($chapter);
+            }
+
+            return response()->json([
+                'success' => true, 
+                'isRead' => $chapter->isRead($student->id)
+            ], 200);
+
+        }
+
     }
 }

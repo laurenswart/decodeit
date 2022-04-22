@@ -21,48 +21,16 @@
 		</nav>
 		<section id="chapter-content">
 			<h2 class="light-card block-title layer-2">Chapter Name</h2>
-			<div class="listElement-v light-card row">
-				<span class="listElementTitle palette-medium col-12">Section I</span>
-				<span class="listElementContent col background">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-						Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-						Quam fugiat facilis iste nulla.</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-					Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-					Quam fugiat facilis iste nulla.</p>
-				</span>
-			</div>
-
-			<div class="listElement-v light-card row">
-				<span class="listElementTitle palette-medium col-12">Section II</span>
-				<span class="listElementContent col background">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-						Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-						Quam fugiat facilis iste nulla.</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-					Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-					Quam fugiat facilis iste nulla.</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-						Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-						Quam fugiat facilis iste nulla.</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-					Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-					Quam fugiat facilis iste nulla.</p>
-				</span>
-			</div>
-
-			<div class="listElement-v light-card row">
-				<span class="listElementTitle palette-medium col-12">Section III</span>
-				<span class="listElementContent col background">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id eaque enim at qui soluta! 
-						Sequi similique numquam ea ipsum minus sint voluptatum consectetur facere totam. 
-						Quam fugiat facilis iste nulla.</p>
-				</span>
+			<div class="listElementContent d-flex flex-col align-items-start layer-2 form-section">
+				{!! clean($chapter->content) !!}
 			</div>
 			<div class="d-flex justify-content-center btn-box">
-				<button class="btn-left myButton btn-highlight">Read</button>
+				@if($chapter->isRead(Auth::id()))
+					<button class="myButton empty layer-2" id="readBtn">Mark as not read</button>
+				@else
+					<button class="myButton btn-highlight layer-2 " id="readBtn">I Have Read This Chapter</button>
+				@endif
 			</div>
-			
 		</section>
 
 
@@ -99,5 +67,45 @@
 	</div>
 
 </div>
+<script>
+	window.onload = function(){
+		let readBtn = document.getElementById('readBtn');
+
+		readBtn.addEventListener('click', function(){
+			console.log('clicked');
+			let xhr = new XMLHttpRequest();
+
+			xhr.onload = function() { //Fonction de rappel
+				console.log(this);
+				if(this.status === 200) {
+					let data = this.responseText;
+					data = JSON.parse(data);
+					if (data.isRead){
+						if(readBtn.classList.contains('btn-highlight')){
+							readBtn.classList.remove('btn-highlight');
+							readBtn.classList.add('empty');
+						}
+						readBtn.innerText = 'Mark as not read';
+					} else if(!data.isRead){
+						if(!readBtn.classList.contains('btn-highlight')){
+							readBtn.classList.add('btn-highlight');
+							readBtn.classList.remove('empty');
+						}
+						readBtn.innerText = 'I Have Read This Chapter';
+					}
+				}
+			};
+			const data = JSON.stringify({
+				_token: "<?= csrf_token() ?>"
+			});
+
+			xhr.open('POST', "{{ route('chapter_studentRead', $chapter->id) }}");
+			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(data);
+			// end of ajax call
+		});
+	}
+</script>
 @endsection
 

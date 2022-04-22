@@ -61,16 +61,10 @@ class Chapter extends Model
     }
 
     public function isRead($userId){
-        $enrolmentId = Enrolment::where('student_id', $userId)
+        $enrolment = Enrolment::where('student_id', $userId)
             ->where('course_id', $this->course_id)->first();
-        if(empty($enrolmentId)) return false;
-        
-        $row = DB::table('chapters_read')
-            ->where('enrolment_id', $enrolmentId)
-            ->where('chapter_id', $this->id)
-            ->all();
-        
-        return count($row)==1;
+        if(empty($enrolment)) return false;
+        return  $enrolment->chaptersRead->contains($this);
     }
 
     

@@ -21,11 +21,13 @@ Route::get('courses/{id}', ([CourseController::class, 'studentShow']))
     ->name('course_studentShow');
 
 //CHAPTER
-Route::get('chapter/{id}', ([ChapterController::class, 'studentShow']))
+Route::get('chapters/{id}', ([ChapterController::class, 'studentShow']))
     ->where('id', '[0-9]+')
     ->name('chapter_studentShow');
+Route::post('chapters/{id}', ([ChapterController::class, 'studentRead']))
+    ->name('chapter_studentRead');
 
 //ASSIGNMENT
-Route::get('assignment/{id}', ([AssignmentController::class, 'studentShow']))
+Route::get('assignments/{id}', ([AssignmentController::class, 'studentShow']))
     ->where('id', '[0-9]+')
     ->name('assignment_studentShow');
