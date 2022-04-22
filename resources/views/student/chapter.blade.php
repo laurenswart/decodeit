@@ -26,9 +26,9 @@
 			</div>
 			<div class="d-flex justify-content-center btn-box">
 				@if($chapter->isRead(Auth::id()))
-					<button class="myButton empty layer-2" id="readBtn">Mark as not read</button>
+					<button class="myButton empty" id="readBtn">Mark as not read</button>
 				@else
-					<button class="myButton btn-highlight layer-2 " id="readBtn">I Have Read This Chapter</button>
+					<button class="myButton btn-highlight" id="readBtn">I Have Read This Chapter</button>
 				@endif
 			</div>
 		</section>

@@ -1,1 +1,0 @@
-unknown{"id":752,"firstname":"bob","lastname":"sull","email":"bsull@gmail.com","role_ref":1,"email_verified_at":"2021-09-16T13:24:43.000000Z","created_at":"2021-09-16T13:24:43.000000Z","updated_at":"2022-04-03T23:44:34.000000Z","deleted_at":null,"stripe_id":"cus_LRW8Z1BIBE8Uz9","pm_type":null,"pm_last_four":null,"trial_ends_at":null}

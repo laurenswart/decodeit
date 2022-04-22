@@ -86,9 +86,12 @@
                 <p class="u-text  u-text-1">Some footer to add</p>
             </div>
         </footer>
+
         <!-- Scripts -->
         <script src="{{ asset('js/scrollToTop.js') }}"></script>
         <!-- Scripts -->
         <script src="{{ asset('js/responsive.js') }}" ></script>
+        @yield('scripts')
+
     </body>
 </html>

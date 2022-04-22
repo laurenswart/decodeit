@@ -15,7 +15,7 @@
 					<span id="description" class="col-sm-6 col-md-8 col-12">
 						<div>
 							<div class="label">Description</div>
-							<div>{{ $assignment->description }}</div>
+							<div>{!! clean($assignment->description) !!}</div>
 						</div>
 						<div>
 							<div class="label">Skills Linked</div>
@@ -40,7 +40,7 @@
 							<span>{{ $assignment->end_time }}</span>
 						</span>
 						<span>
-							<span class="label">Submission size</span>
+							<span class="label">Submission size MB</span>
 							<span>{{ $assignment->submission_size }}</span>
 						</span>
 						<span>
@@ -51,17 +51,16 @@
 					</span>
 			</span>
 		</div>
-
+		@if(count($assignment->notes)>0)
 		<div class="listElement-v light-card row">
 			<span class="listElementTitle palette-medium col-12">Notes</span>
-			
 			<span class="listElementContent col layer-1">
 				@foreach($assignment->notes as $note)
 				<p><span class="label">{{ $note->created_at }}</span>{{ $note->content }}</p>
 				@endforeach
 			</span>
-
 		</div>
+		@endif
 	</section>
 	<section>
 		<h2 class="light-card block-title layer-2">Previous Submissions</h2>
@@ -104,40 +103,52 @@
 
 	</section>
 
-
+	<form method="post" action="#">
 	<section id="submission">
+		
+		@csrf
 		<h2 class="light-card block-title layer-2">New Submission</h2>
-		<div id="editor" class="listElement-v light-card ">
-			<span class="listElementTitle palette-medium ">Code</span>
-			<span class="listElementContent  layer-1">
-				Code here
-			</span>
+
+		<div class="form-section layer-2">
+			<h3 class="title-3">Code</h3>
+			<input name="script" type="text" hidden id="script">
+			<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
+			<div  class="row my-4">
+				<div class="col-12 col-md-8">
+					<h3 class="title-3">Console</h3>
+					<div id="console">
+						<ul>
+							<li>Some line</li>
+							<li>Some other line</li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="btn-box col-12 col-md-4 justify-content-between">
+					<div class="d-flex">
+						<button class="btn-left myButton btn-highlight col">Run</button>
+					</div>
+					<div class="d-flex flex-col">
+						<button class="btn-left myButton" id="newSubmission">Submit</button>
+						<button class="btn-left myButton">Ask For Help</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		
-		<div  class="row">
-			<div id="console" class="listElement-v light-card col-12 col-md-10">
-				<span class="listElementTitle palette-medium ">Console</span>
-				<span class="listElementContent layer-1">
-					<ul>
-						<li>Some line</li>
-						<li>Some other line</li>
-					</ul>
-				</span>
-			</div>
-			<div class="btn-box col justify-content-between">
-				<div class="row">
-					<button class="btn-left myButton btn-highlight">Run</button>
-				</div>
-				<div class="row">
-					<button class="btn-left myButton">Submit</button>
-					<button class="btn-left myButton">Ask For Help</button>
-				</div>
-			</div>
-		</div>
+		
+		
+		
 	</section>
+	</form>
+
 	<div class="d-flex justify-content-center btn-box">
 		<button class="btn-left myButton btn-highlight">Done this assignment</button>
 	</div>
 </div>
+@endsection
+
+@section('scripts')
+	<script src="{{ asset('js/student/studentAssignment.js') }}"></script>
 @endsection
 

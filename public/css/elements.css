@@ -338,6 +338,7 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 }
 
 
+
 @media (max-width: 768px) {
 /*@include media-breakpoint-down(md) {*/
 	.listElement-h .listElementTitle.col-12.col-md-4{
@@ -812,11 +813,7 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	padding-bottom: 20px;
 }
 
-#console{
-	padding-left: 0;
-	padding-right: 0;
-	margin-bottom: 0;
-}
+
 #editor{
 	min-height: 200px;
 }
@@ -824,21 +821,26 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	margin-left: 0;	
 	margin-right: 0;
 }
-#console .listElementContent{
+
+#console{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+#console{
 	min-height: 200px;
     background-color: var(--color-black);
 	justify-content: flex-start;
 	align-items: flex-start;
 }
-#console .listElementContent ul{
+#console ul{
 	padding-left: 0;;
 }
 
-#console .listElementContent li{ 
+#console li{ 
 	color:var(--color-mediumWhite);
 	font-family: 'Consolas';
 }
-#console .listElementContent li::before{
+#console li::before{
 	content:">>";
 } 
 
