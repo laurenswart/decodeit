@@ -49,7 +49,12 @@ if(testScriptEditor){
     executableCheck.onchange = adaptEditorDisplay;
 
     document.getElementById("newAssignment").onsubmit = function(evt) {
-        hiddenScript.value = editor.getValue();
+        let validLanguage = acceptedModes.indexOf(testLanguage.value)!=-1;
+        if(executableCheck.checked && validLanguage){
+            hiddenScript.value = editor.getValue();
+        } else {
+            hiddenScript.value = '';
+        }
       }
 }
 

@@ -14,9 +14,6 @@
 		@if($errors->get('skills.*.description'))
 			<p>Skill descriptions must have less than 255 characters</p>
 		@endif
-		@if($errors->get('students.*'))
-			<p>Chosen user could not be found within your students. Please chose a student from your list of added students.</p>
-		@endif
 		@if($errors->get('students.*.*'))
 			<p>We are unable to add these students.</p>
 		@endif

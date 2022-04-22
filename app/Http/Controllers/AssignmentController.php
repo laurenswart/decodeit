@@ -92,23 +92,34 @@ class AssignmentController extends Controller
         $rules = [
             'title' => 'required|max:100',
             'description' => 'required|max:65535',
-            'submissions' => 'required|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
+            'submissions' => 'required|int|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
             'max-mark' => 'required|max:500',
             'weight' => 'required|max:100',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
             'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
-            'language' => [
-                'required_with:script',
-                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
-            ],
+            
             'script' => 'max:65535',
             'executable' => 'required_with:script'
         ];
+        if($request->post('executable')== 'on' || !empty($request->post('script'))){
+            $rules['language'] = [
+                'required',
+                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+            ];
+        } else {
+            $rules['language'] = [
+                'nullable',
+                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+            ];
+        }
+
+        $messages = [];
         //skills validation
         if(!empty($request->post('skills'))){
             foreach($request->post('skills') as $skillId => $val) { 
                 $rules['skills.'.$skillId] = Rule::in($chapter->course->skills->pluck('id')); 
+                $messages['skills.'.$skillId.'.in'] ='Invalid skills selection';
             }
         }
 
@@ -173,32 +184,44 @@ class AssignmentController extends Controller
         //dd($request->post());
  
         $this->authorize('update', $assignment);
-
+        
         //form validation
         $rules = [
             'title' => 'required|max:100',
             'description' => 'required|max:65535',
-            'submissions' => 'required|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
+            'submissions' => 'required|int|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
             'max-mark' => 'required|max:500',
             'weight' => 'required|max:100',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
             'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
-            'language' => [
-                'required_with:script',
-                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
-            ],
+            
             'script' => 'max:65535',
             'executable' => 'required_with:script'
         ];
+        if($request->post('executable')== 'on' || !empty($request->post('script'))){
+            $rules['language'] = [
+                'required',
+                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+            ];
+        } else {
+            $rules['language'] = [
+                'nullable',
+                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+            ];
+        }
+
+        $messages = [];
         //skills validation
         if(!empty($request->post('skills'))){
             foreach($request->post('skills') as $skillId => $val) { 
                 $rules['skills.'.$skillId] = Rule::in($assignment->course->skills->pluck('id')); 
+                $messages['skills.'.$skillId.'.in'] ='Invalid skills selection';
             }
         }
 
-        $validated = $request->validate($rules);
+        
+        $validated = $request->validate($rules, $messages);
 
          try { 
             //create chapter
@@ -211,8 +234,8 @@ class AssignmentController extends Controller
             $assignment->start_time = date('Y-m-d H:i:s', strtotime($validated['start']));
             $assignment->end_time = date('Y-m-d H:i:s', strtotime($validated['end']));
             $assignment->is_test = $request->post('test')==='on' ? 1 : 0;
-            $assignment->can_execute = $request->post('executable')==='on' ? 1 : 0;
-            $assignment->submission_size = $validated['size'] ?? $teacher->currentSubscriptionPlan()->max_upload_size;
+            $assignment->can_execute = $request->post('executable')==='on' && $validated['language'] ? 1 : 0;
+            $assignment->submission_size = $validated['size'] && $validated['size']!=0 ? $validated['size'] :  $teacher->currentSubscriptionPlan()->max_upload_size;
             $assignment->language = $validated['language'];
 
             $assignment->save();
@@ -222,7 +245,7 @@ class AssignmentController extends Controller
 
 
         } catch (\Illuminate\Database\QueryException $exception) {
-            return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your changes could not be created");    
+            return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your changes could not be saved");    
         }
         return view('teacher.assignment.show', [
             'assignment'=>$assignment,

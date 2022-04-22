@@ -22,28 +22,28 @@
 					<div class="mb-3 row d-flex align-items-center">
 						<label for="title" class="col col-form-label title-3">Assignment Title</label>
 						<div class="col-12 col-md-8">
-							<input type="text" class="form-control-plaintext col" id="title" name="title" value="{{ old('title') ?? $assignment->title }}">
+							<input type="text" class="form-control-plaintext col" id="title" name="title" value="{{ old('title') ??  ( !$errors->any() ? $assignment->title : '') }}">
 						</div>
 					</div>
 				</div>
 				<!--DESCRIPTION-->
 				<div class="form-section layer-2 mt-3">
 					<label class="title-3" for="textEditor">Description</label>
-					<textarea id="textEditor" name="description">{{ old('description') ?? $assignment->description }}</textarea>
+					<textarea id="textEditor" name="description">{{ old('description') ?? ( !$errors->any() ? $assignment->description : '') }}</textarea>
 				</div>
 			</div>
 			<div class="col form-section layer-2 ml-4">
 				<div class="label-value">
 					<label for="submissions">Nb. Submissions</label>
-					<input type="number" name="submissions" id="submissions" value="{{ old('submissions') ?? $assignment->nb_submissions }}">
+					<input type="number" name="submissions" id="submissions" value="{{ old('submissions') ?? ( !$errors->any() ? $assignment->nb_submissions : '') }}">
 				</div>
 				<div class="label-value mt-3">
 					<label for="max-mark">Max. Mark</label>
-					<input type="number" name="max-mark" id="max-mark" value="{{ old('max-mark') ?? $assignment->max_mark }}">
+					<input type="number" name="max-mark" id="max-mark" value="{{ old('max-mark') ?? ( !$errors->any() ? $assignment->max_mark : '') }}">
 				</div>
 				<div class="label-value mt-3">
 					<label for="weight">Course Weight %</label>
-					<input type="number" name="weight" id="weight" value="{{ old('weight') ?? $assignment->course_weight }}">
+					<input type="number" name="weight" id="weight" value="{{ old('weight') ?? ( !$errors->any() ? $assignment->course_weight : '') }}">
 				</div>
 				<div class="label-value mt-3">
 					<label for="start">Start</label>
@@ -59,7 +59,7 @@
 				</div>
 				<div class="label-value mt-3">
 					<label for="size">Submission Max. MB Size</label>
-					<input type="number" name="size" id="size" value="{{ old('size') ?? $assignment->submission_size }}">
+					<input type="number" name="size" id="size" value="{{ old('size') ?? ( !$errors->any() ? $assignment->submission_size : '') }}">
 				</div>
 				<div class="label-value mt-3">
 					<label for="language">Language</label>
