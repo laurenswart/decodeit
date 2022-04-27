@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
+use App\Models\Plan;
 use Illuminate\Support\Facades\Route;
 
 //GENERAL
@@ -13,9 +15,9 @@ Route::get('dashboard',[AdminController::class, 'dashboard'])->name('adminDashbo
 Route::post('logout', [AdminAuthController::class, 'logout'])->name('adminLogout');
 
 //SUBSCRIPTIONS
-Route::get('subscriptions', [SubscriptionController::class, 'adminIndex'])
-    ->name('subscription_adminIndex');
-Route::get('subscriptions/{id}', [SubscriptionController::class, 'adminShow'])
+Route::get('plans', [PlanController::class, 'adminIndex'])
+    ->name('plan_adminIndex');
+Route::get('subscriptions/{id}', [PlanController::class, 'adminShow'])
     ->where('id', '[0-9]+')
     ->name('subscription_adminShow');
 

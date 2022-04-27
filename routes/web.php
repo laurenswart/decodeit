@@ -35,8 +35,7 @@ Route::get('/billing-portal', function (Request $request) {
     return $request->user()->redirectToBillingPortal(route('teacherDashboard'));
 })->name('billingPortal');
 
-/*Route::post('webhook', ([StripeController::class, 'handle']))
-    ->name('stripeWebhook');*/
+
 Route::stripeWebhooks('webhook');
 
 require __DIR__.'/auth.php';

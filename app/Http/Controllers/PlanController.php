@@ -18,32 +18,40 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function adminIndex(){
-        $subscriptions = Plan::all();
 
-        $nbSemiyearly = DB::table('payments')
-            ->join('subscriptions', 'subscriptions.id', '=', 'subscription_id')
-            ->whereRaw('semiyearly_price = `amount`')
-            ->where('start_date', '<=', now())
-            ->where('expires', '>=', now())
-            ->count();
-        $nbMonthly = DB::table('payments')
-            ->join('subscriptions', 'subscriptions.id', '=', 'subscription_id')
-            ->whereRaw('monthly_price = `amount`')
-            ->where('start_date', '<=', now())
-            ->where('expires', '>=', now())
-            ->count();
-        $nbYearly = DB::table('payments')
-            ->join('subscriptions', 'subscriptions.id', '=', 'subscription_id')
-            ->whereRaw('yearly_price = `amount`')
-            ->where('start_date', '<=', now())
-            ->where('expires', '>=', now())
-            ->count();
-        
-        return view('admin.subscription.index', [
-            'subscriptions' => $subscriptions,
+        $plans = Plan::all();
+
+        /*
+         SELECT NAME, created_at, ends_at,
+        TIMESTAMPDIFF(MONTH, created_at, ends_at)
+        from subscriptions
+         */
+        $activeSubscriptions = DB::table('subscriptions')
+            ->select(DB::raw(', name, TIMESTAMPDIFF(MONTH, created_at, ends_at)'))
+            ->where('created_at', '<=', now())
+            ->where('ends_at', '>=', now())->count();
+
+        $nbMonthly = DB::table('subscriptions')
+            ->where('created_at', '<=', now())
+            ->where('ends_at', '>=', now())
+            ->whereRaw('TIMESTAMPDIFF(MONTH, created_at, ends_at)>=12')->count();
+
+        $nbSemiyearly = DB::table('subscriptions')
+            ->where('created_at', '<=', now())
+            ->where('ends_at', '>=', now())
+            ->whereRaw('TIMESTAMPDIFF(MONTH, created_at, ends_at)>=6 && TIMESTAMPDIFF(MONTH, created_at, ends_at)<12')->count();
+
+        $nbYearly = DB::table('subscriptions')
+            ->where('created_at', '<=', now())
+            ->where('ends_at', '>=', now())
+            ->whereRaw('TIMESTAMPDIFF(MONTH, created_at, ends_at)>=1 && TIMESTAMPDIFF(MONTH, created_at, ends_at)<6')->count();
+
+        return view('admin.plan.index', [
+            'plans' => $plans,
             'nbMonthly' => $nbMonthly,
             'nbSemiyearly' => $nbSemiyearly,
-            'nbYearly' => $nbYearly
+            'nbYearly' => $nbYearly,
+            'activeSubscriptions' => $activeSubscriptions,
         ]);
         
     }
@@ -55,13 +63,15 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function adminShow(int $id){
-        $subscription = Plan::find($id);
-        return view('admin.subscription.show', [
-            'subscription' => $subscription
+        $plan = Plan::find($id);
+        return view('admin.plan.show', [
+            'plan' => $plan
         ]);
     }
 
     public function teacherIndex(){
+
+       
        
         //todo redirect if user already has a valid running subscription
         $hasSubscription = Teacher::find(Auth::id())->currentSubscription() ? true : false;

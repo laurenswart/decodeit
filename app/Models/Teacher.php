@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 
 class Teacher extends User
 {
-    use HasFactory;
+    use HasFactory, Billable;
 
     public function students(){
         return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_id', 'student_id', 'id', 'id');
@@ -28,19 +29,6 @@ class Teacher extends User
         return $this->hasMany(Course::class, 'teacher_id', 'id' );
     }
 
-    public function currentSubscriptionPlan(){
-        $plans = Plan::all();
-        foreach($plans as $plan){
-            if(Auth::user()->subscribed($plan->title)){
-                return $plan;
-            }
-        }
-        if(Teacher::find(Auth::id())->isOnFreeTrial()){
-            return Plan::firstWhere('title', 'free');
-        }
-        return null;
-    }
-
     public function currentSubscription(){
         $subscription = Subscription::all()
             ->filter(function($item) {
@@ -48,12 +36,10 @@ class Teacher extends User
                   return $item;
                 }
               })
-              ->where('user_id', Auth::id())
+              ->where('user_id', $this->id)
               ->first();
         return $subscription;
     }
-
-    
 
     public function newQuery($excludeDeleted = true)
     {
@@ -63,7 +49,22 @@ class Teacher extends User
 
     public function isOnFreeTrial(){
         return $this->currentSubscription() == null 
-            && Auth::user()->created_at->diffInDays(Carbon::now()) <= 3;
+            && $this->created_at->diffInDays(Carbon::now()) <= 3;
     }
 
+    public function currentSubscriptionPlan(){
+        $user = User::find($this->id);
+        $plans = Plan::all();
+        
+        foreach($plans as $plan){
+            if( $this->subscribed($plan->title)){
+                return $plan;
+            }
+        }
+        
+        if($this->isOnFreeTrial()){
+            return Plan::firstWhere('title', 'free');
+        }
+        return null;
+    }
 }

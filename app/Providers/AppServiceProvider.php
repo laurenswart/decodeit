@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\ProfitPerSubscription::class,
         ]);
 
-       
+        Cashier::useCustomerModel(Teacher::class);
         //Cashier::useSubscriptionModel(Payment::class);
         //Cashier::useSubscriptionItemModel(Subscription::class);
     }

@@ -23,7 +23,6 @@ class StudentsPerTeacher extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
-        //get number of users enrolled per month
         $studentsPerTeacher = DB::table('teacher_student')
             ->select(DB::raw('teacher_id, count(*) as nbStudents'))
             ->groupBy('teacher_id')

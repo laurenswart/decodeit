@@ -20,9 +20,7 @@ class TeachersPerStudent extends BaseChart
      * and never a string or an array.
      */
     public function handler(Request $request): Chartisan
-    {
-        //get number of users enrolled per month
-        
+    {       
         $teachersPerStudent = DB::table('teacher_student')
             ->select(DB::raw('student_id, count(*) as nbTeachers'))
             ->groupBy('student_id')
@@ -33,27 +31,11 @@ class TeachersPerStudent extends BaseChart
         $data = [];
         foreach ($teachersPerStudent as  $value) {
             //seperate into teacher/student
-            $data[$value.' teacher'] = isset($data[$value.' teacher']) ? ($data[$value.' teacher'] + 1) : 1;
-        }
-        
-        $results = DB::select( DB::raw("
-            select t2.nbTeachers , count(*) 'occurences'
-            from
-                (select count(*) 'nbTeachers'
-                from enrolments
-                group by student_id) as t2
-            group by t2.nbTeachers
-            order by t2.nbTeachers"));
-
-
-        foreach ($results as  $row) {
-            //seperate into teacher/student
-            $data[] = $row->occurences;
-            $labels[] = $row->nbTeachers;
+            $data[$value] = isset($data[$value]) ? ($data[ $value] + 1) : 1;
         }
 
         return Chartisan::build()
-            ->labels($labels)
-            ->dataset('', $data);
+            ->labels(array_keys($data))
+            ->dataset('', array_values($data));
     }
 }

@@ -14,6 +14,7 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Created</th>
+            <th>Subscription</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
             <td>{{ $teacher->lastname }}</td>
             <td>{{ $teacher->email }}</td>
             <td>{{ $teacher->created_at }}<td>
+            <td>{{ $teacher->currentSubscriptionPlan() ? $teacher->currentSubscriptionPlan()->title : '-' }}<td>
         </tr>
        
       @endforeach

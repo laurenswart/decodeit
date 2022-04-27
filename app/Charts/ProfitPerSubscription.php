@@ -22,12 +22,13 @@ class ProfitPerSubscription extends BaseChart
     public function handler(Request $request): Chartisan
     {
         //payments
-        $datas = DB::table('subscriptions')
-            ->select('subscriptions.title', DB::raw('sum(amount) as total'))
-            ->leftJoin('payments', 'payments.subscription_ref', '=', 'subscriptions.id')
+        $datas = DB::table('plans')
+            ->select('plans.title', DB::raw('sum(amount_paid) as total'))
+            ->leftJoin('subscriptions', 'subscriptions.name', '=', 'plans.title')
+            ->leftJoin('payments', 'subscriptions.stripe_id', '=', 'payments.subscription_stripe_id')
             ->where('title', '!=', 'free')
             ->groupBy(['title'])
-            ->orderBy('subscription_ref')
+            ->orderBy('plans.id')
             ->get();
 
         $keys = [];
@@ -35,7 +36,7 @@ class ProfitPerSubscription extends BaseChart
 
         foreach($datas as $data){
             $keys[] = $data->title;
-            $values[] = $data->total;
+            $values[] = $data->total/100;
         }
 
 

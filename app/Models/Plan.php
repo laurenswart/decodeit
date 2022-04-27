@@ -47,10 +47,10 @@ class Plan extends Model
     }
 
     public function nbUsers(){
-        return Payment::all()
+        return Subscription::all()
         ->where('name', '=', $this->title)
         ->filter(function($item) {
-            if (Carbon::now()->between($item->start_date, $item->expires)) {
+            if (Carbon::now()->between($item->created_at, $item->ends_at)) {
               return $item;
             }
           })

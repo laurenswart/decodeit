@@ -13,7 +13,7 @@ use function Illuminate\Events\queueable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable,Billable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -117,4 +117,6 @@ class User extends Authenticatable implements MustVerifyEmail
             }
         }));
     }
+
+    
 }

@@ -54,7 +54,7 @@
                         <a class="nav-link animate-v" href="{{ route('user_adminIndex') }}">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link animate-v" href="{{ route('subscription_adminIndex') }}">Subscriptions</a>
+                        <a class="nav-link animate-v" href="{{ route('plan_adminIndex') }}">Subscriptions</a>
                     </li>
                     <li class="nav-item">
                         <!-- Authentication -->
@@ -70,7 +70,7 @@
                     </li>
                 </ul>
             </header>
-            <div class="col main-content">
+            <div class="col-md-10 main-content container">
                 <h1 class=" block-title  layer-2"> @yield('title')</h1>
                 <!-- Page Content -->
                 <main>
