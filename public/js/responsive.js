@@ -5,8 +5,10 @@ function swapOffCanvas(){
 function hideOffCanvas(){
     offCanvas.classList.remove('show');
 }
-/*
+
 $(document).ready(function(){
-    $("#flashModal").modal('show');
+    if($("#flashModal")){
+        $("#flashModal").modal('show');
+    }
+    
 });
-*/

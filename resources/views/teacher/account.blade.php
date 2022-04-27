@@ -2,7 +2,7 @@
 
 @section('content')
     <h2 class="light-card block-title layer-2">My Subscription</h2>
-    @if($plan)
+    @if($plan && $plan->title!='free')
     <div class="row">
         <div class="col p-sides-10">
             <div class="listElement-v light-card row">

@@ -32,7 +32,7 @@ class SubscriptionController extends Controller
             return abort(403);
         }
 
-        $stripeUser = Auth::user()->createOrGetStripeCustomer();
+        $stripeUser = Teacher::find(Auth::id())->createOrGetStripeCustomer();
         $stripe = new StripeClient(env('STRIPE_SECRET'));
         $session = $stripe->checkout->sessions->create([
             'success_url' => 'http://localhost:8000/teacher/account',

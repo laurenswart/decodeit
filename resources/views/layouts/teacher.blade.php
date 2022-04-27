@@ -26,7 +26,7 @@
         <script src="{{ asset('js/scrollToTop.js') }}" defer></script>
         @livewireStyles
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased pr-0">
       <div class="background">
 
         <header class="navbar-default sticky-top layer-1">
@@ -104,12 +104,11 @@
 		</div>
         <!-- Modal for Flash messages -->
         @if (session('flash_modal'))
-                <div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
+            <div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="flashModalLabel">Request Failed</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             {{ session('flash_modal') }}
@@ -117,13 +116,12 @@
                         <div class="modal-footer">
                             <button type="button" class="btn myButton" data-bs-dismiss="modal">Close</button>
                         </div>
-                        </div>
                     </div>
-                    </div>
-                    
                 </div>
-            @endif
-            <script src="{{ asset('js/app.js') }}"></script>
+            </div>
+                    
+        @endif
+        <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
         <!--<script src="{{ asset('js/app.js') }}"></script>-->
         

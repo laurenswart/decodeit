@@ -47,7 +47,7 @@
         <div class="listElement-v light-card">
           <span class="listElementTitle palette-medium col-12 col-md-4">Payment Options</span>
           <span class="listElementContent col background">
-              <div class="align-self-stretch d-flex justify-content-between align-items-center">
+              <div class="align-self-stretch d-flex justify-content-between align-items-center mt-2">
                   <div><h3 class="d-inline-block">{{ $plan->monthly_price }} &#8364</h3>/ MONTH</div>
                   @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
@@ -59,7 +59,7 @@
                   </form>
                   @endif
               </div>
-              <div class="align-self-stretch d-flex justify-content-between align-items-center">
+              <div class="align-self-stretch d-flex justify-content-between align-items-center mt-2">
                 <div><h3 class="d-inline-block">{{ $plan->semiyearly_price }} &#8364</h3>/ 6 MONTHS</div>
                 @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
@@ -71,7 +71,7 @@
                   </form>
                   @endif
               </div>
-              <div class="align-self-stretch d-flex justify-content-between align-items-center">
+              <div class="align-self-stretch d-flex justify-content-between align-items-center mt-2">
                 <div><h3 class="d-inline-block">{{ $plan->yearly_price }} &#8364</h3>/ YEAR</div>
                 @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">

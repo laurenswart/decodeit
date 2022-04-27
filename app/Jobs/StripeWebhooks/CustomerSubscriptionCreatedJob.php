@@ -46,7 +46,7 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
        
         //update our database
         Subscription::create([
-            'user_id' =>  User::where('stripe_id', $charge['customer'])->first()->id,
+            'teacher_id' =>  User::where('stripe_id', $charge['customer'])->first()->id,
             'name' => $planName,
             'stripe_id' => $charge['id'],
             'stripe_status' => $charge['status'],

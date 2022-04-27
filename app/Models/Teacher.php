@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Laravel\Cashier\Billable;
+use function Illuminate\Events\queueable;
 use Laravel\Cashier\Subscription;
 
 class Teacher extends User
@@ -36,7 +37,7 @@ class Teacher extends User
                   return $item;
                 }
               })
-              ->where('user_id', $this->id)
+              ->where('teacher_id', $this->id)
               ->first();
         return $subscription;
     }
@@ -53,7 +54,6 @@ class Teacher extends User
     }
 
     public function currentSubscriptionPlan(){
-        $user = User::find($this->id);
         $plans = Plan::all();
         
         foreach($plans as $plan){
@@ -66,5 +66,19 @@ class Teacher extends User
             return Plan::firstWhere('title', 'free');
         }
         return null;
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::updated(queueable(function ($customer) {
+            if ($customer->hasStripeId()) {
+                $customer->syncStripeCustomerDetails();
+            }
+        }));
     }
 }

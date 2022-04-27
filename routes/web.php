@@ -31,8 +31,8 @@ Route::post('/admin/login', [AdminAuthController::class, 'postLogin'])->name('ad
 
 //STRIPE
 Route::get('/billing-portal', function (Request $request) {
-    Auth::user()->createOrGetStripeCustomer();
-    return $request->user()->redirectToBillingPortal(route('teacherDashboard'));
+    Teacher::find(Auth::id())->createOrGetStripeCustomer();
+    return Teacher::find(Auth::id())->redirectToBillingPortal(route('teacherDashboard'));
 })->name('billingPortal');
 
 

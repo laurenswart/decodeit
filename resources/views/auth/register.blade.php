@@ -11,7 +11,7 @@
                     </div>
                     <div class="form-group">
                         <label for="lastname">Lastname</label>
-                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter lastname" :value="{{ old('lastname') ?? '' }}" required >
+                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Enter lastname" value="{{ old('lastname') ?? '' }}" required >
                     </div>
                 </div>
                 <div class="form-group">
@@ -27,7 +27,7 @@
                     <input type="password" class="form-control" id="password_confirmation-conf" placeholder="Enter confirmation" name="password_confirmation" required>
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="isTeacher" name="isTeacher">
+                    <input type="checkbox" class="form-check-input" id="isTeacher" name="isTeacher" {{ old('isTeacher') ? 'checked' : ''}}>
                     <label class="form-check-label" for="isTeacher">I'm a teacher</label>
                 </div>
                 <button type="submit" class="myButton">Register</button>
