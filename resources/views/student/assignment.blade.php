@@ -116,17 +116,18 @@
 			<div  class="row my-4">
 				<div class="col-12 col-md-8">
 					<h3 class="title-3">Console</h3>
-					<div id="console">
-						<ul>
-							<li>Some line</li>
-							<li>Some other line</li>
+					<button type="button" id="btClearConsole">Clear Console</button>
+					<p id="codeStatus"></p>
+					<div>
+						<ul  id="console">
+							<li></li>
 						</ul>
 					</div>
 					
 				</div>
 				<div class="btn-box col-12 col-md-4 justify-content-between">
 					<div class="d-flex">
-						<button class="btn-left myButton btn-highlight col">Run</button>
+						<button class="btn-left myButton btn-highlight col" id="btRun" type="button">Run</button>
 					</div>
 					<div class="d-flex flex-col">
 						<button class="btn-left myButton" id="newSubmission">Submit</button>
@@ -135,10 +136,6 @@
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
 	</section>
 	</form>
 

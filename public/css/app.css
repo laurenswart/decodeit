@@ -659,6 +659,10 @@ select {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1001,6 +1005,9 @@ select {
 }
 .pt-1 {
   padding-top: 0.25rem;
+}
+.pr-0 {
+  padding-right: 0px;
 }
 .pt-6 {
   padding-top: 1.5rem;
