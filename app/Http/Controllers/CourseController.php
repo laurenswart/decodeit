@@ -211,6 +211,7 @@ class CourseController extends Controller
                     $newEnrolment = [
                         'student_id'=>$student->id,
                         'course_id' => $course->id,
+                        'created_at' =>now(),
                     ];
                     //don't add new enrolment twice
                     if(!in_array($newEnrolment, $newEnrolments)){
@@ -364,6 +365,7 @@ class CourseController extends Controller
                     $newEnrolment = [
                         'student_id'=>$student->id,
                         'course_id' => $course->id,
+                        'created_at' =>now(),
                     ];
                     //don't add new enrolment twice
                     if(!in_array($newEnrolment, $newEnrolments)){

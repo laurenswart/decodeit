@@ -64,7 +64,7 @@ class StudentPolicy
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function teacherSoftDelete(User $user, Student $student)
+    public function delete(User $user, Student $student)
     {
         return $student!=null && $user->isTeacher() && Teacher::find($user->id)->students->contains($student);
     }

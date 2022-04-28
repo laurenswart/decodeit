@@ -72,15 +72,19 @@ Route::get('chapters/{id}/assignments/new', ([AssignmentController::class, 'teac
     ->where('id', '[0-9]+')
     ->name('assignment_teacherCreate');
 Route::post('chapters/{id}/assignments', ([AssignmentController::class, 'teacherStore']))
+    ->where('id', '[0-9]+')
     ->name('assignment_teacherStore');
 Route::get('assignments/{id}/edit', ([AssignmentController::class, 'teacherEdit']))
     ->where('id', '[0-9]+')
     ->name('assignment_teacherEdit');
 Route::post('assignments/{id}', ([AssignmentController::class, 'teacherUpdate']))
+    ->where('id', '[0-9]+')
     ->name('assignment_teacherUpdate');
 Route::get('assignments/{id}/delete', ([AssignmentController::class, 'teacherConfirmDelete']))
+    ->where('id', '[0-9]+')
     ->name('assignment_teacherConfirmDelete');
 Route::delete('assignments/{id}/delete', ([AssignmentController::class, 'teacherDelete']))
+    ->where('id', '[0-9]+')
     ->name('assignment_teacherDelete');
 
 //STUDENT
@@ -93,12 +97,17 @@ Route::post('students/store', ([StudentController::class, 'teacherStore']))
 Route::get('students/{id}', ([StudentController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
     ->name('student_teacherShow');
-Route::post('students/delete', ([StudentController::class, 'teacherDelete']))
+Route::get('students/{id}/delete', ([StudentController::class, 'teacherConfirmDelete']))
+    ->where('id', '[0-9]+')
+    ->name('student_teacherConfirmDelete');
+Route::delete('students/{id}/delete', ([StudentController::class, 'teacherDelete']))
+    ->where('id', '[0-9]+')
     ->name('student_teacherDelete');
 
-//ENROLMENTS
 Route::post('students', ([StudentController::class, 'teacherStore']))
     ->name('student_teacherStore');
+
+//ENROLMENTS
 Route::get('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherConfirmDelete']))
     ->name('enrolment_teacherConfirmDelete');
 Route::delete('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherDelete']))

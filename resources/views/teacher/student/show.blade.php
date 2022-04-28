@@ -19,13 +19,7 @@
               <h4>Email</h4>
               <span>{{ $student->email }}</span>
             </div>
-            <h3 class="title-3">Remove From My Students</h3>
-            <p>Removing a student from your list will delete all associated data, such as marks, submissions, etc. This cannot be undone</p>
-            <form method="POST" action="{{ route('student_teacherDelete') }}">
-                @csrf
-                <input type="hidden" value="{{ $student->id }}" name="student" >
-                <button class="align-self-end mb-2 highlight"><i class="fas fa-trash-alt"></i>Remove Student</button>
-            </form>
+            <div class="d-flex justify-content-end"><a href="{{ route('student_teacherConfirmDelete', $student->id) }}"><i class="fas fa-trash-alt"></i>Remove Student</a></div>
       </div>
       <div class="col form-section layer-2 ml-4 d-flex flex-col justify-content-between">
         <div>

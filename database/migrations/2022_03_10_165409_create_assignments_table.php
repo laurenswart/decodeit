@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,12 +18,12 @@ return new class extends Migration
             $table->id('id');
             $table->foreignId('course_id');
             $table->string('title', 100);
-            $table->string('description', 255);
+            $table->text('description');
             $table->integer('nb_submissions')->default(1);
             $table->text('test_script')->nullable();
             $table->integer('max_mark')->default(100);
             $table->integer('course_weight')->default(0);
-            $table->timestamp('start_time')->default(now());
+            $table->timestamp('start_time')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('end_time')->nullable()->default(null);
             $table->boolean('is_test')->default(false);
             $table->boolean('can_execute')->default(false);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -158,47 +159,57 @@ class StudentController extends Controller
         }
     }
 
+
+
     /**
-     * Remove a student to list of teacher's students, by ajax request
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response 
+     * Shows the confirmation page for deletion
+     * 
+     * @param int $id Course Id
+     * @return \Illuminate\Http\Response
      */
-    public function teacherDelete(Request $request){
-        
-        if($request->post('student') ) {
-            //check teacher has room in subscription
-            $teacher = Teacher::find(Auth::id());
-            
-            //find student to add
-            $studentId = $request->post('student');
-            
-            $student = Student::firstWhere('id', $studentId);
-            //dd($student);
-            if(empty($student)){
-                return redirect( route('student_teacherIndex')) 
-                ->with('flash_modal', 'Could not find the student to remove.');
-            }
+    public function teacherConfirmDelete($id){
+        $student = Student::find($id);
+        if(empty($student)){
+            return redirect(route('student_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+        $this->authorize('delete', $student);
+        $message = "<p>You have chosen to remove the following student: <strong>".$student->firstname." ".$student->lastname."</strong></p>";
+        $message .= "<p>Please be aware that this will remove all associated data, progress, assignment attempts, marks, etc.</p>";
+        $message .= "<p>Sure you want to remove ?</p>";
+        return view('teacher.confirmDelete', [
+            'route'=> route('student_teacherDelete', $id),
+            'message'=>$message,
+            'backRoute'=> route('student_teacherShow', $id),
+            'resource'=>'student'
+        ]);
+    }
 
-            $this->authorize('teacherSoftDelete', $student);
+    /**
+     * Soft Deleted the student
+     * 
+     * @param int $id Course Id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherDelete($id){
+        $student = Student::find($id);
+        if(empty($student)){
+            return redirect(route('student_teacherIndex'))->with('flash_modal', "Sorry, we were unable to handle your request.");
+        }
+        $teacher = Teacher::find(Auth::id());
 
-            //delete enrolments for this student and teacher
-            $enrolments = DB::table('enrolments')
-                ->where('student_id', $student->id)
-                ->whereIn('course_id', $teacher->courses->pluck('id'))
-                ->update(array('deleted_at' => DB::raw('NOW()')));
-            
-            $teacher->students()->detach($studentId);
+        $this->authorize('delete', $student);        
+         //delete enrolments for this student and teacher
+         $enrolments = DB::table('enrolments')
+         ->where('student_id', $student->id)
+         ->whereIn('course_id', $teacher->courses->pluck('id'))
+         ->update(array('deleted_at' => DB::raw('NOW()')));
 
-            if($teacher->students->contains($student)){
-                return redirect( route('student_teacherIndex')) 
-                    ->with('flash_modal', 'Could not remove the student from your list.');
-            } else {
-                return redirect( route('student_teacherIndex'))
-                    ->with('success', 'Student Successfully Removed');;
-            }
+        $teacher->students()->detach($student->id);
 
-           
+        if (!$teacher->students->contains($student)){
+            return redirect(route('student_teacherIndex'))->with('success', 'Student Removed');
+        } else {
+            return redirect(route('student_teacherShow', $id))->with('error', 'Student Could not be Removed');
         }
     }
 }
