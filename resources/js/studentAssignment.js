@@ -10,9 +10,19 @@ let scriptEditor = document.getElementById('scriptEditor');
 let editor;
 let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
 let hiddenScript = document.getElementById("script");
+let hiddenConsole = document.getElementById("hiddenConsole");
 let myConsole = document.getElementById('console');
 let codeStatus = document.getElementById('codeStatus');
 let testCode = null;
+let judge0Codes = {
+    python:71,
+    php:68,
+    javascript:63,
+    java:62,
+    html:42,
+};
+let btnRun = document.getElementById('btRun');
+
 // If we have an editor element
 if(scriptEditor){
     // pass options to ace.edit
@@ -32,12 +42,12 @@ if(scriptEditor){
         });
 
         document.getElementById("newSubmission").onsubmit = function(evt) {
-                hiddenScript.value = editor.getValue();        
+            hiddenScript.value = editor.getValue();  
         }
 
         //set up judge0
         document.getElementById('btClearConsole').addEventListener('click', function(){
-            myConsole.innerText = '';
+            myConsole.innerHTML = '<li></li>';
         })
 
         //load in testScript
@@ -49,59 +59,77 @@ if(scriptEditor){
             "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
             "x-rapidapi-key": ""+process.env.MIX_JUDGE0_SECRET
         }
-        document.getElementById('btRun').addEventListener('click', function(){
+        if(btnRun){
+            //check language is valid for judge0
+            if (Object.keys(judge0Codes).indexOf(lang)==-1){
+                //todo determine what to do
+            } else {
 
-            this.innerText = 'loading..';
-            let languageId = 71;//python
-            let inputCode = editor.getValue();
-            let options = {
-                "method": "POST",
-                "headers": headers,
-                "body": JSON.stringify({
-                    source_code: (new CodeSubmission(inputCode,testCode)).getCodeSubmission(),
-                    language_id: languageId,
-                    number_of_runs: "1",
-                    stdin:  btoa(unescape(encodeURIComponent("Judge0"))),
-                    cpu_time_limit: "2",
-                    cpu_extra_time: "0.5",
-                    wall_time_limit: "5",
-                    memory_limit: "128000",
-                    stack_limit: "64000",
-                    max_processes_and_or_threads: "60",
-                    enable_per_process_and_thread_time_limit: false,
-                    enable_per_process_and_thread_memory_limit: false,
-                    max_file_size: "1024",	
-                    expected_output:btoa(unescape(encodeURIComponent(null)))
-                })
-            };
-            console.log('OPTIONS: ',options);
-            console.log('editor: ',editor);
-            console.log('INPUT CODE: ',inputCode);
-        
-            sendSubmission(options)
-                .then(token => {
-                    console.log(token);
-                    return getSubmissionResponse(token);
-                })
-                .then( response => {
-                    console.log(response);
-                    let li = document.createElement('li');
-                    if (response.status_id == 4){
-                        //wrong answer
-                        li.innerText = response.stdout;
-                        codeStatus.innerText = 'Failed';
-                    } else if (response.status_id == 11){
-                        //error
-                        li.innerText = response.stderr;
-                        codeStatus.innerText = 'Error';
-                    } else {
-                        li.innerText = response.stdout;
-                        codeStatus.innerText = 'Pass';
+                btnRun.addEventListener('click', function(){
+                    
+                    console.log(editor.getValue());
+
+                    this.innerText = 'loading..';
+                    let languageId = judge0Codes[lang];//python
+                    let inputCode = editor.getValue();
+                    if(inputCode==null || inputCode==''){
+                        this.innerText = 'Run';
+                        return;
                     }
-                    myConsole.appendChild(li);
-                    this.innerText = 'Run';
-                })
-        })
+                    let options = {
+                        "method": "POST",
+                        "headers": headers,
+                        "body": JSON.stringify({
+                            source_code: (new CodeSubmission(inputCode,testCode)).getCodeSubmission(),
+                            language_id: languageId,
+                            number_of_runs: "1",
+                            stdin:  btoa(unescape(encodeURIComponent("Judge0"))),
+                            cpu_time_limit: "2",
+                            cpu_extra_time: "0.5",
+                            wall_time_limit: "5",
+                            memory_limit: "128000",
+                            stack_limit: "64000",
+                            max_processes_and_or_threads: "60",
+                            enable_per_process_and_thread_time_limit: false,
+                            enable_per_process_and_thread_memory_limit: false,
+                            max_file_size: "1024",	
+                            expected_output:btoa(unescape(encodeURIComponent(null)))
+                        })
+                    };
+            
+                    sendSubmission(options)
+                    .then(token => {
+                        console.log(token);
+                        return getSubmissionResponse(token);
+                    })
+                    .then( response => {
+                        console.log(response);
+                        let li = document.createElement('li');
+                        if (response.status_id == 4){
+                            //wrong answer
+                            li.innerText = response.stdout;
+                            codeStatus.innerText = 'Failed';
+                        } else if (response.status_id == 11){
+                            //error
+                            li.innerText = response.stderr;
+                            codeStatus.innerText = 'Error';
+                        } else {
+                            li.innerText = response.stdout;
+                            codeStatus.innerText = 'Pass';
+                        }
+                        myConsole.appendChild(li);
+                        this.innerText = 'Run';
+                    })
+                });
+
+                //save script content and console content on form submission
+                document.getElementById("newSubmission").onsubmit = function(evt) {
+                    hiddenScript.value = editor.getValue();
+                    hiddenConsole.value = myConsole.innerText;
+                    
+                }
+            }
+        }
     }
 }
 

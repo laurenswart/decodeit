@@ -827,10 +827,11 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	padding-right: 5px;
 }
 #console{
-	min-height: 200px;
+	height: 250px;
     background-color: var(--color-black);
 	justify-content: flex-start;
 	align-items: flex-start;
+	overflow-y: scroll;
 }
 #console ul{
 	padding-left: 0;;

@@ -62,48 +62,49 @@
 		</div>
 		@endif
 	</section>
+	@if(count($submissions)>0)
 	<section>
 		<h2 class="light-card block-title layer-2">Previous Submissions</h2>
-		<div class="">
-			
-		</div>
-
 		<div class="accordion accordion-flush" id="accordion">
+			@foreach($submissions as $id => $submission)
 			<div class="accordion-item background">
-				<h3 class="accordion-header row zoom " id="headingOne">
-				<span class="accordion-button listElement-h light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne" aria-expanded="false">
-					<span class="listElementTitle palette-medium col-12 col-md-4">10:05 10/12/2021</span>
+				<h3 class="accordion-header row zoom " id="heading{{$id}}">
+				<span class="accordion-button listElement-h light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$id}}" aria-controls="collapse{{$id}}" aria-expanded="false">
+					<span class="listElementTitle palette-medium col-12 col-md-4">{{ date('H:i:s d/m/Y', $submission->created_at->timestamp) }}</span>
 					<span class="listElementContent col background">
-						<span class=""><i class="fas fa-inbox-in greyed"></i>Has Feedback</span>
+						<span class="">
+							@if(!empty($submission->feedback))
+								<i class="fas fa-inbox-in greyed"></i>Has Feedback
+							@else	
+								<i class="fas fa-hand-paper greyed"></i>Waiting on Feedback
+							@endif
+						</span>
 					</span>
 				</span>
 				</h3>
-				<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
-				<div class="accordion-body">
-					<strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-				</div>
-				</div>
-			</div>
-			<div class="accordion-item background">
-				<h3 class="accordion-header  row zoom " id="headingTwo">
-				<span class="accordion-button listElement-h light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-controls="collapseTwo"  aria-expanded="false">
-					<span class="listElementTitle palette-medium col-12 col-md-4">11:15 10/12/2021</span>
-					<span class="listElementContent col background">
-						<span class=""><i class="fas fa-hand-paper greyed"></i>Waiting on Feedback</span>
-					</span>
-				</span>
-				</h3>
-				<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
-				<div class="accordion-body">
-					<strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-				</div>
+				<div id="collapse{{$id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$id}}" data-bs-parent="#accordion">
+					<div class="accordion-body">
+					@if($submission->feedback)
+						<h4>Feedback</h4>
+						<p>{{ $submission->feedback}}</p>
+					@endif
+					<h4>Code</h4>
+					<div>
+						{{ $submission->content }}
+					</div>
+						
+					</div>
 				</div>
 			</div>
+			@endforeach
 		</div>
-
+		
 	</section>
+	@endif
 
-	<form method="post" action="#">
+
+	@if($assignment->nb_submissions > count($submissions) && !$studentAssignment->to_mark)
+	<form method="post" action="{{ route('submission_studentStore', $assignment->id) }}" id="newSubmission">
 	<section id="submission">
 		
 		@csrf
@@ -112,40 +113,51 @@
 		<div class="form-section layer-2">
 			<h3 class="title-3">Code</h3>
 			<input name="script" type="text" hidden id="script">
+			<input name="console" type="text" hidden id="hiddenConsole">
 			<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
 			<div  class="row my-4">
 				<div class="col-12 col-md-8">
-					<h3 class="title-3">Console</h3>
-					<button type="button" id="btClearConsole">Clear Console</button>
-					<p id="codeStatus"></p>
 					<div>
-						<ul  id="console">
+						<div class="d-flex justify-content-between">
+							<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
+							<p id="codeStatus"></p>
+						</div>
+						<ul  id="console" class="my-0">
 							<li></li>
 						</ul>
 					</div>
 					
 				</div>
-				<div class="btn-box col-12 col-md-4 justify-content-between">
-					<div class="d-flex">
-						<button class="btn-left myButton btn-highlight col" id="btRun" type="button">Run</button>
-					</div>
-					<div class="d-flex flex-col">
-						<button class="btn-left myButton" id="newSubmission">Submit</button>
-						<button class="btn-left myButton">Ask For Help</button>
-					</div>
+				<div class="col-12 col-md-4 d-flex flex-col justify-content-between">
+					<button class="btn-left myButton" id="btRun" type="button">Run</button>
+					<button class="btn-left myButton" id="newSubmission" type="submit">Submit</button>
 				</div>
 			</div>
+
+			@if($errors->any())
+		<div class="form-section errors alert alert-danger">
+			@foreach ($errors->all() as $error)
+				<p>{{ $error }}</p>
+			@endforeach
 		</div>
-	</section>
-	</form>
+		@endif
+		</section>
+		</form>
+		@endif
+		</div>
+
+		
 
 	<div class="d-flex justify-content-center btn-box">
 		<button class="btn-left myButton btn-highlight">Done this assignment</button>
 	</div>
+	
+
 </div>
 @endsection
 
 @section('scripts')
 	<script src="{{ asset('js/student/studentAssignment.js') }}"></script>
+
 @endsection
 

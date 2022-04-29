@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\AssignmentNote;
 use App\Models\Chapter;
+use App\Models\Submission;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +22,16 @@ class AssignmentController extends Controller
      */
     public function studentShow($id){
         $assignment = Assignment::find($id);
-
         $this->authorize('studentView', $assignment);
+        
+        $studentAssignment = Assignment::find($id)->studentAssignmentByStudent(Auth::id());
+        $submissions = $studentAssignment ? $studentAssignment->submissions : [];
+        
     
         return view('student.assignment', [
             'assignment'=>$assignment,
+            'submissions'=>$submissions,
+            'studentAssignment'=>$studentAssignment
         ]);
     }
 

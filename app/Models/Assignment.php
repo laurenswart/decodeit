@@ -48,6 +48,10 @@ class Assignment extends Model
         return $this->hasMany(AssignmentNote::class, 'assignment_id', 'id');
     }
 
+    public function studentAssignments(){
+        return $this->hasMany(StudentAssignment::class, 'assignment_id', 'id');
+    }
+
     public function chapters(){
         return $this->belongsToMany(Chapter::class, 'assignment_chapter', 'assignment_id', 'chapter_id', 'id', 'id');
     }
@@ -55,6 +59,13 @@ class Assignment extends Model
     public function skills(){
         return $this->belongsToMany(Skill::class, 'assignment_skills', 'assignment_id', 'skill_id', 'id', 'id');
     }
+
+    
+    public function studentAssignmentByStudent($studentId){
+        $enrolment = Enrolment::where('course_id', $this->course_id)->where('student_id', $studentId)->first();
+        return StudentAssignment::where('assignment_id', $this->id)->where('enrolment_id', $enrolment->id)->first();
+    }
+
 
     /**
      * returns not done, incomplete, done, marked 

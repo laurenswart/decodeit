@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubmissionController;
 use App\Models\Chapter;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +26,15 @@ Route::get('chapters/{id}', ([ChapterController::class, 'studentShow']))
     ->where('id', '[0-9]+')
     ->name('chapter_studentShow');
 Route::post('chapters/{id}', ([ChapterController::class, 'studentRead']))
+    ->where('id', '[0-9]+')
     ->name('chapter_studentRead');
 
 //ASSIGNMENT
 Route::get('assignments/{id}', ([AssignmentController::class, 'studentShow']))
     ->where('id', '[0-9]+')
     ->name('assignment_studentShow');
+
+//SUBMISSION
+Route::post('assignments/{id}', ([SubmissionController::class, 'studentStore']))
+    ->where('id', '[0-9]+')
+    ->name('submission_studentStore');
