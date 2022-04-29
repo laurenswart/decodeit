@@ -20,7 +20,8 @@ class Submission extends Model
         'student_assignment_id',
         'content',
         'status',
-        'feedback'
+        'feedback',
+        'console'
     ];
 
     public $timestamps = true;

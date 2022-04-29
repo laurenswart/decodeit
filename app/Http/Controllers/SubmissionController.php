@@ -25,6 +25,7 @@ class SubmissionController extends Controller
         //validate form content
         $rules = [
             'script' => 'required|max:65535',
+            'console' => 'max:65535',
         ];
         $validated = $request->validate($rules);
         //todo validate weight of script
@@ -51,7 +52,8 @@ class SubmissionController extends Controller
         //save submission
         Submission::create([
             'student_assignment_id'=>$studentAssignment->id, 
-            'content'=>$validated['script']
+            'content'=>$validated['script'],
+            'console'=>$validated['console']
         ]);
 
         return redirect(route('assignment_studentShow', $id));

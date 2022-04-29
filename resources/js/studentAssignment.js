@@ -125,8 +125,7 @@ if(scriptEditor){
                 //save script content and console content on form submission
                 document.getElementById("newSubmission").onsubmit = function(evt) {
                     hiddenScript.value = editor.getValue();
-                    hiddenConsole.value = myConsole.innerText;
-                    
+                    hiddenConsole.value = myConsole.lastChild.innerText;
                 }
             }
         }
