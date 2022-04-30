@@ -24,6 +24,10 @@
 					</span>
 					<span id="details" class="col">
 						<span>
+							<span class="label">Status</span>
+							<span>{{ ucwords($assignment->statusForAuth()) }}</span>
+						</span>
+						<span>
 							<span class="label">Type</span>
 							<span>{{ $assignment->is_test ? 'Test' : 'Exercise'}}</span>
 						</span>
@@ -99,7 +103,7 @@
 	@endif
 
 
-	@if($assignment->nb_submissions > count($submissions) && !$studentAssignment->to_mark)
+	@if($assignment->nb_submissions > count($submissions) && !$studentAssignment->to_mark && ($assignment->start_time <= now() && $assignment->end_time >= now()))
 	<form method="post" action="{{ route('submission_studentStore', $assignment->id) }}" id="newSubmission">
 	<section id="submission">
 		
@@ -145,7 +149,7 @@
 		</div>
 
 		
-	@if(!$studentAssignment->to_mark)
+	@if(!$studentAssignment->to_mark && ($assignment->start_time <= now() && $assignment->end_time >= now()))
 	<div class="btn-box centered">
 		<a href="{{ route('studentAssignment_studentConfirmDone', $assignment->id) }}" class="myButton btn-highlight">Done this assignment</a>		
 	</div>

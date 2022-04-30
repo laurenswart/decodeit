@@ -47,7 +47,7 @@ class SubmissionPolicy
         $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
         if(empty($enrolment)) return false;
         $studentAssignment = StudentAssignment::where('assignment_id', $assignment->id)->where('enrolment_id', $enrolment->id)->first();
-        return !$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions ;
+        return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) && ($assignment->start_time <= now() && $assignment->end_time >= now());
     }
 
     /**

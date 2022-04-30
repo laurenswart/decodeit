@@ -13,6 +13,19 @@ class StudentAssignment extends Model
 
     public $timestamps = false;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'enrolment_id',
+        'assignment_id',
+        'to_mark',
+        'mark',
+        'marked_at'
+    ];
+
     public function assignment(){
         return $this->belongsTo(Assignment::class, 'assignment_id', 'id');
     }

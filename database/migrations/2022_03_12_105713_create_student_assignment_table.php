@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('enrolment_id');
             $table->foreignId('assignment_id');
             $table->boolean('to_mark')->default(false);
-            $table->boolean('help_needed')->default(false);
             $table->integer('mark')->nullable()->default(null);
             $table->timestamp('marked_at')->nullable()->default(null);
             

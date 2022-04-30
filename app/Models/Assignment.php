@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Assignment extends Model
@@ -90,23 +91,16 @@ class Assignment extends Model
      * returns not done, incomplete, done, marked 
      */
     public function statusForAuth(){
-        $enrolmentId = $this->course->enrolmentForAuth();
+        $studentAssignment = $this->studentAssignmentByStudent(Auth::id());
 
-        $attempt = DB::table('student_assignment')
-            ->where('enrolment_id', $enrolmentId)
-            ->where('assignment_id', $this->id)
-            ->first();
-
-        if (empty($attempt)){
-            return 'to do';
-        }
-        if($attempt->to_mark === null){
-            return 'incomplete';
-        }
-        if($attempt->mark === null){
+        if($studentAssignment->mark!=null){
+            return 'marked';
+        }else if($studentAssignment->to_mark){
             return 'done';
-        }
-        return 'marked';
-
+        } else if(count($studentAssignment->subsmissions) === 0){
+            return 'to do';
+        } 
+        return 'undergoing';
+        
     }
 }
