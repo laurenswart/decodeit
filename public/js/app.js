@@ -27482,19 +27482,22 @@ var testScriptEditor = document.getElementById('testScriptEditor');
 var testLanguage = document.getElementById('language');
 var executableCheck = document.getElementById('executable');
 var editor;
-var acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
+var acceptedModes = ['javascript', 'python', 'java', 'php'];
 var testScriptInfo = document.getElementById('testScriptInfo');
 var hiddenScript = document.getElementById("script"); // If we have an editor element
 
 if (testScriptEditor) {
   var changeMode = function changeMode() {
-    var newMode = testLanguage.value; //console.log(newMode);
+    var newMode = testLanguage.value;
+    var langIsValid = acceptedModes.indexOf(newMode) != -1; //console.log(newMode);
 
-    if (acceptedModes.indexOf(newMode) != -1) {
+    if (langIsValid) {
       //change the mode
       editor.session.setMode("ace/mode/" + newMode);
     }
 
+    executableCheck.disabled = langIsValid ? false : true;
+    executableCheck.checked = langIsValid ? executableCheck.checked : false;
     adaptEditorDisplay();
   };
 

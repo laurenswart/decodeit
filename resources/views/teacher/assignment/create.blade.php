@@ -58,10 +58,6 @@
 					<input type="checkbox" name="test" id="test" {{ old('test') ? 'checked' : '' }}>
 				</div>
 				<div class="label-value mt-3">
-					<label for="size">Submission Max. MB Size</label>
-					<input type="number" name="size" id="size" value="{{ old('size') ?? '' }}">
-				</div>
-				<div class="label-value mt-3">
 					<label for="language">Language</label>
 					<select name="language" id="language">
 						<option value="" {{ old('language') === '' ? 'selected' : '' }}>None</option>
@@ -75,6 +71,11 @@
 						<option value="xml" {{ old('language') === 'xml' ? 'selected' : '' }}>XML</option>
 					</select>
 				</div>
+				<div class="label-value mt-3">
+					<label for="executable">Allow Code Execution and Provide Console</label>
+					<input type="checkbox" name="executable" id="executable" {{ old('executable') ? 'checked' : '' }}>
+				</div>
+				<p>To enable code execution, select one of the following languages: <strong>Java</strong>,<strong> Javascript</strong>,<strong> PHP</strong>,<strong> Python</strong></p> 
 			</div>
 		</div>
 		<!--SKILLS-->
@@ -93,15 +94,10 @@
 		@endif
 		<!--SCRIPT-->
 		<div class="form-section layer-2">
-			<div class="h-end-link">
-				<h3 class="title-3">Script For Testing</h3>
-				<span>
-					<input type="checkbox" name="executable" id="executable" {{ old('executable') ? 'checked' : '' }}>
-					<label for="executable" class="ml-3">Provide Editor and Console</label>
-				</span>
-			</div>
+			<h3 class="title-3">Script For Testing</h3>
 			<div class="row justify-content-between">
-				<p id="testScriptInfo">Before writing a test script, you must select a valid language and enable the editor and console</p>
+				<p id="testScriptInfo">In order to write a code containing tests, you must enable script execution and select one of the following languages:
+				<strong>Java</strong>,<strong> Javascript</strong>,<strong> PHP</strong>,<strong> Python</strong></p>
 				<input name="script" type="text" hidden id="script" value="{{ old('script') ?? '' }}">
 				<div id="testScriptEditor"></div>
 			</div>

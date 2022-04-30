@@ -103,7 +103,7 @@ class AssignmentController extends Controller
             'weight' => 'required|max:100',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
-            'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
+            //'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
             
             'script' => 'max:65535',
             'executable' => 'required_with:script'
@@ -111,7 +111,7 @@ class AssignmentController extends Controller
         if($request->post('executable')== 'on' || !empty($request->post('script'))){
             $rules['language'] = [
                 'required',
-                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+                Rule::in(['javascript', 'python', 'java', 'php']),
             ];
         } else {
             $rules['language'] = [
@@ -145,7 +145,7 @@ class AssignmentController extends Controller
                 'end_time'=>$validated['end'],
                 'is_test'=>$request->post('test')==='on' ? 1 : 0,
                 'can_execute'=>$request->post('executable')==='on' ? 1 : 0,
-                'submission_size'=>$validated['size'] ?? $teacher->currentSubscriptionPlan()->max_upload_size,
+                'submission_size'=> $teacher->currentSubscriptionPlan()->max_upload_size,
                 'language'=>$validated['language'],
             ]);
 
@@ -200,7 +200,7 @@ class AssignmentController extends Controller
             'weight' => 'required|max:100',
             'start' => 'required|date',
             'end' => 'required|date|after:start',
-            'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
+            //'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
             
             'script' => 'max:65535',
             'executable' => 'required_with:script'
@@ -208,7 +208,7 @@ class AssignmentController extends Controller
         if($request->post('executable')== 'on' || !empty($request->post('script'))){
             $rules['language'] = [
                 'required',
-                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+                Rule::in(['javascript', 'python', 'java', 'php']),
             ];
         } else {
             $rules['language'] = [
@@ -241,7 +241,7 @@ class AssignmentController extends Controller
             $assignment->end_time = date('Y-m-d H:i:s', strtotime($validated['end']));
             $assignment->is_test = $request->post('test')==='on' ? 1 : 0;
             $assignment->can_execute = $request->post('executable')==='on' && $validated['language'] ? 1 : 0;
-            $assignment->submission_size = $validated['size'] && $validated['size']!=0 ? $validated['size'] :  $teacher->currentSubscriptionPlan()->max_upload_size;
+            $assignment->submission_size = $teacher->currentSubscriptionPlan()->max_upload_size;
             $assignment->language = $validated['language'];
 
             $assignment->save();
@@ -251,7 +251,8 @@ class AssignmentController extends Controller
 
 
         } catch (\Illuminate\Database\QueryException $exception) {
-            return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your changes could not be saved");    
+            dd($exception);
+            return redirect( route('chapter_teacherShow', $assignment->chapters[0]->id) )->with('flash_modal', "Something went wrong and we're sorry to say your changes could not be saved");    
         }
         return view('teacher.assignment.show', [
             'assignment'=>$assignment,

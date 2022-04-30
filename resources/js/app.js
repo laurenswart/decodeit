@@ -9,7 +9,7 @@ let testScriptEditor = document.getElementById('testScriptEditor');
 let testLanguage = document.getElementById('language');
 let executableCheck = document.getElementById('executable');
 let editor;
-let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
+let acceptedModes = ['javascript', 'python', 'java', 'php'];
 let testScriptInfo = document.getElementById('testScriptInfo');
 let hiddenScript = document.getElementById("script");
 
@@ -38,11 +38,16 @@ if(testScriptEditor){
 
     function changeMode(){
         let newMode = testLanguage.value;
+        let langIsValid = acceptedModes.indexOf(newMode)!=-1;
         //console.log(newMode);
-        if(acceptedModes.indexOf(newMode)!=-1){
+        if(langIsValid){
             //change the mode
             editor.session.setMode("ace/mode/" + newMode);
         }
+        
+        executableCheck.disabled = langIsValid ? false: true ;
+        executableCheck.checked = langIsValid ? executableCheck.checked: false ;
+
         adaptEditorDisplay();
     }
     changeMode();//for page load

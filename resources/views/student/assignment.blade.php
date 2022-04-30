@@ -218,8 +218,10 @@
 						let p = document.createElement('p');
 						p.innerText = questionContent;
 						questionDiv.parentNode.insertBefore(p, questionDiv);
-						questionDiv.remove();
+						
 						//change h4 content
+						questionDiv.parentElement.querySelector('h4').innerText = 'Note Attached';
+						questionDiv.remove();
 						createFlashPopUp('Note Successfully Added');
 					}
 				} else {

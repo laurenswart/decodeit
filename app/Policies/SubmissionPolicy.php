@@ -33,7 +33,7 @@ class SubmissionPolicy
     public function studentAddQuestion(User $user, Submission $submission)
     {
         //submission belongs to student, and student assignment has not been marked yet
-        return $submission->studentAssignment->enrolment->student_id == $user->id &&  $submission->studentAssignment->mark == null;
+        return $submission->studentAssignment->enrolment->student_id == $user->id &&  $submission->studentAssignment->mark == null && $submission->question == null;
     }
 
     /**
