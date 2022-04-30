@@ -30,9 +30,10 @@ class SubmissionPolicy
      * @param  \App\Models\Submission  $submission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function studentView(User $user, Submission $submission)
+    public function studentAddQuestion(User $user, Submission $submission)
     {
-        
+        //submission belongs to student, and student assignment has not been marked yet
+        return $submission->studentAssignment->enrolment->student_id == $user->id &&  $submission->studentAssignment->mark == null;
     }
 
     /**

@@ -48,5 +48,9 @@ Route::post('studentAssignment/{id}/done', ([StudentAssignmentController::class,
 Route::post('assignments/{id}', ([SubmissionController::class, 'studentStore']))
     ->where('id', '[0-9]+')
     ->name('submission_studentStore');
+Route::post('submission/{id}/addQuestion', ([SubmissionController::class, 'studentAddQuestion']))
+    ->where('id', '[0-9]+')
+    ->name('submission_studentAddQuestion');
+
 
     

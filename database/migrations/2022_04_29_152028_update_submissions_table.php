@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('submissions', function (Blueprint $table) {
             $table->text('console')->nullable();
+            $table->text('question')->nullable();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropColumns('submissions', 'console');
+        Schema::dropColumns('submissions', ['console','question']);
     }
 };

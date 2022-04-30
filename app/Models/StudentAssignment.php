@@ -34,5 +34,9 @@ class StudentAssignment extends Model
         return $this->hasMany(Submission::class, 'student_assignment_id', 'id');
     }
 
+    public function enrolment(){
+        return $this->belongsTo(Enrolment::class, 'enrolment_id', 'id');
+    }
+
     
 }

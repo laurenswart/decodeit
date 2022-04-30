@@ -84,14 +84,29 @@
 				</h3>
 				<div id="collapse{{$id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$id}}" data-bs-parent="#accordion">
 					<div class="accordion-body layer-2">
-					@if($submission->feedback)
-						<h4>Feedback</h4>
-						<p>{{ $submission->feedback}}</p>
-					@endif
-					<h4>Code</h4>
-					<div>
-						{{ $submission->content }}
-					</div>
+						<div class="row">
+							<div class="col">
+								<h4>Feedback</h4>
+								<p>{{ $submission->feedback ?? '-'}}</p>
+							</div>
+							<div class="col-12 col-xl-5 ">
+								@if(!$submission->question && $studentAssignment->mark == null)
+								<h4>Attach a Note</h4>
+								<div class="mt-4 mx-6 d-flex flex-col submissionQuestion">
+									<textarea id="question" rows="3" cols="50" ></textarea>
+									<button type="button" onclick="addQuestion(this)" data-submissionId={{$submission->id}} class="myButton align-self-end mt-4" id="btAddQuestion">Add Note or Question</button>
+								</div>
+								@else 
+									<h4>Attached Note</h4>
+									<p>{{$submission->question}}</p>
+								@endif
+							</div>
+						</div>
+						
+						<h4>Code</h4>
+						<div>
+							{{ $submission->content }}
+						</div>
 						
 					</div>
 				</div>
@@ -161,6 +176,68 @@
 
 @section('scripts')
 	<script src="{{ asset('js/student/studentAssignment.js') }}"></script>
+	<script>
+		function createFlashPopUp(msg, error = false){
+    let div = document.createElement('div');
+    div.classList.add('alert', 'flash-popup');
+    if(error){
+        div.classList.add('alert-danger');
+    } else {
+        div.classList.add('alert-success');
+    }
+    div.innerText = msg;
+    document.body.appendChild(div);
+}
 
+		let btnAddQuestion = document.getElementById('btnAddQuestion');
+		let question = document.getElementById('question');
+
+		function addQuestion(button){
+			let questionDiv = button.closest('.submissionQuestion');
+			let questionContent = questionDiv.querySelector('textarea').value;
+			let submissionId = button.dataset.submissionid;
+			//if question empty do nothing
+			if(questionContent=='') {
+				createFlashPopUp('Please enter a question', true);
+				return;
+			}
+			
+			//send ajax request
+			console.log(questionContent);
+			console.log(submissionId);
+			let xhr = new XMLHttpRequest();
+
+			xhr.onload = function() { //Fonction de rappel
+				console.log(this);
+				if(this.status === 200) {
+					let data = this.responseText;
+					data = JSON.parse(data);
+					console.log(data);
+					if(data.success){
+						//remove textareaand display question
+						let p = document.createElement('p');
+						p.innerText = questionContent;
+						questionDiv.parentNode.insertBefore(p, questionDiv);
+						questionDiv.remove();
+						//change h4 content
+						createFlashPopUp('Note Successfully Added');
+					}
+				} else {
+					createFlashPopUp('Oops, Something Went Wrong', true);
+				}
+				
+			};
+			const data = JSON.stringify({
+				_token: "<?= csrf_token() ?>",
+				question: questionContent,
+			});
+
+			xhr.open('POST', "/student/submission/"+submissionId+"/addQuestion");
+			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			xhr.setRequestHeader("Content-Type", "application/json");
+			xhr.send(data);
+			// end of ajax call
+		};
+	</script>
 @endsection
 

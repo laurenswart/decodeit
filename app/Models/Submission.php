@@ -25,12 +25,13 @@ class Submission extends Model
         'console',
         'created_at',
         'updated_at',
+        'question'
     ];
 
     public $timestamps = true;
 
     public function studentAssignment(){
-        return $this->belongsTo('student_assignment', 'student_assignment_id', 'id');
+        return $this->belongsTo(StudentAssignment::class, 'student_assignment_id', 'id');
     }
 
     public function getCreatedAtAttribute($date)

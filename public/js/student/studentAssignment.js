@@ -50097,10 +50097,7 @@ if (scriptEditor) {
     });
 
     document.getElementById("newSubmission").onsubmit = function (evt) {
-      evt.preventDefault();
       hiddenScript.value = editor.getValue();
-      console.log(editor.getValue());
-      console.log(editor.getLines());
     }; //set up judge0
 
 
@@ -50181,7 +50178,7 @@ if (scriptEditor) {
 
         document.getElementById("newSubmission").onsubmit = function (evt) {
           hiddenScript.value = editor.getValue();
-          hiddenConsole.value = myConsole.innerText;
+          hiddenConsole.value = myConsole.lastChild.innerText;
         };
       }
     }

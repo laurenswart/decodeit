@@ -63,4 +63,53 @@ class SubmissionController extends Controller
         dd($request->post());
 
     }
+
+    /**
+     * 
+     * @param int $id Submission Id 
+     */
+    public function studentAddQuestion(Request $request, int $id){
+        if($request->ajax() &&  $request->post('question')) {
+            //validate question
+            if(empty($request->post('question'))){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'No question received'
+                ], 400);
+            }
+
+            //find submission
+            $student = Student::find($request->user()->id);
+            if(empty($student)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'User not found.'
+                ], 500);
+            }
+            $submission = Submission::find($id);
+            if ($submission === null || $request->user()->cannot('studentAddQuestion',$submission)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'Unauthorized action'
+                ], 403);
+            }
+
+            //save question
+            $submission->question =  $request->post('question');
+            $submission->save();
+
+            if($submission->wasChanged('question')){
+                return response()->json([
+                    'success' => true,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'Oops, Something went wrong.'
+                ], 500);
+            }
+
+           
+        }
+    }
 }
