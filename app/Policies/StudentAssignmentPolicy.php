@@ -1,0 +1,99 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Assignment;
+use App\Models\StudentAssignment;
+use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\DB;
+
+class StudentAssignmentPolicy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can view any models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewAny(User $user)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can mark the model as done.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Assignment  $assignment
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function studentDone(User $user,  $assignment)
+    {
+        if(empty($assignment)) return false;
+        //check student is enroled in this course
+        $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
+        return !empty($enrolment) ;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function create(User $user)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\StudentAssignment  $studentAssignment
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function update(User $user, StudentAssignment $studentAssignment)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\StudentAssignment  $studentAssignment
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function delete(User $user, StudentAssignment $studentAssignment)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\StudentAssignment  $studentAssignment
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, StudentAssignment $studentAssignment)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\StudentAssignment  $studentAssignment
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, StudentAssignment $studentAssignment)
+    {
+        //
+    }
+}

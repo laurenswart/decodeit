@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -65,6 +66,24 @@ class Assignment extends Model
         $enrolment = Enrolment::where('course_id', $this->course_id)->where('student_id', $studentId)->first();
         return StudentAssignment::where('assignment_id', $this->id)->where('enrolment_id', $enrolment->id)->first();
     }
+
+    public function getStartTimeAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    }
+    public function getEndTimeAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    }
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    }
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
+    }
+
 
 
     /**

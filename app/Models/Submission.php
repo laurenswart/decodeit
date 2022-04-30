@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,12 +22,19 @@ class Submission extends Model
         'content',
         'status',
         'feedback',
-        'console'
+        'console',
+        'created_at',
+        'updated_at',
     ];
 
     public $timestamps = true;
 
     public function studentAssignment(){
         return $this->belongsTo('student_assignment', 'student_assignment_id', 'id');
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
     }
 }

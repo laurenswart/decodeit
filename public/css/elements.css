@@ -591,6 +591,14 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 .btn-box{
 	margin-top: 20px;;
 }
+.btn-box.centered{
+	display: flex;
+	justify-content: center;
+	
+}
+.btn-box.centered button{
+	min-width: 200px;
+}
 
 nav.back-nav{
 	padding-left: 10px;
@@ -649,15 +657,7 @@ a:hover{
     margin-right: 10px;
 }
 
-#submission .btn-box{
-	padding-left:20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-}
-#submission .btn-box button:not(:first-of-type){
-	margin-top:5px;
-}
+
 .container.padder{
 	padding-bottom: 20px;
 	padding-top: 20px;
@@ -845,7 +845,9 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	content:">>";
 } 
 
-
+.accordion-body{
+	border-radius: 0 0 10px 10px;
+}
 
 
 @media (max-width: 768px) {

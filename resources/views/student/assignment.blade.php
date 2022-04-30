@@ -8,9 +8,9 @@
 	</nav>
 	<section id="info">
 		<h2 class="light-card block-title layer-2">{{ $assignment->title }}</h2>
-		<div class="listElement-v light-card row">
+		<div class="listElement-v light-card row no-border">
 			<span class="listElementTitle palette-medium col-12">Assignment Information</span>
-			<span class="listElementContent  layer-1">
+			<span class="listElementContent  layer-2">
 				<span class="row w-100">
 					<span id="description" class="col-sm-6 col-md-8 col-12">
 						<div>
@@ -40,10 +40,6 @@
 							<span>{{ $assignment->end_time }}</span>
 						</span>
 						<span>
-							<span class="label">Submission size MB</span>
-							<span>{{ $assignment->submission_size }}</span>
-						</span>
-						<span>
 							<span class="label">Last Updated</span>
 							<span>{{ $assignment->updated_at ??  $assignment->created_at}}</span>
 						</span>
@@ -70,7 +66,7 @@
 			<div class="accordion-item background">
 				<h3 class="accordion-header row zoom " id="heading{{$id}}">
 				<span class="accordion-button listElement-h light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$id}}" aria-controls="collapse{{$id}}" aria-expanded="false">
-					<span class="listElementTitle palette-medium col-12 col-md-4">{{ date('H:i:s d/m/Y', $submission->created_at->timestamp) }}</span>
+					<span class="listElementTitle palette-medium col-12 col-md-4">{{ $submission->created_at }}</span>
 					<span class="listElementContent col background">
 						<span class="">
 							@if(!empty($submission->feedback))
@@ -83,7 +79,7 @@
 				</span>
 				</h3>
 				<div id="collapse{{$id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$id}}" data-bs-parent="#accordion">
-					<div class="accordion-body">
+					<div class="accordion-body layer-2">
 					@if($submission->feedback)
 						<h4>Feedback</h4>
 						<p>{{ $submission->feedback}}</p>
@@ -115,23 +111,25 @@
 			<input name="script" type="text" hidden id="script">
 			<input name="console" type="text" hidden id="hiddenConsole">
 			<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
+			<div class="btn-box centered">
+				<button class="myButton" id="btRun" type="button">Run</button>
+			</div>
+			
 			<div  class="row my-4">
-				<div class="col-12 col-md-8">
-					<div>
-						<div class="d-flex justify-content-between">
-							<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
-							<p id="codeStatus"></p>
-						</div>
-						<ul  id="console" class="my-0">
-							<li></li>
-						</ul>
+				<div>
+					<div class="d-flex justify-content-between">
+						<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
+						<p id="codeStatus"></p>
 					</div>
-					
+					<ul  id="console" class="my-0">
+						<li></li>
+					</ul>
 				</div>
-				<div class="col-12 col-md-4 d-flex flex-col justify-content-between">
-					<button class="btn-left myButton" id="btRun" type="button">Run</button>
-					<button class="btn-left myButton" id="newSubmission" type="submit">Submit</button>
+				<div class="btn-box centered">
+					<button class="myButton" id="newSubmission" type="submit">Submit</button>
 				</div>
+				
+
 			</div>
 
 			@if($errors->any())
@@ -147,10 +145,11 @@
 		</div>
 
 		
-
-	<div class="d-flex justify-content-center btn-box">
-		<button class="btn-left myButton btn-highlight">Done this assignment</button>
+	@if(!$studentAssignment->to_mark)
+	<div class="btn-box centered">
+		<a href="{{ route('studentAssignment_studentConfirmDone', $assignment->id) }}" class="myButton btn-highlight">Done this assignment</a>		
 	</div>
+	@endif
 	
 
 </div>

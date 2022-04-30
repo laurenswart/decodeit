@@ -11,6 +11,8 @@ class StudentAssignment extends Model
 
     public $table="student_assignment";
 
+    public $timestamps = false;
+
     public function assignment(){
         return $this->belongsTo(Assignment::class, 'assignment_id', 'id');
     }
