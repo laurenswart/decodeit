@@ -173,7 +173,7 @@
 		</div>
 
 		
-	@if(($studentAssignment==null || !$studentAssignment->to_mark) && ($assignment->start_time <= now() && $assignment->end_time >= now()))
+	@if(($studentAssignment==null || !$studentAssignment->to_mark) && (date_create_from_format('d/m/Y H:i',$assignment->start_time) < now() && date_create_from_format('d/m/Y H:i',$assignment->end_time) >= now()))
 	<div class="btn-box centered">
 		<a href="{{ route('studentAssignment_studentConfirmDone', $assignment->id) }}" class="myButton btn-highlight">Done this assignment</a>		
 	</div>

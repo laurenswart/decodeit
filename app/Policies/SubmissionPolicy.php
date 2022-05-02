@@ -43,12 +43,13 @@ class SubmissionPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user, $assignment)
-    {
+    {   
+        
         //check student is enroled in this course
         $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
         if(empty($enrolment)) return false;
         $studentAssignment = StudentAssignment::where('assignment_id', $assignment->id)->where('enrolment_id', $enrolment->id)->first();
-        return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) && ($assignment->start_time <= now() && $assignment->end_time >= now());
+        return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) && (date_create_from_format('d/m/Y H:i',$assignment->start_time) < now() && date_create_from_format('d/m/Y H:i',$assignment->end_time) >= now());
     }
 
     /**
