@@ -38,5 +38,9 @@ class StudentAssignment extends Model
         return $this->belongsTo(Enrolment::class, 'enrolment_id', 'id');
     }
 
+    public function canBeMarked(){
+        return $this->to_mark || date_create_from_format('d/m/Y H:i',$this->assignment->end_time) < now() || count($this->submissions)>=$this->assignment->nb_submissions;
+    }
+
     
 }

@@ -87,6 +87,11 @@ Route::delete('assignments/{id}/delete', ([AssignmentController::class, 'teacher
     ->where('id', '[0-9]+')
     ->name('assignment_teacherDelete');
 
+//STUDENT ASSIGNMENTS
+Route::get('studentAssignment/{id}', ([AssignmentController::class, 'teacherShow']))
+    ->where('id', '[0-9]+')
+    ->name('studentAssignment_teacherShow');
+
 //STUDENT
 Route::get('students', ([StudentController::class, 'teacherIndex']))
     ->name('student_teacherIndex');

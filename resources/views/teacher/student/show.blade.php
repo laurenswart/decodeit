@@ -27,7 +27,7 @@
         @if(count($student->coursesForTeacher())===0)
           <p>{{ $student->firstname }} {{ $student->lastname }} is not enrolled in any of your courses</p>
         @else 
-          @foreach($student->coursesForTeacher() as $course)
+         
             <table class="table">
               <thead>
                 <tr>
@@ -37,15 +37,17 @@
                 </tr>
               </thead>
               <tbody>
+              @foreach($student->coursesForTeacher() as $course)
                 <tr>
                   <th scope="row">{{ $course->title}}</th>
                   <td>{{ $course->pivot->created_at ? date('d-m-Y', $course->pivot->created_at->timestamp) : '-'}}</td>
                   <td>{{ $course->pivot->final_mark ?? '-'}}</td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
             
-          @endforeach
+          
         @endif
         </div>
         <a class="myButton align-self-end mb-2">Manage Enrolments</a>
@@ -58,7 +60,8 @@
     @foreach($student->coursesForTeacher() as $course)
     
       <h2 class=" block-title light-card layer-2">{{ $course->title}}</h2>
-      <div class="row form-section layer-2">
+      <div class="form-section layer-2">
+        <div class="row">
         <div class="col-12 col-xl-7">
           <h4>Chapters</h4>
           @if(count($course->chapters)===0)
@@ -76,7 +79,7 @@
             @foreach($course->chapters as $chapter)
                   <tr>
                     <th scope="row">{{ $chapter->title}}</th>
-                    <td>{{ $chapter->isRead($student->id) }}</td>
+                    <td>{{ $chapter->isRead($student->id) ? 'Yes' : '-' }}</td>
                     <td>TODO</td>
                   </tr>
             @endforeach
@@ -93,7 +96,57 @@
             </div>
           @endforeach
         </div>
+        </div>
+        <div>
+        <h4>Assignments</h4>
+          @if(count($course->assignments)===0)
+            <p>No assignments created</p>
+          @else 
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Submissions</th>
+				          <th scope="col">Questions to Answer</th>
+                  <th scope="col">Mark</th>
+				          <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach($course->assignments as $assignment)
+                <tr>
+                   <td >{{ ucfirst($assignment->title) }}</td>
+              @if($assignment->studentAssignmentByStudent($student->id)==null)
+              <td colspan="3">No submissions</td>
+              @else
+               
+                   <td>{{ count($assignment->studentAssignmentByStudent($student->id)->submissions) ?? '-'}}</td>
+				          <td>
+                    @if(count($assignment->studentAssignmentByStudent($student->id)->submissions->whereNull('feedback')->whereNotNull('question')))
+                      <i class="fas fa-exclamation-square"></i>
+                    @else
+                      -
+                    @endif
+                  </td>
+                  <td>
+                  @if($assignment->studentAssignmentByStudent($student->id)->mark) 
+                    {{$assignment->studentAssignmentByStudent($student->id)->mark}} / {{ $assignment->max_mark}}
+                  @elseif($assignment->studentAssignmentByStudent($student->id)->canBeMarked()) 
+                    To do<i class="fas fa-exclamation-square"></i>
+                  @else 
+                    -
+                  @endif</td>
+					      <td><a href="{{ route('studentAssignment_teacherShow', $assignment->studentAssignmentByStudent($student->id)->id) }}"><i class="fas fa-arrow-alt-square-right greyed"></i>Manage</a></td>
+                </tr>
+                @endif
+              
+              @endforeach
+              </tbody>
+            </table>
+            @endif
+        </div>
     </div>
+
     @endforeach
       
 @endsection

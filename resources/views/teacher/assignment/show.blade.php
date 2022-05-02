@@ -94,6 +94,53 @@
 			{!! clean($assignment->test_script) !!}
 		</div>
 		@endif
+
+		<h2 class="light-card block-title layer-2">Student Submissions</h2>
+		<div class="form-section layer-2   mx-2">
+		@if(count($assignment->studentAssignments)==0)
+			
+				<p>No submissions</p>
+			
+		@else	
+			
+			<table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Student</th>
+                  <th scope="col">Submissions</th>
+				  <th scope="col">Questions to Answer</th>
+                  <th scope="col">Mark</th>
+				  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+			  @foreach($assignment->studentAssignments as $studentAssignment)
+                <tr>
+                   <th scope="row">{{ ucfirst($studentAssignment->enrolment->student->firstname) }} {{ ucfirst($studentAssignment->enrolment->student->lastname) }}</th>
+                   <td>{{ count($studentAssignment->submissions) ?? '-'}}</td>
+				   <td>
+						@if(count($studentAssignment->submissions->whereNull('feedback')->whereNotNull('question')))
+							<i class="fas fa-exclamation-square"></i>
+						@else
+							-
+						@endif
+					</td>
+				   <td>
+					@if($studentAssignment->mark) 
+						{{$studentAssignment->mark}} / {{ $assignment->max_mark}}
+					@elseif($studentAssignment->canBeMarked()) 
+						To do<i class="fas fa-exclamation-square"></i>
+					@else 
+						-
+					@endif</td>
+					<td><a href="{{ route('studentAssignment_teacherShow', $studentAssignment->id) }}"><i class="fas fa-arrow-alt-square-right greyed"></i>Manage</a></td>
+                </tr>
+				@endforeach
+              </tbody>
+            </table>
+			
+		@endif
+		</div>
 	</section>
 
 @endsection
