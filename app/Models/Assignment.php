@@ -92,12 +92,13 @@ class Assignment extends Model
      */
     public function statusForAuth(){
         $studentAssignment = $this->studentAssignmentByStudent(Auth::id());
+        if(empty($studentAssignment)) return 'to do';
 
         if($studentAssignment->mark!=null){
             return 'marked';
         }else if($studentAssignment->to_mark){
             return 'done';
-        } else if(count($studentAssignment->subsmissions) === 0){
+        } else if(count($studentAssignment->submissions) === 0){
             return 'to do';
         } 
         return 'undergoing';

@@ -51,7 +51,7 @@ if(scriptEditor){
         })
 
         //load in testScript
-        //loadTestScript();
+        loadTestScript();
 
         //prepare to send submission to judge0
         let headers = {
@@ -70,7 +70,7 @@ if(scriptEditor){
                     console.log(editor.getValue());
 
                     this.innerText = 'loading..';
-                    let languageId = judge0Codes[lang];//python
+                    let languageId = judge0Codes[lang];
                     let inputCode = editor.getValue();
                     if(inputCode==null || inputCode==''){
                         this.innerText = 'Run';
@@ -80,7 +80,7 @@ if(scriptEditor){
                         "method": "POST",
                         "headers": headers,
                         "body": JSON.stringify({
-                            source_code: (new CodeSubmission(inputCode,testCode)).getCodeSubmission(),
+                            source_code: (new CodeSubmission(inputCode,testCode, lang)).getCodeSubmission(),
                             language_id: languageId,
                             number_of_runs: "1",
                             stdin:  btoa(unescape(encodeURIComponent("Judge0"))),
@@ -174,42 +174,66 @@ async function getSubmissionResponse(token){
 
 
 function loadTestScript(){
-    let options = {
-        "method":"GET"
-    }
-    
-    fetch("myScript.js", options)
-        .then( response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+    let assignmentId = btnRun.value;
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function() { //Fonction de rappel
+        if(this.status === 200) {
+            let data = this.responseText;
+            data = JSON.parse(data);
+            console.log(data);
+            if(data.success){
+                testCode = data.script;
             }
-            console.log(response);
-            return response.text();
-            //
-        })
-        .then ( script => {
-            testCode = script;
-        })
-        .catch(err => {
-            console.error(err);
-        });
+            
+        }
+    };
+    const data = JSON.stringify({
+        _token: "<?= csrf_token() ?>"
+    });
+
+    xhr.open('GET', "/student/assignments/"+assignmentId+"/testscript");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(data);
+
+
+   
 }
 
 
 //used for judge0
 class CodeSubmission{
-    constructor(studentInput, testScript){
+    static starts = {
+        'python':'try:',
+        'php':'try{',
+        'javascript':'try{',
+        'java':'try{',
+    }
+    static ends = {
+        'python': 'except Error: print("error")',
+        'php': '} catch(Exception $e)',
+        'javascript': '} catch(e){ ',
+        'java': '} catch(Exception e)',
+    }
+    constructor(studentInput, testScript, language){
         this.studentInput = studentInput;
         this.testScript = testScript;
+        this.language = language;
     }
-    static start = 'try {';
-    static end = '} catch ( error ){ console.log(error.message);}';
-
     
 
     getCodeSubmission(){
-        if(this.testScript!=null){
-            return btoa(unescape(encodeURIComponent(CodeSubmission.start+this.studentInput+this.testScript+CodeSubmission.end)));
+        console.log(this.testScript);
+        if(this.testScript!=null && this.testScript!=''){
+            if (Object.keys(CodeSubmission.starts).indexOf(this.language)==-1){
+                //todo determine what to do
+                return btoa(unescape(encodeURIComponent(this.studentInput)));
+            }
+            let start = CodeSubmission.starts[this.language];
+            let end = CodeSubmission.ends[this.language];
+            console.log(start+this.studentInput+this.testScript+end);
+            return btoa(unescape(encodeURIComponent(start+this.studentInput+this.testScript+end)));
         } else {
             return btoa(unescape(encodeURIComponent(this.studentInput)));
         }

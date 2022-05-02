@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\AssignmentNote;
 use App\Models\Chapter;
+use App\Models\Student;
 use App\Models\Submission;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -157,9 +158,9 @@ class AssignmentController extends Controller
         } catch (\Illuminate\Database\QueryException $exception) {
             return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your new assignment could not be created");    
         }
-        return view('teacher.assignment.show', [
+        return redirect(route('teacher_assignmentShow', [
             'assignment'=>$assignment,
-        ]);
+        ]));
     }
 
     /**
@@ -301,6 +302,36 @@ class AssignmentController extends Controller
             return redirect(route('chapter_teacherShow', $assignment->chapters[0]->id))->with('success', 'Assignment Deleted');
         } else {
             return redirect(route('chapter_teacherShow', $assignment->chapters[0]->id))->with('error', 'Assignment Could not be Deleted');
+        }
+    }
+
+    /**
+     * Get the test script for an assignment
+     * 
+     * @param int $id Assignment Id
+     * @return \Illuminate\Http\Response
+     */
+    public function studentTestScript(Request $request , $id){
+        if($request->ajax()) {
+            //check teacher has room in subscription
+            $assignment = Assignment::find($id);
+            $student = Student::find(Auth::id());
+            if ($student === null || empty($assignment)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'An error occured'
+                ], 403);
+            } else if ($request->user()->cannot('studentView', $assignment)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'You do not have permission to access this resource.'
+                ], 403);
+            }
+
+            return response()->json([
+                'success' => true, 
+                'script' => $assignment->test_script
+            ], 200);
         }
     }
 }

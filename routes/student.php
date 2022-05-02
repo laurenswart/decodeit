@@ -43,7 +43,9 @@ Route::get('studentAssignment/{id}/done', ([StudentAssignmentController::class, 
 Route::post('studentAssignment/{id}/done', ([StudentAssignmentController::class, 'studentDone']))
     ->where('id', '[0-9]+')
     ->name('studentAssignment_studentDone');
-
+Route::get('assignments/{id}/testscript', ([AssignmentController::class, 'studentTestScript']))
+    ->where('id', '[0-9]+')
+    ->name('assignment_studentTestScript');
 //SUBMISSION
 Route::post('assignments/{id}', ([SubmissionController::class, 'studentStore']))
     ->where('id', '[0-9]+')

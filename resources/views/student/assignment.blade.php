@@ -1,5 +1,9 @@
 @extends('layouts.student')
 
+@section('head')
+<meta test="@json(['script' => '{{$assignment->test_script}}'])">
+@endsection
+
 @section('content')
 <!-- MAIN RIGHT SECTION -->
 <div>
@@ -30,6 +34,10 @@
 						<span>
 							<span class="label">Type</span>
 							<span>{{ $assignment->is_test ? 'Test' : 'Exercise'}}</span>
+						</span>
+						<span>
+							<span class="label">Type</span>
+							<span>{{ $assignment->language ? ucfirst($assignment->language) :  '-'}}</span>
 						</span>
 						<span>
 							<span class="label">Max Submissions</span>
@@ -118,7 +126,7 @@
 	@endif
 
 
-	@if($assignment->nb_submissions > count($submissions) && !$studentAssignment->to_mark && ($assignment->start_time <= now() && $assignment->end_time >= now()))
+	@if($assignment->nb_submissions > count($submissions) && ($studentAssignment==null || !$studentAssignment->to_mark) && (date_create_from_format('d/m/Y H:i',$assignment->start_time) < now() && date_create_from_format('d/m/Y H:i',$assignment->end_time) >= now()))
 	<form method="post" action="{{ route('submission_studentStore', $assignment->id) }}" id="newSubmission">
 	<section id="submission">
 		
@@ -130,26 +138,27 @@
 			<input name="script" type="text" hidden id="script">
 			<input name="console" type="text" hidden id="hiddenConsole">
 			<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
+
+			@if($assignment->can_execute)
 			<div class="btn-box centered">
-				<button class="myButton" id="btRun" type="button">Run</button>
+				<button class="myButton" id="btRun" type="button" value="{{ $assignment->id }}">Run</button>
 			</div>
 			
-			<div  class="row my-4">
-				<div>
-					<div class="d-flex justify-content-between">
-						<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
-						<p id="codeStatus"></p>
-					</div>
-					<ul  id="console" class="my-0">
-						<li></li>
-					</ul>
-				</div>
-				<div class="btn-box centered">
-					<button class="myButton" id="newSubmission" type="submit">Submit</button>
-				</div>
-				
 
+			<div  class="my-4">
+				<div class="d-flex justify-content-between">
+					<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
+					<p id="codeStatus"></p>
+				</div>
+				<ul  id="console" class="my-0">
+					<li></li>
+				</ul>
 			</div>
+			@endif
+			<div class="btn-box centered">
+				<button class="myButton" id="newSubmission" type="submit">Submit</button>
+			</div>
+
 
 			@if($errors->any())
 		<div class="form-section errors alert alert-danger">
@@ -164,7 +173,7 @@
 		</div>
 
 		
-	@if(!$studentAssignment->to_mark && ($assignment->start_time <= now() && $assignment->end_time >= now()))
+	@if(($studentAssignment==null || !$studentAssignment->to_mark) && ($assignment->start_time <= now() && $assignment->end_time >= now()))
 	<div class="btn-box centered">
 		<a href="{{ route('studentAssignment_studentConfirmDone', $assignment->id) }}" class="myButton btn-highlight">Done this assignment</a>		
 	</div>

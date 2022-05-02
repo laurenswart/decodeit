@@ -50104,8 +50104,8 @@ if (scriptEditor) {
     document.getElementById('btClearConsole').addEventListener('click', function () {
       myConsole.innerHTML = '<li></li>';
     }); //load in testScript
-    //loadTestScript();
-    //prepare to send submission to judge0
+
+    loadTestScript(); //prepare to send submission to judge0
 
     var headers = {
       "content-type": "application/json",
@@ -50122,8 +50122,7 @@ if (scriptEditor) {
 
           console.log(editor.getValue());
           this.innerText = 'loading..';
-          var languageId = judge0Codes[lang]; //python
-
+          var languageId = judge0Codes[lang];
           var inputCode = editor.getValue();
 
           if (inputCode == null || inputCode == '') {
@@ -50135,7 +50134,7 @@ if (scriptEditor) {
             "method": "POST",
             "headers": headers,
             "body": JSON.stringify({
-              source_code: new CodeSubmission(inputCode, testCode).getCodeSubmission(),
+              source_code: new CodeSubmission(inputCode, testCode, lang).getCodeSubmission(),
               language_id: languageId,
               number_of_runs: "1",
               stdin: btoa(unescape(encodeURIComponent("Judge0"))),
@@ -50266,37 +50265,56 @@ function _getSubmissionResponse() {
 }
 
 function loadTestScript() {
-  var options = {
-    "method": "GET"
-  };
-  fetch("myScript.js", options).then(function (response) {
-    if (!response.ok) {
-      throw new Error("HTTP error! status: ".concat(response.status));
-    }
+  var assignmentId = btnRun.value;
+  var xhr = new XMLHttpRequest();
 
-    console.log(response);
-    return response.text(); //
-  }).then(function (script) {
-    testCode = script;
-  })["catch"](function (err) {
-    console.error(err);
+  xhr.onload = function () {
+    //Fonction de rappel
+    if (this.status === 200) {
+      var _data = this.responseText;
+      _data = JSON.parse(_data);
+      console.log(_data);
+
+      if (_data.success) {
+        testCode = _data.script;
+      }
+    }
+  };
+
+  var data = JSON.stringify({
+    _token: "<?= csrf_token() ?>"
   });
+  xhr.open('GET', "/student/assignments/" + assignmentId + "/testscript");
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(data);
 } //used for judge0
 
 
 var CodeSubmission = /*#__PURE__*/function () {
-  function CodeSubmission(studentInput, testScript) {
+  function CodeSubmission(studentInput, testScript, language) {
     _classCallCheck(this, CodeSubmission);
 
     this.studentInput = studentInput;
     this.testScript = testScript;
+    this.language = language;
   }
 
   _createClass(CodeSubmission, [{
     key: "getCodeSubmission",
     value: function getCodeSubmission() {
-      if (this.testScript != null) {
-        return btoa(unescape(encodeURIComponent(CodeSubmission.start + this.studentInput + this.testScript + CodeSubmission.end)));
+      console.log(this.testScript);
+
+      if (this.testScript != null && this.testScript != '') {
+        if (Object.keys(CodeSubmission.starts).indexOf(this.language) == -1) {
+          //todo determine what to do
+          return btoa(unescape(encodeURIComponent(this.studentInput)));
+        }
+
+        var start = CodeSubmission.starts[this.language];
+        var end = CodeSubmission.ends[this.language];
+        console.log(start + this.studentInput + this.testScript + end);
+        return btoa(unescape(encodeURIComponent(start + this.studentInput + this.testScript + end)));
       } else {
         return btoa(unescape(encodeURIComponent(this.studentInput)));
       }
@@ -50306,9 +50324,19 @@ var CodeSubmission = /*#__PURE__*/function () {
   return CodeSubmission;
 }();
 
-_defineProperty(CodeSubmission, "start", 'try {');
+_defineProperty(CodeSubmission, "starts", {
+  'python': 'try:',
+  'php': 'try{',
+  'javascript': 'try{',
+  'java': 'try{'
+});
 
-_defineProperty(CodeSubmission, "end", '} catch ( error ){ console.log(error.message);}');
+_defineProperty(CodeSubmission, "ends", {
+  'python': 'except Error: print("error")',
+  'php': '} catch(Exception $e)',
+  'javascript': '} catch(e){ ',
+  'java': '} catch(Exception e)'
+});
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
