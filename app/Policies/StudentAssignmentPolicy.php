@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Assignment;
 use App\Models\StudentAssignment;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
@@ -47,6 +48,17 @@ class StudentAssignmentPolicy
     public function create(User $user)
     {
         //
+    }
+
+    /**
+     * Determine whether the teacher can view a model.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function teacherShow(User $user, StudentAssignment $studentAssignment)
+    {
+        return $user->isTeacher() && $studentAssignment!=null && Teacher::find($user->id)->students->contains($studentAssignment->enrolment->student);
     }
 
     /**

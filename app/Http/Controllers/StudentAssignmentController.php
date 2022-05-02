@@ -70,4 +70,20 @@ class StudentAssignmentController extends Controller
 
         return redirect(route('assignment_studentShow', $id));
     }
+
+    /**
+     * 
+     * @param int $id StudentAssignment Id
+     */
+    public function teacherShow($id){
+        $studentAssignment = StudentAssignment::find($id);
+
+        $this->authorize('teacherShow', $studentAssignment);
+
+
+        return view('teacher.studentAssignment.show', [
+            'studentAssignment' => $studentAssignment,
+            'student'=>$studentAssignment->enrolment->student
+        ]);
+    }
 }

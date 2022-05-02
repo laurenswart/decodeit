@@ -8,6 +8,7 @@ use App\Http\Controllers\EnrolmentController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TeacherController;
@@ -88,7 +89,7 @@ Route::delete('assignments/{id}/delete', ([AssignmentController::class, 'teacher
     ->name('assignment_teacherDelete');
 
 //STUDENT ASSIGNMENTS
-Route::get('studentAssignment/{id}', ([AssignmentController::class, 'teacherShow']))
+Route::get('studentAssignment/{id}', ([StudentAssignmentController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
     ->name('studentAssignment_teacherShow');
 

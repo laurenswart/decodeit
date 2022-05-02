@@ -150,7 +150,7 @@
 					<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
 					<p id="codeStatus"></p>
 				</div>
-				<ul  id="console" class="my-0">
+				<ul  id="console" class="my-0 console">
 					<li></li>
 				</ul>
 			</div>

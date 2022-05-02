@@ -596,6 +596,14 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	justify-content: center;
 	
 }
+
+.btn-box.btn-right{
+	display: flex;
+	justify-content: end;
+	margin-bottom: 10px;;
+}
+
+
 .btn-box.centered button{
 	min-width: 200px;
 }
@@ -795,6 +803,14 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	margin-bottom:20px;
 }
 
+.orange-section{
+	padding:10px 20px;
+	border-radius:10px;
+	margin-bottom:20px;
+	background-color:  var(--color-darkWhite);
+	color:black
+}
+
 #info #details span{
 	display:flex;
 	flex-direction: row;
@@ -822,26 +838,26 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	margin-right: 0;
 }
 
-#console{
+.console{
 	padding-left: 5px;
 	padding-right: 5px;
 }
-#console{
+.console{
 	height: 250px;
     background-color: var(--color-black);
 	justify-content: flex-start;
 	align-items: flex-start;
 	overflow-y: scroll;
 }
-#console ul{
+.console ul{
 	padding-left: 0;;
 }
 
-#console li{ 
+.console li{ 
 	color:var(--color-mediumWhite);
 	font-family: 'Consolas';
 }
-#console li::before{
+.console li::before{
 	content:">>";
 } 
 

@@ -115,7 +115,7 @@
               <tbody>
               @foreach($course->assignments as $assignment)
                 <tr>
-                   <td >{{ ucfirst($assignment->title) }}</td>
+                   <th>{{ ucfirst($assignment->title) }}</th>
               @if($assignment->studentAssignmentByStudent($student->id)==null)
               <td colspan="3">No submissions</td>
               @else
