@@ -803,7 +803,7 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	margin-bottom:20px;
 }
 
-.orange-section{
+.form-highlight-section{
 	padding:10px 20px;
 	border-radius:10px;
 	margin-bottom:20px;

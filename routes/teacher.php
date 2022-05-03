@@ -10,6 +10,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TypeaheadController;
@@ -92,7 +93,9 @@ Route::delete('assignments/{id}/delete', ([AssignmentController::class, 'teacher
 Route::get('studentAssignment/{id}', ([StudentAssignmentController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
     ->name('studentAssignment_teacherShow');
-
+    Route::post('submissions/{id}/updateFeedback', ([SubmissionController::class, 'teacherUpdateFeedback']))
+    ->where('id', '[0-9]+')
+    ->name('submission_teacherUpdateFeedback');
 //STUDENT
 Route::get('students', ([StudentController::class, 'teacherIndex']))
     ->name('student_teacherIndex');

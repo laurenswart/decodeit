@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\StudentAssignment;
 use App\Models\Submission;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
@@ -59,9 +60,10 @@ class SubmissionPolicy
      * @param  \App\Models\Submission  $submission
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Submission $submission)
+    public function teacherUpdate(User $user, Submission $submission)
     {
-        //
+        
+        return $submission!=null && $user->isTeacher() && Teacher::find($user->id)->courses->contains($submission->studentAssignment->assignment->course);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Student;
 use App\Models\Submission;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -101,6 +102,56 @@ class SubmissionController extends Controller
             if($submission->wasChanged('question')){
                 return response()->json([
                     'success' => true,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'Oops, Something went wrong.'
+                ], 500);
+            }
+
+           
+        }
+    }
+
+    /**
+     * 
+     * @param int $id Submission Id 
+     */
+    public function teacherUpdateFeedback(Request $request, int $id){
+        if($request->ajax() &&  $request->post('feedback')) {
+            //validate question
+            if(empty($request->post('feedback'))){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'No feedback received'
+                ], 400);
+            }
+
+            //find submission
+            $teacher = Teacher::find($request->user()->id);
+            if(empty($teacher)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'User not found.'
+                ], 500);
+            }
+            $submission = Submission::find($id);
+            if ($submission === null || $request->user()->cannot('teacherUpdate',$submission)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'Unauthorized action'
+                ], 403);
+            }
+
+            //save question
+            $submission->feedback =  $request->post('feedback');
+            $submission->save();
+
+            if($submission->wasChanged('feedback')){
+                return response()->json([
+                    'success' => true,
+                    'feedback'=>$submission->feedback
                 ], 200);
             } else {
                 return response()->json([
