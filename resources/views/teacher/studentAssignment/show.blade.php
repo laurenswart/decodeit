@@ -3,20 +3,23 @@
 
 @section('content')
 
-		<h2 class=" block-title light-card layer-2">{{ ucfirst($studentAssignment->assignment->title) }}</h2>
+		<h2 class=" block-title light-card layer-2">Student's Assignment</h2>
 
     <div class="row">
       <div class="col-12 col-xl-7 form-section layer-2 d-flex flex-col mx-2">
-      
-      <h3 class="title-3">Assignment</h3>
-        <div class="label-value">
-          <span class="label">Course</span>
-          <span>{{ $studentAssignment->assignment->course->title }}</span>
+        <div class="h-end-link">
+        <h3 class="title-3">{{ ucfirst($studentAssignment->assignment->title) }}</h3>
+        <a href="{{ route('assignment_teacherShow', $studentAssignment->assignment_id) }}"><i class="fas fa-arrow-alt-square-right"></i>View</a>
         </div>
         <div class="label-value">
           <span class="label">Chapter</span>
           <span>{{ $studentAssignment->assignment->chapters[0]->title }}</span>
         </div>
+        <div class="label-value">
+          <span class="label">Course</span>
+          <span>{{ $studentAssignment->assignment->course->title }}</span>
+        </div>
+       
         <div class="label-value">
           <span class="label">Start</span>
           <span>{{ $studentAssignment->assignment->start_time }}</span>

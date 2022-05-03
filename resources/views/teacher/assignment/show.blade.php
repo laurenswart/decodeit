@@ -95,6 +95,24 @@
 		</div>
 		@endif
 
+		<h2 class="light-card block-title layer-2">Added Notes</h2>
+		
+		<div class="form-section layer-2   mx-2">
+			@if(count($assignment->notes)==0)
+			<p>No notes have been added.</p>
+			@else
+				@foreach($assignment->notes as $note)
+					<div class="msg">
+						<span class="date">{{ $note->created_at}}</span>
+						<p>{{ $note->content}}</p>
+					</div>
+				@endforeach
+			@endif
+			<div class="btn-right btn-box">
+			<a class="myButton " href="{{ route('assignmentNote_teacherCreate', $assignment->id) }}">Add Note</a>
+			</div>	
+		</div>
+
 		<h2 class="light-card block-title layer-2">Student Submissions</h2>
 		<div class="form-section layer-2   mx-2">
 		@if(count($assignment->studentAssignments)==0)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\AssignmentNoteController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CourseController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\SubmissionController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TypeaheadController;
+use App\Models\AssignmentNote;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,6 +90,14 @@ Route::get('assignments/{id}/delete', ([AssignmentController::class, 'teacherCon
 Route::delete('assignments/{id}/delete', ([AssignmentController::class, 'teacherDelete']))
     ->where('id', '[0-9]+')
     ->name('assignment_teacherDelete');
+
+//ASSIGNMENT NOTES
+Route::get('assignments/{id}/notes/new', ([AssignmentNoteController::class, 'teacherCreate']))
+    ->where('id', '[0-9]+')
+    ->name('assignmentNote_teacherCreate');
+Route::post('assignments/{id}/notes/new', ([AssignmentNoteController::class, 'teacherStore']))
+    ->where('id', '[0-9]+')
+    ->name('assignmentNote_teacherStore');
 
 //STUDENT ASSIGNMENTS
 Route::get('studentAssignment/{id}', ([StudentAssignmentController::class, 'teacherShow']))

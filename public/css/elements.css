@@ -910,3 +910,19 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		padding: 20px 100px;
 		font-size: 1.2rem;
 	}
+
+	.msg{
+		display:flex;
+		flex-direction:column;
+		padding-top:10px;;
+	}
+
+	.msg:not(first-of-type){
+		border-top: solid 1px var(--color-darkWhite);
+	}
+
+	.msg .date{
+		align-self: flex-end;
+		color:var(--color-veryLightPurple);
+		font-style: italic;
+	}
