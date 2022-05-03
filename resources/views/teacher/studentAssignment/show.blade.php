@@ -42,9 +42,11 @@
             </div>
             <div class="label-value">
               <span class="label">Final Mark</span>
-              <span>{{ $studentAssignment->mark ?? '-' }}</span>
+              <span>{{ $studentAssignment->mark!=null ? $studentAssignment->mark.' / '.$studentAssignment->assignment->max_mark :  '-' }}</span>
             </div>
-            <div class="d-flex justify-content-end"><a href="#"><i class="fas fa-edit"></i>Edit Mark</a></div>
+            @if($studentAssignment->canBeMarked())
+            <div class="d-flex justify-content-end"><a href="{{ route('studentAssignment_teacherEditMark', $studentAssignment->id) }}"><i class="fas fa-edit"></i>Edit Mark</a></div>
+            @endif
             
       </div>
     </div>

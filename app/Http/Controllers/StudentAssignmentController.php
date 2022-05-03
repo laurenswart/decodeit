@@ -72,8 +72,10 @@ class StudentAssignmentController extends Controller
     }
 
     /**
-     * 
-     * @param int $id StudentAssignment Id
+     * Show a student assignment
+     *
+     * @param int $id Assignment id
+     * @return \Illuminate\Http\Response 
      */
     public function teacherShow($id){
         $studentAssignment = StudentAssignment::find($id);
@@ -85,5 +87,61 @@ class StudentAssignmentController extends Controller
             'studentAssignment' => $studentAssignment,
             'student'=>$studentAssignment->enrolment->student
         ]);
+    }
+
+    /**
+     * Show form to update mark
+     *
+     * @param int $id StudentAssignment id
+     * @return \Illuminate\Http\Response 
+     */
+    public function teacherEditMark($id){
+        $studentAssignment = StudentAssignment::find($id);
+
+        $this->authorize('teacherEdit', $studentAssignment);
+        if(!$studentAssignment->canBeMarked()){
+            return redirect(route('student_dashboard'))->with('flash_modal', "You cannot mark this assignment yet.<br>Either the end date has not been reached, or the student has not yet finished working on it.");
+        }
+
+        return view('teacher.studentAssignment.mark', [
+            'studentAssignment' => $studentAssignment,
+            'student'=>$studentAssignment->enrolment->student
+        ]);
+    }
+
+    /**
+     * Process form t update mark
+     *
+     * @param int $id StudentAssignment id
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response 
+     */
+    public function teacherUpdateMark(Request $request, $id){
+        $studentAssignment = StudentAssignment::find($id);
+
+        $this->authorize('teacherUpdate', $studentAssignment);
+
+        //validate inputs
+        $rules = [
+            'mark' => "required|int|min:0|max:".$studentAssignment->assignment->max_mark,
+        ];
+
+        
+        $validated = $request->validate($rules);
+
+        $studentAssignment->mark = $validated['mark'];
+        $studentAssignment->save();
+
+        if($studentAssignment->wasChanged('mark')){
+            return view('teacher.studentAssignment.show', [
+                'studentAssignment' => $studentAssignment,
+                'student'=>$studentAssignment->enrolment->student
+            ]);
+        } else {
+            return view('teacher.studentAssignment.show', [
+                'studentAssignment' => $studentAssignment,
+                'student'=>$studentAssignment->enrolment->student
+            ])->with('error', 'Sorry, something went wrong');
+        }
     }
 }

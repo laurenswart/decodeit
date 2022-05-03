@@ -58,7 +58,18 @@ class StudentAssignmentPolicy
      */
     public function teacherShow(User $user, StudentAssignment $studentAssignment)
     {
-        return $user->isTeacher() && $studentAssignment!=null && Teacher::find($user->id)->students->contains($studentAssignment->enrolment->student);
+        return $user->isTeacher() && $studentAssignment!=null && Teacher::find($user->id)->students->contains($studentAssignment->enrolment->student) && Teacher::find($user->id)->courses->contains($studentAssignment->assignment->course);
+    }
+
+    /**
+     * Determine whether the teacher can edit a model.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function teacherEdit(User $user, StudentAssignment $studentAssignment)
+    {
+        return $user->isTeacher() && $studentAssignment!=null  && Teacher::find($user->id)->students->contains($studentAssignment->enrolment->student) && Teacher::find($user->id)->courses->contains($studentAssignment->assignment->course);
     }
 
     /**
@@ -68,9 +79,9 @@ class StudentAssignmentPolicy
      * @param  \App\Models\StudentAssignment  $studentAssignment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, StudentAssignment $studentAssignment)
+    public function teacherUpdate(User $user, StudentAssignment $studentAssignment)
     {
-        //
+        return $user->isTeacher() && $studentAssignment!=null && $studentAssignment->canBeMarked() && Teacher::find($user->id)->students->contains($studentAssignment->enrolment->student) && Teacher::find($user->id)->courses->contains($studentAssignment->assignment->course);
     }
 
     /**
