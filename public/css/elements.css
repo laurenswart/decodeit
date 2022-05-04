@@ -915,9 +915,10 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		display:flex;
 		flex-direction:column;
 		padding-top:10px;;
+		width:100%;
 	}
-
-	.msg:not(first-of-type){
+	
+	.msg  ~ .msg{
 		border-top: solid 1px var(--color-darkWhite);
 	}
 

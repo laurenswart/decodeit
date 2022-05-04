@@ -60,12 +60,17 @@
 			</span>
 		</div>
 		@if(count($assignment->notes)>0)
-		<div class="listElement-v light-card row">
+		<div class="listElement-v light-card row no-border">
 			<span class="listElementTitle palette-medium col-12">Notes</span>
 			<span class="listElementContent col layer-1">
+			
 				@foreach($assignment->notes as $note)
-				<p><span class="label">{{ $note->created_at }}</span>{{ $note->content }}</p>
+					<div class="msg">
+						<span class="date">{{ $note->created_at}}</span>
+						<p>{{ $note->content}}</p>
+					</div>
 				@endforeach
+			
 			</span>
 		</div>
 		@endif

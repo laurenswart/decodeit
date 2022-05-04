@@ -18,7 +18,7 @@ class AssignmentNoteController extends Controller
         $assignment = Assignment::find($id);
 
         //todo
-        //$this->authorize('teacherCreate', [AssignmentNote::class, $assignment]);
+        $this->authorize('create', $assignment);
 
         return view('teacher.assignment.note', [
             'assignment' => $assignment,
@@ -36,7 +36,7 @@ class AssignmentNoteController extends Controller
         $assignment = Assignment::find($id);
 
         //todo
-        //$this->authorize('teacherCreate', [AssignmentNote::class, $assignment]);
+        $this->authorize('create', $assignment);
 
         //validate inputs
         $rules = [

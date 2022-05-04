@@ -13,11 +13,9 @@
           <div class="btn-box btn-right mb-3"> 
             <button class="myButton">Save</button>
           </div>
-          @if($errors->any())
+          @if($errors->get('note'))
           <div class="form-section errors alert alert-danger">
-            @foreach($errors->all() as $error)
-              <p>{{ $error }}</p>
-            @endforeach
+            <p>Please enter a note between 0 and 65,535 characters.</p>
           </div>
           @endif
         </form>
