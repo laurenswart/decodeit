@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class MessageController extends Controller
 {
     /**
-     * Show a course for the authenticated student
+     * Show forum messages for a course
      *
      * @param int $id Id of the course
      * @return \Illuminate\Http\Response
@@ -31,7 +31,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Show a course for the authenticated student
+     * Create a new message
      *
      * @param Request $request
      * @param int $id Id of the course
