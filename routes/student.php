@@ -4,6 +4,8 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\StudentAssignmentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubmissionController;
@@ -53,6 +55,12 @@ Route::post('assignments/{id}', ([SubmissionController::class, 'studentStore']))
 Route::post('submission/{id}/addQuestion', ([SubmissionController::class, 'studentAddQuestion']))
     ->where('id', '[0-9]+')
     ->name('submission_studentAddQuestion');
+
+//FORUM
+Route::get('courses/{id}/forum', ([MessageController::class, 'studentForum']))
+    ->where('id', '[0-9]+')
+    ->name('message_studentForum');
+
 
 
     

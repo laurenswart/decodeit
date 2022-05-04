@@ -8,7 +8,7 @@ use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AssignmentNote
+class AssignmentNotePolicy
 {
     use HandlesAuthorization;
 

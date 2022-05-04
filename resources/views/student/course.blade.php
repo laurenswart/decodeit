@@ -1,9 +1,20 @@
 @extends('layouts.student')
 
 @section('content')
-<section>
+<div class="row">
+<div class="col  layer-2 form-section" id="sidebar">
+	<h1>{{ $course->title }}</h1>
+	<ul>
+		<li><a href="{{ route('message_studentForum', $course->id) }}">Forum</a></li>
+		<li><a href="">Upcoming Tests</a></li>
+		<li><a href="">Students</a></li>
+		<li><a href="">My Progress</a></li>
+	</ul>
+</div>
+<section class="col-12 col-xl-8">
 
-		<h2 class="light-card block-title layer-2">{{ $course->title }}</h2>
+
+		<h2 class="light-card block-title layer-2">Chapters</h2>
         @foreach($course->chapters as $chapter)
 		
 		<a href="{{ route('chapter_studentShow', $chapter->id)}}" class="listElement-h light-card row zoom">
@@ -52,4 +63,5 @@
 		
 	</section>
 @endsection
+</div>
 
