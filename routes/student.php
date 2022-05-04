@@ -60,7 +60,8 @@ Route::post('submission/{id}/addQuestion', ([SubmissionController::class, 'stude
 Route::get('courses/{id}/forum', ([MessageController::class, 'studentForum']))
     ->where('id', '[0-9]+')
     ->name('message_studentForum');
-
-
+Route::post('courses/{id}/forum', ([MessageController::class, 'store']))
+    ->where('id', '[0-9]+')
+    ->name('message_store');
 
     

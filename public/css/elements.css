@@ -390,8 +390,8 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	padding-right: 20px;
 }
 .h-end-link h2{
-	margin-top:0;
-	margin-bottom: 0;
+	margin-top:0!important;
+	margin-bottom: 0!important;
 }
 
 .listElement-v  .listElementTitle{
