@@ -41,6 +41,8 @@ class Enrolment extends Model
     }
 
     
+
+    
     public function studentSkills(){
         return $this->hasMany(Skill::class, 'skill_id', 'id');
     }

@@ -1,14 +1,19 @@
 @extends('layouts.student')
 
 @section('content')
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white border-b border-gray-200">
-                Welcome {{auth()->guard('web')->user()->username }}, you're logged in as a student! 
-            </div>
-        </div>
-    </div>
-</div>
+<h2 class="block-title layer-2">
+    Hey {{ ucfirst(auth()->guard('web')->user()->firstname) }}, here's what's been happening! 
+</h2>
+
+@foreach($notifications as $notification)
+		<a href="" class="listElement-h light-card row zoom">
+			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $notification->created_at }}</span>
+			<span class="listElementContent col background">
+                {{ $notification->type }}
+			</span>
+		</a>
+        @endforeach
+
+
 @endsection
 

@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
+use App\Models\AssignmentNote;
+use App\Models\Chapter;
+use App\Models\Enrolment;
+use App\Models\Message;
 use App\Models\Student;
+use App\Models\Submission;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,6 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Boolean;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class StudentController extends Controller
 {
@@ -20,7 +27,12 @@ class StudentController extends Controller
      */
     public function dashboard()
     {
-        return view('student.dashboard');
+
+        //dd(Student::find(Auth::id())->notifications());
+        
+        return view('student.dashboard', [
+            'notifications' => Student::find(Auth::id())->notifications()
+        ]);
     }
 
     /**

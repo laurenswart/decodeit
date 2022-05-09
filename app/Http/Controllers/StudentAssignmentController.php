@@ -130,12 +130,14 @@ class StudentAssignmentController extends Controller
         $validated = $request->validate($rules);
 
         $studentAssignment->mark = $validated['mark'];
+        $studentAssignment->marked_at = now();
         $studentAssignment->save();
 
         if($studentAssignment->wasChanged('mark')){
             return view('teacher.studentAssignment.show', [
                 'studentAssignment' => $studentAssignment,
                 'student'=>$studentAssignment->enrolment->student
+                
             ]);
         } else {
             return view('teacher.studentAssignment.show', [
