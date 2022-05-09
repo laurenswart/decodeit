@@ -30,6 +30,10 @@
 			<div class="form-section layer-2 col-12 col-xl-4   mx-2">
 				<h3 class="title-3">Manage</h3>
 				<div class="label-value">
+					<span><a href="{{ route('message_teacherForum', $course->id) }}">Forum</a></span>
+					<span></span>
+				</div>
+				<div class="label-value">
 					<span>Created</span>
 					<span>{{ $course->created_at }}</span>
 				</div>

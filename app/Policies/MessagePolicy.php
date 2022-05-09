@@ -25,6 +25,19 @@ class MessagePolicy
     }
 
     /**
+     * Determine whether the user can view a forum
+     *
+     * @param  \App\Models\User  $user
+     * @param Course $course Course of the forum
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function teacherForum(User $user, $course)
+    {
+       
+        return !empty($course) && $user->isTeacher() && $user->id == $course->teacher_id;
+    }
+
+    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user

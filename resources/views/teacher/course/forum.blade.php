@@ -17,9 +17,6 @@
 							Me
 						@else
 							{{ ucfirst($message->user->firstname) }} {{ ucfirst($message->user->lastname) }}
-							@if($message->user_id == $course->teacher_id)
-							<i class="fas fa-star"></i>
-							@endif
 						@endif
 						</span>
 					<span class="date">{{ date('H:i:m d/m/Y', $message->created_at->timestamp) }}</span>
@@ -56,7 +53,6 @@ document.querySelector('#newMessage button').addEventListener('click', function(
 	let xhr = new XMLHttpRequest();
 
 	xhr.onload = function() { //Fonction de rappel
-		console.log(this);
 		if(this.status === 200) {
 			let data = JSON.parse(this.responseText);
 			createMessage(data.msg, data.date);
@@ -70,7 +66,7 @@ document.querySelector('#newMessage button').addEventListener('click', function(
 		_token: "<?= csrf_token() ?>"
 	});
 
-	xhr.open('POST', "{{ route('message_store', $course->id) }}");
+	xhr.open('POST', "{{ route('message_teacherStore', $course->id) }}");
 	xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(data);
@@ -78,7 +74,6 @@ document.querySelector('#newMessage button').addEventListener('click', function(
 });
 
 function createMessage(content, date){
-	console.log('here');
 	let div = document.createElement('div');
 
 	div.classList.add( 'layer-2', 'forum-msg', 'form-section', 'right');

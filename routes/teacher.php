@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrolmentController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\StripeController;
@@ -156,3 +157,12 @@ Route::post('create-checkout-session', ([SubscriptionController::class, 'createC
 //TYPEAHEAD
 Route::post('/searchMyStudents', [TypeaheadController::class, 'newEnrolmentByTeacher'])
     ->name('search_newEnrolmentByTeacher');
+
+//FORUM
+Route::get('courses/{id}/forum', ([MessageController::class, 'teacherForum']))
+->where('id', '[0-9]+')
+->name('message_teacherForum');
+Route::post('courses/{id}/forum', ([MessageController::class, 'store']))
+->where('id', '[0-9]+')
+->name('message_teacherStore');
+

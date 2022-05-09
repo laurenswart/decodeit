@@ -31,6 +31,25 @@ class MessageController extends Controller
     }
 
     /**
+     * Show forum messages for a course
+     *
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherForum($id){
+        $course = Course::find($id);
+
+        $this->authorize('teacherForum', [Message::class, $course]);
+
+        $messages = $course->messages->sortBy('created_at');
+
+        return view('teacher.course.forum', [
+            'course'=>$course,
+            'messages'=>$messages
+        ]);
+    }
+
+    /**
      * Create a new message
      *
      * @param Request $request
