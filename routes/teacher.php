@@ -146,6 +146,15 @@ Route::get('skills/{id}/delete', ([SkillController::class, 'teacherConfirmDelete
     ->name('skill_teacherConfirmDelete');
 Route::delete('skills/{id}/delete', ([SkillController::class, 'teacherDelete']))
     ->name('skill_teacherDelete');
+Route::get('students/{id}/skill/{nb}', ([SkillController::class, 'editStudentMark']))
+    ->where('id', '[0-9]+')
+    ->where('nb', '[0-9]+')
+    ->name('studentSkill_teacherEdit');
+Route::post('students/{id}/skill/{nb}', ([SkillController::class, 'updateStudentMark']))
+    ->where('id', '[0-9]+')
+    ->where('nb', '[0-9]+')
+    ->name('studentSkill_teacherUpdate');
+
 
 Route::get('plans', ([PlanController::class, 'teacherIndex']))
     ->name('plan_teacherIndex');

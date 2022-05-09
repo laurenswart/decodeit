@@ -31,4 +31,6 @@ class Student extends User
         return $this->courses->where('teacher_id', Auth::id());
     }
 
+   
+
 }

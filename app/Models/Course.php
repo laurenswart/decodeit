@@ -59,8 +59,22 @@ class Course extends Model
         return $enrolment;
     }
 
+
+
     public function enrolmentIdForAuth(){
         return $this->enrolmentForAuth()->id;
+    }
+
+    public function enrolmentForStudent($id){
+        $enrolment = Enrolment::all()
+            ->where('student_id', $id)
+            ->where('course_id', $this->id)
+            ->first();
+        return $enrolment;
+    }
+
+    public function enrolmentIdForStudent($id){
+        return $this->enrolmentForStudent($id)->id;
     }
 
     public function hasNewMessages(){

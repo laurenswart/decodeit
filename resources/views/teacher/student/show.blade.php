@@ -92,7 +92,7 @@
           @foreach($course->skills as $skill)
             <div class="label-value">
               <span>{{ $skill->title}}</span>
-              <span>TODO</span>
+              <span>{{ $skill->studentMark($student->id)!==null ? $skill->studentMark($student->id).' /100' : '-'}}<a href="{{ route('studentSkill_teacherEdit', [$student->id, $skill->id]) }}"><i class="fas fa-pen-square"></i></a></span>
             </div>
           @endforeach
         </div>

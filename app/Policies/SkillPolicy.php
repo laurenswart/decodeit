@@ -3,22 +3,28 @@
 namespace App\Policies;
 
 use App\Models\Skill;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class SkillPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the user can edit
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function viewAny(User $user)
+    public function editStudentMark(User $user, Skill $skill, Student $student)
     {
-        //
+        if(empty($skill) || empty($student)){
+            return false;
+        }
+        //teacher owns this course and student is enrolled in this course
+        return Auth::id()==$skill->course->teacher_id && !empty($skill->course->enrolmentForStudent($student->id));
     }
 
     /**

@@ -41,8 +41,12 @@ class Enrolment extends Model
     }
 
     
-    protected function studentSkills(){
+    public function studentSkills(){
         return $this->hasMany(Skill::class, 'skill_id', 'id');
+    }
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class, 'student_skills', 'enrolment_id', 'skill_id', 'id', 'id')->withPivot('mark');
     }
 
     public function chaptersRead(){
