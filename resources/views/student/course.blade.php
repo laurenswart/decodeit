@@ -8,7 +8,7 @@
 		<li><a href="{{ route('message_studentForum', $course->id) }}">Forum</a></li>
 		<li><a href="">Upcoming Tests</a></li>
 		<li><a href="">Students</a></li>
-		<li><a href="">My Progress</a></li>
+		<li><a href="{{ route('course_studentProgress', $course->id) }}">My Progress</a></li>
 	</ul>
 </div>
 <section class="col-12 col-xl-8">
@@ -42,20 +42,7 @@
 			<span class="listElementContent col background">
 				<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
 				<span>
-					{{ ucwords($assignment->statusForAuth()) }}
-					@switch( $assignment->statusForAuth() )
-						@case('to do')
-							<i class="fas fa-exclamation-circle"></i>
-							@break
-						@case('marked')
-							<i class="fas fa-inbox-in greyed"></i>
-							@break
-						@case('done')
-							<i class="fas fa-check-circle greyed"></i>
-							@break
-						@default
-							<i class="fas fa-question-circle"></i>
-					@endswitch
+					$assignment->statusTextForAuth()
 				</span>
 			</span>
 		</a>

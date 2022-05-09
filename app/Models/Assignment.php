@@ -65,8 +65,31 @@ class Assignment extends Model
     
     public function studentAssignmentByStudent($studentId){
         $enrolment = Enrolment::where('course_id', $this->course_id)->where('student_id', $studentId)->first();
+        
         return StudentAssignment::where('assignment_id', $this->id)->where('enrolment_id', $enrolment->id)->first();
     }
+
+    public function statusTextByStudent($studentId){
+        $text = $this->statusByStudent($studentId);
+        $icon = null;
+        switch($text){
+					
+            case('to do'):
+                $icon = '<i class="fas fa-exclamation-circle"></i>';
+                break;
+            case('marked'):
+                $icon = '<i class="fad fa-inbox-in greyed"></i></i>';
+                break;
+            case('done'):
+                $icon = '<i class="fas fa-check-circle greyed"></i>';
+                break;
+            default:
+                $icon = '<i class="fas fa-question-circle"></i>';
+                break; 
+        }
+        return $icon.ucwords($text);
+    }
+
 
     public function getStartTimeAttribute($date)
     {
@@ -92,6 +115,24 @@ class Assignment extends Model
      */
     public function statusForAuth(){
         $studentAssignment = $this->studentAssignmentByStudent(Auth::id());
+        if(empty($studentAssignment)) return 'to do';
+
+        if($studentAssignment->mark!=null){
+            return 'marked';
+        }else if($studentAssignment->to_mark){
+            return 'done';
+        } else if(count($studentAssignment->submissions) === 0){
+            return 'to do';
+        } 
+        return 'undergoing';
+        
+    }
+
+    /**
+     * returns not done, incomplete, done, marked 
+     */
+    public function statusByStudent($studentId){
+        $studentAssignment = $this->studentAssignmentByStudent($studentId);
         if(empty($studentAssignment)) return 'to do';
 
         if($studentAssignment->mark!=null){

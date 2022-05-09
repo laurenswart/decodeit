@@ -24,6 +24,9 @@ Route::get('courses', ([CourseController::class, 'studentIndex']))
 Route::get('courses/{id}', ([CourseController::class, 'studentShow']))
     ->where('id', '[0-9]+')
     ->name('course_studentShow');
+Route::get('courses/{id}/progress', ([CourseController::class, 'studentProgress']))
+    ->where('id', '[0-9]+')
+    ->name('course_studentProgress');
 
 //CHAPTER
 Route::get('chapters/{id}', ([ChapterController::class, 'studentShow']))

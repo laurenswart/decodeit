@@ -246,6 +246,23 @@ class CourseController extends Controller
         ]);
     }
 
+
+    /**
+     * Progress for authenticated student in a course
+     * 
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
+     */
+    public function studentProgress($id){
+        $course = Course::find($id);
+
+        $this->authorize('studentView', $course);
+
+        return view("student.progress", [
+            "course" =>$course
+        ]);
+    }
+
     /**
      * Save the course
      *

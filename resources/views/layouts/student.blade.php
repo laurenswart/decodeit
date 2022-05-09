@@ -41,7 +41,7 @@
               <li class="nav-item"><a class="nav-link animate-h" href="{{ route('course_studentIndex') }}">Courses</a></li>
               <li class="nav-item">
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
+                <form method="POST" action="{{ route('logout') }}" class="mb-0">
                     @csrf
                     <a class="nav-link animate-h" href="route('logout')" 
                         onclick="event.preventDefault();this.closest('form').submit();">Log Out</a>
