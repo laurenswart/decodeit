@@ -638,9 +638,11 @@ a:hover{
 }
 
 .accordion-button {
-	padding: 0!important;;
 	border-radius: 8px!important;
 	margin-bottom: 0;
+}
+.accordion-button:not(.layer-2) {
+	padding: 0!important;;
 }
 .accordion-item {
     background-color: none;;
@@ -648,11 +650,10 @@ a:hover{
 	margin-bottom: 10px;;
 }
 
-.accordion-button.collapsed {
-    background:var(--color-mediumWhite);
-}
-.accordion-button:not(.collapsed) {
-    background:var(--color-mediumWhite);
+
+.accordion-button:not(.collapsed){
+    background:var(--color-lightWhite);
+	color: var(--color-darkPurple);
 }
 .accordion-header{
 	margin-left: 0!important;

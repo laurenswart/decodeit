@@ -159,6 +159,21 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * Progress for authenticated student in all courses
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function studentProgress(){
+        $courses = Student::find(Auth::id())->courses;
+
+        $this->authorize('studentProgress', Student::class);
+
+        return view("student.progress", [
+            "courses" =>$courses
+        ]);
+    }
+
 
 
     /**

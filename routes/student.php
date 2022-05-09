@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 //GENERAL
 Route::get('dashboard', ([StudentController::class, 'dashboard']))
     ->name('studentDashboard');
+Route::get('progress', ([StudentController::class, 'studentProgress']))
+    ->name('studentProgress');
 
 //COURSE
 Route::get('courses', ([CourseController::class, 'studentIndex']))

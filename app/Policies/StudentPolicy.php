@@ -35,14 +35,14 @@ class StudentPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user view overall progress
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function studentProgress(User $user)
     {
-        //
+        return $user->isStudent() && count(Student::find($user->id)->courses)!=0;
     }
 
     /**

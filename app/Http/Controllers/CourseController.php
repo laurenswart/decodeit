@@ -258,7 +258,7 @@ class CourseController extends Controller
 
         $this->authorize('studentView', $course);
 
-        return view("student.progress", [
+        return view("student.courseProgress", [
             "course" =>$course
         ]);
     }
