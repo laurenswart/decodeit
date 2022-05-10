@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Laravel\Cashier\Billable;
 use function Illuminate\Events\queueable;
@@ -80,5 +81,91 @@ class Teacher extends User
                 $customer->syncStripeCustomerDetails();
             }
         }));
+    }
+
+    /**
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function notifications(){
+        $teacher = Teacher::find( Auth::id());
+        $lastConnection = $teacher->last_connected;
+
+        //dd($lastConnection);
+        
+        //assignments that have new submissions :Collection of assignmentIds
+        $assignmentsWithNewSubmissions = StudentAssignment::
+            select('assignment_id')
+            ->join('submissions', 'submissions.student_assignment_id', 'student_assignment.id')
+            ->where('submissions.created_at', '>',$lastConnection)
+            ->where('submissions.created_at', '=', DB::raw('submissions.updated_at'))
+            ->groupBy('assignment_id')
+            ->having(DB::raw('count(submissions.id)'), '>', 0)
+            ->get();
+        
+        
+        //assignments with submissions with question
+        $assignmentsWithNewQuestions = StudentAssignment::
+            select('assignment_id')
+            ->join('submissions', 'submissions.student_assignment_id', 'student_assignment.id')
+            ->where('submissions.created_at', '>',$lastConnection)
+            ->whereNotNull('submissions.question')
+            ->whereNull('submissions.feedback')
+            ->groupBy('assignment_id')
+            ->having(DB::raw('count(submissions.id)'), '>', 0)
+            ->get();
+            
+        //forum messages :Array
+        //student is enroled in course and course is active
+        $updatedForumCourseIds = Message::
+                        groupBy('course_id')
+                        ->where('created_at', '>',$lastConnection)
+                        ->pluck('course_id')->all();
+        $updatedForumCourses = $teacher->courses->whereIn('id', $updatedForumCourseIds);
+        
+        
+
+        //make a collection
+        $models = [];
+        
+        foreach($assignmentsWithNewSubmissions as $studentAssignment){
+            $models[] = [
+                'icon'=>'<i class="fas fa-plus-square"></i>',
+                'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
+                'text'=> 'New Submissions for ',
+                'resource' => ucfirst($studentAssignment->assignment->title),
+                'date'=> now()
+            ];
+        }
+        foreach($assignmentsWithNewQuestions as $studentAssignment){
+            $models[] = [
+                'icon'=>'<i class="fas fa-plus-square"></i>',
+                'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
+                'text'=> 'New Questions for ',
+                'resource' => ucfirst($studentAssignment->assignment->title),
+                'date'=> now()
+            ];
+        }
+        foreach($updatedForumCourses as $updatedForumCourse){
+            $models[] = [
+                'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
+                'route'=> route('message_teacherForum', $updatedForumCourse->id),
+                'text'=> 'New Messages in ',
+                'resource' => ucfirst($updatedForumCourse->title),
+                'date'=> Carbon::parse(now())
+            ];
+        }
+        
+     
+        
+        
+        //sort by creation date
+        uasort($models, function($a, $b){
+            if ($a['date'] == $b['date']) {
+                return 0;
+            }
+            return ($a['date'] > $b['date']) ? -1 : 1;
+        });
+        return $models;
     }
 }

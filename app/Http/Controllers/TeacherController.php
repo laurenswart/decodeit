@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
+use App\Models\StudentAssignment;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
@@ -15,8 +18,11 @@ class TeacherController extends Controller
      */
     public function dashboard()
     {
+        $teacher = Teacher::find(Auth::id());
+
         return view('teacher.dashboard', [
-            'teacher' => Teacher::find(Auth::id())
+            'teacher' => Teacher::find(Auth::id()),
+            'notifications'=> $teacher->notifications()
         ]);
     }
 
