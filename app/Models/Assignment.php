@@ -91,19 +91,19 @@ class Assignment extends Model
     }
 
 
-    public function getStartTimeAttribute($date)
+    public function startTimeString($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
     }
-    public function getEndTimeAttribute($date)
+    public function endTimeString($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
     }
-    public function getUpdatedAtAttribute($date)
+    public function getUpdatedAtString($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
     }
-    public function getCreatedAtAttribute($date)
+    public function getCreatedAtString($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
     }

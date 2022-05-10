@@ -6,10 +6,13 @@
 </h2>
 
 @foreach($notifications as $notification)
-		<a href="" class="listElement-h light-card row zoom">
-			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $notification->created_at }}</span>
+		<a href="{{ $notification['route'] }}" class="listElement-h light-card row zoom">
+			<span class="listElementTitle palette-medium col-12 col-md-4 col-xl-3">{{ $notification['date'] }}</span>
 			<span class="listElementContent col background">
-                {{ $notification->type }}
+                <span>
+                {!! $notification['icon'] !!}
+                {{ $notification['text'] }}<strong>{{$notification['resource']}}</strong>
+                </span>
 			</span>
 		</a>
         @endforeach

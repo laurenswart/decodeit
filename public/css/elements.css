@@ -432,9 +432,7 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 .dark-mode .listElementContent{
 	color:var(--color-darkWhite);
 }
-.listElementContent > span:first-of-type:not(.row){
-	white-space: nowrap;
-}
+
 
 
 .listElement-v .listElementContent{

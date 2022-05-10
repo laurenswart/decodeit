@@ -103,51 +103,86 @@ class Student extends User
         //make a collection
         $models = [];
         foreach($createdChapters as $createdChapter){
-            $createdChapter->type='created chapter';
-            $models[] = $createdChapter;
+            $models[] = [
+                'icon'=>'<i class="fas fa-plus-square"></i>',
+                'route'=> route('chapter_studentShow', $createdChapter->id),
+                'text'=> 'New Chapter in ',
+                'resource' => ucfirst($createdChapter->course->title),
+                'date'=> $createdChapter->created_at
+            ];
         }
         foreach($createdAssignments as $createdAssignment){
-            $createdAssignment->type='created assignment';
-            
-            $models[] = $createdAssignment;
+            $models[] = [
+                'icon'=>'<i class="fas fa-plus-square"></i>',
+                'route'=> route('assignment_studentShow', $createdAssignment->id),
+                'text'=> 'New Assignment in ',
+                'resource' => ucfirst($createdChapter->course->title),
+                'date'=> $createdAssignment->created_at
+            ];
         }
         foreach($feedbackedSubmissions as $feedbackedSubmission){
-            $feedbackedSubmission->type='feedback';
-            $feedbackedSubmission->created_at = $feedbackedSubmission->updated_at;//temporary or sorting, not saved
-            $models[] = $feedbackedSubmission;
+            $models[] = [
+                'icon'=>'<i class="fad fa-inbox-in"></i>',
+                'route'=> route('assignment_studentShow', $feedbackedSubmission->studentAssignment->assignment_id),
+                'text'=> 'Feedback Received for ',
+                'resource' => ucfirst($feedbackedSubmission->studentAssignment->assignment->title),
+                'date'=> $feedbackedSubmission->updated_at
+            ];
         }
         foreach($markedStudentAssignments as $markedStudentAssignment){
-            $markedStudentAssignment->type='assignment mark';
-            $markedStudentAssignment->created_at = $markedStudentAssignment->marked_at;//temporary or sorting, not saved
-            $models[] = $markedStudentAssignment;
+            $models[] = [
+                'icon'=>'<i class="fad fa-inbox-in"></i>',
+                'route'=> route('assignment_studentShow', $markedStudentAssignment->assignment_id),
+                'text'=> 'Mark Received for ',
+                'resource' => ucfirst($markedStudentAssignment->assignment->title),
+                'date'=> $markedStudentAssignment->marked_at
+            ];
         }
         foreach($updatedForumCourses as $updatedForumCourse){
-            $updatedForumCourse->type='forum';
-            $updatedForumCourse->created_at = now();//temporary or sorting, not saved
-            $models[] = $updatedForumCourse;
+            $models[] = [
+                'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
+                'route'=> route('message_studentForum', $updatedForumCourse->id),
+                'text'=> 'New Messages in ',
+                'resource' => ucfirst($updatedForumCourse->title),
+                'date'=> now()
+            ];
         }
         foreach($createdEnrolments as $createdEnrolment){
-            $createdEnrolment->type='created enrolment';
-            $models[] = $createdEnrolment;
+            $models[] = [
+                'icon'=>'<i class="fas fa-plus-square"></i>',
+                'route'=> route('course_studentShow', $createdEnrolment->course_id),
+                'text'=> 'New Course: ',
+                'resource' => ucfirst($createdEnrolment->course->title),
+                'date'=> $createdEnrolment->created_at
+            ];
         }
         foreach($markedEnrolments as $markedEnrolment){
-            $markedEnrolment->type='final mark';
-            $markedEnrolment->created_at = $markedEnrolment->marked_at;//temporary or sorting, not saved
-            $models[] = $markedEnrolment;
+            $models[] = [
+                'icon'=>'<i class="fad fa-inbox-in"></i>',
+                'route'=> route('course_studentShow', $markedEnrolment->course_id),
+                'text'=> 'Final Mark Received for ',
+                'resource' => ucfirst($markedEnrolment->course->title),
+                'date'=> $markedEnrolment->marked_at
+            ];
         }
         foreach($createdNoteAssignments as $createdNoteAssignment){
-            $createdNoteAssignment->type='updated note';
-            $models[] = $createdNoteAssignment;
+            $models[] = [
+                'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
+                'route'=> route('assignment_studentShow', $createdNoteAssignment->id),
+                'text'=> 'New Assignment Note for ',
+                'resource' => ucfirst($createdNoteAssignment->title),
+                'date'=> $createdNoteAssignment->created_at
+            ];
         }
      
         
         
 
             uasort($models, function($a, $b){
-                if ($a->created_at == $b->created_at) {
+                if ($a['date'] == $b['date']) {
                     return 0;
                 }
-                return ($a->created_at > $b->created_at) ? -1 : 1;
+                return ($a['date'] > $b['date']) ? -1 : 1;
             });
         return $models;
     }
