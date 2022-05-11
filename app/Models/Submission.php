@@ -34,8 +34,5 @@ class Submission extends Model
         return $this->belongsTo(StudentAssignment::class, 'student_assignment_id', 'id');
     }
 
-    public function getCreatedAtAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
-    }
+    
 }

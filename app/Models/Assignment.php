@@ -91,23 +91,6 @@ class Assignment extends Model
     }
 
 
-    public function startTimeString($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
-    }
-    public function endTimeString($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
-    }
-    public function getUpdatedAtString($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
-    }
-    public function getCreatedAtString($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
-    }
-
     /**
      * Get all of the submissions for the assignment.
      */

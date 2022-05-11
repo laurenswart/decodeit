@@ -2,7 +2,7 @@
 
 
 @section('content')
-  <nav class="back-nav">
+    <nav class="back-nav">
 			<a href="{{ route('student_teacherIndex') }}"><i class="fas fa-arrow-alt-square-left"></i>All Students</a>
 		</nav>
 		<h2 class=" block-title light-card layer-2">{{ ucfirst($student->firstname) }} {{ ucfirst($student->lastname) }}</h2>
