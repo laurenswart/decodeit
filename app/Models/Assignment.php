@@ -108,7 +108,12 @@ class Assignment extends Model
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d/m/Y H:i');
     }
 
-
+    /**
+     * Get all of the submissions for the assignment.
+     */
+    public function submissions(){
+        return $this->hasManyThrough( Submission::class,StudentAssignment::class,);
+    }
 
     /**
      * returns not done, incomplete, done, marked 

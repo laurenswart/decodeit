@@ -2,10 +2,13 @@
 
 @section('content')
 <section>
-
+<nav class="back-nav">
+			<a href="{{ route('course_teacherIndex') }}"><i class="fas fa-arrow-alt-square-left"></i>All Courses</a>
+		</nav>
 		<h2 class="light-card block-title layer-2">{{ $course->title }}</h2>
+		
 		<div class="row">
-			<div class="form-section layer-2 col mx-2">
+			<div class="form-section layer-2 col">
 				<div class="h-end-link">
 					<h3 class="title-3">Chapters</h3>
 					<a href="{{ route('chapter_teacherCreate', $course->id) }}"><i class="fas fa-plus-square"></i>New Chapter</a>
@@ -13,26 +16,21 @@
 				@if(count($course->chapters)==0)
 					<p>No Chapters Created in this Course</p>
 				@else
-					@foreach($course->chapters as $chapter)
-					<a href="{{ route('chapter_teacherShow', $chapter->id)}}" class="listElement-h light-card row zoom">
-						<span class="listElementTitle palette-medium col-12 col-md-4">{{ $chapter->title }}</span>
-						<span class="listElementContent col background">
-							<span>
-								{{ count($chapter->assignments) }} Assignments
-							</span>
-							<span class="small-date "></span>
-						</span>
-					</a>
-					@endforeach
+					<table class="table">
+						<tbody>
+						@foreach($course->chapters as $chapter)
+							<tr>
+								<td><a href="{{ route('chapter_teacherShow', $chapter->id)}}" class="label">{{ $chapter->title }}</a></td>
+								<td>{{ count($chapter->assignments)!=0 ? count($chapter->assignments).( count($chapter->assignments)==1 ? ' Assignment' : ' Assignments') : '-'}}</td>
+							</tr>
+						@endforeach
+						</tbody>
+					</table>
 				@endif
 			</div>
 
-			<div class="form-section layer-2 col-12 col-xl-4   mx-2">
+			<div class="form-section layer-2 col-12 col-xl-4">
 				<h3 class="title-3">Manage</h3>
-				<div class="label-value">
-					<span><a href="{{ route('message_teacherForum', $course->id) }}">Forum</a></span>
-					<span></span>
-				</div>
 				<div class="label-value">
 					<span>Created</span>
 					<span>{{ $course->created_at }}</span>
@@ -45,80 +43,84 @@
 					<span>Active</span>
 					<span>{{ $course->is_active ? 'Yes' : 'No' }}</span>
 				</div>
-				<div class="label-value mt-4">
-					<span><a href="{{ route('course_teacherEdit', $course->id) }}"><i class="fas fa-pen-square"></i>Edit Course</a></span>
-					<span><a href="{{ route('course_teacherConfirmDelete', $course->id) }}"><i class="fas fa-trash-alt"></i>Delete Course</a></span>
+				<div class="d-flex flex-col align-items-end mt-4">
+					<a href="{{ route('message_teacherForum', $course->id) }}"><i class="fas fa-comment-alt-dots"></i>Forum</a>
+					<a href="{{ route('course_teacherDownloadReports', $course->id) }}"><i class="fas fa-arrow-alt-to-bottom"></i>Download Reports</a>
+					<a href="{{ route('course_teacherEdit', $course->id) }}"><i class="fas fa-pen-square"></i>Edit Course</a>
+					<a href="{{ route('course_teacherConfirmDelete', $course->id) }}"><i class="fas fa-trash-alt"></i>Delete Course</a>
 				</div>
-				<a href="{{ route('course_teacherDownloadReports', $course->id) }}"><i class="fas fa-arrow-alt-to-bottom"></i>Download Reports</a>
+				
 			</div>
 		</div>
-		<div class="row">
-			<div class="form-section layer-2 col mx-2">
+		<div>
+			<div class="form-section layer-2">
 				<h3 class="title-3">Assignments</h3>
 				@if(count($assignments)==0)
 					<p>No Assignments Created in this Course</p>
 				@else
-					@foreach($assignments as $assignment)
-						<a href="{{ route('assignment_teacherShow', $assignment->id)}}" class="listElement-h light-card row zoom">
-							<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time }}</span>
-							<span class="listElementContent col background">
-								<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
-							</span>
-						</a>
-					@endforeach
-				@endif
-			</div>
-
-			<div class="form-section layer-2 col-12 col-xl-3   mx-2">
-				<h3 class="title-3">Usage Details</h3>
-				<div class="label-value">
-					<span>Chapters</span>
-					<span>{{ count($course->chapters) }}</span>
-				</div>
-				<div class="label-value">
-					<span>Assignments</span>
-					<span>{{ count($course->assignments) }}</span>
-				</div>
-				<div class="label-value">
-					<span>Storage</span>
-					<span>To Do</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="form-section layer-2 col mx-2">
-				<h3 class="title-3">Skills</h3>
-				@if(count($course->skills)==0)
-					<p>No Skills Created in this Course</p>
-				@else
 					<table class="table">
 						<thead>
 							<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Description</th>
-							<th></th>
+								<th></th>
+								<th>Starts</th>
+								<th>Ends</th>
+								<th class="cell-center">To Mark</th>
+								<th class="cell-center">Questions</th>
 							</tr>
 						</thead>
 						<tbody>
-						@foreach($course->skills as $skill)
+						@foreach($assignments as $assignment)
 							<tr>
-								<td>{{ $skill->title }}</td>
-								<td>{{ $skill->description }}</td>
-								<td><a href="{{ route('skill_teacherConfirmDelete', $skill->id) }}" class="btsp btn btn-outline-danger">x</a></td>
+								<td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
+								<td>{{ date('H:i, D d/m/Y', strtotime($assignment->start_time)) }}</td>
+								<td>{{ date('H:i, D d/m/Y', strtotime($assignment->end_time)) }}</td>
+								<td class="cell-center">
+									@if($assignment->end_time < now() || count($assignment->studentAssignments->whereNotNull('to_mark'))!=0)
+										<i class="fas fa-exclamation-square"></i>
+									@else 
+										-
+									@endif
+								</td>
+								<td class="cell-center">
+									@if(count($assignment->submissions->whereNotNull('question')->whereNull('feedback'))!=0)
+										<i class="fas fa-exclamation-square"></i>
+									@else 
+										-
+									@endif
+								</td>
 							</tr>
 						@endforeach
 						</tbody>
 					</table>
 				@endif
 			</div>
+			
+		</div>
+		<div class="row">
+			<div class="form-section layer-2 col">
+				<h3 class="title-3">Skills</h3>
+				@if(count($course->skills)==0)
+					<p>No Skills Created in this Course</p>
+				@else
+					@foreach($course->skills as $skill)
+						<div class="d-flex flex-col mb-4">
+							<div class="h-end-link">
+								<span class="label">{{ $skill->title }}</span>
+								<a href="{{ route('skill_teacherConfirmDelete', $skill->id) }}"><i class="fas fa-times-square greyed"></i></a>
+							</div>
+							<span class="pl-3">{{ $skill->description }}</span>
+						</div>
+					@endforeach
+				@endif
+			</div>
 
-			<div class="form-section layer-2 col-12 col-xl-6  mx-2">
+			<div class="form-section layer-2 col-12 col-xl-6">
 				<h3 class="title-3">Enrolments</h3>
 				@foreach($course->students as $student)
 				<div class="label-value mt-1">
-					<span>{{ $student->firstname.' '.$student->lastname }}</span>
+					<span><a href="{{ route('student_teacherShow', $student->id) }}">{{ ucwords($student->firstname.' '.$student->lastname) }}</a></span>
 					<span>{{ $student->email }}</span>
-					<span><a href="{{ route('enrolment_teacherConfirmDelete', $student->pivot->id) }}" class="btsp btn btn-outline-danger">x</a></span>
+					<span><a href="{{ route('enrolment_teacherConfirmDelete', $student->pivot->id) }}"><i class="fas fa-times-square greyed"></i></a></span>
 				</div>
 				@endforeach
 			</div>

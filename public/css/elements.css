@@ -57,6 +57,14 @@ i{
 i.greyed{
 	color: var(--color-mediumPurple);
 }
+a i.greyed:hover{
+	color: var(--color-orange);
+}
+
+.cell-center{
+	text-align:center;
+}
+
 
 .block-title{
 	padding: 15px;
@@ -376,6 +384,16 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	justify-content:space-between;
 	align-items: center;
 	align-self:stretch;
+	
+}
+
+
+.label-value > span:nth-child(2){
+	font-style: italic;
+}
+
+.dark-mode .label-value > span:first-of-type{
+	color: var(--color-mediumWhite);
 }
 
 .h-end-link{
@@ -630,8 +648,12 @@ a:hover{
 	color: var(--color-orange);
 }
 
-.label{
+.label, .label-value > span:first-of-type{
 	font-weight: bold;
+	color: var(--color-mediumPurple);
+	font-family: 'Ubuntu';
+}
+.label{
 	padding-right:10px;
 }
 
@@ -803,6 +825,8 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	padding:10px 20px;
 	border-radius:10px;
 	margin-bottom:20px;
+	margin-left:10px;
+	margin-right: 10px;
 }
 
 .form-highlight-section{
