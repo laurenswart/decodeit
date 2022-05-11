@@ -1,13 +1,12 @@
 @extends('layouts.student')
 
 @section('content')
-
-
-		<div class="h-end-link light-card  mt-4 layer-2">
-			<h2 class=" block-title">{{ $course->title }}</h2>
+		<nav class="back-nav">
 			<a href="{{ url()->previous() }}"><i class="fas fa-arrow-alt-square-left"></i>Back</a>
-		</div>
+		</nav>
 
+		<h2 class="block-title light-card  layer-2">{{ $course->title }}</h2>
+			
 		<div class="forum">
         @foreach($messages as $message)
 			<div class="layer-2 forum-msg form-section {{ $message->user->id == Auth::id() ? 'right' : ''}}">
@@ -19,7 +18,7 @@
 							{{ ucfirst($message->user->firstname) }} {{ ucfirst($message->user->lastname) }}
 						@endif
 						</span>
-					<span class="date">{{ date('H:i:m d/m/Y', $message->created_at->timestamp) }}</span>
+					<span class="date">{{ date('D d/m/Y, H:i:m ', $message->created_at->timestamp) }}</span>
 				</div>
 				<p>{{$message->content}}</p>
 			</div>
