@@ -48,7 +48,7 @@ class Course extends Model
     }
 
     public function students(){
-        return $this->belongsToMany(Student::class, 'enrolments','course_id', 'student_id','id','id')->withPivot('id');
+        return $this->belongsToMany(Student::class, 'enrolments','course_id', 'student_id','id','id')->withPivot('id')->whereNull('enrolments.deleted_at');
     }
 
     public function enrolmentForAuth(){

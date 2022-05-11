@@ -49,6 +49,7 @@
 					<span><a href="{{ route('course_teacherEdit', $course->id) }}"><i class="fas fa-pen-square"></i>Edit Course</a></span>
 					<span><a href="{{ route('course_teacherConfirmDelete', $course->id) }}"><i class="fas fa-trash-alt"></i>Delete Course</a></span>
 				</div>
+				<a href="{{ route('course_teacherDownloadReports', $course->id) }}"><i class="fas fa-arrow-alt-to-bottom"></i>Download Reports</a>
 			</div>
 		</div>
 		<div class="row">

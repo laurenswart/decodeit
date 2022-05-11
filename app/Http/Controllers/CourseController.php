@@ -9,12 +9,15 @@ use App\Models\Skill;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use PDF;
 
 class CourseController extends Controller
 {
@@ -446,5 +449,32 @@ class CourseController extends Controller
         } else {
             return redirect(route('chapter_teacherShow', $id))->with('error', 'Course Could not be Deleted');
         }
+    }
+
+
+    /**
+     * Download reports for all students in the course
+     * 
+     */
+    public function teacherDownloadReports($id){
+        $course = Course::find($id);
+
+        $this->authorize('teacherView', $course);
+
+        $zip_file = public_path().'/'.$course->title.'.zip'; // Name of our archive to download
+
+        // Initializing PHP class
+        $zip = new \ZipArchive();
+        $zip->open($zip_file,\ZipArchive::OVERWRITE);
+
+        foreach($course->students as $student){
+            $pdf = PDF::loadView('teacher.course.report', compact('course', 'student'));
+            $pdf_name = $student->firstname.'_'.$student->lastname.'.pdf';
+            $zip->addFromString($pdf_name, $pdf->output());
+        }
+
+        $zip->close();
+
+        return  response()->download($zip_file);
     }
 }

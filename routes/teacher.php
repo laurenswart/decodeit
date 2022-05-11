@@ -49,7 +49,10 @@ Route::get('courses/{id}/delete', ([CourseController::class, 'teacherConfirmDele
     ->name('course_teacherConfirmDelete');
 Route::delete('courses/{id}/delete', ([CourseController::class, 'teacherDelete']))
     ->name('course_teacherDelete');
-    
+
+Route::get('courses/{id}/report/download', ([CourseController::class, 'teacherDownloadReports']))
+    ->where('id', '[0-9]+')
+    ->name('course_teacherDownloadReports');
 //CHAPTER
 Route::get('chapters/{id}', ([ChapterController::class, 'teacherShow']))
     ->where('id', '[0-9]+')
