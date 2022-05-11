@@ -626,7 +626,9 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 .btn-box.centered button{
 	min-width: 200px;
 }
-
+ hr{
+	background-color:#75808b;
+}
 nav.back-nav{
 	padding-left: 10px;
     margin-top: 20px;

@@ -18,7 +18,7 @@
 				@else
 					<table class="table">
 						<tbody>
-						@foreach($course->chapters as $chapter)
+						@foreach($course->chapters->sortBy('order_id') as $chapter)
 							<tr>
 								<td><a href="{{ route('chapter_teacherShow', $chapter->id)}}" class="label">{{ $chapter->title }}</a></td>
 								<td>{{ count($chapter->assignments)!=0 ? count($chapter->assignments).( count($chapter->assignments)==1 ? ' Assignment' : ' Assignments') : '-'}}</td>
@@ -39,11 +39,12 @@
 					<span>Last Updated</span>
 					<span>{{ $course->updated_at }}</span>
 				</div>
-				<div class="label-value">
+				<div class="label-value mb-3">
 					<span>Active</span>
 					<span>{{ $course->is_active ? 'Yes' : 'No' }}</span>
 				</div>
-				<div class="d-flex flex-col align-items-end mt-4">
+				<hr>
+				<div class="d-flex flex-col align-items-end mt-3">
 					<a href="{{ route('message_teacherForum', $course->id) }}"><i class="fas fa-comment-alt-dots"></i>Forum</a>
 					<a href="{{ route('course_teacherDownloadReports', $course->id) }}"><i class="fas fa-arrow-alt-to-bottom"></i>Download Reports</a>
 					<a href="{{ route('course_teacherEdit', $course->id) }}"><i class="fas fa-pen-square"></i>Edit Course</a>
@@ -102,7 +103,7 @@
 				@if(count($course->skills)==0)
 					<p>No Skills Created in this Course</p>
 				@else
-					@foreach($course->skills as $skill)
+					@foreach($course->skills->sortBy('id') as $skill)
 						<div class="d-flex flex-col mb-4">
 							<div class="h-end-link">
 								<span class="label">{{ $skill->title }}</span>
@@ -110,19 +111,25 @@
 							</div>
 							<span class="pl-3">{{ $skill->description }}</span>
 						</div>
+						<hr>
 					@endforeach
 				@endif
 			</div>
 
 			<div class="form-section layer-2 col-12 col-xl-6">
 				<h3 class="title-3">Enrolments</h3>
-				@foreach($course->students as $student)
-				<div class="label-value mt-1">
-					<span><a href="{{ route('student_teacherShow', $student->id) }}">{{ ucwords($student->firstname.' '.$student->lastname) }}</a></span>
-					<span>{{ $student->email }}</span>
-					<span><a href="{{ route('enrolment_teacherConfirmDelete', $student->pivot->id) }}"><i class="fas fa-times-square greyed"></i></a></span>
-				</div>
-				@endforeach
+				
+				<table class="table">
+					<tbody>
+					@foreach($course->students->sortBy('firstname', SORT_NATURAL | SORT_FLAG_CASE ) as $student)
+					<tr>
+						<td class="label"><a href="{{ route('student_teacherShow', $student->id) }}">{{ ucwords($student->firstname.' '.$student->lastname) }}</a></td>
+						<td>{{ $student->email }}</td>
+						<td><a href="{{ route('enrolment_teacherConfirmDelete', $student->pivot->id) }}"><i class="fas fa-times-square greyed"></i></a></span>
+					</tr>
+					@endforeach
+				</tbody>
+				</table>
 			</div>
 		</div>
 	</section>
