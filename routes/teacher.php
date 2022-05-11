@@ -133,6 +133,9 @@ Route::delete('students/{id}/delete', ([StudentController::class, 'teacherDelete
 
 Route::post('students', ([StudentController::class, 'teacherStore']))
     ->name('student_teacherStore');
+Route::get('students/{id}/report/download', ([StudentController::class, 'teacherDownloadReport']))
+    ->where('id', '[0-9]+')
+    ->name('student_teacherDownloadReport');
 
 //ENROLMENTS
 Route::get('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherConfirmDelete']))

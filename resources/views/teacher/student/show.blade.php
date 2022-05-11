@@ -19,7 +19,10 @@
               <h4>Email</h4>
               <span>{{ $student->email }}</span>
             </div>
-            <div class="d-flex justify-content-end"><a href="{{ route('student_teacherConfirmDelete', $student->id) }}"><i class="fas fa-trash-alt"></i>Remove Student</a></div>
+            <div class="d-flex justify-content-between">
+              <a href="{{ route('student_teacherDownloadReport', $student->id) }}"><i class="fas fa-arrow-alt-to-bottom"></i>Download Report</a>
+              <a href="{{ route('student_teacherConfirmDelete', $student->id) }}"><i class="fas fa-trash-alt"></i>Remove Student</a>
+            </div>
       </div>
       <div class="col form-section layer-2 ml-4 d-flex flex-col justify-content-between">
         <div>

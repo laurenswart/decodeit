@@ -11,13 +11,14 @@ use App\Models\Student;
 use App\Models\Submission;
 use App\Models\Teacher;
 use App\Models\User;
+use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Boolean;
 use PHPUnit\Framework\MockObject\Builder\Stub;
-
+use PDF;
 class StudentController extends Controller
 {
     /**
@@ -238,5 +239,15 @@ class StudentController extends Controller
         } else {
             return redirect(route('student_teacherShow', $id))->with('error', 'Student Could not be Removed');
         }
+    }
+
+    public function teacherDownloadReport($id){
+        $student = Student::find($id);
+
+        $this->authorize('teacherView', $student);
+
+
+        $pdf = PDF::loadView('teacher.student.report', compact('student'));
+        return $pdf->download($student->firstname.'_'.$student->lastname.'.pdf');
     }
 }
