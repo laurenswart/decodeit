@@ -149,6 +149,9 @@ class Teacher extends User
             ];
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
+            if(!in_array($updatedForumCourse['course_id'], $teacher->courses->pluck('id')->toArray())){
+                continue;
+            }
             $models[] = [
                 'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
                 'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),
