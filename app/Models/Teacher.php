@@ -95,7 +95,7 @@ class Teacher extends User
         
         //assignments that have new submissions :Collection of assignmentIds
         $assignmentsWithNewSubmissions = StudentAssignment::
-            select('assignment_id')
+            select('assignment_id', DB::raw("min(submissions.created_at) as 'created_at'"))
             ->join('submissions', 'submissions.student_assignment_id', 'student_assignment.id')
             ->where('submissions.created_at', '>',$lastConnection)
             ->where('submissions.created_at', '=', DB::raw('submissions.updated_at'))
@@ -103,10 +103,10 @@ class Teacher extends User
             ->having(DB::raw('count(submissions.id)'), '>', 0)
             ->get();
         
-        
+       
         //assignments with submissions with question
         $assignmentsWithNewQuestions = StudentAssignment::
-            select('assignment_id')
+            select('assignment_id', DB::raw("min(submissions.created_at) as 'created_at'"))
             ->join('submissions', 'submissions.student_assignment_id', 'student_assignment.id')
             ->where('submissions.created_at', '>',$lastConnection)
             ->whereNotNull('submissions.question')
@@ -118,11 +118,13 @@ class Teacher extends User
         //forum messages :Array
         //student is enroled in course and course is active
         $updatedForumCourseIds = Message::
-                        groupBy('course_id')
-                        ->where('created_at', '>',$lastConnection)
-                        ->pluck('course_id')->all();
-        $updatedForumCourses = $teacher->courses->whereIn('id', $updatedForumCourseIds);
-        
+                        select('course_id', DB::raw("min(forum_messages.created_at) as 'created_at'"), 'title')
+                        ->join('courses', 'courses.id', 'forum_messages.course_id')
+                        ->groupBy('course_id', 'title')
+                        ->where('forum_messages.created_at', '>',$lastConnection)
+                        ->get();
+                        
+        //dd($assignmentsWithNewSubmissions);
         
 
         //make a collection
@@ -134,7 +136,7 @@ class Teacher extends User
                 'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
                 'text'=> 'New Submissions for ',
                 'resource' => ucfirst($studentAssignment->assignment->title),
-                'date'=> now()
+                'date'=> Carbon::parse($studentAssignment->created_at)
             ];
         }
         foreach($assignmentsWithNewQuestions as $studentAssignment){
@@ -143,16 +145,16 @@ class Teacher extends User
                 'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
                 'text'=> 'New Questions for ',
                 'resource' => ucfirst($studentAssignment->assignment->title),
-                'date'=> now()
+                'date'=> Carbon::parse($assignmentsWithNewQuestions->created_at)
             ];
         }
-        foreach($updatedForumCourses as $updatedForumCourse){
+        foreach($updatedForumCourseIds as $updatedForumCourse){
             $models[] = [
                 'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
-                'route'=> route('message_teacherForum', $updatedForumCourse->id),
+                'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),
                 'text'=> 'New Messages in ',
-                'resource' => ucfirst($updatedForumCourse->title),
-                'date'=> Carbon::parse(now())
+                'resource' => ucfirst($updatedForumCourse['title']),
+                'date'=> Carbon::parse($updatedForumCourse['created_at'])
             ];
         }
         

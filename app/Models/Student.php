@@ -74,13 +74,14 @@ class Student extends User
         $markedStudentAssignments = $student->studentAssignments->where('marked_at', '>',$lastConnection)->whereIn('id',  $student->studentAssignments->pluck('id'))->all();
         
 
-        //forum messages :Array
+        //forum messages :Eloquent\Collection
         //student is enroled in course and course is active
         $updatedForumCourseIds = Message::
-                        groupBy('course_id')
-                        ->where('created_at', '>',$lastConnection)
-                        ->pluck('course_id')->all();
-        $updatedForumCourses = $student->courses->whereIn('id', $updatedForumCourseIds);
+                        select('course_id', DB::raw("min(forum_messages.created_at) as 'created_at'"), 'title')
+                        ->join('courses', 'courses.id', 'forum_messages.course_id')
+                        ->groupBy('course_id', 'title')
+                        ->where('forum_messages.created_at', '>',$lastConnection)
+                        ->get();
         
         //new enrolment :Eloquent\Collection
         //student is enroled in course and course is active
@@ -146,13 +147,13 @@ class Student extends User
                 'date'=> Carbon::parse($markedStudentAssignment->marked_at)
             ];
         }
-        foreach($updatedForumCourses as $updatedForumCourse){
+        foreach($updatedForumCourseIds as $updatedForumCourse){
             $models[] = [
                 'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
-                'route'=> route('message_studentForum', $updatedForumCourse->id),
+                'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),
                 'text'=> 'New Messages in ',
-                'resource' => ucfirst($updatedForumCourse->title),
-                'date'=> Carbon::parse(now())
+                'resource' => ucfirst($updatedForumCourse['title']),
+                'date'=> Carbon::parse($updatedForumCourse['created_at'])
             ];
         }
         foreach($createdEnrolments as $createdEnrolment){
