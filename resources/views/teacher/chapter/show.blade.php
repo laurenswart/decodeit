@@ -1,8 +1,9 @@
 @extends('layouts.teacher')
 
 @section('content')
-<section>
-
+		<nav class="back-nav">
+			<a href="{{ route('course_teacherShow', $chapter->course->id) }}"><i class="fas fa-arrow-alt-square-left"></i>{{ $chapter->course->title}}</a>
+		</nav>
 		<h2 class="light-card block-title layer-2">{{ $chapter->title }}</h2>
 		<div class="row">
 			<div class="form-section layer-2 col mx-2">
@@ -13,14 +14,17 @@
 					@if(count($assignments)==0)
 						<p>No Assignments Related to this Chapter</p>
 					@else
-						@foreach($assignments as $assignment)
-							<a href="{{ route('assignment_teacherShow', $assignment->id)}}" class="listElement-h light-card row zoom">
-								<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time }}</span>
-								<span class="listElementContent col background">
-									<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
-								</span>
-							</a>
-						@endforeach
+						<table class="table">
+							<tbody>
+							@foreach($assignments->sortBy('start_time')->sortBy('end_time') as $assignment)
+								<tr>
+									<td><a href="{{ route('assignment_teacherShow', $assignment->id)}}" class="label">{{ $assignment->title }}</a></td>
+									<td>{{ date('D d/m/Y, H:i', strtotime($assignment->start_time)) }}</td>
+									<td>{{ date('D d/m/Y, H:i', strtotime($assignment->end_time)) }}</td>
+								</tr>
+							@endforeach
+							</tbody>
+						</table>
 					@endif
 				</div>
 
@@ -28,31 +32,30 @@
 				<h3 class="title-3">Manage</h3>
 				<div class="label-value">
 					<span>Course</span>
-					<span>{{ $chapter->course->title}}</span>
+					<span><a href="{{ route('course_teacherShow', $chapter->course->id) }}">{{ $chapter->course->title}}</a></span>
 				</div>
 				<div class="label-value">
 					<span>Created</span>
-					<span>{{ $chapter->created_at }}</span>
+					<span>{{ date('d/m/Y, H:i', strtotime($chapter->created_at)) }}</span>
 				</div>
 				<div class="label-value">
 					<span>Last Updated</span>
-					<span>{{ $chapter->updated_at }}</span>
+					<span>{{  date('d/m/Y, H:i', strtotime($chapter->updated_at)) }}</span>
 				</div>
-				<div class="label-value">
+				<div class="label-value mb-3">
 					<span>Active</span>
 					<span>{{ $chapter->is_active ? 'Yes' : 'No' }}</span>
 				</div>
-				<div class="label-value mt-4">
-					<span><a href="{{ route('chapter_teacherEdit', $chapter->id) }}"><i class="fas fa-pen-square"></i>Edit Chapter</a></span>
-					<span><a href="{{ route('chapter_teacherConfirmDelete', $chapter->id) }}"><i class="fas fa-trash-alt"></i>Delete Chapter</a></span>
+				<hr>
+				<div class="d-flex flex-col align-items-end mt-3">
+					<a href="{{ route('chapter_teacherEdit', $chapter->id) }}"><i class="fas fa-pen-square"></i>Edit Chapter</a>
+					<a href="{{ route('chapter_teacherConfirmDelete', $chapter->id) }}"><i class="fas fa-trash-alt"></i>Delete Chapter</a>
 				</div>
 			</div>
 		</div>
 		<h2 class="light-card block-title layer-2">Content</h2>
 		<div class="form-section layer-2   mx-2">
 			{!! clean($chapter->content) !!}
-		</div>
-	</section>
-
+		</div>	
 @endsection
 

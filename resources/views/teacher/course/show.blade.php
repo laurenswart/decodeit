@@ -1,8 +1,7 @@
 @extends('layouts.teacher')
 
 @section('content')
-<section>
-<nav class="back-nav">
+		<nav class="back-nav">
 			<a href="{{ route('course_teacherIndex') }}"><i class="fas fa-arrow-alt-square-left"></i>All Courses</a>
 		</nav>
 		<h2 class="light-card block-title layer-2">{{ $course->title }}</h2>
@@ -73,8 +72,8 @@
 						@foreach($assignments as $assignment)
 							<tr>
 								<td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
-								<td>{{ date('H:i, D d/m/Y', strtotime($assignment->start_time)) }}</td>
-								<td>{{ date('H:i, D d/m/Y', strtotime($assignment->end_time)) }}</td>
+								<td>{{ date('D d/m/Y, H:i', strtotime($assignment->start_time)) }}</td>
+								<td>{{ date('D d/m/Y, H:i', strtotime($assignment->end_time)) }}</td>
 								<td class="cell-center">
 									@if($assignment->end_time < now() || count($assignment->studentAssignments->whereNotNull('to_mark'))!=0)
 										<i class="fas fa-exclamation-square"></i>
@@ -132,7 +131,5 @@
 				</table>
 			</div>
 		</div>
-	</section>
-
 @endsection
 
