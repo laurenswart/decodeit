@@ -273,4 +273,49 @@ class StudentController extends Controller
         $pdf = PDF::loadView('teacher.student.report', compact('student'));
         return $pdf->download($student->firstname.'_'.$student->lastname.'.pdf');
     }
+
+
+    /**
+     * Show account details for the student
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentShow(){
+        $this->authorize('studentShow', Student::class);
+        $student = Student::find(Auth::id());
+
+        return view('student.account', [
+            'student'=>$student
+        ]);
+    }
+
+    /**
+     * Show edit form for student details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentEdit(){
+        $this->authorize('studentShow', Student::class);
+        $student = Student::find(Auth::id());
+        
+
+        return view('student.account_edit', [
+            'student'=>$student
+        ]);
+    }
+
+    /**
+     * Update student details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentUpdate(){
+        $this->authorize('studentShow', Student::class);
+        $student = Student::find(Auth::id());
+        
+
+        return view('student.account', [
+            'student'=>$student
+        ]);
+    }
 }

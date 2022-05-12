@@ -35,6 +35,18 @@ class StudentPolicy
     }
 
     /**
+     * Determine whether the user can view the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Student  $student
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function studentShow(User $user)
+    {
+        return $user!=null && $user->isStudent();
+    }
+
+    /**
      * Determine whether the user view overall progress
      *
      * @param  \App\Models\User  $user

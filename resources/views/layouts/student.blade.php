@@ -39,6 +39,7 @@
           <ul class="nav nav-horizontal my-2 my-lg-0">
               <li class="nav-item "><a class="nav-link animate-h" href="{{ route('studentDashboard') }}">Dashboard</a></li>
               <li class="nav-item"><a class="nav-link animate-h" href="{{ route('course_studentIndex') }}">Courses</a></li>
+              <li class="nav-item"><a class="nav-link animate-h" href="{{ route('student_studentShow') }}">My Account</a></li>
               <li class="nav-item">
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" class="mb-0">

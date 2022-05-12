@@ -19,6 +19,12 @@ Route::get('dashboard', ([StudentController::class, 'dashboard']))
     ->name('studentDashboard');
 Route::get('progress', ([StudentController::class, 'studentProgress']))
     ->name('studentProgress');
+Route::get('account', ([StudentController::class, 'studentShow']))
+    ->name('student_studentShow');
+Route::get('account/edit', ([StudentController::class, 'studentEdit']))
+    ->name('student_studentEdit');
+Route::post('account', ([StudentController::class, 'studentUpdate']))
+    ->name('student_studentUpdate');
 
 //COURSE
 Route::get('courses', ([CourseController::class, 'studentIndex']))
