@@ -56,7 +56,14 @@ class StudentController extends Controller
     public function teacherIndex(){
         $this->authorize('teacherViewAny', Student::class);
 
-        $students = Teacher::find(Auth::id())->students->sortBy('firstname');
+        $students = Teacher::find(Auth::id())->students()->orderBy('firstname')->paginate(10);
+
+        /*
+        $users = User::paginate(15);
+ 
+    $users->appends(['sort' => 'votes']);
+
+        */
         return view('teacher.student.index', [
             'students'=>$students
         ]);

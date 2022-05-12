@@ -26,9 +26,9 @@ return new class extends Migration
             $table->decimal('monthly_price', 6, 2);
             $table->decimal('semiyearly_price', 6, 2);
             $table->decimal('yearly_price', 6, 2);
-            $table->text('monthly_stripe_id', 255);
-            $table->text('semiyearly_stripe_id', 255);
-            $table->text('yearly_stripe_id', 255);
+            $table->string('monthly_stripe_id', 255);
+            $table->string('semiyearly_stripe_id', 255);
+            $table->string('yearly_stripe_id', 255);
             $table->boolean('is_custom');
             $table->boolean('is_active');
             $table->timestamps();
