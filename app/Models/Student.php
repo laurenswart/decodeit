@@ -67,7 +67,7 @@ class Student extends User
         
         //got feedback on submission :Eloquent\Collection
         //studentAssignment is for auth student
-        $feedbackedSubmissions = Submission::where('updated_at', '>',$lastConnection)->where('updated_at', '!=','created_at')->whereIn('student_assignment_id', $student->studentAssignments->pluck('id'))->get();
+        $feedbackedSubmissions = Submission::where('feedback_at', '>',$lastConnection)->whereIn('student_assignment_id', $student->studentAssignments->pluck('id'))->get();
         
         //got mark on student_assignment :Array
         //studentAssignment is for auth student
@@ -135,7 +135,7 @@ class Student extends User
                 'route'=> route('assignment_studentShow', $feedbackedSubmission->studentAssignment->assignment_id),
                 'text'=> 'Feedback Received for ',
                 'resource' => ucfirst($feedbackedSubmission->studentAssignment->assignment->title),
-                'date'=> Carbon::parse($feedbackedSubmission->updated_at)
+                'date'=> Carbon::parse($feedbackedSubmission->feedback_at)
             ];
         }
         foreach($markedStudentAssignments as $markedStudentAssignment){

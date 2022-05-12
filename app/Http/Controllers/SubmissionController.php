@@ -146,6 +146,7 @@ class SubmissionController extends Controller
 
             //save question
             $submission->feedback =  $request->post('feedback');
+            $submission->feedback_at =  now();
             $submission->save();
 
             if($submission->wasChanged('feedback')){
