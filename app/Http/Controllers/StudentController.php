@@ -51,13 +51,18 @@ class StudentController extends Controller
     /**
      * Show students for the authenticated teacher
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function teacherIndex(){
+    public function teacherIndex(Request $request){
         $this->authorize('teacherViewAny', Student::class);
+        $currentQueries = $request->query();
+        $sort = $request->query('sort') ?? 'firstname';
+        $order = $request->query('order') ?? 'asc';
+        $students = Teacher::find(Auth::id())->students()->orderBy($sort, $order)->paginate(10)->appends( ['sort'=>$sort, 'order'=>$order ]);
 
-        $students = Teacher::find(Auth::id())->students()->orderBy('firstname')->paginate(10);
-
+        $currentQueries['sort'] = $sort;
+        $currentQueries['order'] = $order;
         /*
         $users = User::paginate(15);
  
@@ -65,7 +70,8 @@ class StudentController extends Controller
 
         */
         return view('teacher.student.index', [
-            'students'=>$students
+            'students'=>$students,
+            'currentQueries'=>$currentQueries
         ]);
     }
 

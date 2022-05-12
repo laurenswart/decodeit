@@ -10,8 +10,8 @@
         <table class="table" id="students">
             <thead>
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
+                    <th><a href="{{ route('student_teacherIndex', ['sort'=>'firstname', 'order'=> ($currentQueries['sort']=='firstname' && $currentQueries['order']=='asc' ? 'desc' : 'asc')])}}">Firstname</a></th>
+                    <th><a href="{{ route('student_teacherIndex', ['sort'=>'lastname', 'order'=> ($currentQueries['sort']=='lastname' && $currentQueries['order']=='asc' ? 'desc' : 'asc')])}}">Lastname</a></th>
                     <th>Email</th>
                     <th></th>
                 </tr>
