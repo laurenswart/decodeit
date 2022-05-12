@@ -57,12 +57,22 @@ class StudentController extends Controller
     public function teacherIndex(Request $request){
         $this->authorize('teacherViewAny', Student::class);
         $currentQueries = $request->query();
+        //dd($currentQueries);
         $sort = $request->query('sort') ?? 'firstname';
         $order = $request->query('order') ?? 'asc';
-        $students = Teacher::find(Auth::id())->students()->orderBy($sort, $order)->paginate(10)->appends( ['sort'=>$sort, 'order'=>$order ]);
-
+        $filter = $request->query('filter') ?? '';
+        $students = Teacher::find(Auth::id())->students()
+                ->orderBy($sort, $order)
+                ->where(function ($query) use ($filter){
+                    $query->where('firstname', 'like', "%$filter%")
+                          ->orWhere('lastname', 'like',"%$filter%");
+                })
+                ->paginate(10)
+                ->appends( ['sort'=>$sort, 'order'=>$order, 'filter'=>$filter ]);
+        
         $currentQueries['sort'] = $sort;
         $currentQueries['order'] = $order;
+        $currentQueries['filter'] = $filter;
         /*
         $users = User::paginate(15);
  

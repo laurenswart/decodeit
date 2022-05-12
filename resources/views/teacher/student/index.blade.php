@@ -7,11 +7,20 @@
 
     
       <div class="form-section layer-2">
+        <div class="d-flex justify-content-end">
+          <form method="get" action="{{ route('student_teacherIndex') }}">
+            @csrf
+            <input type="text" placeholder="Search.." name="filter" value="{{ $currentQueries['filter'] ?? ''}}">
+            <input type="text" hidden value="{{ $currentQueries['sort'] }}" name="sort">
+            <input type="text" hidden value="{{ $currentQueries['order'] }}" name="order">
+            <button class="myButton">Search</button>
+          </form>
+        </div>
         <table class="table" id="students">
             <thead>
                 <tr>
-                    <th><a href="{{ route('student_teacherIndex', ['sort'=>'firstname', 'order'=> ($currentQueries['sort']=='firstname' && $currentQueries['order']=='asc' ? 'desc' : 'asc')])}}">Firstname</a></th>
-                    <th><a href="{{ route('student_teacherIndex', ['sort'=>'lastname', 'order'=> ($currentQueries['sort']=='lastname' && $currentQueries['order']=='asc' ? 'desc' : 'asc')])}}">Lastname</a></th>
+                    <th><a href="{{ route('student_teacherIndex', ['sort'=>'firstname', 'order'=> ($currentQueries['sort']=='firstname' && $currentQueries['order']=='asc' ? 'desc' : 'asc'), 'filter'=> $currentQueries['filter']])}}">Firstname</a></th>
+                    <th><a href="{{ route('student_teacherIndex', ['sort'=>'lastname', 'order'=> ($currentQueries['sort']=='lastname' && $currentQueries['order']=='asc' ? 'desc' : 'asc'), 'filter'=> $currentQueries['filter']])}}">Lastname</a></th>
                     <th>Email</th>
                     <th></th>
                 </tr>
