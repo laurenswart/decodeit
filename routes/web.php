@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminAuthController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Models\Plan;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +23,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $plans = Plan::all()->where('is_custom','0')->where('title','!=', 'free');
+    return view('welcome', ['plans'=>$plans]);
 })->name('welcome');
+Route::get('/plans', [PlanController::class, 'guestIndex'])->name('plans');
 
 //ADMIN
 Route::get('/admin/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');

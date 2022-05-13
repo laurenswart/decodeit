@@ -13,7 +13,7 @@
                         their teaching methods and motivate students with
                         a more hands-on approach.</p>
                     <p class="u-align-left u-text">Don't want to deprive your students any longer ?</p>
-                    <a href="#" class="btn btn-left myButton">Subscribe</a>
+                    <a href="{{ route('register') }}" class="btn btn-left myButton">Subscribe</a>
                 </div>
             </div>
             <div class="u-shape u-shape-circle u-white u-shape-2"></div>
@@ -187,27 +187,18 @@
         <div class="u-expanded-width palette-highlight u-shape u-shape-rectangle u-shape-1"></div>
         <div class="u-list u-list-1">
             <div class="u-repeater u-repeater-1">
+                @foreach($plans as $plan)
                 <div class=" dark-card foreground u-align-center u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-1">
-                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1">
-                    <img src="{{ asset('img/3.png') }}" alt="" class="u-expanded-width u-image u-image-default u-image-1" data-image-width="900" data-image-height="878">
-                    <h4 class="u-text u-text-3">Starter</h4>
-                    <p class="u-text u-text-4">Suitable for a small class, with minimal assignments.</p>
+                    <div class="u-container-layout u-similar-container u-valign-top u-container-layout-1 d-flex flex-col justify-content-between">
+                        <div>
+                            <img src="{{ asset('img/'.$plan->title.'.png') }}" alt="" class="u-expanded-width u-image u-image-default u-image-1" data-image-width="900" data-image-height="878">
+                            <h4 class="u-text u-text-3">{{ ucwords($plan->title) }}</h4>
+                            <p class="u-text u-text-4">{{ $plan->description }}</p>
+                        </div>
+                        <a href="{{ route('plans') }}"  class="btn btn-left myButton mx-auto mt-3">Checkout</a>
+                    </div>
                 </div>
-                </div>
-                <div class=" dark-card foreground u-align-center u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-2">
-                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2">
-                    <img src="{{ asset('img/2.png') }}" alt="" class="u-expanded-width u-image u-image-default u-image-2" data-image-width="900" data-image-height="878">
-                    <h4 class="u-text u-text-5">Intermediate</h4>
-                    <p class="u-text u-text-6">If your aim is to provide short courses for varying groups of students, this package is likely sufficient.</p>
-                </div>
-                </div>
-                <div class=" dark-card foreground u-align-center u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-3">
-                <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3">
-                    <img src="{{ asset('img/1.png') }}" alt="" class="u-expanded-width u-image u-image-contain u-image-default u-image-3" data-image-width="900" data-image-height="878">
-                    <h4 class="u-text u-text-7">Advanced</h4>
-                    <p class="u-text u-text-8">Provide multiple courses to different groups of students with plenty of flexibility.</p>
-                </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

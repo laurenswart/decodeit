@@ -43,7 +43,7 @@ class PlansSeeder extends Seeder
             ],
             [
                 'title'=>'starter',
-                'description'=>'',
+                'description'=>'Suitable for a small class, with minimal assignments.',
                 'nb_courses'=>3,
                 'nb_submissions'=>2,
                 'max_upload_size'=>10,
@@ -61,7 +61,7 @@ class PlansSeeder extends Seeder
             ],
             [
                 'title'=>'standard',
-                'description'=>'',
+                'description'=>'If your aim is to provide short courses for varying groups of students, this package is likely sufficient.',
                 'nb_courses'=>5,
                 'nb_submissions'=>3,
                 'max_upload_size'=>20,
@@ -79,7 +79,7 @@ class PlansSeeder extends Seeder
             ],
             [
                 'title'=>'advanced',
-                'description'=>'',
+                'description'=>'Provide multiple courses to different groups of students with plenty of flexibility.',
                 'nb_courses'=>10,
                 'nb_submissions'=>5,
                 'max_upload_size'=>50,
