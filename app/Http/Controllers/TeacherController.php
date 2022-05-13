@@ -38,15 +38,59 @@ class TeacherController extends Controller
         ]);
     }
 
-    
+    /**
+     * Show account details for the teacher
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function account(){
+        $this->authorize('teacherShow', Teacher::class);
         $plan = Teacher::find(Auth::id())->currentSubscriptionPlan();
 
         $subscription = Teacher::find(Auth::id())->currentSubscription();
         return view('teacher.account', [
             'plan' => $plan,
-            'subscription' => $subscription
+            'subscription' => $subscription,
+            'teacher' => Teacher::find(Auth::id())
         ]);
+    }
+
+    /**
+     * Show edit form for teacher details
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherEdit(){
+        $this->authorize('teacherShow', Teacher::class);
+        $teacher = Teacher::find(Auth::id());
+        
+
+        return view('teacher.account_edit', [
+            'teacher'=>$teacher
+        ]);
+    }
+
+    /**
+     * Update teacher details
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherUpdate(Request $request){
+        $this->authorize('teacherShow', Teacher::class);
+        $teacher = Teacher::find(Auth::id());
+        
+        $rules = [
+            'firstname' => 'required|string|max:50',
+            'lastname' => 'required|string|max:50',
+        ];
+        $validated = $request->validate($rules);
+
+        $teacher->firstname = $validated['firstname'];
+        $teacher->lastname = $validated['lastname'];
+        $teacher->save();
+        
+        return  redirect(route('teacher_account'));
     }
 
 }

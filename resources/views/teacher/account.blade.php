@@ -4,15 +4,15 @@
     <h2 class="light-card block-title layer-2">My Subscription</h2>
     @if($plan && $plan->title!='free')
     <div class="row">
-        <div class="col p-sides-10">
-            <div class="listElement-v light-card row">
-                <span class="listElementTitle palette-medium col-12 col-md-4">{{ ucfirst($plan->title) }} Plan</span>
-                <span class="listElementContent col background">
+        <div class="col form-section layer-2">
+            
+                <h3 class="title-3">{{ ucfirst($plan->title) }} Plan</h3>
+               
                     <table class="table caption-top">
                         <tbody>
                             <tr>
                                 <th>Nb Courses</th>
-                                <td>{{ $plan->nb_courses }}</td>
+                                <td>{{ count($teacher->courses) }} / {{ $plan->nb_courses }}</td>
                             </tr>
                             <tr>
                                 <th>Nb Chapters</th>
@@ -20,7 +20,7 @@
                             </tr>
                             <tr>
                                 <th>Nb Students</th>
-                                <td>{{ $plan->nb_students }}</td>
+                                <td>{{ count($teacher->students) }} / {{ $plan->nb_students }}</td>
                             </tr>
                             <tr>
                                 <th>Nb Submissions</th>
@@ -37,37 +37,35 @@
                         </tbody>
                     </table>
                     <div class="text-end w-100">
-                        <a href="{{ route('plan_teacherIndex') }}" class="highlight"><i class="fas fa-arrow-circle-right"></i>Other Subscription Plans</a>
+                        <a href="{{ route('plan_teacherIndex') }}" class="highlight"><i class="fas fa-arrow-square-right"></i>Other Subscription Plans</a>
                     </div>
-                </span>
-            </div>
         </div>
-        <div class="col p-sides-10">
-            <div class="listElement-v light-card row">
-                <span class="listElementTitle palette-medium col-12 col-md-4">Subscription Details</span>
-                <span class="listElementContent col background">
-                    <div class="align-self-stretch d-flex justify-content-between align-items-center">
+        <div class="col form-section layer-2">
+            
+                <h3 class="title-3">Subscription Details</h3>
+                
+                    <div class="label-value">
                         <span>Created</span>
                         <span>{{ $subscription->created_at }}</span>
                     </div>
-                    <div class="align-self-stretch d-flex justify-content-between align-items-center">
+                    <div class="label-value">
                         <span>Ends</span>
                         <span>{{ $subscription->ends_at }}</span>
                     </div>
-                    <div class="align-self-stretch d-flex justify-content-between align-items-center">
+                    <div class="label-value">
                         <span>Status</span>
-                        <span>{{ ucfirst($subscription->stripe_status) }}
-                        </span>
+                        <span>{{ ucfirst($subscription->stripe_status) }}</span>
                     </div>
                     @if($subscription->stripe_status=='canceled')
                         <p class="text-end w-100">My subscription is canceled?<br>
                         You may still use our subscription plan until the end of the billing period.<br>
                         No new automatic payment will be made.</p>
                     @endif
-                        <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-5 align-self-end">Manage My Subscription</a>
-                </span>
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-5">Manage My Subscription</a>
+                    </div>
                 
-            </div>
+            
         </div>
             
     </div>
@@ -82,5 +80,24 @@
         </span>
     </div>
     @endif
+    <h2 class="light-card block-title layer-2 ">My Details</h2>
+
+	<div class="layer-2 form-section"  style="max-width:500px;">
+		<div class="label-value my-3">
+			<span>Firstname</span>
+			<span>{{ $teacher->firstname }}</span>
+		</div>
+		<div class="label-value  my-3">
+			<span>Lastname</span>
+			<span>{{ $teacher->lastname }}</span>
+		</div>
+		<div class="label-value my-3">
+			<span>Email</span>
+			<span>{{ $teacher->email }}</span>
+		</div>
+		<div class="d-flex flex-col align-items-end mt-3">
+			<a href="{{ route('teacher_teacherEdit') }}"><i class="fas fa-pen-square"></i>Edit</a>
+		</div>
+	</div>
 @endsection
 

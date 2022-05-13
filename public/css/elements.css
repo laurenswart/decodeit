@@ -925,6 +925,11 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		white-space: nowrap;
 	}
 
+	.error-msg{
+		font-style: italic;
+		color: rgb(193, 2, 240);
+	}
+
 	.flash-popup{
 		width: 400px;
 		z-index: 9000;

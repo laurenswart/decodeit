@@ -307,13 +307,23 @@ class StudentController extends Controller
     /**
      * Update student details
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function studentUpdate(){
+    public function studentUpdate(Request $request){
         $this->authorize('studentShow', Student::class);
         $student = Student::find(Auth::id());
         
+        $rules = [
+            'firstname' => 'required|string|max:50',
+            'lastname' => 'required|string|max:50',
+        ];
+        $validated = $request->validate($rules);
 
+        $student->firstname = $validated['firstname'];
+        $student->lastname = $validated['lastname'];
+        $student->save();
+        
         return view('student.account', [
             'student'=>$student
         ]);

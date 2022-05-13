@@ -2,15 +2,15 @@
 
 @section('content')
 <nav class="back-nav">
-	<a href="{{ route('student_studentShow') }}"><i class="fas fa-arrow-alt-square-left"></i>Back</a>
+	<a href="{{ route('teacher_account') }}"><i class="fas fa-arrow-alt-square-left"></i>Back</a>
 </nav>
 <h2 class="light-card block-title layer-2 ">My Details</h2>
-<form action="{{ route('student_studentUpdate') }}" method="post">
+<form action="{{ route('teacher_teacherUpdate') }}" method="post">
 	@csrf
 	<div class="layer-2 form-section" style="max-width:800px;margin:auto">
 		<div class="label-value mt-3">
 			<span>Firstname</span>
-			<input type="text" value="{{ old('firstname') ?? $student->firstname }}" name="firstname" id="firstname">
+			<input type="text" value="{{ old('firstname') ?? $teacher->firstname }}" name="firstname" id="firstname">
 		</div>
 		@if($errors->any('lastname'))
 			<div class="error-msg">
@@ -19,7 +19,7 @@
 		@endif
 		<div class="label-value mt-3">
 			<span>Lastname</span>
-			<input type="text" value="{{ old('lastname') ?? $student->lastname }}" name="lastname" id="lastname">
+			<input type="text" value="{{ old('lastname') ?? $teacher->lastname }}" name="lastname" id="lastname">
 		</div>
 		@if($errors->any('lastname'))
 			<div class="error-msg">

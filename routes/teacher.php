@@ -28,6 +28,10 @@ Route::get('dashboard', ([TeacherController::class, 'dashboard']))
     ->name('teacherDashboard');
 Route::get('account', ([TeacherController::class, 'account']))
     ->name('teacher_account');
+Route::get('account/edit', ([TeacherController::class, 'teacherEdit']))
+    ->name('teacher_teacherEdit');
+Route::post('account', ([TeacherController::class, 'teacherUpdate']))
+    ->name('teacher_teacherUpdate');
 
 //COURSE
 Route::get('courses', ([CourseController::class, 'teacherIndex']))
