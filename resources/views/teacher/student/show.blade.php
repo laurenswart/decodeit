@@ -104,7 +104,7 @@
         </div>
         </div>
         <div class="form-section layer-2">
-        <h3 class="title-3">Assignments</h3>
+        <h3 class="title-3">Linked Assignments</h3>
           @if(count($course->assignments)===0)
             <p>No assignments created</p>
           @else 

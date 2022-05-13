@@ -66,13 +66,15 @@ class SkillController extends Controller
     public function editStudentMark($studentId, $skillId){
         $skill = Skill::find($skillId);
         $student = Student::find($studentId);
+        $assignments = $skill->assignments ?? [];
 
         $this->authorize('editStudentMark', [$skill, $student]);
 
         return view('teacher.student.skill', [
             'skill' => $skill,
             'student' => $student,
-            'currentMark' => $skill->studentMark($studentId)
+            'currentMark' => $skill->studentMark($studentId),
+            'assignments' => $assignments
         ]);
     }
 

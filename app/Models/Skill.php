@@ -32,6 +32,13 @@ class Skill extends Model
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
+    /**
+     * The course associated to this enrolment
+     */
+    public function assignments(){
+        return $this->belongsToMany(Assignment::class, 'assignment_skills', 'skill_id','assignment_id', );
+    }
+
 
     /**
      * The mark for a student for the skill
