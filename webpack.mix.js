@@ -20,3 +20,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 
 mix.copyDirectory('vendor/tinymce/tinymce', 'public/js/tinymce');
 mix.js('resources/js/studentAssignment.js', 'public/js/student');
+mix.js('resources/js/teacherForum.js', 'public/js/teacher');
+mix.js('resources/js/functions.js', 'public/js');

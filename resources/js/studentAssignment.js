@@ -1,11 +1,6 @@
-require('./bootstrap');
-import Alpine from 'alpinejs';
+require('./functions.js');
 
-//// ACE
-import 'ace-builds';
-import 'ace-builds/webpack-resolver';
 
-console.log('studentAssignment script loaded');
 let scriptEditor = document.getElementById('scriptEditor');
 let editor;
 let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
@@ -240,6 +235,53 @@ class CodeSubmission{
     }
 }
 
-window.Alpine = Alpine;
+////
+let btnAddQuestion = document.getElementById('btnAddQuestion');
+let question = document.getElementById('question');
 
-Alpine.start();
+window.addQuestion = function (button){
+    let questionDiv = button.closest('.submissionQuestion');
+    let questionContent = questionDiv.querySelector('textarea').value;
+    let submissionId = button.dataset.submissionid;
+    //if question empty do nothing
+    if(questionContent=='') {
+        createFlashPopUp('Please enter a question', true);
+        return;
+    }
+    
+    //send ajax request
+    console.log(questionContent);
+    console.log(submissionId);
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = function() { //Fonction de rappel
+        if(this.status === 200) {
+            let data = this.responseText;
+            data = JSON.parse(data);
+            if(data.success){
+                //remove textareaand display question
+                let p = document.createElement('p');
+                p.innerText = questionContent;
+                questionDiv.parentNode.insertBefore(p, questionDiv);
+                
+                //change h4 content
+                questionDiv.parentElement.querySelector('h4').innerText = 'Note Attached';
+                questionDiv.remove();
+                createFlashPopUp('Note Successfully Added');
+            }
+        } else {
+            createFlashPopUp('Oops, Something Went Wrong', true);
+        }
+        
+    };
+    const data = JSON.stringify({
+        _token: csrfToken,
+        question: questionContent,
+    });
+
+    xhr.open('POST', "/student/submission/"+submissionId+"/addQuestion");
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(data);
+    // end of ajax call
+};

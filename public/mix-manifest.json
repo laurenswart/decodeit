@@ -1,6 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/student/studentAssignment.js": "/js/student/studentAssignment.js",
+    "/js/teacher/teacherForum.js": "/js/teacher/teacherForum.js",
+    "/js/functions.js": "/js/functions.js",
     "/css/app.css": "/css/app.css",
     "/js/tinymce/.npmignore": "/js/tinymce/.npmignore",
     "/js/tinymce/bower.json": "/js/tinymce/bower.json",

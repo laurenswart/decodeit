@@ -78,19 +78,6 @@ function adaptEditorDisplay(){
     }
 }
 
-
-function createFlashPopUp(msg, error = false){
-    let div = document.createElement('div');
-    div.classList.add('alert', 'flash-popup');
-    if(error){
-        div.classList.add('alert-danger');
-    } else {
-        div.classList.add('alert-success');
-    }
-    div.innerText = msg;
-    document.body.appendChild(div);
-}
-
 window.Alpine = Alpine;
 
 Alpine.start();

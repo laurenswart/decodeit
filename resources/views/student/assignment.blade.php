@@ -189,71 +189,10 @@
 @endsection
 
 @section('scripts')
-	<script src="{{ asset('js/student/studentAssignment.js') }}"></script>
-	<script>
-		function createFlashPopUp(msg, error = false){
-    let div = document.createElement('div');
-    div.classList.add('alert', 'flash-popup');
-    if(error){
-        div.classList.add('alert-danger');
-    } else {
-        div.classList.add('alert-success');
-    }
-    div.innerText = msg;
-    document.body.appendChild(div);
-}
-
-		let btnAddQuestion = document.getElementById('btnAddQuestion');
-		let question = document.getElementById('question');
-
-		function addQuestion(button){
-			let questionDiv = button.closest('.submissionQuestion');
-			let questionContent = questionDiv.querySelector('textarea').value;
-			let submissionId = button.dataset.submissionid;
-			//if question empty do nothing
-			if(questionContent=='') {
-				createFlashPopUp('Please enter a question', true);
-				return;
-			}
-			
-			//send ajax request
-			console.log(questionContent);
-			console.log(submissionId);
-			let xhr = new XMLHttpRequest();
-
-			xhr.onload = function() { //Fonction de rappel
-				console.log(this);
-				if(this.status === 200) {
-					let data = this.responseText;
-					data = JSON.parse(data);
-					console.log(data);
-					if(data.success){
-						//remove textareaand display question
-						let p = document.createElement('p');
-						p.innerText = questionContent;
-						questionDiv.parentNode.insertBefore(p, questionDiv);
-						
-						//change h4 content
-						questionDiv.parentElement.querySelector('h4').innerText = 'Note Attached';
-						questionDiv.remove();
-						createFlashPopUp('Note Successfully Added');
-					}
-				} else {
-					createFlashPopUp('Oops, Something Went Wrong', true);
-				}
-				
-			};
-			const data = JSON.stringify({
-				_token: "<?= csrf_token() ?>",
-				question: questionContent,
-			});
-
-			xhr.open('POST', "/student/submission/"+submissionId+"/addQuestion");
-			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			xhr.setRequestHeader("Content-Type", "application/json");
-			xhr.send(data);
-			// end of ajax call
-		};
+	<script type="text/javascript">
+		let courseId = <?= $assignment->course_id ?>;
+		let csrfToken = "<?= csrf_token() ?>";
 	</script>
+	<script src="{{ asset('js/student/studentAssignment.js') }}"></script>
 @endsection
 

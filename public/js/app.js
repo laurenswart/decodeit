@@ -27550,21 +27550,6 @@ function adaptEditorDisplay() {
   }
 }
 
-function createFlashPopUp(msg) {
-  var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var div = document.createElement('div');
-  div.classList.add('alert', 'flash-popup');
-
-  if (error) {
-    div.classList.add('alert-danger');
-  } else {
-    div.classList.add('alert-success');
-  }
-
-  div.innerText = msg;
-  document.body.appendChild(div);
-}
-
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
