@@ -23,12 +23,21 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
                 </div>
-
+                @if($errors->get('password'))
+                    <div class="error-msg">
+                        Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character.
+                    </div>
+                @endif
                 <!-- Confirm Password -->
                 <div class="form-group">
                     <label for="password">Confirm</label>
                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required>
                 </div>
+                @if($errors->get('password'))
+                    <div class="error-msg">
+                        Passwords do not match
+                    </div>
+                @endif
 
                  <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />

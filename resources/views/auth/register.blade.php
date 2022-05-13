@@ -22,10 +22,20 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required autocomplete="new-password">
                 </div>
+                @if($errors->get('password'))
+                    <div class="error-msg">
+                        Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character.
+                    </div>
+                @endif
                 <div class="form-group">
                     <label for="password-conf">Confirm Password</label>
                     <input type="password" class="form-control" id="password_confirmation-conf" placeholder="Enter confirmation" name="password_confirmation" required>
                 </div>
+                @if($errors->get('password'))
+                    <div class="error-msg">
+                        Passwords do not match
+                    </div>
+                @endif
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="isTeacher" name="isTeacher" {{ old('isTeacher') ? 'checked' : ''}}>
                     <label class="form-check-label" for="isTeacher">I'm a teacher</label>
@@ -33,6 +43,7 @@
                 <button type="submit" class="myButton">Register</button>
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                 <a href="{{ route('login') }}">Already registered ?</a>
             </form>
         </div>
