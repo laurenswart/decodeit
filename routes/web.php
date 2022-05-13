@@ -26,7 +26,13 @@ Route::get('/', function () {
     $plans = Plan::all()->where('is_custom','0')->where('title','!=', 'free');
     return view('welcome', ['plans'=>$plans]);
 })->name('welcome');
-Route::get('/plans', [PlanController::class, 'guestIndex'])->name('plans');
+Route::get('/plans', function () {
+    $plans = Plan::all()->where('is_custom','0')->where('title','!=', 'free');
+    return view('plans', ['plans'=>$plans]);
+})->name('plans');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 //ADMIN
 Route::get('/admin/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');

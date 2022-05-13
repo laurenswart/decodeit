@@ -5,12 +5,11 @@
 
     <h2 class="light-card block-title layer-2">{{ ucfirst($plan->title) }} Plan</h2>
     <div class="row">
-      <div class="col p-sides-10">
-        <div class="listElement-v light-card row">
-          <span class="listElementTitle palette-medium col-12 col-md-4 ">Description</span>
-          <span class="listElementContent col background">
+      <div class="col form-section layer-2">
+          <h3 class="title-3">Description</h3>
+         
           @if($plan->description)
-            <p>{{ $plan->description }}</p>
+          <p>{{ $plan->description }}</p>
           @endif
           <table class="table caption-top">
                 <tbody>
@@ -40,15 +39,13 @@
                     </tr>
                 </tbody>
             </table>
-          </span>
-        </div>
       </div>
-      <div class="col p-sides-10">
-        <div class="listElement-v light-card">
-          <span class="listElementTitle palette-medium col-12 col-md-4">Payment Options</span>
-          <span class="listElementContent col background">
+      <div class="col form-section layer-2">
+        
+          <h3 class="title-3">Payment Options</h3>
+          <div>
               <div class="align-self-stretch d-flex justify-content-between align-items-center mt-2">
-                  <div><h3 class="d-inline-block">{{ $plan->monthly_price }} &#8364</h3>/ MONTH</div>
+                  <div><h3 class="d-inline-block">{{ $plan->monthly_price }} &#8364</h3> / MONTH</div>
                   @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
                     @csrf
@@ -60,7 +57,7 @@
                   @endif
               </div>
               <div class="align-self-stretch d-flex justify-content-between align-items-center mt-2">
-                <div><h3 class="d-inline-block">{{ $plan->semiyearly_price }} &#8364</h3>/ 6 MONTHS</div>
+                <div><h3 class="d-inline-block">{{ $plan->semiyearly_price }} &#8364</h3> / 6 MONTHS</div>
                 @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
                     @csrf
@@ -72,7 +69,7 @@
                   @endif
               </div>
               <div class="align-self-stretch d-flex justify-content-between align-items-center mt-2">
-                <div><h3 class="d-inline-block">{{ $plan->yearly_price }} &#8364</h3>/ YEAR</div>
+                <div><h3 class="d-inline-block">{{ $plan->yearly_price }} &#8364</h3> / YEAR</div>
                 @if(!$hasSubscription)
                   <form action="{{ route('create-checkout-session') }}" method="POST">
                     @csrf
@@ -83,8 +80,7 @@
                   </form>
                   @endif
               </div>
-          </span>
-        </div>
+          </div>
       </div>
   </div>
   @endforeach
