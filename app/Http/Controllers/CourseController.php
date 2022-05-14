@@ -461,6 +461,7 @@ class CourseController extends Controller
 
         $this->authorize('teacherView', $course);
 
+        //htaccess deny from all
         $zip_file = public_path().'/'.$course->title.'.zip'; // Name of our archive to download
 
         // Initializing PHP class
@@ -474,6 +475,10 @@ class CourseController extends Controller
         }
 
         $zip->close();
+        //detruire fichier: unlink
+
+        //headers to dowload
+        //readfile($file)
 
         return  response()->download($zip_file);
     }

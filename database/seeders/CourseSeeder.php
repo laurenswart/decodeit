@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Assignment;
+use App\Models\Chapter;
 use App\Models\Teacher;
 use App\Models\Course;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CourseSeeder extends Seeder
 {
@@ -47,34 +50,100 @@ class CourseSeeder extends Seeder
         //Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Course::truncate();
+        Chapter::truncate();
+        Assignment::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        // //get students and teachers
-        // $teachers = Teacher::get();
+        //get students and teachers
+        $teachers = Teacher::where('email', '!=', 'bsull@gmail.com')->get();
 
-        //  //add students to teachers
-        //  foreach($teachers as $teacher){
-        //     //find max number of students for this teacher
-        //     $subscription = $teacher->currentSubscriptionPlan();
-        //     if(empty($subscription)) continue;
-        //     $max_courses = $subscription->nb_courses;
-        //     //choose a random amount of courses within range
-        //     $nbCourses = rand(1,$max_courses);
-        //     if($nbCourses==0) continue;
-        //     //choose courses
-        //     $courseTitles = array_rand(self::TITLES, $nbCourses);
-        //     $courseTitles = is_int($courseTitles) ? [$courseTitles] : $courseTitles;
-        //     //create the courses
-        //     foreach($courseTitles as $title){
-        //         //course code
-        //         $code = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 5));
-        //         Course::factory()->create([
-        //             'teacher_id' => $teacher->id,
-        //             'title'=>$code.' '.self::TITLES[$title]
-        //         ]);
-        //     }
+        //add students to teachers
+        foreach($teachers as $teacher){
+            //find max number of students for this teacher
+            $subscription = $teacher->currentSubscriptionPlan();
+            if(empty($subscription)) continue;
+            $max_courses = $subscription->nb_courses;
+            //choose a random amount of courses within range
+            $nbCourses = rand(1,$max_courses);
+            if($nbCourses==0) continue;
+            //choose courses
+            $courseTitles = array_rand(self::TITLES, $nbCourses);
+            $courseTitles = is_int($courseTitles) ? [$courseTitles] : $courseTitles;
+            //create the courses
+            foreach($courseTitles as $title){
+                //course code
+                $code = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 5));
+                Course::factory()->create([
+                    'teacher_id' => $teacher->id,
+                    'title'=>$code.' '.self::TITLES[$title]
+                ]);
+            }
             
-        // }
+        }
+        
+        //create some proper courses for bob sull
+        $bob = Teacher::firstWhere('email', '=', 'bsull@gmail.com');
+
+        //get courses, ie folders in resources/courses
+        //name : coursename.html
+        $courses = Storage::disk('local')->directories('courses');
+        $subscription = $bob->currentSubscriptionPlan();
+        //foreach course, 
+        foreach($courses as $coursePath){
+            $courseName = explode('/',$coursePath)[1];
+
+            //create the course
+            $newCourse = Course::factory()->create([
+                'teacher_id' => $bob->id,
+                'title'=>$courseName
+            ]);
+
+            //create chapters
+            $chapters = Storage::disk('local')->files($coursePath.'/chapters');
+            foreach($chapters as $chapterPath){
+                $chapterFullName = explode('chapters/',$chapterPath)[1];
+                $bits = explode('-',$chapterFullName);
+                $chapterOrderId = $bits[0];
+                $chapterName = explode('.',$bits[1])[0];
+                $newChapter = Chapter::factory()->create([
+                    'course_id' => $newCourse->id,
+                    'title'=>$chapterName,
+                    'content'=>Storage::disk('local')->get($chapterPath),
+                    'is_active'=>1,
+                    'order_id'=>$chapterOrderId,
+                ]);
+            }
+
+            //create assignments
+            $assignments = Storage::disk('local')->files($coursePath.'/assignments');
+            foreach($assignments as $assignmentPath){
+                $assignmentFullName = explode('assignments/',$assignmentPath)[1];
+                $bits = explode('-',$assignmentFullName);
+                $chapterId = $bits[0];
+                $assignmentName =  explode('.',$bits[2])[0];
+                $language = stripos('javascript', $courseName)!=-1 
+                    ? 'javascript'
+                    : (stripos('php', $courseName)!=-1 
+                    ? 'php'
+                    : (stripos('java', $courseName)!=-1 
+                    ? 'java'
+                    : (stripos('python', $courseName)!=-1
+                    ? 'python'
+                    : null)));
+                    
+                $newAssignment = Assignment::factory()->create([
+                    'course_id' => $newCourse->id,
+                    'title' => $assignmentName,
+                    'description' => Storage::disk('local')->get($assignmentPath),
+                    'nb_submissions' => rand(1,$subscription->nb_submissions),
+                    'test_script' => null,
+                    'can_execute' => !empty($language),
+                    'submission_size' => $subscription->max_upload_size,
+                    'language' => $language
+                ]);
+            }
+        }
+
     }
 
     
