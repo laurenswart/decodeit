@@ -36,11 +36,11 @@
 				</div>
 				<div class="label-value">
 					<span>Created</span>
-					<span>{{ $assignment->created_at }}</span>
+					<span>{{ $assignment->created_at_string() }}</span>
 				</div>
 				<div class="label-value mb-3">
 					<span>Last Updated</span>
-					<span>{{ $assignment->updated_at }}</span>
+					<span>{{ $assignment->updated_at_string() }}</span>
 				</div>
 				<div class="d-flex flex-col align-items-end mt-3">
 					<a href="{{ route('assignment_teacherEdit', $assignment->id) }}"><i class="fas fa-pen-square"></i>Edit Assignment</a>
@@ -69,11 +69,11 @@
 				</div>
 				<div class="label-value mt-3">
 					<span>Start</span>
-					<span>{{ date('D d/m/Y, H:i', strtotime($assignment->start_time)) }}</span>
+					<span>{{ $assignment->start_time_string() }}</span>
 				</div>
 				<div class="label-value mt-3">
 					<span>End</span>
-					<span>{{ date('D d/m/Y, H:i', strtotime($assignment->end_time)) }}</span>
+					<span>{{ $assignment->end_time_string() }}</span>
 				</div>
 				<div class="label-value mt-3">
 					<span>Is a Test</span>

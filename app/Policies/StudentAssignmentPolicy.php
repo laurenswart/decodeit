@@ -36,7 +36,7 @@ class StudentAssignmentPolicy
         if(empty($assignment)) return false;
         //check student is enroled in this course
         $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
-        return !empty($enrolment) && (date_create_from_format('d/m/Y H:i',$assignment->start_time) < now() && date_create_from_format('d/m/Y H:i',$assignment->end_time) >= now());
+        return !empty($enrolment) && $assignment->isOpen();
     }
 
     /**

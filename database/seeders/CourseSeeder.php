@@ -141,6 +141,10 @@ class CourseSeeder extends Seeder
                     'submission_size' => $subscription->max_upload_size,
                     'language' => $language
                 ]);
+                DB::table('assignment_chapter')->insert([
+                    'assignment_id' => $newAssignment->id,
+                    'chapter_id' => $chapterId,
+                ]);
             }
         }
 

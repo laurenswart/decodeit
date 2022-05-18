@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,7 +40,7 @@ class StudentAssignment extends Model
     }
 
     public function canBeMarked(){
-        return $this->to_mark || date_create_from_format('d/m/Y H:i',$this->assignment->end_time) < now() || count($this->submissions)>=$this->assignment->nb_submissions;
+        return $this->to_mark || Carbon::createFromFormat('Y-m-d H:i:s',$this->assignment->end_time)->lt(now()) || count($this->submissions)>=$this->assignment->nb_submissions;
     }
 
     

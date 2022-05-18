@@ -72,10 +72,10 @@
 						@foreach($assignments as $assignment)
 							<tr>
 								<td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
-								<td>{{ date('D d/m/Y, H:i', strtotime($assignment->start_time)) }}</td>
-								<td>{{ date('D d/m/Y, H:i', strtotime($assignment->end_time)) }}</td>
+								<td>{{  $assignment->start_time_string() }}</td>
+								<td>{{  $assignment->end_time_string() }}</td>
 								<td class="cell-center">
-									@if($assignment->end_time < now() || count($assignment->studentAssignments->whereNotNull('to_mark'))!=0)
+									@if(date_$assignment->end_time_carbon->lt(now()) || count($assignment->studentAssignments->whereNotNull('to_mark'))!=0)
 										<i class="fas fa-exclamation-square"></i>
 									@else 
 										-

@@ -23,7 +23,7 @@
 						</div>
 						<div>
 							<div class="label">Skills Linked</div>
-							<div>{{ implode(', ', $assignment->skills->pluck('title')->toArray()) }}</div>
+							<div>{{ count($assignment->skills)==0 ? '-' : implode(', ', $assignment->skills->pluck('title')->toArray()) }}</div>
 						</div>
 					</span>
 					<span id="details" class="col">
@@ -45,15 +45,15 @@
 						</span>
 						<span>
 							<span class="label">Start</span>
-							<span>{{ $assignment->start_time }}</span>
+							<span>{{ $assignment->start_time_string() }}</span>
 						</span>
 						<span>
 							<span class="label">End</span>
-							<span>{{ $assignment->end_time }}</span>
+							<span>{{ $assignment->end_time_string() }}</span>
 						</span>
 						<span>
 							<span class="label">Last Updated</span>
-							<span>{{ $assignment->updated_at ??  $assignment->created_at}}</span>
+							<span>{{ $assignment->updated_at ? date_create_from_format ('Y-m-d H:i:s',$assignment->updated_at)->format('d/m/Y, H:i') :  date_create_from_format ('Y-m-d H:i:s',$assignment->created_at)->format('d/m/Y, H:i')}}</span>
 						</span>
 					</span>
 					</span>
@@ -131,7 +131,7 @@
 	@endif
 
 
-	@if($assignment->nb_submissions > count($submissions) && ($studentAssignment==null || !$studentAssignment->to_mark) && (date_create_from_format('d/m/Y H:i',$assignment->start_time) < now() && date_create_from_format('d/m/Y H:i',$assignment->end_time) >= now()))
+	@if($assignment->nb_submissions > count($submissions) && ($studentAssignment==null || !$studentAssignment->to_mark) && $assignment->isOpen())
 	<form method="post" action="{{ route('submission_studentStore', $assignment->id) }}" id="newSubmission">
 	<section id="submission">
 		
@@ -178,7 +178,7 @@
 		</div>
 
 		
-	@if(($studentAssignment==null || !$studentAssignment->to_mark) && (date_create_from_format('d/m/Y H:i',$assignment->start_time) < now() && date_create_from_format('d/m/Y H:i',$assignment->end_time) >= now()))
+	@if(($studentAssignment==null || !$studentAssignment->to_mark) && $assignment->isOpen())
 	<div class="btn-box centered">
 		<a href="{{ route('studentAssignment_studentConfirmDone', $assignment->id) }}" class="myButton btn-highlight">Done this assignment</a>		
 	</div>

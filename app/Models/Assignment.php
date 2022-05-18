@@ -133,4 +133,37 @@ class Assignment extends Model
         return 'undergoing';
         
     }
+
+    public function start_time_string(){
+        
+        return Carbon::createFromFormat('Y-m-d H:i:s',$this->start_time)->format('d/m/Y, H:i');
+    }
+
+    public function created_at_string(){
+        
+        return Carbon::createFromFormat('Y-m-d H:i:s',$this->created_at)->format('d/m/Y, H:i');
+    }
+
+    public function updated_at_string(){
+        
+        return Carbon::createFromFormat('Y-m-d H:i:s',$this->updated)->format('d/m/Y, H:i');
+    }
+
+    public function start_time_carbon(){
+        
+        return Carbon::createFromFormat('Y-m-d H:i:s',$this->start_time);
+    }
+
+    public function end_time_string(){
+        return Carbon::createFromFormat('Y-m-d H:i:s',$this->end_time)->format('d/m/Y, H:i');
+    }
+    public function end_time_carbon(){
+        
+        return Carbon::createFromFormat('Y-m-d H:i:s',$this->end_time);
+    }
+
+    public function isOpen(){
+        return $this->start_time_carbon()->lt(now()) && $this->end_time_carbon()->gt(now());
+    }
 }
+

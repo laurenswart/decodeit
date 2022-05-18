@@ -51,8 +51,8 @@
 				@foreach($course->assignments->sortByDesc('start_time') as $assignment)
 					<tr>
 						<td><a href="{{ route('assignment_studentShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
-						<td>{{ $assignment->start_time }}</td>
-						<td>{{ $assignment->end_time }}</td>
+						<td>{{ $assignment->start_time_string() }}</td>
+						<td>{{ $assignment->end_time_string() }}</td>
 						<td>@if($assignment->is_test)<i class="fas fa-exclamation-square"></i>Test @else Exercice @endif</td>
 						<td>{!! $assignment->statusTextByStudent(Auth::id()) !!}</td>
 						<td>{{$assignment->studentAssignmentByStudent(Auth::id())!==null ? $assignment->studentAssignmentByStudent(Auth::id())->mark.' / '.$assignment->max_mark : '-'}}</td>

@@ -40,11 +40,11 @@
        
         <div class="label-value">
           <span class="label">Start</span>
-          <span>{{ date('D d/m/Y, H:i', strtotime($studentAssignment->assignment->start_time)) }}</span>
+          <span>{{ $studentAssignment->assignment->start_time_string() }}</span>
         </div>
         <div class="label-value">
           <span class="label">End</span>
-          <span>{{ date('D d/m/Y, H:i', strtotime($studentAssignment->assignment->end_time)) }}</span>
+          <span>{{ $studentAssignment->assignment->end_time_string() }}</span>
         </div>
         <div class="label-value">
           <span class="label">Type</span>

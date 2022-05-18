@@ -19,8 +19,8 @@
 							@foreach($assignments->sortBy('start_time')->sortBy('end_time') as $assignment)
 								<tr>
 									<td><a href="{{ route('assignment_teacherShow', $assignment->id)}}" class="label">{{ $assignment->title }}</a></td>
-									<td>{{ date('D d/m/Y, H:i', strtotime($assignment->start_time)) }}</td>
-									<td>{{ date('D d/m/Y, H:i', strtotime($assignment->end_time)) }}</td>
+									<td>{{  $assignment->start_time_string() }}</td>
+									<td>{{  $assignment->end_time_string() }}</td>
 								</tr>
 							@endforeach
 							</tbody>

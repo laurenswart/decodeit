@@ -16,7 +16,7 @@
 		<h2 class="light-card block-title layer-2">Coming Up</h2>
         @foreach($assignments as $assignment)
 		<a href="{{ route('assignment_studentShow', $assignment->id) }}" class="listElement-h light-card row zoom">
-			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time }}</span>
+			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time_string() }}</span>
 			<span class="listElementContent col background">
 				<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
 				<span>
