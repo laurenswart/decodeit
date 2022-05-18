@@ -135,7 +135,7 @@ class Assignment extends Model
 
     public function updated_at_string(){
         
-        return Carbon::createFromFormat('Y-m-d H:i:s',$this->updated)->format('d/m/Y, H:i');
+        return $this->updated_at ? Carbon::createFromFormat('Y-m-d H:i:s',$this->updated_at)->format('d/m/Y, H:i') : null;
     }
 
     public function start_time_carbon(){

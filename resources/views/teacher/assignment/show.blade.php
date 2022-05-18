@@ -121,9 +121,7 @@
 
 		<h2 class="light-card block-title layer-2">Student Submissions</h2>
 		<div class="form-section layer-2   mx-2">
-		@if(count($assignment->studentAssignments)==0)
-				<p>No submissions</p>
-		@else	
+			
 			
 			<table class="table">
               <thead>
@@ -136,32 +134,43 @@
                 </tr>
               </thead>
               <tbody>
-			  @foreach($assignment->studentAssignments as $studentAssignment)
+			  @foreach($assignment->course->students->sortBy('firstname') as $student)
+			  	<?php $studentAssignment = $assignment->studentAssignmentByStudent($student->id) ?>
+				 
                 <tr>
-                   <th scope="row"><a href="{{ route('student_teacherShow', $studentAssignment->enrolment->student_id) }}">{{ ucfirst($studentAssignment->enrolment->student->firstname) }} {{ ucfirst($studentAssignment->enrolment->student->lastname) }}</th>
-                   <td class="cell-center">{{ count($studentAssignment->submissions) ?? '-'}}</td>
-				   <td class="cell-center">
-						@if(count($studentAssignment->submissions->whereNull('feedback')->whereNotNull('question')))
-							<i class="fas fa-exclamation-square"></i>
-						@else
+                   <th scope="row"><a href="{{ route('student_teacherShow', $student->id) }}">{{ ucfirst($student->firstname) }} {{ ucfirst($student->lastname) }}</th>
+				   @if(!empty($studentAssignment))
+					<td class="cell-center">{{ count($studentAssignment->submissions) ?? '-'}}</td>
+					<td class="cell-center">
+							@if(count($studentAssignment->submissions->whereNull('feedback')->whereNotNull('question')))
+								<i class="fas fa-exclamation-square"></i>
+							@else
+								-
+							@endif
+					</td>
+					<td class="cell-center">
+						@if($studentAssignment->mark) 
+							{{$studentAssignment->mark}} / {{ $assignment->max_mark}}
+						@elseif($studentAssignment->canBeMarked()) 
+							<i class="fas fa-exclamation-square"></i>To do
+						@else 
 							-
 						@endif
 					</td>
-				   <td class="cell-center">
-					@if($studentAssignment->mark) 
-						{{$studentAssignment->mark}} / {{ $assignment->max_mark}}
-					@elseif($studentAssignment->canBeMarked()) 
-						<i class="fas fa-exclamation-square"></i>To do
-					@else 
-						-
-					@endif</td>
-					<td><a href="{{ route('studentAssignment_teacherShow', $studentAssignment->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage Submissions</a></td>
+					<td class="cell-center"><a href="{{ route('studentAssignment_teacherShow', $studentAssignment->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage Submissions</a></td>
+					@else
+					<td class="cell-center">-</td>
+					<td class="cell-center">-</td>
+					<td class="cell-center">-</td>
+					<td class="cell-center">-</td>
+					@endif
                 </tr>
+				
 				@endforeach
               </tbody>
             </table>
 			
-		@endif
+
 		</div>
 
 @endsection

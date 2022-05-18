@@ -146,7 +146,7 @@ class Teacher extends User
                 'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
                 'text'=> 'New Questions for ',
                 'resource' => ucfirst($studentAssignment->assignment->title),
-                'date'=> Carbon::parse($assignmentsWithNewQuestions->created_at)
+                'date'=> Carbon::parse($studentAssignment->created_at)
             ];
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
