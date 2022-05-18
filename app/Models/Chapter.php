@@ -50,13 +50,12 @@ class Chapter extends Model
     }
 
     public function nbAssignmentsDone(){
-        $assignmentIds = $this->assignments->pluck('assignment_id');
+        $assignmentIds = $this->assignments->pluck('id');
         $enrolmentId = $this->course->enrolmentForAuth();
-
         $nbDone = DB::table('student_assignment')
-            ->where('enrolment_id', $enrolmentId)
+            ->where('enrolment_id', $enrolmentId->id)
             ->whereIn('assignment_id', $assignmentIds)
-            ->where('to_mark', true)->count();
+            ->where('to_mark', 1)->count();
 
         return $nbDone;
     }

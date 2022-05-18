@@ -328,7 +328,7 @@ a.btn-right{
 	display:flex;
 	padding:0;
 	align-items:stretch;
-	background-color: var(--color-mediumPurple);
+	/*background-color: var(--color-mediumPurple);*/
 	border: 1px solid var(--color-mediumPurple);
 	text-decoration: none;
     margin-bottom: 15px;
@@ -373,6 +373,7 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	}
 	a.listElement-h .listElementContent{
 		border-radius:0 0 8px 8px ;
+		justify-content: flex-end;
 	}
 }
 .dark-mode .listElement-h, .darkmode .listElement-v {
@@ -691,7 +692,7 @@ a:hover{
 
 
 .accordion-button:not(.collapsed){
-    background:var(--color-lightWhite);
+    background:var(--color-mediumWhite);
 	color: var(--color-darkPurple);
 }
 .accordion-header{
@@ -706,6 +707,11 @@ a:hover{
 .accordion-button::after {
 	align-self: center;
     margin-right: 10px;
+	background-color: var(--color-mediumWhite);
+	
+}
+.dark-mode .accordion-button::after {
+	background-color: var(--color-darkestPurple);
 }
 
 

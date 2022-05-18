@@ -119,7 +119,7 @@ class CourseSeeder extends Seeder
             foreach($assignments as $assignmentPath){
                 $assignmentFullName = explode('assignments/',$assignmentPath)[1];
                 $bits = explode('-',$assignmentFullName);
-                $chapterId = $bits[0];
+                $chapterOrderId = $bits[0];
                 $assignmentName =  explode('.',$bits[2])[0];
                 $language = stripos('javascript', $courseName)!=-1 
                     ? 'javascript'
@@ -141,9 +141,11 @@ class CourseSeeder extends Seeder
                     'submission_size' => $subscription->max_upload_size,
                     'language' => $language
                 ]);
+                //find related chapter
+                $chapter = Chapter::where('course_id',$newCourse->id)->firstWhere('order_id', $chapterOrderId);
                 DB::table('assignment_chapter')->insert([
                     'assignment_id' => $newAssignment->id,
-                    'chapter_id' => $chapterId,
+                    'chapter_id' => $chapter->id,
                 ]);
             }
         }

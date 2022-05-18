@@ -127,10 +127,10 @@ class Assignment extends Model
                 $icon = '<i class="fas fa-exclamation-square"></i>';
                 break;
             case 'marked':
-                $icon = '<i class="fas fa-check-double"></i>';
+                $icon = '<i class="fas fa-check-double greyed no-hover"></i>';
                 break;
             case 'done':
-                $icon = '<i class="fas fa-check-square"></i>';
+                $icon = '<i class="fas fa-check-square greyed no-hover"></i>';
                 break;
             case 'undergoing':
                 $icon = '<i class="fas fa-spinner"></i>';

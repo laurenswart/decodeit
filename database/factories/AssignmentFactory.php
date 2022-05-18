@@ -34,8 +34,8 @@ class AssignmentFactory extends Factory
             'deleted_at' => null,
             'start_time' => $start,
             'end_time' => $this->faker->dateTimeBetween($start, new DateTime('+3 months')),
-            'max_mark' => rand(1,10)*100,
-            'course_weight' =>  $isTest ? rand(1,10)*100 : 0,
+            'max_mark' => rand(1,10)*10,
+            'course_weight' =>  $isTest ? rand(1,10)*10 : 0,
             'is_test' => $isTest
         ];
     }

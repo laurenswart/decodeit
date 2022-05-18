@@ -25,13 +25,14 @@
 				<span class="flex-fill d-flex">
 					@if(count($chapter->assignments)!= 0)
 					<div class="progressbar layer-1">
-						<div class="progress"  style="width:{{ $chapter->nbAssignmentsDone() / count($chapter->assignments)  }}%">
+						<div class="progress"  style="width:{{ $chapter->nbAssignmentsDone() / count($chapter->assignments) * 100}}%">
 						</div>
+						
 					</div><p>{{ $chapter->nbAssignmentsDone() }} / {{ count($chapter->assignments)}} Assignments</p>
 					@endif
 				</span>
 				
-				<span class="small-date" style="width:30px;"><i class="fas fa-eye {{ $chapter->read() ? 'fa-eye greyed' : 'fa-eye-slash' }}"></i></span>
+				<span class="small-date" style="width:30px;"><i class="fas fa-eye {{ $chapter->read() ? 'fa-eye greyed no-hover' : 'fa-eye-slash' }}"></i></span>
 			</span>
 		</a>
         @endforeach
@@ -41,11 +42,11 @@
 	<section id="coming-up">
 		<h2 class="light-card block-title layer-2">Assignments</h2>
         @foreach($chapter->course->assignments as $assignment)
-		<a href="{{ route('assignment_studentShow', $assignment->id)}}" class="listElement-h light-card row zoom">
-			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $assignment->end_time_string() }}</span>
+		<a href="{{ route('assignment_studentShow', $assignment->id)}}" class="listElement-h light-card row zoom palette-medium">
+			<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $assignment->title }}</p></span>
 			<span class="listElementContent col background">
-				<span><p><i class="fas fa-clipboard-list greyed no-hover"></i>{{ $assignment->title }}</p></span>
-				<span>{!! $assignment->statusTextForAuth() !!}</span>
+				<span><p><i class="fas fa-clipboard-list greyed no-hover"></i><strong>Starts</strong> {{ $assignment->start_time_string() }}  -   <strong>Ends</strong> {{ $assignment->end_time_string() }}</p></span>
+				<span><p>{!! $assignment->statusTextForAuth() !!}</p></span>
 			</span>
 		</a>
         @endforeach

@@ -36,7 +36,7 @@
 							<span>{{ $assignment->is_test ? 'Test' : 'Exercise'}}</span>
 						</span>
 						<span>
-							<span class="label">Type</span>
+							<span class="label">Language</span>
 							<span>{{ $assignment->language ? ucfirst($assignment->language) :  '-'}}</span>
 						</span>
 						<span>
@@ -82,16 +82,16 @@
 			@foreach($submissions as $id => $submission)
 			<div class="accordion-item background">
 				<h3 class="accordion-header row zoom " id="heading{{$id}}">
-				<span class="accordion-button listElement-h light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$id}}" aria-controls="collapse{{$id}}" aria-expanded="false">
+				<span class="accordion-button listElement-h background light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$id}}" aria-controls="collapse{{$id}}" aria-expanded="false">
 					<span class="listElementTitle palette-medium col-12 col-md-4">{{ $submission->created_at }}</span>
 					<span class="listElementContent col background">
-						<span class="">
+						<span>
 							@if(!empty($submission->feedback))
 								<i class="fas fa-inbox-in greyed"></i>Has Feedback
 							@else	
 								<i class="fas fa-hand-paper greyed"></i>Waiting on Feedback
 							@endif
-						</span>
+						</span>	
 					</span>
 				</span>
 				</h3>

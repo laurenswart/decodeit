@@ -27,11 +27,16 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function dashboard(){
+        $courses = Student::find(Auth::id())->courses
+        ->whereNull('deleted_at');
+        $assignments = Assignment::all()
+        ->sortBy('start_time')
+        ->whereIn('course_id', $courses->pluck('id'))
+        ->where('end_time', '>=', now());
 
-        //dd(Student::find(Auth::id())->notifications());
-        
         return view('student.dashboard', [
-            'notifications' => Student::find(Auth::id())->notifications()
+            'notifications' => Student::find(Auth::id())->notifications(),
+            'assignments' => $assignments
         ]);
     }
 
