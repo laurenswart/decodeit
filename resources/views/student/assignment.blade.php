@@ -17,10 +17,16 @@
 			<span class="listElementContent  layer-2">
 				<span class="row w-100">
 					<span id="description" class="col-sm-6 col-md-8 col-12">
-						<div>
-							<div class="label">Description</div>
-							<div>{!! clean($assignment->description) !!}</div>
-						</div>
+						
+							<div>
+								<div class="label">Description</div>
+								@if(count($assignment->notes)>0 && $assignment->start_time_carbon()->lt(now()))
+									<div>{!! clean($assignment->description) !!}</div>
+								@else
+									<div>This assignment is not available yet.</div>
+								@endif
+							</div>
+						
 						<div>
 							<div class="label">Skills Linked</div>
 							<div>{{ count($assignment->skills)==0 ? '-' : implode(', ', $assignment->skills->pluck('title')->toArray()) }}</div>
@@ -66,7 +72,7 @@
 					</span>
 			</span>
 		</div>
-		@if(count($assignment->notes)>0)
+		@if(count($assignment->notes)>0 && $assignment->start_time_carbon()->lt(now()))
 		<div class="listElement-v light-card row no-border">
 			<span class="listElementTitle palette-medium col-12">Notes</span>
 			<span class="listElementContent col layer-1">
