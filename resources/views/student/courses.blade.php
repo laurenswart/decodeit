@@ -5,7 +5,7 @@
 		<h2 class="light-card block-title layer-2">Courses</h2>
         @foreach($courses as $course)
 		<a href="{{ route('course_studentShow', $course->id)}}" class="listElement-h light-card row zoom">
-			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $course->title }}</span>
+			<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $course->title }}</p></span>
 			<span class="listElementContent col background">
 			</span>
 		</a>
@@ -20,6 +20,7 @@
 			<span class="listElementContent col background">
 				<span><i class="fas fa-clipboard-list greyed"></i>{{ $assignment->title }}</span>
 				<span>
+					<p>
 					{{ ucwords($assignment->statusForAuth()) }}
 					@switch( $assignment->statusForAuth() )
 						@case('to do')
@@ -34,6 +35,7 @@
 						@default
 							<i class="fas fa-question-circle"></i>
 					@endswitch
+					</p>
 				</span>
 			</span>
 		</a>

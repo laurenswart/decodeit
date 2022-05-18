@@ -39,12 +39,13 @@ class Chapter extends Model
     }
 
     public function read(){
-        $enrolmentId = $this->course->enrolmentForAuth();
+        $enrolmentId = $this->course->enrolmentForAuth()->id;
         $read = DB::table('chapters_read')
             ->where('enrolment_id', $enrolmentId)
             ->where('chapter_id', $this->id)
             ->count();
         ;
+        
         return $read == 1;
     }
 

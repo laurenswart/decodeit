@@ -52,12 +52,12 @@ class CourseSeeder extends Seeder
         Course::truncate();
         Chapter::truncate();
         Assignment::truncate();
+        DB::table('assignment_chapter')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //get students and teachers
         $teachers = Teacher::where('email', '!=', 'bsull@gmail.com')->get();
 
-        //add students to teachers
         foreach($teachers as $teacher){
             //find max number of students for this teacher
             $subscription = $teacher->currentSubscriptionPlan();

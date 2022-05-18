@@ -13,17 +13,7 @@ use Stripe\StripeClient;
 
 class SubscriptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-
+    
     public function createCheckoutSession(Request $request){
         if(empty( $request->post('price_id'))){
             return abort(403);

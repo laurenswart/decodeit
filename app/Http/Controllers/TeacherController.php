@@ -16,8 +16,7 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
-    {
+    public function dashboard(){
         $teacher = Teacher::find(Auth::id());
 
         return view('teacher.dashboard', [
