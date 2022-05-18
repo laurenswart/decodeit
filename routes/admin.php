@@ -30,5 +30,8 @@ Route::get('students', [StudentController::class, 'adminIndex'])
     ->name('student_adminIndex');
 Route::get('teachers', [TeacherController::class, 'adminIndex'])
     ->name('teacher_adminIndex');
+Route::get('teachers/{id}', [TeacherController::class, 'adminShow'])
+    ->where('id', '[0-9]+')
+    ->name('teacher_adminShow');
 
 

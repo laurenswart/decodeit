@@ -41,10 +41,26 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function adminIndex(){
-        $students = Student::all();
+    public function adminIndex(Request $request){
+        $currentQueries = $request->query();
+        $sort = $request->query('sort') ?? 'firstname';
+        $order = $request->query('order') ?? 'asc';
+        $filter = $request->query('filter') ?? '';
+        $students = Student::
+                orderBy($sort, $order)
+                ->where(function ($query) use ($filter){
+                    $query->where('firstname', 'like', "%$filter%")
+                          ->orWhere('lastname', 'like',"%$filter%");
+                })
+                ->paginate(10)
+                ->appends( ['sort'=>$sort, 'order'=>$order, 'filter'=>$filter ]);
+        
+        $currentQueries['sort'] = $sort;
+        $currentQueries['order'] = $order;
+        $currentQueries['filter'] = $filter;
         return view('admin.student.index', [
-            'students'=>$students
+            'students'=>$students,
+            'currentQueries'=>$currentQueries
         ]);
     }
 

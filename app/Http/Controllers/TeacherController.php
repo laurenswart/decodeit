@@ -31,10 +31,44 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function adminIndex(){
-        $teachers = Teacher::all();
+    public function adminIndex(Request $request){
+
+        $currentQueries = $request->query();
+        $sort = $request->query('sort') ?? 'firstname';
+        $order = $request->query('order') ?? 'asc';
+        $filter = $request->query('filter') ?? '';
+        $teachers = Teacher::
+                orderBy($sort, $order)
+                ->where(function ($query) use ($filter){
+                    $query->where('firstname', 'like', "%$filter%")
+                          ->orWhere('lastname', 'like',"%$filter%");
+                })
+                ->paginate(10)
+                ->appends( ['sort'=>$sort, 'order'=>$order, 'filter'=>$filter ]);
+        
+        $currentQueries['sort'] = $sort;
+        $currentQueries['order'] = $order;
+        $currentQueries['filter'] = $filter;
         return view('admin.teacher.index', [
-            'teachers'=>$teachers
+            'teachers'=>$teachers,
+            'currentQueries'=>$currentQueries
+        ]);
+    }
+
+    /**
+     * Show account details for the teacher
+     *
+     * @param int $id Teacher id
+     * @return \Illuminate\Http\Response
+     */
+    public function adminShow(int $id ){
+        $teacher = Teacher::find($id);
+        $plan = $teacher->currentSubscriptionPlan();
+        $subscription = $teacher->currentSubscription();
+        return view('admin.teacher.show', [
+            'plan' => $plan,
+            'subscription' => $subscription,
+            'teacher' => $teacher
         ]);
     }
 
