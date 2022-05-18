@@ -274,7 +274,7 @@ class AssignmentController extends Controller
         $this->authorize('delete', $assignment);
         $message = "<p>You have chosen to delete the following assignment: <strong>".$assignment->title."</strong></p>";
         $message .= "<ul><li>Course: ".$assignment->course->title."</li><li>Chapter: ".$assignment->chapters[0]->title."</li></ul>";
-        $message .= "<p>Please be aware that this will remove all associated data, such as student attempts, marks, assingment notes, etc.</p>";
+        $message .= "<p>Please be aware that this will remove all associated data, such as student attempts, marks, assignment notes, etc.</p>";
         $message .= "<p>Sure you want to delete ?</p>";
         return view('teacher.confirmDelete', [
             'route'=> route('assignment_teacherDelete', $id),

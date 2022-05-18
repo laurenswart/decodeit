@@ -9,6 +9,9 @@
 		<p>{!! $message!!}</p>
 		<form method="post" action="{{ $confirmAction }}" class="d-flex justify-content-center">
 			@csrf
+			@if($delete)  
+				@method('DELETE')
+			@endif
 			<button class="myButton btn-highlight my-4" type="submit">{{ $confirmLabel }}</button>
 		</form>
 	</div>

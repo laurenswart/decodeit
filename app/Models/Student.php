@@ -5,12 +5,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Student extends User
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public function teachers(){
         return $this->belongsToMany(Student::class, 'teacher_student', 'student_id', 'teacher_id', 'id', 'id', );
@@ -148,13 +149,15 @@ class Student extends User
             ];
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
-            $models[] = [
-                'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
-                'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),
-                'text'=> 'New Messages in ',
-                'resource' => ucfirst($updatedForumCourse['title']),
-                'date'=> Carbon::parse($updatedForumCourse['created_at'])
-            ];
+            if($student->courses->pluck('id')->contains($updatedForumCourse->id)){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
+                    'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),
+                    'text'=> 'New Messages in ',
+                    'resource' => ucfirst($updatedForumCourse['title']),
+                    'date'=> Carbon::parse($updatedForumCourse['created_at'])
+                ];
+            }
         }
         foreach($createdEnrolments as $createdEnrolment){
             $models[] = [

@@ -328,4 +328,45 @@ class StudentController extends Controller
             'student'=>$student
         ]);
     }
+
+    /**
+     * Show confirmation page to delete account
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentConfirmDelete(){
+        $this->authorize('studentShow', Student::class);
+        
+        $message = "<p>You have chosen to delete your account.</p>";
+        $message .= "<p>Please be aware that this will remove all of your data data, such as submissions, marks, progress etc.</p>";
+        $message .= "<p>This action cannot be undone.</p>";
+        $message .= "<p>Are you sure you want to delete ?</p>";
+        return view('student.confirm', [
+            'confirmAction'=> route('student_studentDelete'),
+            'message'=>$message,
+            'confirmLabel'=>'Delete',
+            'title'=>'Delete Account',
+            'backRoute'=> route('student_studentShow'),
+            'delete'=>true
+        ]);
+    }
+
+    /**
+     * Remove personnal information from student
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function studentDelete(){
+        $this->authorize('studentShow', Student::class);
+        //remove firstname, lastname, email, password    
+        $userId = Auth::id();
+        $student = Student::find($userId);
+        $student->firstname = 'firstname_'.$userId;
+        $student->lastname = 'lastname_'.$userId;
+        $student->email = 'email_'.$userId;
+        $student->save();
+        $student->delete();
+        Auth::logout();
+        return redirect(route('welcome'));
+    }
 }

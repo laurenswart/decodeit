@@ -41,8 +41,7 @@
                     <label class="form-check-label" for="isTeacher">I'm a teacher</label>
                 </div>
                 <button type="submit" class="myButton">Register</button>
-                <!-- Validation Errors -->
-                <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                
 
                 <a href="{{ route('login') }}">Already registered ?</a>
             </form>

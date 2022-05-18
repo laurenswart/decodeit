@@ -32,6 +32,10 @@ Route::get('account/edit', ([TeacherController::class, 'teacherEdit']))
     ->name('teacher_teacherEdit');
 Route::post('account', ([TeacherController::class, 'teacherUpdate']))
     ->name('teacher_teacherUpdate');
+Route::get('account/delete', ([TeacherController::class, 'teacherConfirmDelete']))
+    ->name('teacher_confirmDelete');
+Route::delete('account/delete', ([TeacherController::class, 'teacherDelete']))
+    ->name('teacher_delete');
 
 //COURSE
 Route::get('courses', ([CourseController::class, 'teacherIndex']))
