@@ -81,8 +81,8 @@
     </div>
     @endif
     <h2 class="light-card block-title layer-2 ">My Details</h2>
-
-	<div class="layer-2 form-section"  style="max-width:500px;">
+    <div class="row">
+	<div class="layer-2 form-section col">
 		<div class="label-value my-3">
 			<span>Firstname</span>
 			<span>{{ $teacher->firstname }}</span>
@@ -99,5 +99,15 @@
 			<a href="{{ route('teacher_teacherEdit') }}"><i class="fas fa-pen-square"></i>Edit</a>
 		</div>
 	</div>
+    <div class="form-section col-12 col-md-6 layer-2">
+		<h3>I wish to delete my account</h3>
+		<p>You may delete your account at any time. All your personal information will be removed, such as name, email address and password.</p>
+	
+		<div class="d-flex flex-col align-items-end mt-3">
+		<a href="{{ route('teacher_teacherConfirmDelete') }}"><i class="fas fa-minus-square"></i>Delete</a>
+		</div>
+		
+	</div>
+</div>
 @endsection
 

@@ -93,4 +93,42 @@ class TeacherController extends Controller
         return  redirect(route('teacher_account'));
     }
 
+    /**
+     * Show confirmation page to delete account
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherConfirmDelete(){
+        $this->authorize('teacherShow', Teacher::class);
+        
+        $message = "<p>You have chosen to delete your account.</p>";
+        $message .= "<p>Please be aware that this will remove all of your data data, such as courses, chapters, assignments, students submissions, marks, etc.</p>";
+        $message .= "<p>This action cannot be undone.</p>";
+        $message .= "<p>Are you sure you want to delete ?</p>";
+        return view('teacher.confirmDelete', [
+            'route'=> route('teacher_teacherDelete'),
+            'message'=>$message,
+            'resource'=>'Account',
+            'backRoute'=> route('teacher_account'),
+        ]);
+    }
+
+    /**
+     * Remove personnal information from teacher
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherDelete(){
+        $this->authorize('teacherShow', Teacher::class);
+        //remove firstname, lastname, email, password    
+        $userId = Auth::id();
+        $teacher = Teacher::find($userId);
+        $teacher->firstname = 'firstname_'.$userId;
+        $teacher->lastname = 'lastname_'.$userId;
+        $teacher->email = 'email_'.$userId;
+        $teacher->save();
+        $teacher->delete();
+        Auth::logout();
+        return redirect(route('welcome'));
+    }
 }

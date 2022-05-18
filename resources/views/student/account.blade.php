@@ -24,15 +24,15 @@
 
 		
 		
-		<div class="form-section col layer-2 j">
-			<h3>I wish to delete my account</h3>
-			<p>You may delete your account at any time. All your personal information will be removed, such as name, email address and password.</p>
-		
-			<div class="d-flex flex-col align-items-end mt-3">
-			<a href="{{ route('student_confirmDelete') }}"><i class="fas fa-minus-square"></i>Delete</a>
-			</div>
-			
+	<div class="form-section col-12 col-md-6 layer-2">
+		<h3>I wish to delete my account</h3>
+		<p>You may delete your account at any time. All your personal information will be removed, such as name, email address and password.</p>
+	
+		<div class="d-flex flex-col align-items-end mt-3">
+		<a href="{{ route('student_confirmDelete') }}"><i class="fas fa-minus-square"></i>Delete</a>
 		</div>
+		
+	</div>
 
 </div>
 @endsection
