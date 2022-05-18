@@ -8,9 +8,9 @@
 
     <div class="row">
         <div class="col form-section layer-2">
-            
-                <h3 class="title-3">{{ ucfirst($plan->title) }} Plan</h3>
                 @if($plan)
+                <h3 class="title-3">{{ ucfirst($plan->title) }} Plan</h3>
+                
                     <table class="table caption-top">
                         <tbody>
                             <tr>
@@ -57,6 +57,14 @@
                 <div class="label-value my-3">
                     <span>Email</span>
                     <span>{{ $teacher->email }}</span>
+                </div>
+                <div class="label-value my-3">
+                    <span>Account Created</span>
+                    <span>{{ $teacher->created_at }}</span>
+                </div>
+                <div class="label-value my-3">
+                    <span>Account Deleted</span>
+                    <span>{{ $teacher->deleted_at ??  '-' }}</span>
                 </div>
 
                 <div class="label-value my-3">
