@@ -26,10 +26,19 @@ Route::get('/', function () {
     $plans = Plan::all()->where('is_custom','0')->where('title','!=', 'free');
     return view('welcome', ['plans'=>$plans]);
 })->name('welcome');
+
 Route::get('/plans', function () {
     $plans = Plan::all()->where('is_custom','0')->where('title','!=', 'free');
     return view('plans', ['plans'=>$plans]);
 })->name('plans');
+
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');

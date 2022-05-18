@@ -123,6 +123,8 @@
             </div>
                     
         @endif
+
+        <x-footer></x-footer>
         <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
         

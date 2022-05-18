@@ -81,12 +81,7 @@
             @yield('content')
         </main>
 		</div>
-        <button onclick="topFunction()" id="scrollToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-        <footer class="u-align-center u-clearfix u-footer  layer-1 u-footer" id="sec-e3f5">
-            <div class="u-clearfix u-sheet u-sheet-1">
-                <p class="u-text  u-text-1">Some footer to add</p>
-            </div>
-        </footer>
+        <x-footer></x-footer>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
