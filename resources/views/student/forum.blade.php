@@ -9,24 +9,25 @@
 		</div>
 
 		<div class="forum">
-        @foreach($messages as $message)
-			<div class="layer-2 forum-msg form-section {{ $message->user->id == Auth::id() ? 'right' : ''}}">
-				<div class="msg-header">
-					<span>
-						@if($message->user->id == Auth::id())
-							Me
-						@else
-							{{ ucfirst($message->user->firstname) }} {{ ucfirst($message->user->lastname) }}
-							@if($message->user_id == $course->teacher_id)
-							<i class="fas fa-star"></i>
-							@endif
-						@endif
-						</span>
-					<span class="date">{{ date('H:i:m d/m/Y', $message->created_at->timestamp) }}</span>
-				</div>
-				<p>{{$message->content}}</p>
-			</div>
-        @endforeach
+			
+				@foreach($messages as $message)
+					<div class="layer-2 forum-msg form-section {{ $message->user->id == Auth::id() ? 'right' : ''}}">
+						<div class="msg-header">
+							<span>
+								@if($message->user->id == Auth::id())
+									Me
+								@else
+									{{ ucfirst($message->user->firstname) }} {{ ucfirst($message->user->lastname) }}
+									@if($message->user_id == $course->teacher_id)
+									<i class="fas fa-star"></i>
+									@endif
+								@endif
+								</span>
+							<span class="date">{{ date('H:i:m d/m/Y', $message->created_at->timestamp) }}</span>
+						</div>
+						<p>{{$message->content}}</p>
+					</div>
+				@endforeach
 		<div class="scroll"></div>
 		</div>
 		<div id="newMessage">

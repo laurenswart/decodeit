@@ -34,7 +34,7 @@
 			<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $assignment->title }}</p></span>
 			<span class="listElementContent col background">
 				<span><p><i class="fas fa-clipboard-list greyed no-hover"></i><strong>Starts</strong> {{ $assignment->start_time_string() }}  -   <strong>Ends</strong> {{ $assignment->end_time_string() }}</p></span>
-				<span><p>{!! $assignment->statusTextForAuth() !!}</p></span>
+				<span><p>{!! $assignment->statusTextByStudent(Auth::id()) !!}</p></span>
 			</span>
 		</a>
     @endforeach

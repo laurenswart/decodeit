@@ -681,6 +681,10 @@ a:hover{
 	border-radius: 8px!important;
 	margin-bottom: 0;
 }
+
+.accordion-button.white-after::after{
+	background-color: var(--color-whitest);
+}
 .accordion-button:not(.layer-2) {
 	padding: 0!important;;
 }
@@ -692,7 +696,7 @@ a:hover{
 
 
 .accordion-button:not(.collapsed){
-    background:var(--color-mediumWhite);
+    background:var(--color-whitest);
 	color: var(--color-darkPurple);
 }
 .accordion-header{
@@ -1014,6 +1018,7 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 		flex-direction:column;
 		overflow-y: scroll;
 		max-height: calc( 100vh - 460px );
+		min-height: 200px;
 	}
 
 	#newMessage{

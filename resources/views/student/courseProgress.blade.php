@@ -1,9 +1,10 @@
 @extends('layouts.student')
 
 @section('content')
-
-
-	<section>
+	<nav class="back-nav">
+		<a href="{{ route('course_studentShow', $course->id) }}"><i class="fas fa-arrow-alt-square-left"></i>Back to Course</a>
+	</nav>
+	
 		<h2 class="light-card block-title layer-2">{{ $course->title }}</h2>
 		<div class="form-section">
 		@if(count($course->chapters)==0)
@@ -17,7 +18,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach($course->chapters as $chapter)
+				@foreach($course->chapters->sortBy('order_id') as $chapter)
 					<tr>
 						<td><a href="{{ route('chapter_studentShow', $chapter->id)}}">{{ $chapter->title }}</a></td>
 						<td>@if($chapter->read()) <i class="fad fa-check-square greyed"></i> @else<i class="fas fa-times-square"></i>@endif</td>
@@ -27,10 +28,7 @@
 			</table>
 		@endif
 		</div>
-        
-	</section>
 
-	<section>
 		<h2 class="light-card block-title layer-2">Assignments</h2>
 		<div class="form-section">
 		@if(count($course->assignments)==0)
@@ -48,24 +46,21 @@
 					</tr>
 				</thead>
 				<tbody>
-				@foreach($course->assignments->sortByDesc('start_time') as $assignment)
+				@foreach($course->assignments->sortBy('start_time') as $assignment)
 					<tr>
 						<td><a href="{{ route('assignment_studentShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
 						<td>{{ $assignment->start_time_string() }}</td>
 						<td>{{ $assignment->end_time_string() }}</td>
-						<td>@if($assignment->is_test)<i class="fas fa-exclamation-square"></i>Test @else Exercice @endif</td>
+						<td>@if($assignment->is_test)Test @else Exercice @endif</td>
 						<td>{!! $assignment->statusTextByStudent(Auth::id()) !!}</td>
-						<td>{{$assignment->studentAssignmentByStudent(Auth::id())!==null ? $assignment->studentAssignmentByStudent(Auth::id())->mark.' / '.$assignment->max_mark : '-'}}</td>
+						<td>{{$assignment->studentAssignmentByStudent(Auth::id()) !==null && $assignment->studentAssignmentByStudent(Auth::id())->mark !== null ? $assignment->studentAssignmentByStudent(Auth::id())->mark.' / '.$assignment->max_mark : '-'}}</td>
 					</tr>
 				@endforeach
 				</tbody>
 			</table>
 		@endif
 		</div>
-        
-	</section>
 
-	<section>
 		<h2 class="light-card block-title layer-2">Skills</h2>
 		<div class="form-section">
 		@if(count($course->skills)==0)
@@ -91,10 +86,6 @@
 			</table>
 		@endif
 		</div>
-        
-	</section>
-
-	
 
 @endsection
 

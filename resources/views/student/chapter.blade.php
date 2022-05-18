@@ -3,7 +3,7 @@
 @section('content')
 
 		<nav class="back-nav">
-			<a href="{{ route('course_studentShow', $chapter->course_id)}}"><i class="fas fa-arrow-circle-left greyed"></i>Back</a>
+			<a href="{{ route('course_studentShow', $chapter->course_id)}}"><i class="fas fa-arrow-alt-square-left"></i>Back to Course</a>
 		</nav>
 		<section id="chapter-content">
 			<h2 class="light-card block-title layer-2">Chapter Name</h2>
@@ -21,19 +21,17 @@
 
 
 		@if( count($chapter->assignments) !=0 )
-		<section id="coming-up">
-		<h2 class="light-card block-title layer-2">Assignments</h2>
-        @foreach($chapter->assignments as $assignment)
-		<a href="{{ route('assignment_studentShow', $assignment->id)}}" class="listElement-h light-card row zoom">
-			<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $assignment->title }}</p></span>
-			<span class="listElementContent col background">
-				<span><p><i class="fas fa-clipboard-list greyed no-hover"></i><strong>Starts</strong> {{ $assignment->start_time_string() }}  -   <strong>Ends</strong> {{ $assignment->end_time_string() }}</p></span>
-				<span>{!! $assignment->statusTextForAuth() !!}</span>
-			</span>
-		</a>
-        @endforeach
-		
-	</section>
+
+			<h2 class="light-card block-title layer-2">Assignments</h2>
+			@foreach($chapter->assignments->sortBy('start_time') as $assignment)
+			<a href="{{ route('assignment_studentShow', $assignment->id)}}" class="listElement-h light-card row zoom palette-medium">
+				<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $assignment->title }}</p></span>
+				<span class="listElementContent col background">
+					<span><p><i class="fas fa-clipboard-list greyed no-hover"></i><strong>Starts</strong> {{ $assignment->start_time_string() }}  -   <strong>Ends</strong> {{ $assignment->end_time_string() }}</p></span>
+					<span>{!! $assignment->statusTextByStudent(Auth::id()) !!}</span>
+				</span>
+			</a>
+			@endforeach
 		@endif
 
 @endsection

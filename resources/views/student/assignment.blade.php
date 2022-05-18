@@ -8,7 +8,7 @@
 <!-- MAIN RIGHT SECTION -->
 <div>
 	<nav class="back-nav">
-		<a href="{{ route('chapter_studentShow', $assignment->chapters[0]->id) }}"><i class="fas fa-arrow-circle-left greyed"></i>Back to chapter</a>
+		<a href="{{ route('chapter_studentShow', $assignment->chapters[0]->id) }}"><i class="fas fa-arrow-alt-square-left"></i>Back to chapter</a>
 	</nav>
 	<section id="info">
 		<h2 class="light-card block-title layer-2">{{ $assignment->title }}</h2>
@@ -79,11 +79,11 @@
 	<section>
 		<h2 class="light-card block-title layer-2">Previous Submissions</h2>
 		<div class="accordion accordion-flush" id="accordion">
-			@foreach($submissions as $id => $submission)
+			@foreach($submissions->sortBy('created_at') as $id => $submission)
 			<div class="accordion-item background">
 				<h3 class="accordion-header row zoom " id="heading{{$id}}">
 				<span class="accordion-button listElement-h background light-card collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$id}}" aria-controls="collapse{{$id}}" aria-expanded="false">
-					<span class="listElementTitle palette-medium col-12 col-md-4">{{ $submission->created_at }}</span>
+					<span class="listElementTitle palette-medium col-12 col-md-4">{{ date('D d/m/Y, H:i',strtotime($submission->created_at)) }}</span>
 					<span class="listElementContent col background">
 						<span>
 							@if(!empty($submission->feedback))
@@ -104,13 +104,13 @@
 							</div>
 							<div class="col-12 col-xl-5 ">
 								@if(!$submission->question && $studentAssignment->mark == null)
-								<h4>Attach a Note</h4>
+								<h4>Attach a Question</h4>
 								<div class="mt-4 mx-6 d-flex flex-col submissionQuestion">
 									<textarea id="question" rows="3" cols="50" ></textarea>
 									<button type="button" onclick="addQuestion(this)" data-submissionId={{$submission->id}} class="myButton align-self-end mt-4" id="btAddQuestion">Add Note or Question</button>
 								</div>
 								@else 
-									<h4>Attached Note</h4>
+									<h4>Attached Question</h4>
 									<p>{{$submission->question}}</p>
 								@endif
 							</div>

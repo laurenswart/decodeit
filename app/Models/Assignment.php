@@ -69,80 +69,6 @@ class Assignment extends Model
         return StudentAssignment::where('assignment_id', $this->id)->where('enrolment_id', $enrolment->id)->first();
     }
 
-    public function statusTextByStudent($studentId){
-        $text = $this->statusByStudent($studentId);
-        $icon = null;
-        switch($text){
-					
-            case('to do'):
-                $icon = '<i class="fas fa-exclamation-circle"></i>';
-                break;
-            case('marked'):
-                $icon = '<i class="fad fa-inbox-in greyed"></i></i>';
-                break;
-            case('done'):
-                $icon = '<i class="fas fa-check-circle greyed"></i>';
-                break;
-            default:
-                $icon = '<i class="fas fa-question-circle"></i>';
-                break; 
-        }
-        return $icon.ucwords($text);
-    }
-
-
-    /**
-     * Get all of the submissions for the assignment.
-     */
-    public function submissions(){
-        return $this->hasManyThrough( Submission::class,StudentAssignment::class,);
-    }
-
-    /**
-     * returns not done, incomplete, done, marked 
-     */
-    public function statusForAuth(){
-        $studentAssignment = $this->studentAssignmentByStudent(Auth::id());
-        if(empty($studentAssignment)) return 'to do';
-
-        if($studentAssignment->mark!=null){
-            return 'marked';
-        }else if($studentAssignment->to_mark){
-            return 'done';
-        } else if(count($studentAssignment->submissions) === 0){
-            return 'to do';
-        } 
-        return 'undergoing';
-        
-    }
-
-    /**
-     * returns not done, incomplete, done, marked 
-     */
-    public function statusTextForAuth(){
-        $text = $this->statusForAuth();
-
-        switch($text){
-            case 'to do':
-                $icon = '<i class="fas fa-exclamation-square"></i>';
-                break;
-            case 'marked':
-                $icon = '<i class="fas fa-check-double greyed no-hover"></i>';
-                break;
-            case 'done':
-                $icon = '<i class="fas fa-check-square greyed no-hover"></i>';
-                break;
-            case 'undergoing':
-                $icon = '<i class="fas fa-spinner"></i>';
-                break;
-            default:
-                $icon = '<i class="fas fa-clipboard-list"></i>';
-        }
-
-        return ucwords($text).' '.$icon;
-        
-    }
-
     /**
      * returns not done, incomplete, done, marked 
      */
@@ -160,6 +86,42 @@ class Assignment extends Model
         return 'undergoing';
         
     }
+
+    /**
+     * returns not done, incomplete, done, marked as well as appropriate icon
+     */
+    public function statusTextByStudent($studentId){
+        $text = $this->statusByStudent($studentId);
+        $icon = null;
+        switch($text){
+            case 'to do':
+                $icon = '<i class="fas fa-exclamation-square"></i>';
+                break;
+            case 'marked':
+                $icon = '<i class="fas fa-check-double greyed no-hover"></i>';
+                break;
+            case 'done':
+                $icon = '<i class="fas fa-check-square greyed no-hover"></i>';
+                break;
+            case 'undergoing':
+                $icon = '<i class="fas fa-spinner"></i>';
+                break;
+            default:
+                $icon = '<i class="fas fa-clipboard-list"></i>';
+        }
+        return $icon.ucwords($text);
+    }
+
+
+    /**
+     * Get all of the submissions for the assignment.
+     */
+    public function submissions(){
+        return $this->hasManyThrough( Submission::class,StudentAssignment::class,);
+    }
+ 
+
+    
 
     public function start_time_string(){
         
