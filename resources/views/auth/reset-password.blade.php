@@ -17,7 +17,11 @@
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="{{ old('email', $request->email) ?? '' }}" required autofocus>
                     </div>
-
+                @if($errors->get('email'))
+                    <div class="error-msg">
+                    {{$errors->first('email')}}
+                    </div>
+                @endif
                 <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -33,15 +37,11 @@
                     <label for="password">Confirm</label>
                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required>
                 </div>
-                @if($errors->get('password'))
+                @if($errors->get('password_confirmation'))
                     <div class="error-msg">
                         Passwords do not match
                     </div>
                 @endif
-
-                 <!-- Validation Errors -->
-                <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
                 <button type="submit" class="myButton">Reset Password</button>
 
             </form>

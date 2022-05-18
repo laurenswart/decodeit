@@ -31,7 +31,7 @@
                     <label for="password-conf">Confirm Password</label>
                     <input type="password" class="form-control" id="password_confirmation-conf" placeholder="Enter confirmation" name="password_confirmation" required>
                 </div>
-                @if($errors->get('password'))
+                @if($errors->get('password_confirmation'))
                     <div class="error-msg">
                         Passwords do not match
                     </div>
