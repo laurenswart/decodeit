@@ -60,6 +60,9 @@ i.greyed{
 a i.greyed:hover{
 	color: var(--color-orange);
 }
+a i.greyed.no-hover{
+	color: var(--color-mediumPurple);
+}
 
 
 .cell-center{
@@ -334,13 +337,20 @@ a.btn-right{
 
 .zoom:hover{
 	/*color:var(--color-darkestPurple);	/*TODO CHANGE DYNAMICALLY*/
-	font-size:1.2em;
 	transform: scale(1.005);
+	font-size:18px;
 	filter: drop-shadow(3px 3px 4px #00000099);
 	backface-visibility: hidden;
 	-webkit-font-smoothing: subpixel-antialiased translate3d( 0, 0, 0);
 	
 }
+.zoom.zoom p{
+	margin-bottom:0;
+	margin-top:0;
+	padding:0;
+	transform: scale(calc(1000 / 1005));
+}
+
 
 a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle{
 	transform: scale(1.015);
@@ -373,7 +383,7 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 	margin:0;
 	display:flex;
 	align-items:center;
-	font-size:18px;
+	font-size:1.1em;
 	padding:10px 30px;
 	background-color: var(--color-mediumPurple);
 	color:var(--color-mediumWhite);
@@ -516,6 +526,7 @@ a.listElement-h:hover .listElementTitle, a.listElement-v:hover .listElementTitle
 
 #sidebar{
 	z-index: 0;
+	align-self: flex-start;
 }
 #sidebar h1{
 	font-size: 22px;;

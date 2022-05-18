@@ -119,6 +119,33 @@ class Assignment extends Model
     /**
      * returns not done, incomplete, done, marked 
      */
+    public function statusTextForAuth(){
+        $text = $this->statusForAuth();
+
+        switch($text){
+            case 'to do':
+                $icon = '<i class="fas fa-exclamation-square"></i>';
+                break;
+            case 'marked':
+                $icon = '<i class="fas fa-check-double"></i>';
+                break;
+            case 'done':
+                $icon = '<i class="fas fa-check-square"></i>';
+                break;
+            case 'undergoing':
+                $icon = '<i class="fas fa-spinner"></i>';
+                break;
+            default:
+                $icon = '<i class="fas fa-clipboard-list"></i>';
+        }
+
+        return ucwords($text).' '.$icon;
+        
+    }
+
+    /**
+     * returns not done, incomplete, done, marked 
+     */
     public function statusByStudent($studentId){
         $studentAssignment = $this->studentAssignmentByStudent($studentId);
         if(empty($studentAssignment)) return 'to do';

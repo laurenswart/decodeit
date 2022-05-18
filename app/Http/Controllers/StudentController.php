@@ -26,8 +26,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
-    {
+    public function dashboard(){
 
         //dd(Student::find(Auth::id())->notifications());
         
@@ -73,12 +72,7 @@ class StudentController extends Controller
         $currentQueries['sort'] = $sort;
         $currentQueries['order'] = $order;
         $currentQueries['filter'] = $filter;
-        /*
-        $users = User::paginate(15);
- 
-    $users->appends(['sort' => 'votes']);
 
-        */
         return view('teacher.student.index', [
             'students'=>$students,
             'currentQueries'=>$currentQueries
