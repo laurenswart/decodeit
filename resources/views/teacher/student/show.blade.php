@@ -124,7 +124,14 @@
                    <td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ ucfirst($assignment->title) }}</a></td>
               @if($assignment->studentAssignmentByStudent($student->id)==null)
               <td class="cell-center">-</td>
-              <td colspan="3"></td>
+              <td class="cell-center">-</td>
+              <td class="cell-center">-</td>
+              <td class="cell-center">    @if(strtotime($assignment->end_time) < now()->timestamp) 
+                    <a href="{{ route('studentAssignment_teacherStore', [$assignment->id, $student->id]) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage</a>
+                  @else 
+                    -
+                  @endif
+                </td>
               @else
                
                    <td class="cell-center">{{ count($assignment->studentAssignmentByStudent($student->id)->submissions) ?? '-'}}</td>
@@ -136,14 +143,14 @@
                     @endif
                   </td>
                   <td class="cell-center">
-                  @if($assignment->studentAssignmentByStudent($student->id)->mark) 
+                  @if($assignment->studentAssignmentByStudent($student->id)->mark!==null) 
                     {{$assignment->studentAssignmentByStudent($student->id)->mark}} / {{ $assignment->max_mark}}
                   @elseif($assignment->studentAssignmentByStudent($student->id)->canBeMarked()) 
                     To do<i class="fas fa-exclamation-square"></i>
                   @else 
                     -
                   @endif</td>
-					        <td><a href="{{ route('studentAssignment_teacherShow', $assignment->studentAssignmentByStudent($student->id)->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage</a></td>
+					        <td class="cell-center"><a href="{{ route('studentAssignment_teacherShow', $assignment->studentAssignmentByStudent($student->id)->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage</a></td>
                 </tr>
                 @endif
               

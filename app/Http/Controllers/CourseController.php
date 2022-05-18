@@ -9,14 +9,10 @@ use App\Models\Skill;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
-use Exception;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+
 use PDF;
 
 class CourseController extends Controller
@@ -466,7 +462,7 @@ class CourseController extends Controller
 
         // Initializing PHP class
         $zip = new \ZipArchive();
-        $zip->open($zip_file,\ZipArchive::OVERWRITE);
+        $zip->open($zip_file,\ZIPARCHIVE::CREATE | \ZIPARCHIVE::OVERWRITE);
 
         foreach($course->students as $student){
             $pdf = PDF::loadView('teacher.course.report', compact('course', 'student'));

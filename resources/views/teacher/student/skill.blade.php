@@ -66,27 +66,33 @@
                 </tr>
               </thead>
               <tbody>
-              @foreach($assignments->sort() as $assignment)
+              @foreach($assignments->sortBy('start_time') as $assignment)
                 <tr>
                    <td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ ucfirst($assignment->title) }}</a></td>
                     @if($assignment->studentAssignmentByStudent($student->id)==null)
-                    <td class="cell-center">-</td>
-                    <td></td>
-                    @else
-               
-                  <td class="cell-center">
-                      @if($assignment->studentAssignmentByStudent($student->id)->mark) 
-                        {{$assignment->studentAssignmentByStudent($student->id)->mark}} / {{ $assignment->max_mark}}
-                      @elseif($assignment->studentAssignmentByStudent($student->id)->canBeMarked()) 
-                        To do<i class="fas fa-exclamation-square"></i>
+                      <td class="cell-center">-</td>
+                      <td class="cell-center">-</td>
+                      <td>
+                      @if(strtotime($assignment->end_time) < now()->timestamp) 
+                        <a href="{{ route('studentAssignment_teacherStore', [$assignment->id, $student->id]) }}"><i class="fas fa-arrow-alt-square-right"></i>View Submissions</a>
                       @else 
                         -
                       @endif
-                  </td>
-					        <td><a href="{{ route('studentAssignment_teacherShow', $assignment->studentAssignmentByStudent($student->id)->id) }}"><i class="fas fa-arrow-alt-square-right"></i>View Submissions</a></td>
+                      </td>
+                    @else
+                      <td class="cell-center">
+                          @if($assignment->studentAssignmentByStudent($student->id)->mark!==null) 
+                            {{$assignment->studentAssignmentByStudent($student->id)->mark}} / {{ $assignment->max_mark}}
+                          @elseif($assignment->studentAssignmentByStudent($student->id)->canBeMarked()) 
+                            To do<i class="fas fa-exclamation-square"></i>
+                          @else 
+                            -
+                          @endif
+                      </td>
+					            <td><a href="{{ route('studentAssignment_teacherShow', $assignment->studentAssignmentByStudent($student->id)->id) }}"><i class="fas fa-arrow-alt-square-right"></i>View Submissions</a></td>
+                
+                    @endif
                 </tr>
-                @endif
-              
               @endforeach
               </tbody>
             </table>

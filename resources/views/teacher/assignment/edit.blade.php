@@ -47,11 +47,11 @@
 				</div>
 				<div class="label-value mt-3">
 					<label for="start">Start</label>
-					<input type="datetime-local" name="start" id="start" value="{{ old('start') ?? date('Y-m-d\TH:i:s', date_create_from_format('d/m/Y H:i',$assignment->start_time)->getTimestamp()) }}">
+					<input type="datetime-local" name="start" id="start" value="{{ old('start') ?? date('Y-m-d\TH:i:s', strtotime($assignment->start_time)) }}">
 				</div>
 				<div class="label-value mt-3">
 					<label for="end">End</label>
-					<input type="datetime-local" name="end" id="end" value="{{ old('end') ?? date('Y-m-d\TH:i:s', date_create_from_format('d/m/Y H:i',$assignment->end_time)->getTimestamp()) }}">
+					<input type="datetime-local" name="end" id="end" value="{{ old('end') ?? date('Y-m-d\TH:i:s', strtotime($assignment->end_time)) }}">
 				</div>
 				<div class="label-value mt-3">
 					<label for="test">Is a Test</label>

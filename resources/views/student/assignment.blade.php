@@ -29,7 +29,7 @@
 					<span id="details" class="col">
 						<span>
 							<span class="label">Status</span>
-							<span>{{ ucwords($assignment->statusForAuth()) }}</span>
+							<span>{!! ucwords($assignment->statusTextByStudent(Auth::id())) !!}</span>
 						</span>
 						<span>
 							<span class="label">Type</span>
@@ -55,6 +55,13 @@
 							<span class="label">Last Updated</span>
 							<span>{{ $assignment->updated_at ? date_create_from_format ('Y-m-d H:i:s',$assignment->updated_at)->format('d/m/Y, H:i') :  date_create_from_format ('Y-m-d H:i:s',$assignment->created_at)->format('d/m/Y, H:i')}}</span>
 						</span>
+						@if( $studentAssignment && $studentAssignment->canBeMarked())
+						<span class="label title-3">
+							<span>Final Mark</span>
+							<span>{{ $studentAssignment->mark !== null ? $studentAssignment->mark.' / '.$assignment->max_mark  : '-'}}</span>
+						</span>
+						@endif
+						
 					</span>
 					</span>
 			</span>

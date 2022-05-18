@@ -124,6 +124,10 @@ Route::get('studentAssignment/{id}/mark', ([StudentAssignmentController::class, 
 Route::post('studentAssignment/{id}', ([StudentAssignmentController::class, 'teacherUpdateMark']))
     ->where('id', '[0-9]+')
     ->name('studentAssignment_teacherUpdateMark');
+Route::get('studentAssignment/{assignmentId}/{studentId}', ([StudentAssignmentController::class, 'teacherStore']))
+    ->where('assignmentId', '[0-9]+')
+    ->where('studentId', '[0-9]+')
+    ->name('studentAssignment_teacherStore');
 
 //STUDENT
 Route::get('students', ([StudentController::class, 'teacherIndex']))

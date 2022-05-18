@@ -3,6 +3,8 @@
 namespace App\Policies;
 
 use App\Models\Assignment;
+use App\Models\Enrolment;
+use App\Models\Student;
 use App\Models\StudentAssignment;
 use App\Models\Teacher;
 use App\Models\User;
@@ -40,14 +42,20 @@ class StudentAssignmentPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the teacher can automatically create a student assignment 
      *
      * @param  \App\Models\User  $user
+     *  * @param  \App\Models\Assignment  $assignment
+     *  * @param  \App\Models\Enrolment  $enrolment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function teacherStore(User $user, Assignment $assignment, Enrolment $enrolment)
     {
-        //
+        return $user->isTeacher() && $assignment!=null && $enrolment!=null 
+            && Teacher::find($user->id)->students->contains($enrolment->student) 
+            && Teacher::find($user->id)->courses->contains($assignment->course)
+            && strtotime($assignment->end_time) < now()->timestamp
+            && StudentAssignment::where('enrolment_id', $enrolment->id)->where('assignment_id', $assignment->id)->count()==0;
     }
 
     /**

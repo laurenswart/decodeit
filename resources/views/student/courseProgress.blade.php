@@ -21,7 +21,7 @@
 				@foreach($course->chapters->sortBy('order_id') as $chapter)
 					<tr>
 						<td><a href="{{ route('chapter_studentShow', $chapter->id)}}">{{ $chapter->title }}</a></td>
-						<td>@if($chapter->read()) <i class="fad fa-check-square greyed"></i> @else<i class="fas fa-times-square"></i>@endif</td>
+						<td>@if($chapter->read()) <i class="fas fa-check-square greyed "></i> @else<i class="fas fa-times-square"></i>@endif</td>
 					</tr>
 				@endforeach
 				</tbody>

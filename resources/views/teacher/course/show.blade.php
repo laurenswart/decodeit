@@ -75,7 +75,7 @@
 								<td>{{  $assignment->start_time_string() }}</td>
 								<td>{{  $assignment->end_time_string() }}</td>
 								<td class="cell-center">
-									@if(date_$assignment->end_time_carbon->lt(now()) || count($assignment->studentAssignments->whereNotNull('to_mark'))!=0)
+									@if($assignment->end_time_carbon()->lt(now()) || count($assignment->studentAssignments->whereNotNull('to_mark'))!=0)
 										<i class="fas fa-exclamation-square"></i>
 									@else 
 										-

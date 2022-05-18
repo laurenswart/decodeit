@@ -40,7 +40,7 @@ class StudentAssignment extends Model
     }
 
     public function canBeMarked(){
-        return $this->to_mark || Carbon::createFromFormat('Y-m-d H:i:s',$this->assignment->end_time)->lt(now()) || count($this->submissions)>=$this->assignment->nb_submissions;
+        return $this->to_mark || Carbon::createFromFormat('Y-m-d H:i:s',$this->assignment->end_time)->lt(now()) || count($this->submissions)>=$this->assignment->nb_submissions || $this->to_mark;
     }
 
     

@@ -98,7 +98,7 @@
                     <td>{{ ucfirst($assignment->title) }}</td>
                     @if($assignment->studentAssignmentByStudent($student->id) )
                         <td>
-                        @if($assignment->studentAssignmentByStudent($student->id)->mark) 
+                        @if($assignment->studentAssignmentByStudent($student->id)->mark!==null) 
                             {{$assignment->studentAssignmentByStudent($student->id)->mark}} / {{ $assignment->max_mark}}
                         @else 
                             -

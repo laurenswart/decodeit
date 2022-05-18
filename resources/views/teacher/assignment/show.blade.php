@@ -149,7 +149,7 @@
 							@endif
 					</td>
 					<td class="cell-center">
-						@if($studentAssignment->mark) 
+						@if($studentAssignment->mark!==null) 
 							{{$studentAssignment->mark}} / {{ $assignment->max_mark}}
 						@elseif($studentAssignment->canBeMarked()) 
 							<i class="fas fa-exclamation-square"></i>To do
@@ -157,12 +157,18 @@
 							-
 						@endif
 					</td>
-					<td class="cell-center"><a href="{{ route('studentAssignment_teacherShow', $studentAssignment->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage Submissions</a></td>
+					<td class="cell-center"><a href="{{ route('studentAssignment_teacherShow', $studentAssignment->id) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage</a></td>
 					@else
 					<td class="cell-center">-</td>
 					<td class="cell-center">-</td>
 					<td class="cell-center">-</td>
-					<td class="cell-center">-</td>
+					<td class="cell-center">
+						@if(strtotime($assignment->end_time) < now()->timestamp) 
+							<a href="{{ route('studentAssignment_teacherStore', [$assignment->id, $student->id]) }}"><i class="fas fa-arrow-alt-square-right"></i>Manage</a>
+						@else 
+							-
+						@endif
+					</td>
 					@endif
                 </tr>
 				

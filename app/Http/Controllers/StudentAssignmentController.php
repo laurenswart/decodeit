@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\AssignmentNote;
+use App\Models\Enrolment;
 use App\Models\Student;
 use App\Models\StudentAssignment;
 use Illuminate\Http\Request;
@@ -145,5 +147,24 @@ class StudentAssignmentController extends Controller
                 'student'=>$studentAssignment->enrolment->student
             ])->with('error', 'Sorry, something went wrong');
         }
+    }
+
+    public function teacherStore(int $assignmentId, int $studentId){
+        $assignment = Assignment::find($assignmentId);
+        $enrolment = Enrolment::
+                whereNull('enrolments.deleted_at')
+                ->where('student_id', $studentId)
+                ->where('course_id', $assignment->course_id)
+                ->first();
+       // dd($enrolment);   
+        $this->authorize('teacherStore', [StudentAssignment::class, $assignment,$enrolment]);
+
+        //create the student assignment
+        $studentAssignmentId = StudentAssignment::insertGetId([
+            'enrolment_id'=>$enrolment->id,
+            'assignment_id'=>$assignmentId,
+        ]);
+        //redirect
+        return redirect(route('studentAssignment_teacherShow', $studentAssignmentId));
     }
 }

@@ -74,14 +74,16 @@ class Assignment extends Model
      */
     public function statusByStudent($studentId){
         $studentAssignment = $this->studentAssignmentByStudent($studentId);
-        if(empty($studentAssignment)) return 'to do';
+        if(empty($studentAssignment)) return $this->end_time_carbon()->lt(now())? 'missed' : 'to do';
 
-        if($studentAssignment->mark!=null){
+        if($studentAssignment->mark!==null){
             return 'marked';
-        }else if($studentAssignment->to_mark){
+        } else if($studentAssignment->to_mark || ($this->end_time_carbon()->lt(now()) && count($studentAssignment->submissions) > 0)){
             return 'done';
-        } else if(count($studentAssignment->submissions) === 0){
+        } else if(count($studentAssignment->submissions) === 0 && $this->end_time_carbon()->gt(now())){
             return 'to do';
+        } else if($this->end_time_carbon()->lt(now()) && count($studentAssignment->submissions) === 0){
+            return 'missed';
         } 
         return 'undergoing';
         
@@ -106,8 +108,11 @@ class Assignment extends Model
             case 'undergoing':
                 $icon = '<i class="fas fa-spinner"></i>';
                 break;
+            case 'missed':
+                $icon = '<i class="fas fa-times-square greyed"></i>';
+                break;
             default:
-                $icon = '<i class="fas fa-clipboard-list"></i>';
+                $icon = '<i class="fas fa-clipboard-list greyed"></i>';
         }
         return $icon.ucwords($text);
     }
