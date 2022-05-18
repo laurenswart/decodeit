@@ -1,5 +1,5 @@
 <x-guest-layout>
-<div class="container mb-4">
+<section class="container mb-4 guest">
 <h2 class="light-card block-title layer-2 py-3 px-4">Terms of Service</h2>
 <div class="d-flex justify-content-end">
     <em>
@@ -140,5 +140,5 @@ DecodeIt may deny you access to all or any part of the Services or terminate you
 <p>
 All Fees paid or accrued in connection with any Services are non-refundable, and DecodeIt will not prorate any Fees paid for a subscription that is terminated before the end of its term.
 <p/>
-</div>
+</section>
 </x-guest-layout>

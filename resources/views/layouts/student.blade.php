@@ -26,8 +26,8 @@
 
         
     </head>
-    <body class="font-sans antialiased">
-      <div class="background" style="position: relative;min-height: 100vh;">
+    <body class="font-sans antialiased d-flex flex-col">
+      <div class="background">
 
         <header class="navbar-default sticky-top layer-1">
           <nav class="navbar navbar-expand-lg navbar-light container">

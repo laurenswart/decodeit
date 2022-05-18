@@ -28,7 +28,7 @@
         <script src="{{ asset('js/scrollToTop.js') }}" defer></script>
         @livewireStyles
     </head>
-    <body class="font-sans antialiased pr-0">
+    <body class="font-sans antialiased pr-0  d-flex flex-col">
       <div class="background">
 
         <header class="navbar-default sticky-top layer-1">
@@ -96,13 +96,6 @@
                     {{ session('error') }}
                 </div>
             @endif
-
-            <button onclick="topFunction()" id="scrollToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-            <footer class="u-align-center u-clearfix u-footer  layer-1 u-footer" id="sec-e3f5">
-                <div class="u-clearfix u-sheet u-sheet-1">
-                    <p class="u-text  u-text-1">Some footer to add</p>
-                </div>
-            </footer>
 		</div>
         <!-- Modal for Flash messages -->
         @if (session('flash_modal'))

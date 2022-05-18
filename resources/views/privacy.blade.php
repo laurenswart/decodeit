@@ -1,5 +1,5 @@
 <x-guest-layout>
-<div class="container mb-4">
+<section class="container mb-4 guest">
 <h2 class="light-card block-title layer-2 py-3 px-4">Privacy Policy</h2>
 <div class="d-flex justify-content-end">
     <em>
@@ -96,5 +96,5 @@
     Our amended Privacy Policy will automatically take effect 30 days after the change, except that we will not, without your consent, use your previously collected personally identifiable information in a manner inconsistent the Privacy Policy in effect when we received that information.
     If you do not agree with any changes to the Privacy Policy, you may terminate your use of the Services.
 </p>
-</div>
+</section>
 </x-guest-layout>

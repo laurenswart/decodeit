@@ -1,6 +1,6 @@
 <x-guest-layout>
 
-<section class="container">
+<section class="container guest">
   @foreach($plans as $plan)
 
     <h2 class="light-card block-title layer-2" style="padding:15px;">{{ ucfirst($plan->title) }} Plan</h2>

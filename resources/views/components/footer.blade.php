@@ -2,7 +2,7 @@
 
 
 <div class=" layer-1">
-  <footer class="container py-3 my-4">
+  <footer class="container py-3">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="{{ route('terms') }}" class="nav-link px-2 text-muted">Terms of Service</a></li>
       <li class="nav-item"><a href="{{ route('privacy') }}" class="nav-link px-2 text-muted">Privacy</a></li>
