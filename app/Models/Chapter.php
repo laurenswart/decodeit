@@ -53,9 +53,15 @@ class Chapter extends Model
         $assignmentIds = $this->assignments->pluck('id');
         $enrolmentId = $this->course->enrolmentForAuth();
         $nbDone = DB::table('student_assignment')
+            ->join('assignments', 'assignments.id', 'student_assignment.assignment_id')
             ->where('enrolment_id', $enrolmentId->id)
             ->whereIn('assignment_id', $assignmentIds)
-            ->where('to_mark', 1)->count();
+            ->where(function ($query){
+                $query->where('to_mark', 1)
+                      ->orWhereNotNull('mark')
+                      ->orWhere('end_time', '<=', now());
+            })
+            ->count();
 
         return $nbDone;
     }

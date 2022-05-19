@@ -20,7 +20,7 @@
 						
 							<div>
 								<div class="label">Description</div>
-								@if(count($assignment->notes)>0 && $assignment->start_time_carbon()->lt(now()))
+								@if($assignment->start_time_carbon()->lt(now()))
 									<div>{!! clean($assignment->description) !!}</div>
 								@else
 									<div>This assignment is not available yet.</div>
