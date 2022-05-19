@@ -53,6 +53,35 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-section layer-2" style="max-width:500px;">
+			<h3 class="title-3">Students</h3>
+			@if(count($chapter->course->students)==0)
+				<p>No students currently enrolled in this course</p>
+			@else
+				<table class="table">
+				<thead>
+					<tr>
+					<th scope="col">Student</th>
+					<th scope="col" class="cell-center">Read</th>
+					</tr>
+				</thead>
+				<tbody>
+				@foreach($chapter->course->students->sortBy('firstname') as $student)
+					<tr>
+						<td><a href="{{ route('student_teacherShow', $student->id) }}">{{ ucfirst($student->firstname) }} {{ ucfirst($student->lastname) }}</td>
+						<td class="cell-center">
+							@if($chapter->isRead($student->id))
+								<i class="fas fa-check-square greyed no-hover"></i>
+							@else
+								<i class="fas fa-times-square"></i>
+							@endif
+						</td>
+					</tr>
+				@endforeach
+				</tbody>
+				</table>
+			@endif
+		</div>
 		<h2 class="light-card block-title layer-2">Content</h2>
 		<div class="form-section layer-2   mx-2">
 			{!! clean($chapter->content) !!}

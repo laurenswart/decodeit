@@ -8,13 +8,13 @@
 		</div>
         @foreach($courses as $course)
 		<a href="{{ route('course_teacherShow', $course->id)}}" class="listElement-h light-card row zoom">
-			<span class="listElementTitle palette-medium col-12 col-md-4">{{ $course->title }}</span>
+			<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $course->title }}</p></span>
 			<span class="listElementContent col background">
 				@if($course->hasNewMessages())
-					<span><i class="fas fa-comment-alt-dots"></i>New Messages</span>
+					<span><p><i class="fas fa-comment-alt-dots"></i>New Messages</p></span>
 				@endif
 				@if($course->hasNewSubmissions())
-					<span><i class="fas fa-inbox-in"></i>New Submissions</span>
+					<span><p><i class="fas fa-inbox-in"></i>New Submissions</p></span>
 				@endif
 			</span>
 		</a>

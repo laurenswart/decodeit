@@ -86,7 +86,7 @@
             @foreach($course->chapters as $chapter)
                   <tr>
                     <th class="label"><a href="{{ route('chapter_teacherShow', $chapter->id)}}">{{ $chapter->title}}</a></th>
-                    <td>{{ $chapter->isRead($student->id) ? 'Yes' : '-' }}</td>
+                    <td class="cell-center">{!! $chapter->isRead($student->id) ? '<i class="fas fa-check-square greyed no-hover"></i>' : '-' !!}</td>
                   </tr>
             @endforeach
               </tbody>
