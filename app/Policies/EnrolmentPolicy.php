@@ -10,39 +10,8 @@ class EnrolmentPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Enrolment  $enrolment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function view(User $user, Enrolment $enrolment)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function create(User $user)
-    {
-        //
-    }
+    
+  
 
     /**
      * Determine whether the user can update the model.
@@ -53,7 +22,7 @@ class EnrolmentPolicy
      */
     public function update(User $user, Enrolment $enrolment)
     {
-        //
+        return $user->isTeacher() && $enrolment!==null && $enrolment->course->teacher_id === $user->id;
     }
 
     /**

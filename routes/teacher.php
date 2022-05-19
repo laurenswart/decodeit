@@ -154,15 +154,25 @@ Route::get('students/{id}/report/download', ([StudentController::class, 'teacher
 
 //ENROLMENTS
 Route::get('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherConfirmDelete']))
+    ->where('id', '[0-9]+')
     ->name('enrolment_teacherConfirmDelete');
 Route::delete('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherDelete']))
+    ->where('id', '[0-9]+')
     ->name('enrolment_teacherDelete');
-
+Route::get('enrolments/{id}/mark', ([EnrolmentController::class, 'teacherEdit']))
+    ->where('id', '[0-9]+')
+    ->name('enrolment_teacherEdit');
+Route::post('enrolments/{id}/mark', ([EnrolmentController::class, 'teacherUpdate']))
+    ->where('id', '[0-9]+')
+    ->name('enrolment_teacherUpdate');
+    
 
 //SKILLS
 Route::get('skills/{id}/delete', ([SkillController::class, 'teacherConfirmDelete']))
+    ->where('id', '[0-9]+')
     ->name('skill_teacherConfirmDelete');
 Route::delete('skills/{id}/delete', ([SkillController::class, 'teacherDelete']))
+    ->where('id', '[0-9]+')
     ->name('skill_teacherDelete');
 Route::get('students/{id}/skill/{nb}', ([SkillController::class, 'editStudentMark']))
     ->where('id', '[0-9]+')

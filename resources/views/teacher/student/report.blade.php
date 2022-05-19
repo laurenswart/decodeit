@@ -56,7 +56,7 @@
     @foreach($student->courses as $course)
     
     <h2>{{ ucwords($course->title) }}</h2>
-    <p class="final-mark">Final Mark: {{ $course->final_mark ?? '-' }} / 100</p>
+    <p class="final-mark">Final Mark: {{ $course->enrolmentForStudent($student->id)->final_mark ?? '-' }} / 100</p>
         @if(count($course->skills)>0)
             <table>
                 <thead>

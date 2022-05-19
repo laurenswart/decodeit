@@ -93,14 +93,21 @@
             </table>
             @endif
         </div>
-        <div class="col ml-4 form-section layer-2">
-          <h3 class="title-3">Skills</h3>
-          @foreach($course->skills->sort() as $skill)
-            <div class="label-value">
-              <span>{{ $skill->title}}</span>
-              <span>{{ $skill->studentMark($student->id)!==null ? $skill->studentMark($student->id).' /100' : '-'}}<a href="{{ route('studentSkill_teacherEdit', [$student->id, $skill->id]) }}"><i class="fas fa-pen-square"></i>Edit</a></span>
-            </div>
-          @endforeach
+        <div class="col ml-4 form-section layer-2 d-flex flex-col justify-content-between">
+          <div>
+            <h3 class="title-3">Skills</h3>
+            @foreach($course->skills->sort() as $skill)
+              <div class="label-value">
+                <span>{{ $skill->title}}</span>
+                <span>{{ $skill->studentMark($student->id)!==null ? $skill->studentMark($student->id).' /100' : '-'}}<a href="{{ route('studentSkill_teacherEdit', [$student->id, $skill->id]) }}"><i class="fas fa-pen-square"></i>Edit</a></span>
+              </div>
+            @endforeach
+          </div>
+          <div class="d-flex flex-col">
+            <h3 class="title-3">Final Mark</h3>
+            <div class="align-self-end title-3">{{ $course->enrolmentForStudent($student->id)->final_mark ?? '-'}} / 100</div>
+            <div class="align-self-end"><a href="{{ route('enrolment_teacherEdit', $course->enrolmentIdForStudent($student->id)) }}"><i class="fas fa-pen-square"></i>Edit</a></div>
+          </div>
         </div>
         </div>
         <div class="form-section layer-2">
