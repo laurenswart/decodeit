@@ -21,38 +21,42 @@ window.onload = function(){
 			outerDiv.replaceChild(textarea, p);
 			$(textarea).focus();
 			$(textarea).blur(async function() {
-			  let newcont = $(this).val().trim();
+			  	let newcont = $(this).val().trim() ?? '';
 			   
-			  let xhr = new XMLHttpRequest();
-			  xhr.onload = function() { //Fonction de rappel
-			  let ans = false;
-			  if(this.status === 200) {
-				let data = this.responseText;
-				data = JSON.parse(data);
-				if(data.success){
-				  ans = data.feedback;
-				} 
-			  }
-			if(!ans){
-			    createFlashPopUp('Oops, Something Went Wrong', true);
-			} else {
-				createFlashPopUp('Feedback Updated');
-			}
-			let p = document.createElement('p');
-			p.innerText = ans ? ans : currentText;
-			outerDiv.replaceChild(p, textarea);
-			myButton.style.display = 'inline-block';
-			  
-			};
-			const data = JSON.stringify({
-			  _token: csrfToken,
-			  feedback: newcont,
-			});
+			  	let xhr = new XMLHttpRequest();
+			  	xhr.onload = function() { //Fonction de rappel
+					let ans = false;
+					//console.log(this);
+					let p = document.createElement('p');
+					if(this.status === 200) {
+						let dataReturned = this.responseText;
+						
+						dataReturned = JSON.parse(dataReturned);
+						if(dataReturned.success){
+							ans = dataReturned.feedback;
+							createFlashPopUp('Feedback Updated');
+							p.innerText = ans;
+						} else{
+							createFlashPopUp('Oops, Something Went Wrong', true);
+							p.innerText = currentText;
+						}
+					} else {
+						createFlashPopUp('Oops, Something Went Wrong', true);
+						p.innerText = currentText;
+					}
+					outerDiv.replaceChild(p, textarea);
+					myButton.style.display = 'inline-block';
+					
+				};
+				const data = JSON.stringify({
+					_token: csrfToken,
+					feedback: newcont,
+				});
 	
-			xhr.open('POST', "/teacher/submissions/"+myButton.value+"/updateFeedback");
-			xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			xhr.setRequestHeader("Content-Type", "application/json");
-			xhr.send(data);  
+				xhr.open('POST', "/teacher/submissions/"+myButton.value+"/updateFeedback");
+				xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+				xhr.setRequestHeader("Content-Type", "application/json");
+				xhr.send(data);  
 	
 				
 			});

@@ -906,35 +906,39 @@ window.onload = function () {
       outerDiv.replaceChild(textarea, p);
       $(textarea).focus();
       $(textarea).blur( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _$$val$trim;
+
         var newcont, xhr, data;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                newcont = $(this).val().trim();
+                newcont = (_$$val$trim = $(this).val().trim()) !== null && _$$val$trim !== void 0 ? _$$val$trim : '';
                 xhr = new XMLHttpRequest();
 
                 xhr.onload = function () {
                   //Fonction de rappel
-                  var ans = false;
-
-                  if (this.status === 200) {
-                    var _data = this.responseText;
-                    _data = JSON.parse(_data);
-
-                    if (_data.success) {
-                      ans = _data.feedback;
-                    }
-                  }
-
-                  if (!ans) {
-                    createFlashPopUp('Oops, Something Went Wrong', true);
-                  } else {
-                    createFlashPopUp('Feedback Updated');
-                  }
+                  var ans = false; //console.log(this);
 
                   var p = document.createElement('p');
-                  p.innerText = ans ? ans : currentText;
+
+                  if (this.status === 200) {
+                    var dataReturned = this.responseText;
+                    dataReturned = JSON.parse(dataReturned);
+
+                    if (dataReturned.success) {
+                      ans = dataReturned.feedback;
+                      createFlashPopUp('Feedback Updated');
+                      p.innerText = ans;
+                    } else {
+                      createFlashPopUp('Oops, Something Went Wrong', true);
+                      p.innerText = currentText;
+                    }
+                  } else {
+                    createFlashPopUp('Oops, Something Went Wrong', true);
+                    p.innerText = currentText;
+                  }
+
                   outerDiv.replaceChild(p, textarea);
                   myButton.style.display = 'inline-block';
                 };

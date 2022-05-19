@@ -955,7 +955,7 @@ if (scriptEditor) {
         btnRun.addEventListener('click', function () {
           var _this = this;
 
-          console.log(editor.getValue());
+          //console.log(editor.getValue());
           this.innerText = 'loading..';
           var languageId = judge0Codes[lang];
           var inputCode = editor.getValue();
@@ -986,17 +986,13 @@ if (scriptEditor) {
             })
           };
           sendSubmission(options).then(function (token) {
-            console.log(token);
+            //console.log(token);
             return getSubmissionResponse(token);
           }).then(function (response) {
-            console.log(response);
+            //console.log(response);
             var li = document.createElement('li');
 
-            if (response.status_id == 4) {
-              //wrong answer
-              li.innerText = response.stdout;
-              codeStatus.innerText = 'Failed';
-            } else if (response.status_id == 11) {
+            if (response.status_id == 11) {
               //error
               li.innerText = response.stderr;
               codeStatus.innerText = 'Error';
@@ -1034,9 +1030,10 @@ function _sendSubmission() {
             return fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&fields=*", options).then(function (response) {
               if (!response.ok) {
                 throw new Error("HTTP error! status: ".concat(response.status));
-              }
+              } //console.log(response);
 
-              console.log(response);
+
+              //console.log(response);
               return response.json();
             }).then(function (data) {
               return data.token;
@@ -1107,8 +1104,7 @@ function loadTestScript() {
     //Fonction de rappel
     if (this.status === 200) {
       var _data = this.responseText;
-      _data = JSON.parse(_data);
-      console.log(_data);
+      _data = JSON.parse(_data); //console.log(data);
 
       if (_data.success) {
         testCode = _data.script;
@@ -1138,8 +1134,7 @@ var CodeSubmission = /*#__PURE__*/function () {
   _createClass(CodeSubmission, [{
     key: "getCodeSubmission",
     value: function getCodeSubmission() {
-      console.log(this.testScript);
-
+      //console.log(this.testScript);
       if (this.testScript != null && this.testScript != '') {
         if (Object.keys(CodeSubmission.starts).indexOf(this.language) == -1) {
           //todo determine what to do
@@ -1147,8 +1142,8 @@ var CodeSubmission = /*#__PURE__*/function () {
         }
 
         var start = CodeSubmission.starts[this.language];
-        var end = CodeSubmission.ends[this.language];
-        console.log(start + this.studentInput + this.testScript + end);
+        var end = CodeSubmission.ends[this.language]; //console.log(start+this.studentInput+this.testScript+end);
+
         return btoa(unescape(encodeURIComponent(start + this.studentInput + this.testScript + end)));
       } else {
         return btoa(unescape(encodeURIComponent(this.studentInput)));
@@ -1186,10 +1181,10 @@ window.addQuestion = function (button) {
     createFlashPopUp('Please enter a question', true);
     return;
   } //send ajax request
+  //console.log(questionContent);
+  //console.log(submissionId);
 
 
-  console.log(questionContent);
-  console.log(submissionId);
   var xhr = new XMLHttpRequest();
 
   xhr.onload = function () {

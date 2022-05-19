@@ -62,7 +62,7 @@ if(scriptEditor){
 
                 btnRun.addEventListener('click', function(){
                     
-                    console.log(editor.getValue());
+                    //console.log(editor.getValue());
 
                     this.innerText = 'loading..';
                     let languageId = judge0Codes[lang];
@@ -94,17 +94,13 @@ if(scriptEditor){
             
                     sendSubmission(options)
                     .then(token => {
-                        console.log(token);
+                        //console.log(token);
                         return getSubmissionResponse(token);
                     })
                     .then( response => {
-                        console.log(response);
+                        //console.log(response);
                         let li = document.createElement('li');
-                        if (response.status_id == 4){
-                            //wrong answer
-                            li.innerText = response.stdout;
-                            codeStatus.innerText = 'Failed';
-                        } else if (response.status_id == 11){
+                        if (response.status_id == 11){
                             //error
                             li.innerText = response.stderr;
                             codeStatus.innerText = 'Error';
@@ -135,7 +131,7 @@ async function sendSubmission(options){
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log(response);
+        //console.log(response);
         return response.json();
     })
     .then (data => {
@@ -176,7 +172,7 @@ function loadTestScript(){
         if(this.status === 200) {
             let data = this.responseText;
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             if(data.success){
                 testCode = data.script;
             }
@@ -219,7 +215,7 @@ class CodeSubmission{
     
 
     getCodeSubmission(){
-        console.log(this.testScript);
+        //console.log(this.testScript);
         if(this.testScript!=null && this.testScript!=''){
             if (Object.keys(CodeSubmission.starts).indexOf(this.language)==-1){
                 //todo determine what to do
@@ -227,7 +223,7 @@ class CodeSubmission{
             }
             let start = CodeSubmission.starts[this.language];
             let end = CodeSubmission.ends[this.language];
-            console.log(start+this.studentInput+this.testScript+end);
+            //console.log(start+this.studentInput+this.testScript+end);
             return btoa(unescape(encodeURIComponent(start+this.studentInput+this.testScript+end)));
         } else {
             return btoa(unescape(encodeURIComponent(this.studentInput)));
@@ -250,8 +246,8 @@ window.addQuestion = function (button){
     }
     
     //send ajax request
-    console.log(questionContent);
-    console.log(submissionId);
+    //console.log(questionContent);
+    //console.log(submissionId);
     let xhr = new XMLHttpRequest();
 
     xhr.onload = function() { //Fonction de rappel

@@ -119,15 +119,7 @@ class SubmissionController extends Controller
      * @param int $id Submission Id 
      */
     public function teacherUpdateFeedback(Request $request, int $id){
-        if($request->ajax() &&  $request->post('feedback')) {
-            //validate question
-            if(empty($request->post('feedback'))){
-                return response()->json([
-                    'success' => false, 
-                    'msg' => 'No feedback received'
-                ], 400);
-            }
-
+        if($request->ajax()) {
             //find submission
             $teacher = Teacher::find($request->user()->id);
             if(empty($teacher)){
@@ -145,14 +137,14 @@ class SubmissionController extends Controller
             }
 
             //save question
-            $submission->feedback =  $request->post('feedback');
+            $submission->feedback =  $request->post('feedback') ?? '';
             $submission->feedback_at =  now();
             $submission->save();
 
             if($submission->wasChanged('feedback')){
                 return response()->json([
                     'success' => true,
-                    'feedback'=>$submission->feedback
+                    'feedback'=> $submission->feedback ?? ''
                 ], 200);
             } else {
                 return response()->json([
@@ -163,5 +155,6 @@ class SubmissionController extends Controller
 
            
         }
+        return response()->json($request->post());
     }
 }
