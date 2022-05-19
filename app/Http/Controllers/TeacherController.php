@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use App\Models\Message;
 use App\Models\StudentAssignment;
 use App\Models\Teacher;
@@ -64,10 +65,12 @@ class TeacherController extends Controller
         $teacher = Teacher::find($id);
         $plan = $teacher->currentSubscriptionPlan();
         $subscription = $teacher->currentSubscription();
+        $nbAssignments = Assignment::whereIn('course_id',$teacher->courses->pluck('id'))->count();
         return view('admin.teacher.show', [
             'plan' => $plan,
             'subscription' => $subscription,
-            'teacher' => $teacher
+            'teacher' => $teacher,
+            'nbAssignments' => $nbAssignments
         ]);
     }
 
@@ -78,13 +81,15 @@ class TeacherController extends Controller
      */
     public function account(){
         $this->authorize('teacherShow', Teacher::class);
-        $plan = Teacher::find(Auth::id())->currentSubscriptionPlan();
-
+        $teacher = Teacher::find(Auth::id());
+        $plan = $teacher->currentSubscriptionPlan();
+        $nbAssignments = Assignment::whereIn('course_id',$teacher->courses->pluck('id'))->count();
         $subscription = Teacher::find(Auth::id())->currentSubscription();
         return view('teacher.account', [
             'plan' => $plan,
             'subscription' => $subscription,
-            'teacher' => Teacher::find(Auth::id())
+            'teacher' => Teacher::find(Auth::id()),
+            'nbAssignments' => $nbAssignments
         ]);
     }
 

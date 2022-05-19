@@ -24,6 +24,13 @@ class Teacher extends User
     public function payments(){
         return $this->hasMany(Payment::class, 'teacher_id', 'id' );
     }
+
+    /**
+     * Get all of chapters of teacher's courses
+     */
+    public function chapters(){
+        return $this->hasManyThrough( Chapter::class, Course::class,);
+    }
     
     /**
      * The courses create by this teacher
@@ -132,22 +139,26 @@ class Teacher extends User
         $models = [];
         
         foreach($assignmentsWithNewSubmissions as $studentAssignment){
-            $models[] = [
-                'icon'=>'<i class="fas fa-plus-square"></i>',
-                'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
-                'text'=> 'New Submissions for ',
-                'resource' => ucfirst($studentAssignment->assignment->title),
-                'date'=> Carbon::parse($studentAssignment->created_at)
-            ];
+            if(in_array($studentAssignment->assignment->course_id, $teacher->courses->pluck('id')->toArray())){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-plus-square"></i>',
+                    'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
+                    'text'=> 'New Submissions for ',
+                    'resource' => ucfirst($studentAssignment->assignment->title),
+                    'date'=> Carbon::parse($studentAssignment->created_at)
+                ];
+            }
         }
         foreach($assignmentsWithNewQuestions as $studentAssignment){
-            $models[] = [
-                'icon'=>'<i class="fas fa-plus-square"></i>',
-                'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
-                'text'=> 'New Questions for ',
-                'resource' => ucfirst($studentAssignment->assignment->title),
-                'date'=> Carbon::parse($studentAssignment->created_at)
-            ];
+            if(in_array($studentAssignment->assignment->course_id, $teacher->courses->pluck('id')->toArray())){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-plus-square"></i>',
+                    'route'=> route('assignment_teacherShow', $studentAssignment->assignment_id),
+                    'text'=> 'New Questions for ',
+                    'resource' => ucfirst($studentAssignment->assignment->title),
+                    'date'=> Carbon::parse($studentAssignment->created_at)
+                ];
+            }
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
             if(!in_array($updatedForumCourse['course_id'], $teacher->courses->pluck('id')->toArray())){

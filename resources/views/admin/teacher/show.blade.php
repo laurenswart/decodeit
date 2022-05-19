@@ -12,30 +12,22 @@
                 <h3 class="title-3">{{ ucfirst($plan->title) }} Plan</h3>
                 
                     <table class="table caption-top">
-                        <tbody>
+                    <tbody>
                             <tr>
                                 <th>Nb Courses</th>
-                                <td>{{ count($teacher->courses) }} / {{ $plan->nb_courses }}</td>
+                                <td class="cell-center">{{ count($teacher->courses) }} / {{ $plan->nb_courses }}</td>
                             </tr>
                             <tr>
                                 <th>Nb Chapters</th>
-                                <td>? / {{ $plan->nb_chapters }}</td>
+                                <td class="cell-center">{{ count($teacher->chapters) }} / {{ $plan->nb_chapters*$plan->nb_courses }}</td>
                             </tr>
                             <tr>
                                 <th>Nb Students</th>
-                                <td>{{ count($teacher->students) }} / {{ $plan->nb_students }}</td>
-                            </tr>
-                            <tr>
-                                <th>Nb Submissions</th>
-                                <td>? / {{ $plan->nb_submissions }}</td>
+                                <td class="cell-center">{{ count($teacher->students) }} / {{ $plan->nb_students }}</td>
                             </tr>
                             <tr>
                                 <th>Nb Assignments</th>
-                                <td>? / {{ $plan->nb_assignments }}</td>
-                            </tr>
-                            <tr>
-                                <th>Max Upload Size</th>
-                                <td>? / {{ $plan->max_upload_size }}</td>
+                                <td class="cell-center">{{ $nbAssignments }} / {{ $plan->nb_assignments }}</td>
                             </tr>
                         </tbody>
                     </table>
