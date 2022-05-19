@@ -258,6 +258,12 @@ a.btn-right{
     overflow: hidden;
 	color: var(--color-mediumWhite);
 }
+.myButton[disabled], .myButton:hover[disabled]{
+	background:none;;
+	background-color: #00000000;
+	color:  var(--color-lightPurple);
+}
+
    
 .myButton.empty{
 	background-color: #00000000;
@@ -265,7 +271,7 @@ a.btn-right{
 }
 
    
-.myButton::before {
+.myButton:not([disabled])::before {
     content: "";
     position: absolute;
     top: 0;

@@ -40,7 +40,16 @@
                     <input type="checkbox" class="form-check-input" id="isTeacher" name="isTeacher" {{ old('isTeacher') ? 'checked' : ''}}>
                     <label class="form-check-label" for="isTeacher">I'm a teacher</label>
                 </div>
-                <button type="submit" class="myButton">Register</button>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" name="terms" {{ old('terms') ? 'checked' : ''}}>
+                    <label class="form-check-label" for="terms">I have read and accept the <a href="{{ route('terms') }}">Terms of Service</a></label>
+                </div>
+                @if($errors->get('terms'))
+                    <div class="error-msg">
+                        You must accept the terms of service.
+                    </div>
+                @endif
+                <button type="submit" class="myButton" disabled>Register</button>
                 
 
                 <a href="{{ route('login') }}">Already registered ?</a>
@@ -48,3 +57,4 @@
         </div>
     </div>
 </x-guest-layout>
+<script src="{{ asset('js/register.js') }}"></script>

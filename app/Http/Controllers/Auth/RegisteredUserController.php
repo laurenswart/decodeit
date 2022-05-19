@@ -43,6 +43,7 @@ class RegisteredUserController extends Controller
                 ->letters()
                 ->numbers()
                 ->symbols()],
+            'terms' => ['required']
             //password : min 8 characters, maj, min, number, special char
         ]);
 
