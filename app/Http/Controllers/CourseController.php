@@ -458,7 +458,7 @@ class CourseController extends Controller
         $this->authorize('teacherView', $course);
 
         //htaccess deny from all
-        $zip_file = public_path().'/'.$course->title.'.zip'; // Name of our archive to download
+        $zip_file = public_path().'/reports/'.$course->teacher->firstname.'_'.$course->teacher->lastname.'_'.$course->title.'.zip'; // Name of our archive to download
 
         // Initializing PHP class
         $zip = new \ZipArchive();
@@ -471,11 +471,25 @@ class CourseController extends Controller
         }
 
         $zip->close();
-        //detruire fichier: unlink
 
-        //headers to dowload
-        //readfile($file)
+        //headers to force dowload
+        $quoted = sprintf('"%s"', addcslashes(basename($zip_file), '"\\'));
+        $size   = filesize($zip_file);
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $quoted); 
+        header('Content-Transfer-Encoding: binary');
+        header('Connection: Keep-Alive');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        header('Content-Length: ' . $size);
+        readfile($zip_file);
 
-        return  response()->download($zip_file);
+        //delete zip
+        unlink($zip_file);
+
+        //return  response()->download($zip_file);
+        return;
     }
 }
