@@ -19,7 +19,11 @@
 
                 <button type="submit" class="myButton">Log in</button>
                 <!-- Validation Errors -->
-            <x-auth-validation-errors class="mt-4" :errors="$errors" />
+                @if($errors->any())
+                    <div class="error-msg m-3">
+                        These credentials do not match any of our records.
+                    </div>
+                @endif
                 @if (Route::has('password.request'))
                     <a class="text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}

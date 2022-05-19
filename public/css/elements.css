@@ -890,6 +890,22 @@ input:-webkit-autofill:focus, input:-webkit-autofill:active{
 	padding-bottom: 20px;
 }
 
+.alert.alert-danger{
+	color: var(--color-darkPurple);
+    background-color: #ffc876;
+    border-color: var(--color-orange);
+}
+.alert.alert-success{
+	color: var(--color-darkPurple);
+    background-color: var(--color-darkWhite);
+    border-color: var(--color-darkPurple);
+}
+
+body{
+	overflow: hidden;
+    padding-right: 0!important;
+}
+
 
 #editor{
 	min-height: 200px;
