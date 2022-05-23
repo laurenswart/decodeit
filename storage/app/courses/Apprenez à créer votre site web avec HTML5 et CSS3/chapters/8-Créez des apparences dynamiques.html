@@ -1,0 +1,107 @@
+<p id="r-4800778" data-claire-element-id="8796853">C'est une de ses forces : le CSS nous permet aussi de modifier l'apparence des éléments de façon dynamique, c'est-à-dire que des éléments peuvent changer de forme une fois que la page a été chargée. Nous allons faire appel à une fonctionnalité puissante du CSS : les pseudo-formats.</p>
+<p id="r-1610755" data-claire-element-id="1633581">Nous verrons dans ce chapitre comment changer l'apparence :</p>
+<ul id="r-1610764" data-claire-element-id="1633590">
+<li id="r-1610757" data-claire-element-id="1633583">
+<p id="r-1610756" data-claire-element-id="1633582">au survol ;</p>
+</li>
+<li id="r-1610759" data-claire-element-id="1633585">
+<p id="r-1610758" data-claire-element-id="1633584">lors du clic ;</p>
+</li>
+<li id="r-1610761" data-claire-element-id="1633587">
+<p id="r-1610760" data-claire-element-id="1633586">lors du focus (élément sélectionné) ;</p>
+</li>
+<li id="r-1610763" data-claire-element-id="1633589">
+<p id="r-1610762" data-claire-element-id="1633588">lorsqu'un lien a été consulté.</p>
+</li>
+</ul>
+<p id="r-1610765" data-claire-element-id="1633591">Vous allez voir que le langage CSS n'a pas fini de nous étonner !</p>
+<aside id="r-6314173" data-claire-element-id="30949453" data-claire-semantic="information">
+<p id="r-6314172" data-claire-element-id="30949452">Pour valider vos compétences avec un diplôme bac+2, suivez la <a href="/fr/paths/185-developpeur-web">formation Développeur web</a> avec OpenClassrooms. 6 mois en moyenne sont nécessaires pour finaliser cette <a href="/fr/paths">formation à distance</a>, qui peut aussi être suivie en <a href="/fr/apprenticeship">alternance ou contrat d’apprentissage</a>.</p>
+</aside>
+<h3 id="r-1605726" data-claire-element-id="32718609">Au survol</h3>
+<p id="r-1610766" data-claire-element-id="30949472">Nous allons découvrir dans ce chapitre plusieurs pseudo-formats CSS. Le premier que je vais vous montrer s'appelle <code data-claire-semantic="css">:hover</code>  . Comme tous les autres pseudo-formats que nous allons voir, c'est une information que l'on rajoute après le nom de la balise (ou de la classe) dans le CSS, comme ceci :</p>
+<pre id="r-1610767" data-claire-element-id="6250432">
+<code data-claire-semantic="css">a:hover
+{
+   
+}</code>
+</pre>
+<p id="r-1610768" data-claire-element-id="30949473">
+<code data-claire-semantic="css">:hover</code>  signifie « survoler ». <code data-claire-semantic="css">a:hover</code>  peut donc se traduire par : « Quand la souris est sur le lien » (quand on pointe dessus).</p>
+<p id="r-1610769" data-claire-element-id="1633595">À partir de là, c'est à vous de définir l'apparence que doivent avoir les liens lorsqu'on pointe dessus. Laissez libre cours à votre imagination, il n'y a pas de limite.</p>
+<p id="r-1610770" data-claire-element-id="1633596">Voici un exemple de présentation des liens, mais n'hésitez pas à inventer le vôtre :</p>
+<pre id="r-1610771" data-claire-element-id="6250433">
+<code data-claire-semantic="css">a /* Liens par défaut (non survolés) */
+{
+   text-decoration: none;
+   color: red;
+   font-style: italic;
+}
+
+a:hover /* Apparence au survol des liens */
+{
+   text-decoration: underline;
+   color: green;
+}</code>
+</pre>
+<p id="r-1610772" data-claire-element-id="1633598">On a défini ici deux versions des styles pour les liens :</p>
+<ul id="r-1610777" data-claire-element-id="1633603">
+<li id="r-1610774" data-claire-element-id="1633600">
+<p id="r-1610773" data-claire-element-id="1633599">pour les liens par défaut (non survolés) ;</p>
+</li>
+<li id="r-1610776" data-claire-element-id="1633602">
+<p id="r-1610775" data-claire-element-id="1633601">pour les liens au survol.</p>
+</li>
+</ul>
+<p id="r-1610778" data-claire-element-id="1633604">Le résultat se trouve à la figure suivante.</p>
+<p id="r-1610782" data-claire-element-id="1633608">Sympa, n'est-ce pas ?</p>
+<p id="r-1610783" data-claire-element-id="1633609">Même si on l'utilise souvent sur les liens, vous pouvez modifier l'apparence de n'importe quel élément. Par exemple, vous pouvez modifier l'apparence des paragraphes lorsqu'on pointe dessus :</p>
+<pre id="r-1610784" data-claire-element-id="6250436">
+<code data-claire-semantic="css">p:hover /* Quand on pointe sur un paragraphe */
+{
+
+}</code>
+</pre>
+<h3 id="r-1605744" data-claire-element-id="30949538">Au clic et lors de la sélection</h3>
+<p id="r-1610785" data-claire-element-id="1633612">Vous pouvez interagir encore plus finement en CSS. Nous allons voir ici que nous pouvons changer l'apparence des éléments lorsque l'on clique dessus et lorsqu'ils sont sélectionnés !</p>
+<h4 id="r-1610790" data-claire-element-id="30949496">
+<code data-claire-semantic="css">:active</code>  : au moment du clic</h4>
+<p id="r-1610786" data-claire-element-id="30949495">Le pseudo-format <code data-claire-semantic="css">:active</code>  permet d'appliquer un style particulier <em>au moment du clic</em>. En pratique, il n'est utilisé que sur les liens.</p>
+<p id="r-1610787" data-claire-element-id="1633614">Le lien gardera cette apparence très peu de temps : en fait, le changement intervient lorsque le bouton de la souris est enfoncé. En clair, ce n'est pas forcément toujours bien visible.</p>
+<p id="r-1610788" data-claire-element-id="1633615">On peut par exemple changer la couleur de fond du lien lorsque l'on clique dessus :</p>
+<pre id="r-1610789" data-claire-element-id="6250438">
+<code data-claire-semantic="css">a:active /* Quand le visiteur clique sur le lien */
+{
+    background-color: #FFCC66;
+}</code>
+</pre>
+<h4 id="r-1610801" data-claire-element-id="30949537">
+<code data-claire-semantic="css">:focus</code>  : lorsque l'élément est sélectionné</h4>
+<p id="r-1610791" data-claire-element-id="30949515">Là, c'est un peu différent. Le pseudo-format <code data-claire-semantic="css">:focus</code>  applique un style <em>lorsque l'élément est sélectionné</em>.</p>
+<div id="r-1610793" data-claire-element-id="1633620" data-claire-semantic="question">
+<p id="r-1610792" data-claire-element-id="1633619">C'est-à-dire ?</p>
+</div>
+<p id="r-1610794" data-claire-element-id="1633621">Une fois que vous avez cliqué, le lien reste « sélectionné » (il y a une petite bordure en pointillés autour). C'est cela, la sélection.</p>
+<aside id="r-1610796" data-claire-element-id="1633623" data-claire-semantic="information">
+<p id="r-1610795" data-claire-element-id="1633622">Ce pseudo-format pourra être appliqué à d'autres balises HTML que nous n'avons pas encore vues, comme les éléments de formulaires.</p>
+</aside>
+<p id="r-1610797" data-claire-element-id="1633624">Essayons pour l'instant sur les liens :</p>
+<pre id="r-1610798" data-claire-element-id="6250440">
+<code data-claire-semantic="css">a:focus /* Quand le visiteur sélectionne le lien */
+{
+    background-color: #FFCC66;
+}</code>
+</pre>
+<aside id="r-1610800" data-claire-element-id="30949536" data-claire-semantic="information">
+<p id="r-1610799" data-claire-element-id="30949535">Sous Google Chrome et Safari, l'effet ne se voit que si l'on appuie sur la touche <kbd>Tab</kbd>  .</p>
+</aside>
+<h3 id="r-1605762" data-claire-element-id="32718612">Lorsque le lien a déjà été consulté</h3>
+<p id="r-1610802" data-claire-element-id="30949539">Il est possible d'appliquer un style à un lien vers une page qui a déjà été vue. Par défaut, le navigateur colore le lien en un violet assez laid (de mon point de vue, du moins !).</p>
+<p id="r-1610803" data-claire-element-id="30949540">Vous pouvez changer cette apparence avec <code data-claire-semantic="css">:visited</code>  (qui signifie « visité »). En pratique, sur les liens consultés, on ne peut pas changer beaucoup de choses à part la couleur (figure suivante).</p>
+<pre id="r-1610804" data-claire-element-id="6250443">
+<code data-claire-semantic="css">a:visited /* Quand le visiteur a déjà vu la page concernée */
+{
+    color: #AAA; /* Appliquer une couleur grise */
+}</code>
+</pre>
+<p id="r-1610808" data-claire-element-id="4748028">Si vous ne souhaitez pas que les liens déjà visités soient colorés d'une façon différente, il vous faudra leur appliquer la même couleur qu'aux liens normaux. De nombreux sites web font cela (OpenClassrooms y compris !). Une exception notable : Google… ce qui est plutôt pratique, puisque l'on peut voir dans les résultats d'une recherche si on a déjà consulté ou non les sites que Google nous présente.</p>

@@ -1,0 +1,129 @@
+<p id="r-7317052" data-claire-element-id="31792832">Vous avez probablement entendu auparavant le terme <strong>
+<em>objet </em>
+</strong>dans un contexte de programmation. Mais qu'est-ce que cela signifie vraiment ? Commençons par nous intéresser à quelques objets du monde réel, comme les stylos, les livres, les smartphones, les ordinateurs, etc.</p>
+<p id="r-7178208" data-claire-element-id="31479043">Vous reconnaissez tous les stylos – à piston, à bille, feutre, gel, etc. – comme faisant partie du type d'objet : stylos. Vous pouvez écrire avec, ils utilisent de l'encre et peuvent se tenir à une main.</p>
+<p id="r-7178209" data-claire-element-id="31476764">C'est la même chose pour les livres : ils ont une couverture, un certain nombre de pages, un titre, et un ou plusieurs auteurs.</p>
+<p id="r-7178210" data-claire-element-id="31476765">Vous remarquez des points communs entre différents objets et vous notez ces informations pour créer une représentation mentale d'une catégorie d'objets.</p>
+<p id="r-7178211" data-claire-element-id="31476766">Cette liste mentale d'attributs sert de <strong>modèle</strong> pour cet objet. En programmation, on l'appelle une <strong>classe</strong>. Pour créer une classe, vous pouvez choisir le nom de votre choix. C'est pour cela qu'on l'appelle un <strong>
+<em>type nommé</em>
+</strong>. Vous le verrez, les classes permettent aussi de regrouper beaucoup de détails ; c'est pourquoi elles s'appellent aussi des <strong>
+<em>types complexes</em>
+</strong>.</p>
+<p id="r-7178212" data-claire-element-id="31476767">Avant de plonger dans les classes, observons un type JavaScript complexe : l'objet.</p>
+<h3 id="r-7178379" data-claire-element-id="32830407">
+<strong>Découvrez les objets</strong>
+</h3>
+<p id="r-7178213" data-claire-element-id="31479053">Les objets JavaScript sont écrits en <strong>JSON (JavaScript Object Notation)</strong>. Ce sont des séries de <strong>paires clés-valeurs</strong> séparées par des virgules, entre des accolades. Les objets peuvent être enregistrés dans une variable :</p>
+<pre id="r-7178382" data-claire-element-id="32830404">
+<code data-claire-semantic="javascript">let myBook = {
+    title: 'The Story of Tau',
+    author: 'Will Alexander',
+    numberOfPages: 250,
+    isAvailable: true
+};</code>
+</pre>
+<p id="r-7178226" data-claire-element-id="31476973">Chaque clé est une chaîne (title, author, numberOfPages...), et les valeurs associées peuvent avoir tout type de données (nombre, chaîne, etc.).</p>
+<p id="r-7178227" data-claire-element-id="31476782">Construire des objets présente un avantage essentiel : cela permet de regrouper les attributs d'une <em>chose</em> unique à un même emplacement, que ce soit un livre, un profil d'utilisateur ou la configuration d'une application, par exemple.</p>
+<p id="r-7178244" data-claire-element-id="31476799">
+<h4 id="r-7179427" data-claire-element-id="32830406">
+<strong>Accédez aux données d'un objet</strong>
+</h4>
+<p id="r-7178246" data-claire-element-id="31476801">Maintenant que vous savez comment créer un objet en JavaScript, voyons comment accéder aux données dans un objet avec la <strong>notation pointée (</strong>
+<strong>
+<em>dot notation</em>
+</strong>
+<strong>)</strong>, expliquée ci-dessous.</p>
+<p id="r-7178247" data-claire-element-id="31476802">Une fois qu'un objet est enregistré dans une variable, vous pouvez accéder à ses données comme dans l'exemple ci-dessous.</p>
+<pre id="r-7178402" data-claire-element-id="32830405">
+<code data-claire-semantic="javascript">let myBook = {
+    title: &quot;L'Histoire de Tao&quot;,
+    author: &quot;Will Alexander&quot;,
+    numberOfPages: 250,
+    isAvailable: true
+};
+let bookTitle = myBook.title;  // &quot;L'Histoire de Tao&quot;
+let bookPages = myBook.numberOfPages  // 250</code>
+</pre>
+<p id="r-7178264" data-claire-element-id="31476819">Pour cela, utilisez le nom de la variable qui contient l'objet, un point (  .  ), puis le nom de la clé dont vous souhaitez récupérer la valeur.</p>
+<h4 id="r-7180113" data-claire-element-id="32131885">
+<strong>La notation bracket (</strong>
+<strong>
+<em>bracket notation</em>
+</strong>
+<strong>)</strong>
+</h4>
+<p id="r-7180108" data-claire-element-id="31481154">Pour accéder à un sous élément vous pouvez utiliser les brackets avec la valeur du sous élément. Par exemple :</p>
+<pre id="r-7180109" data-claire-element-id="31786864">
+<code data-claire-semantic="javascript">let myBook = {
+   title: &quot;L'Histoire de Tao&quot;,
+   author: &quot;Will Alexander&quot;,
+   numberOfPages: 250,
+   isAvailable: true
+};
+let bookTitle = myBook[&quot;title&quot;];  // &quot;L'Histoire de Tao&quot;
+let bookPages = myBook[&quot;numberOfPages&quot;];  // 250</code>
+</pre>
+<p id="r-7180110" data-claire-element-id="31481156">
+</p>
+<p id="r-7180111" data-claire-element-id="31481157">L'intérêt ici c’est qu’on va pouvoir mettre entre bracket une variable qui contient en string le nom de la propriété que l’on souhaite atteindre. Par exemple :</p>
+<pre id="r-7180112" data-claire-element-id="32131884">
+<code data-claire-semantic="javascript">let myBook = {
+   title: &quot;L'Histoire de Tao&quot;,
+   author: &quot;Will Alexander&quot;,
+   numberOfPages: 250,
+   isAvailable: true
+};
+let propertyToAccess = &quot;title&quot;;
+let bookTitle = myBook[propertyToAccess];  // &quot;L'Histoire de Tao&quot;</code>
+</pre>
+<h3 id="r-7178417" data-claire-element-id="32830413">
+<strong>Manipulez des classes</strong>
+</h3>
+<p id="r-7178283" data-claire-element-id="31476838">La construction d'un objet à la main, par la notation à accolades vue précédemment, convient bien à des objets simples et uniques. Mais vous aurez souvent besoin de beaucoup d'objets du même type. C'est là que les <strong>classes</strong> sont utiles.</p>
+<p id="r-7178285" data-claire-element-id="31476840">Comme expliqué précédemment, une classe est un <strong>modèle</strong> pour un objet dans le code. Elle permet de construire plusieurs objets du même type (appelés <strong>
+<em>instances</em>
+</strong>
+<em> de la même classe</em>) plus facilement, rapidement et en toute fiabilité.</p>
+<p id="r-7178287" data-claire-element-id="31476842">Voyons comment construire une classe dans le code.</p>
+<p id="r-7178288" data-claire-element-id="31477065">Pour créer une classe dans JavaScript, utilisez le mot clé   <code data-claire-semantic="text">class</code>  , suivi par un nom. Encadrez ensuite le code de la classe entre accolades :</p>
+<pre id="r-7178428" data-claire-element-id="31786870">
+<code data-claire-semantic="javascript">class Book {
+}</code>
+</pre>
+<p id="r-7178293" data-claire-element-id="31477085">Pour cette classe, nous souhaitons que chaque   <code data-claire-semantic="text">Book</code>  ait un titre, un auteur et un nombre de pages. Pour cela, vous utilisez ce qu'on appelle un <strong>
+<em>constructor</em>
+</strong>.</p>
+<aside id="r-7178448" data-claire-element-id="31477125" data-claire-semantic="information">
+<p id="r-7178294" data-claire-element-id="31477095">Le  constructor d'une classe est la fonction qui est appelée quand on crée une nouvelle instance de cette classe avec le mot clé   <code data-claire-semantic="text">new</code>  .</p>
+</aside>
+<pre id="r-7178438" data-claire-element-id="32830410">
+<code data-claire-semantic="javascript">class Book {
+    constructor(title, author, pages) {
+    }
+}</code>
+</pre>
+<p id="r-7178305" data-claire-element-id="31477126">Il y a un ensemble d'instructions à suivre à l'intérieur du  constructor  pour créer une instance de la classe   <code data-claire-semantic="text">Book</code>  . Pour attribuer le titre, l'auteur et le nombre de pages reçus à cette instance, utilisez le mot clé   <code data-claire-semantic="text">this</code>  et la notation dot.</p>
+<pre id="r-7178449" data-claire-element-id="32830411">
+<code data-claire-semantic="javascript">class Book {
+    constructor(title, author, pages) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+    }
+}</code>
+</pre>
+<p id="r-7178320" data-claire-element-id="31477155">Ici, le mot clé   <code data-claire-semantic="text">this</code>  fait référence à la nouvelle instance. Donc, il utilise la notation dot pour attribuer les valeurs reçues aux clés correspondantes.</p>
+<p id="r-7178321" data-claire-element-id="31477156">Maintenant que la classe est terminée, vous pouvez créer des instances par le mot clé   <code data-claire-semantic="text">new</code>  :</p>
+<pre id="r-7178458" data-claire-element-id="32830412">
+<code data-claire-semantic="javascript">let myBook = new Book(&quot;L'Histoire de Tao&quot;, &quot;Will Alexander&quot;, 250);
+//Cette ligne crée l'objet suivant :
+{
+    title: &quot;L'Histoire de Tao&quot;,
+    author: &quot;Will Alexander&quot;,
+    pages: 250
+}</code>
+</pre>
+<p id="r-7178335" data-claire-element-id="31479105">Avec une classe <code data-claire-semantic="text">Book</code>  , vous pouvez créer facilement et rapidement de nouveaux objets <code data-claire-semantic="text">Book</code>  .</p>
+<aside id="r-7178473" data-claire-element-id="31477195" data-claire-semantic="information">
+<p id="r-7178336" data-claire-element-id="31477186">Gardez cette notion de classe en tête, on y reviendra un peu plus loin en abordant la notion de propriété de classe et les méthodes d’instance.</p>
+</aside>

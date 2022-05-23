@@ -1,0 +1,35 @@
+<p id="r-7179922" data-claire-element-id="31480632">Dans la deuxième partie de ce cours, vous avez découvert des notions de base en développement. Poursuivons avec les fonctions.</p>
+<h3 id="r-7176101" data-claire-element-id="31785729">
+<strong>Comprenez les fonctions</strong>
+</h3>
+<p id="r-7180257" data-claire-element-id="31481572">Une <strong>fonction</strong> est un bloc de code auquel vous attribuez un nom. Quand vous <strong>appelez</strong> cette fonction, vous exécutez le code qu'elle contient. Par exemple, dans les vidéos d'enregistrement d'écrans, vous m'avez vu appeler la fonction<code data-claire-semantic="text">console.log()</code>  , qui contient du code permettant d'imprimer sur la console mais vous pouvez créer n’importe quelle fonction vous même :</p>
+<pre id="r-7180258" data-claire-element-id="31785722">
+<code data-claire-semantic="javascript">// On définit la fonction
+
+function afficherDeuxValeurs(valeur1, valeur2) {
+      console.log('Première valeur:' + valeur1);
+      console.log('Deuxième valeur:' + valeur2);
+}
+
+// On exécute la fonction
+afficherDeuxValeurs(12, 'Bonjour');
+
+// On obtient dans la console
+// &gt; Première valeur:12 
+// &gt; Deuxième valeur:Bonjour </code>
+</pre>
+<p id="r-7176013" data-claire-element-id="31472893">Beaucoup de fonctions ont besoin de variables pour effectuer leur travail. Quand vous créez ou <strong>déclarez</strong> une fonction, vous indiquez la liste des variables dont elle a besoin pour effectuer son travail : vous définissez les <strong>paramètres</strong> de la fonction.</p>
+<p id="r-7176014" data-claire-element-id="31472894">Ensuite, à l'appel de la fonction, vous lui attribuez des <strong>valeurs</strong> pour ses paramètres. Les valeurs sont les <strong>arguments</strong> d'appel.</p>
+<p id="r-7176015" data-claire-element-id="31472895">Enfin, votre fonction peut vous donner un résultat : une <strong>valeur de retour</strong>. Supposons que vous ayez une fonction qui compte le nombre de mots dans une chaîne :</p>
+<ul id="r-7176022" data-claire-element-id="31473013">
+<li id="r-7176017" data-claire-element-id="31472897">
+<p id="r-7176016" data-claire-element-id="31472896">le paramètre sera une chaîne dont vous allez compter les mots ;</p>
+</li>
+<li id="r-7176019" data-claire-element-id="31473012">
+<p id="r-7176018" data-claire-element-id="31473011">l'argument sera toute chaîne attribuée à votre fonction quand vous l'appelez ;</p>
+</li>
+<li id="r-7176021" data-claire-element-id="31472901">
+<p id="r-7176020" data-claire-element-id="31472900">la valeur de retour sera le nombre de mots.</p>
+</li>
+</ul>
+<p id="r-7176023" data-claire-element-id="31472903">Commençons par une fonction très simple qui ajoute des nombres.</p>

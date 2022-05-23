@@ -1,0 +1,205 @@
+<p>Ça y est, vous avez installé tous les logiciels ? Vous devriez maintenant avoir un éditeur de texte pour <em>créer votre site</em> (comme Sublime Text) et plusieurs navigateurs pour le <em>tester</em> (Mozilla Firefox, Google Chrome…).</p>
+<p id="r-1609294" data-claire-element-id="30940452">Dans ce chapitre, nous allons commencer à pratiquer ! Nous allons découvrir les bases du langage HTML et enregistrer notre toute première page web ! <br /> Alors oui, bien sûr, ne vous attendez pas encore à réaliser une page web exceptionnelle dès ce deuxième chapitre, mais patience… cela viendra !</p>
+<aside id="r-6413133" data-claire-element-id="30940454" data-claire-semantic="information">
+<p id="r-6413132" data-claire-element-id="30940453">Ce cours vous intéresse et vous souhaitez valider vos compétences acquises avec un diplôme reconnu par l'État ? Cliquez et jetez un œil à la <a href="/fr/paths/185-developpeur-web">formation Développeur web</a>
+</p>
+</aside>
+<p id="r-6413135" data-claire-element-id="30304074">
+<a href="/fr/paths/185-developpeur-web">
+</a>
+</p>
+<p id="r-1609295" data-claire-element-id="4716083">Allez, mettons-nous en situation ! Comme je vous l'ai dit, nous allons créer notre site dans un éditeur de texte. Vous avez dû en installer un suite à mes conseils dans le premier chapitre : qu'il s'appelle Sublime Text, Notepad++, Brackets, jEdit, vim, TextWrangler… peu importe. Ces logiciels ont un but très simple : vous permettre d'écrire du texte !</p>
+<p id="r-1609296" data-claire-element-id="4716084">Dans la suite de ce cours, je travaillerai avec Sublime Text. Je vais donc l'ouvrir :</p>
+
+<p id="r-1609300" data-claire-element-id="4716088">Bon, qu'est-ce qu'on fait maintenant ? Qu'est-ce qu'on écrit sur cette feuille blanche (euh... noire) ?</p>
+<p id="r-1609301" data-claire-element-id="1632086">On va faire un petit essai. Je vous invite à écrire ce qui vous passe par la tête, comme moi à la figure suivante.</p>
+
+<p id="r-1609305" data-claire-element-id="1632090">Vous pouvez écrire les mêmes phrases que moi ou ce que vous voulez ; le but est d'écrire quelque chose.</p>
+<p id="r-1609306" data-claire-element-id="30940566">Maintenant, enregistrons ce fichier. Pour cela, c'est très simple : comme dans tous les programmes, vous avez un menu <code data-claire-semantic="text">Fichier</code>  &gt; <code data-claire-semantic="text">Enregistrer</code> (ou <code data-claire-semantic="text">File</code>  &gt; <code data-claire-semantic="text">Save</code> en anglais). Une boîte de dialogue vous demande où enregistrer le fichier et sous quel nom. Enregistrez-le où vous voulez. Donnez au fichier le nom que vous voulez, en terminant par <code data-claire-semantic="text">.html</code>  ; par exemple <code data-claire-semantic="text">test.html</code>  , comme indiqué à la figure suivante.</p>
+
+<aside id="r-1609311" data-claire-element-id="30940529" data-claire-semantic="information">
+<p id="r-1609310" data-claire-element-id="30940528">Je vous recommande de créer un nouveau dossier dans vos documents, qui contiendra les fichiers de votre site. Pour ma part, j'ai créé un dossier <code data-claire-semantic="text">test</code>  dans lequel j'ai mis mon fichier <code data-claire-semantic="text">test.html</code>  .</p>
+</aside>
+<p id="r-1609312" data-claire-element-id="30940530">Ouvrez maintenant l'explorateur de fichiers dans le dossier où vous avez enregistré votre page (l'Explorateur sous Windows ou le Finder sous Mac). Vous y verrez le fichier que vous venez de créer :</p>
+
+<p id="r-1609316" data-claire-element-id="30940600">L'icône qui représente le fichier dépend de votre navigateur web par défaut, en général. Vous pouvez y voir une icône de Firefox, de Chrome... ou un aperçu, comme ici. N'y prêtez pas attention. Faites simplement un double-clic sur ce fichier et… votre navigateur s'ouvre et affiche le texte que vous avez écrit.</p>
+
+<div id="r-1609328" data-claire-element-id="1632113" data-claire-semantic="question">
+<p id="r-1609327" data-claire-element-id="1632112">Cela ne marche pas bien, on dirait ! Tout le texte s'affiche sur la même ligne alors qu'on avait écrit deux lignes de texte différentes !?</p>
+</div>
+<p id="r-1609329" data-claire-element-id="1632114">En effet, bien vu ! <br /> Le texte s'affiche sur la même ligne alors qu'on avait demandé à l'écrire sur deux lignes différentes. Que se passe-t-il ?</p>
+<p id="r-1609330" data-claire-element-id="30940662">En fait, pour créer une page web, il ne suffit pas de taper simplement du texte comme on vient de le faire. En plus de ce texte, il faut aussi écrire ce qu'on appelle des <strong>
+<em>balises</em>
+</strong>, qui vont donner des instructions à l'ordinateur comme « aller à la ligne », « afficher une image », etc.</p>
+<h3 id="r-1604258" data-claire-element-id="30940885">Les balises et leurs attributs</h3>
+<p id="r-1609331" data-claire-element-id="1632117">Bon, tout cela était trop facile. Évidemment, il a fallu que ces satanés informaticiens s'en mêlent et compliquent les choses. Il ne suffit pas d'écrire « simplement » du texte dans l'éditeur, il faut aussi donner des instructions à l'ordinateur. En HTML, on utilise pour cela des <strong>balises</strong>.</p>
+<h4 id="r-1609346" data-claire-element-id="30940745">Les balises</h4>
+<p id="r-1609333" data-claire-element-id="30940663">Les pages HTML sont remplies de ce qu'on appelle des <em>balises</em>. Celles-ci sont invisibles à l'écran pour vos visiteurs, mais elles permettent à l'ordinateur de comprendre ce qu'il doit afficher.<br /> Les balises se repèrent facilement. Elles sont entourées de « chevrons », c'est-à-dire des symboles <code data-claire-semantic="text">&lt;</code>  et <code data-claire-semantic="text">&gt;</code>  , comme ceci : <code data-claire-semantic="html">&lt;balise&gt;</code>  .</p>
+<p id="r-6966672" data-claire-element-id="30940664">À quoi est-ce qu'elles servent ? Elles indiquent la nature du texte qu'elles encadrent. Elles veulent dire par exemple : « Ceci est le titre de la page », « Ceci est une image », « Ceci est un paragraphe de texte », etc.</p>
+<p id="r-1609334" data-claire-element-id="1632120">On distingue deux types de balises : les balises en paires et les balises orphelines.</p>
+<h5 id="r-1609339" data-claire-element-id="30940703">Les balises en paires</h5>
+<p id="r-1609335" data-claire-element-id="1632121">Elles s'ouvrent, contiennent du texte, et se ferment plus loin. Voici à quoi elles ressemblent :</p>
+<pre id="r-1609336" data-claire-element-id="2255989">
+<code data-claire-semantic="html">&lt;titre&gt;Ceci est un titre&lt;/titre&gt;</code>
+</pre>
+<p id="r-1609337" data-claire-element-id="30940702">On distingue une balise ouvrante ( <code data-claire-semantic="html">&lt;titre&gt;</code>  ) et une balise fermante ( <code data-claire-semantic="html">&lt;/titre&gt;</code>  ) qui indique que le titre se termine. Cela signifie pour l'ordinateur que tout ce qui n'est <em>pas</em> entre ces deux balises… n'est pas un titre.</p>
+<pre id="r-1609338" data-claire-element-id="2255990">
+<code data-claire-semantic="html">Ceci n'est pas un titre &lt;titre&gt;Ceci est un titre&lt;/titre&gt; Ceci n'est pas un titre</code>
+</pre>
+<h5 id="r-1609345" data-claire-element-id="30940744">Les balises orphelines</h5>
+<p id="r-1609340" data-claire-element-id="1632126">Ce sont des balises qui servent le plus souvent à insérer un élément à un endroit précis (par exemple une image). Il n'est pas nécessaire de délimiter le début et la fin de l'image, on veut juste dire à l'ordinateur « Insère une image ici ».</p>
+<p id="r-1609341" data-claire-element-id="1632127">Une balise orpheline s'écrit comme ceci :</p>
+<pre id="r-1609342" data-claire-element-id="5727273">
+<code data-claire-semantic="html">&lt;image /&gt;</code>
+</pre>
+<aside id="r-1609344" data-claire-element-id="30940743" data-claire-semantic="information">
+<p id="r-1609343" data-claire-element-id="30940742">Notez que le / de fin n'est pas obligatoire. On pourrait écrire seulement <code data-claire-semantic="html">&lt;image&gt;</code>  . Néanmoins, pour ne pas les confondre avec le premier type de balise, les webmasters recommandent de rajouter ce <code data-claire-semantic="text">/</code>  (<em>slash</em>) à la fin des balises orphelines. Vous me verrez donc mettre un <code data-claire-semantic="text">/</code>  aux balises orphelines et je vous recommande de faire de même, c'est une bonne pratique.</p>
+</aside>
+<h4 id="r-1609356" data-claire-element-id="30940884">Les attributs</h4>
+<p id="r-1609347" data-claire-element-id="1632133">Les attributs sont un peu les options des balises. Ils viennent les compléter pour donner des informations supplémentaires. L'attribut se place après le nom de la balise ouvrante et a le plus souvent une valeur, comme ceci :</p>
+<pre id="r-1609348" data-claire-element-id="2255995">
+<code data-claire-semantic="html">&lt;balise attribut=&quot;valeur&quot;&gt;</code>
+</pre>
+<p id="r-1609349" data-claire-element-id="30940802">À quoi cela sert-il ? Prenons la balise <code data-claire-semantic="html">&lt;image /&gt;</code>  que nous venons de voir. Seule, elle ne sert pas à grand-chose. On pourrait rajouter un attribut qui indique le nom de l'image à afficher :</p>
+<pre id="r-1609350" data-claire-element-id="5727276">
+<code data-claire-semantic="html">&lt;image nom=&quot;photo.jpg&quot; /&gt;</code>
+</pre>
+<p id="r-1609351" data-claire-element-id="30940803">L'ordinateur comprend alors qu'il doit afficher l'image contenue dans le fichier <code data-claire-semantic="text">photo.jpg</code>  .</p>
+<p id="r-1609352" data-claire-element-id="30940842">Dans le cas d'une balise fonctionnant « par paire », on ne met les attributs que dans la balise ouvrante et pas dans la balise fermante. Par exemple, ce code indique que la citation est de Neil Armstrong et qu'elle date du 21 juillet 1969 :</p>
+<pre id="r-1609353" data-claire-element-id="5727277">
+<code data-claire-semantic="html">&lt;citation auteur=&quot;Neil Armstrong&quot; date=&quot;21/07/1969&quot;&gt;
+&lt;/citation&gt;</code>
+</pre>
+<aside id="r-1609355" data-claire-element-id="30940883" data-claire-semantic="warning">
+<p id="r-1609354" data-claire-element-id="30940882">Toutes les balises que nous venons de voir sont fictives. Les vraies balises ont des noms en anglais (eh oui !) ; nous allons les découvrir dans la suite de ce cours.</p>
+</aside>
+<h3 id="r-6413154" data-claire-element-id="32718417">Structure de base d'une page HTML5</h3>
+<p id="r-1609357" data-claire-element-id="30940922">Reprenons notre éditeur de texte (dans mon cas, Sublime Text). Je vous invite à écrire ou à copier-coller le code source ci-dessous dans votre éditeur de texte. Ce code correspond à la base d'une page web en HTML5 :</p>
+<pre id="r-1609358" data-claire-element-id="5727280">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;Titre&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+    
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<aside id="r-1609360" data-claire-element-id="30940924" data-claire-semantic="information">
+<p id="r-1609359" data-claire-element-id="30940923">J'ai mis des espaces au début de certaines lignes pour « décaler » les balises. Ce n'est pas obligatoire et cela n'a aucun impact sur l'affichage de la page, mais cela rend le code source plus lisible. On appelle cela l'<strong>
+<em>indentation</em>
+</strong>. Dans votre éditeur, il suffit d'appuyer sur la touche <kbd>Tab</kbd> pour avoir le même résultat.</p>
+</aside>
+<p id="r-1609361" data-claire-element-id="4716288">Copié dans Sublime Text, vous devriez voir:</p>
+
+<p id="r-1609365" data-claire-element-id="30940964">Vous noterez que les balises s'ouvrent et se ferment dans un ordre précis. Par exemple, la balise <code data-claire-semantic="html">&lt;html&gt;</code>  est la première que l'on ouvre et c'est aussi la dernière que l'on ferme (tout à la fin du code, avec <code data-claire-semantic="html">&lt;/html&gt;</code>  ). <em>Les balises doivent être fermées dans le sens inverse de leur ouverture.</em> Un exemple :</p>
+<ul id="r-1609370" data-claire-element-id="30940969">
+<li id="r-1609367" data-claire-element-id="30940966">
+<p id="r-1609366" data-claire-element-id="30940965">
+<code data-claire-semantic="html">&lt;html&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;</code>  : <strong>correct</strong>. Une balise qui est ouverte à l'intérieur d'une autre doit aussi être fermée à l'intérieur.</p>
+</li>
+<li id="r-1609369" data-claire-element-id="30940968">
+<p id="r-1609368" data-claire-element-id="30940967">
+<code data-claire-semantic="html">&lt;html&gt;&lt;body&gt;&lt;/html&gt;&lt;/body&gt;</code>  : <strong>incorrect</strong>, les balises s'entremêlent.</p>
+</li>
+</ul>
+<div id="r-1609372" data-claire-element-id="1632159" data-claire-semantic="question">
+<p id="r-1609371" data-claire-element-id="1632158">Euh, on pourrait avoir des explications sur toutes les balises que l'on vient de copier dans l'éditeur, m'sieur ?</p>
+</div>
+<p id="r-1609373" data-claire-element-id="4716486">Bien sûr, c'est demandé si gentiment. :)<br /> Ne prenez pas peur en voyant toutes ces balises d'un coup, je vais vous expliquer leur rôle !</p>
+<h4 id="r-1609378" data-claire-element-id="30941045">Le doctype</h4>
+<pre id="r-1609374" data-claire-element-id="2256002">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;</code>
+</pre>
+<p id="r-1609375" data-claire-element-id="30941044">La toute première ligne s'appelle le <strong>
+<em>doctype</em>
+</strong>. Elle est indispensable car c'est elle qui indique qu'il s'agit bien d'une page web HTML.<br /> Ce n'est pas vraiment une balise comme les autres (elle commence par un point d'exclamation). Vous pouvez considérer que c'est un peu l'exception qui confirme la règle.</p>
+<aside id="r-1609377" data-claire-element-id="30941005" data-claire-semantic="information">
+<p id="r-1609376" data-claire-element-id="30941004">Cette ligne du doctype était autrefois incroyablement complexe. Il était impossible de la retenir de tête. Pour XHTML 1.0, il fallait écrire :<br />
+<code data-claire-semantic="html">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</code>
+<br /> Dans le cadre de HTML5, il a été décidé de la simplifier, pour le plus grand bonheur des webmasters. Quand vous voyez une balise doctype courte ( <code data-claire-semantic="html">&lt;!DOCTYPE html&gt;</code>  ), cela signifie que la page est écrite en HTML5.</p>
+</aside>
+<h4 id="r-1609381" data-claire-element-id="30941047">La balise <code data-claire-semantic="html">&lt;/html&gt;</code>
+</h4>
+<pre id="r-1609379" data-claire-element-id="5727283">
+<code data-claire-semantic="html">&lt;html&gt;
+
+&lt;/html&gt;</code>
+</pre>
+<p id="r-1609380" data-claire-element-id="30941046">C'est la balise principale du code. Elle englobe tout le contenu de votre page. Comme vous pouvez le voir, la balise fermante <code data-claire-semantic="html">&lt;/html&gt;</code>  se trouve tout à la fin du code !</p>
+<h4 id="r-6413153" data-claire-element-id="32718416">L'en-tête <code data-claire-semantic="html">&lt;head&gt;</code>  et le corps <code data-claire-semantic="html">&lt;body&gt;</code>
+</h4>
+<p id="r-1609382" data-claire-element-id="1632169">Une page web est constituée de deux parties :</p>
+<ul id="r-1609387" data-claire-element-id="30941086">
+<li id="r-1609384" data-claire-element-id="30941085">
+<p id="r-1609383" data-claire-element-id="30941084">L'en-tête <code data-claire-semantic="html">&lt;head&gt;</code>  : cette section donne quelques informations générales sur la page, comme son titre, l'encodage (pour la gestion des caractères spéciaux), etc. Cette section est généralement assez courte. Les informations que contient l'en-tête ne sont pas affichées sur la page, ce sont simplement des informations générales à destination de l'ordinateur. Elles sont cependant très importantes !</p>
+</li>
+<li id="r-1609386" data-claire-element-id="30941051">
+<p id="r-1609385" data-claire-element-id="30941050">Le corps <code data-claire-semantic="html">&lt;body&gt;</code>  : c'est là que se trouve la partie principale de la page. Tout ce que nous écrirons ici sera affiché à l'écran. C'est à l'intérieur du corps que nous écrirons la majeure partie de notre code.</p>
+</li>
+</ul>
+<p id="r-1609388" data-claire-element-id="1632175">Pour le moment, le corps est vide (nous y reviendrons plus loin). Intéressons-nous par contre aux deux balises contenues dans l'en-tête…</p>
+<h5 id="r-1609398" data-claire-element-id="30941206">L'encodage ( <code data-claire-semantic="text">charset</code>  )</h5>
+<pre id="r-1609389" data-claire-element-id="5727285">
+<code data-claire-semantic="html">&lt;meta charset=&quot;utf-8&quot; /&gt;</code>
+</pre>
+<p id="r-1609390" data-claire-element-id="30941124">Cette balise indique l'encodage utilisé dans votre fichier <code data-claire-semantic="text">.html</code>  .</p>
+<p id="r-1609391" data-claire-element-id="1632178">Sans rentrer dans les détails, car cela pourrait vite devenir compliqué, l'encodage indique la façon dont le fichier est enregistré. C'est lui qui détermine comment les caractères spéciaux vont s'afficher (accents, idéogrammes chinois et japonais, caractères arabes, etc.).</p>
+<p id="r-1609392" data-claire-element-id="30941164">Il y a plusieurs techniques d'encodage, portant des noms bizarres, et utilisées en fonction des langues : ISO-8859-1, OEM 775, Windows-1253… Une seule cependant devrait être utilisée aujourd'hui autant que possible : UTF-8. Cette méthode d'encodage permet d'afficher sans aucun problème pratiquement tous les symboles de toutes les langues de notre planète ! C'est pour cela que j'ai indiqué <code data-claire-semantic="text">utf-8</code>  dans cette balise.</p>
+<p id="r-1609393" data-claire-element-id="5727286">Il ne suffit pas de <em>dire</em> que votre fichier est en UTF-8. Il faut aussi que votre fichier soit bien <em>enregistré</em> en UTF-8. C'est heureusement le cas désormais par défaut dans la plupart des éditeurs de texte.</p>
+<aside id="r-1609397" data-claire-element-id="30941205" data-claire-semantic="error">
+<p id="r-1609396" data-claire-element-id="30941204">Si les accents s'affichent mal par la suite, c'est qu'il y a un problème avec l'encodage. Vérifiez que la balise meta indique bien UTF-8, et que votre fichier est enregistré en UTF-8 (sous Sublime Text, allez dans le menu File &gt; Save with Encoding &gt; UTF-8  pour vous assurer que votre fichier est enregistré en UTF-8.).</p>
+</aside>
+<h5 id="r-6413152" data-claire-element-id="32718415">Le titre principal de la page</h5>
+<pre id="r-1609399" data-claire-element-id="2256008">
+<code data-claire-semantic="html">&lt;title&gt;</code>
+</pre>
+<p id="r-1609400" data-claire-element-id="30941207">C'est le titre de votre page, probablement l'élément le plus important ! Toute page doit avoir un titre qui décrit ce qu'elle contient.<br /> Il est conseillé de garder le titre assez court (moins de 100 caractères, en général).</p>
+<p id="r-1609401" data-claire-element-id="1632188">Le titre ne s'affiche pas dans votre page mais en haut de celle-ci (souvent dans l'onglet du navigateur). Enregistrez votre page web et ouvrez-la dans votre navigateur. Vous verrez que le titre s'affiche dans l'onglet, comme sur la figure suivante.</p>
+
+<p id="r-1609405" data-claire-element-id="1632192">Il faut savoir que le titre apparaît aussi dans les résultats de recherche, comme sur Google (figure suivante).</p>
+
+<p id="r-1609409" data-claire-element-id="1632196">Autant vous dire que bien choisir son titre est important !</p>
+<h3 id="r-6413160" data-claire-element-id="32718423">Les commentaires</h3>
+<p id="r-1609412" data-claire-element-id="1632200">Nous avons appris à créer notre première <em>vraie</em> page HTML dans ce chapitre. Avant de terminer, j'aimerais vous présenter le principe des commentaires.</p>
+<p id="r-1609413" data-claire-element-id="1632201">Un <strong>commentaire</strong> en HTML est un texte qui sert simplement de mémo. Il n'est pas affiché, il n'est pas lu par l'ordinateur, cela ne change rien à l'affichage de la page.</p>
+<div id="r-1609415" data-claire-element-id="1632203" data-claire-semantic="question">
+<p id="r-1609414" data-claire-element-id="1632202">Bref, cela ne sert à rien ?</p>
+</div>
+<p id="r-1609416" data-claire-element-id="1632204">Eh bien si ! <br /> Cela sert à <em>vous</em> et aux personnes qui liront le code source de votre page. Vous pouvez utiliser les commentaires pour laisser des indications sur le fonctionnement de votre page.</p>
+<p id="r-1609417" data-claire-element-id="1632205">Quel intérêt ? Cela vous permettra de vous rappeler comment fonctionne votre page si vous revenez sur votre code source après un long moment d'absence. Ne rigolez pas, cela arrive à tous les webmasters.</p>
+<h4 id="r-1609422" data-claire-element-id="5727296">Insérer un commentaire</h4>
+<p id="r-1609418" data-claire-element-id="1632206">Un commentaire est une balise HTML avec une forme bien spéciale :</p>
+<pre id="r-1609419" data-claire-element-id="2256014">
+<code data-claire-semantic="html">&lt;!-- Ceci est un commentaire --&gt;</code>
+</pre>
+<p id="r-1609420" data-claire-element-id="1632208">Vous pouvez le mettre où vous voulez au sein de votre code source : il n'a aucun impact sur votre page, mais vous pouvez vous en servir pour vous aider à vous repérer dans votre code source (surtout s'il est long).</p>
+<pre id="r-1609421" data-claire-element-id="5727295">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;!-- En-tête de la page --&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;Titre&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;!-- Corps de la page --&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<h4 id="r-6413159" data-claire-element-id="32718422">Tout le monde peut voir vos commentaires… et tout votre code HTML !</h4>
+<p id="r-1609423" data-claire-element-id="1632211">Terminons par une remarque importante : <em>tout le monde peut voir le code HTML de votre page</em> une fois celle-ci mise en ligne sur le Web. Il suffit de faire un clic droit sur la page et de sélectionner « Afficher le code source de la page » (l'intitulé peut changer selon votre navigateur), comme le montre la figure suivante.</p>
+
+<p id="r-1609427" data-claire-element-id="1632215">Le code source s'affiche alors (figure suivante).</p>
+
+<p id="r-1609431" data-claire-element-id="30941255">Vous pouvez tester cette manipulation sur n'importe quel site web, cela marche ! Garanti à 100 %. Cela s'explique assez facilement : le navigateur <em>doit</em> obtenir le code HTML pour savoir ce qu'il faut afficher. Le code HTML de tous les sites est donc public.</p>
+<p id="r-1609432" data-claire-element-id="4716887">La morale de l'histoire ? Tout le monde pourra voir votre code HTML et vous ne pouvez pas l'empêcher. Par conséquent, ne mettez pas d'informations sensibles comme des mots de passe dans les commentaires… et soignez votre code source, car je pourrai venir vérifier si vous avez bien suivi mon cours à la lettre !
+</p>
+<aside id="r-1609434" data-claire-element-id="30941257" data-claire-semantic="warning">
+<p id="r-1609433" data-claire-element-id="30941256">Lorsque vous regarderez le code de certains sites web, ne prenez pas peur s'il vous paraît long ou semble ne pas respecter les mêmes règles que celles que je vous présente dans ce cours. Tous les sites ne sont pas écrits en HTML5 (loin de là) et, parfois, certains webmasters rédigent très mal leur code, ce ne sont pas toujours des exemples à suivre !</p>
+</aside>
+</div>

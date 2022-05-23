@@ -1,0 +1,359 @@
+<p id="r-4800733" data-claire-element-id="8796603">Continuons notre tour d'horizon des propriétés CSS existantes. Nous allons nous intéresser ici aux propriétés liées de près ou de loin à la couleur. Nous verrons entre autres :</p>
+<ul id="r-1610407" data-claire-element-id="1633224">
+<li id="r-1610400" data-claire-element-id="1633217">
+<p id="r-1610399" data-claire-element-id="1633216">comment changer la couleur du texte ;</p>
+</li>
+<li id="r-1610402" data-claire-element-id="1633219">
+<p id="r-1610401" data-claire-element-id="1633218">comment mettre une couleur ou une image d'arrière-plan ;</p>
+</li>
+<li id="r-1610404" data-claire-element-id="1633221">
+<p id="r-1610403" data-claire-element-id="1633220">comment ajouter des ombres ;</p>
+</li>
+<li id="r-1610406" data-claire-element-id="1633223">
+<p id="r-1610405" data-claire-element-id="1633222">comment jouer avec les niveaux de transparence.</p>
+</li>
+</ul>
+<p id="r-1610408" data-claire-element-id="1633225">Le CSS n'a pas fini de nous étonner !</p>
+<aside id="r-6314148" data-claire-element-id="30947953" data-claire-semantic="information">
+<p id="r-6314147" data-claire-element-id="30947952">Pour valider vos compétences avec un diplôme bac+2, suivez la <a href="/fr/paths/185-developpeur-web">formation Développeur web</a> avec OpenClassrooms. 6 mois en moyenne sont nécessaires pour finaliser cette <a href="/fr/paths">formation à distance</a>, qui peut aussi être suivie en <a href="/fr/apprenticeship">alternance ou contrat d’apprentissage</a>.</p>
+</aside>
+<h3 id="r-1605398" data-claire-element-id="32718562">Couleur du texte</h3>
+<p id="r-1610409" data-claire-element-id="1633226">Passons maintenant au vaste sujet de la couleur.</p>
+<div id="r-1610411" data-claire-element-id="4718153" data-claire-semantic="question">
+<p id="r-1610410" data-claire-element-id="4718152">Comment ça, « vaste » ?</p>
+</div>
+<p id="r-1610412" data-claire-element-id="30948002">Vous connaissez déjà la propriété qui permet de modifier la couleur du texte : il s'agit de <code data-claire-semantic="css">color</code>  . Nous allons nous intéresser aux différentes façons d'indiquer la couleur, car il y en a plusieurs.</p>
+<h4 id="r-1610425" data-claire-element-id="32718553">Indiquer le nom de la couleur</h4>
+<p id="r-1610413" data-claire-element-id="1633230">La méthode la plus simple et la plus pratique pour choisir une couleur consiste à taper son nom (<em>in english, of course</em>).<br /> Le seul défaut de cette méthode est qu'il n'existe que seize couleurs dites « standard ». D'autres couleurs officieuses existent mais, comme elles ne fonctionneront pas forcément de la même manière sur tous les navigateurs, je vais éviter de vous les montrer.</p>
+<p id="r-1610414" data-claire-element-id="1633231">La figure suivante vous montre les seize couleurs que vous pouvez utiliser en tapant simplement leur nom.</p>
+<p id="r-1610418" data-claire-element-id="30948044">Vous pouvez les apprendre par cœur si cela vous chante ; en plus cela vous fera réviser votre anglais.</p>
+<p id="r-1610419" data-claire-element-id="10879464">Pour passer tous les titres en bordeaux, on peut donc écrire :</p>
+<pre id="r-1610420" data-claire-element-id="6250324">
+<code data-claire-semantic="css">
+h1{
+    color: maroon;
+}</code>
+</pre>
+<p id="r-1610421" data-claire-element-id="1633238">Vous trouverez le résultat à la figure suivante.</p>
+<h4 id="r-1610436" data-claire-element-id="30948088">La notation hexadécimale</h4>
+<p id="r-1610426" data-claire-element-id="1633243">Seize couleurs, c'est quand même un peu limite quand on sait que la plupart des écrans peuvent en afficher seize <em>millions</em>.<br /> D'un autre côté, remarquez, s'il avait fallu donner un nom à chacune des seize millions de couleurs…</p>
+<p id="r-1610427" data-claire-element-id="30948087">Heureusement, il existe en CSS plusieurs façons de choisir une couleur parmi toutes celles qui existent. La première que je vais vous montrer est la notation hexadécimale. Elle est couramment utilisée sur le Web, mais il existe aussi une autre méthode que nous verrons plus loin.</p>
+<p id="r-1610428" data-claire-element-id="1633245">Un nom de couleur en hexadécimal, cela ressemble à : #FF5A28. Pour faire simple, c'est une combinaison de lettres et de chiffres qui indiquent une couleur.<br /> On doit toujours commencer par écrire un dièse (#), suivi de six lettres ou chiffres allant de 0 à 9 et de A à F.<br /> Ces lettres ou chiffres fonctionnent deux par deux. Les deux premiers indiquent une quantité de rouge, les deux suivants une quantité de vert et les deux derniers une quantité de bleu. En mélangeant ces quantités (qui sont les composantes Rouge-Vert-Bleu de la couleur) on peut obtenir la couleur qu'on veut.</p>
+<p id="r-1610429" data-claire-element-id="1633246">Ainsi, #000000 correspond à la couleur noire et #FFFFFF à la couleur blanche. Mais maintenant, ne me demandez pas quelle est la combinaison qui produit de l'orange couleur « coucher de soleil », je n'en sais strictement rien.</p>
+<aside id="r-1610431" data-claire-element-id="1633248" data-claire-semantic="information">
+<p id="r-1610430" data-claire-element-id="1633247">Certains logiciels de dessin, comme Photoshop, <a href="http://telecharger.tomsguide.fr/The-Gimp,0301-513-214.html">Gimp </a>et <a href="http://telecharger.tomsguide.fr/PaintNET,0301-4883.html">Paint.NET</a>, vous indiquent les couleurs en hexadécimal. Il vous est alors facile de copier-coller le code hexadécimal d'une couleur dans votre fichier CSS.</p>
+</aside>
+<p id="r-1610432" data-claire-element-id="1633249">Voici par exemple comment on fait pour appliquer aux paragraphes la couleur blanche en hexadécimal :</p>
+<pre id="r-1610433" data-claire-element-id="6250328">
+<code data-claire-semantic="css">p
+{
+    color: #FFFFFF;
+}</code>
+</pre>
+<aside id="r-1610435" data-claire-element-id="1633252" data-claire-semantic="information">
+<p id="r-1610434" data-claire-element-id="1633251">Notez qu'il existe une notation raccourcie : on peut écrire une couleur avec seulement trois caractères. Par exemple : #FA3 équivaut à écrire #FFAA33.</p>
+</aside>
+<h4 id="r-1610458" data-claire-element-id="32718558">La méthode RGB</h4>
+<p id="r-1610437" data-claire-element-id="30948137">Que signifie RGB ? En anglais, Rouge-Vert-Bleu s'écrit <em>Red-Green-Blue</em>, ce qui s'abrège en « RGB ». Comme avec la notation hexadécimale, pour choisir une couleur, on doit définir une quantité de rouge, de vert et de bleu.</p>
+<div id="r-1610439" data-claire-element-id="1633256" data-claire-semantic="question">
+<p id="r-1610438" data-claire-element-id="1633255">Encore cette histoire tordue de quantités de rouge-vert-bleu ?</p>
+</div>
+<p id="r-1610440" data-claire-element-id="1633257">Oui mais là, vous allez voir que c'est beaucoup plus pratique et qu'avec un logiciel de dessin tout simple comme Paint, vous pouvez trouver la couleur que vous désirez. Voici la marche à suivre :</p>
+<ol id="r-1610449" data-claire-element-id="30948183">
+<li id="r-1610442" data-claire-element-id="30948178">
+<p id="r-1610441" data-claire-element-id="30948177">Lancez le logiciel Paint depuis le menu <code data-claire-semantic="text">Démarrer</code>  .</p>
+</li>
+<li id="r-1610444" data-claire-element-id="30948180">
+<p id="r-1610443" data-claire-element-id="30948179">Rendez-vous dans la section <code data-claire-semantic="text">Modifier les couleurs</code>  , comme indiqué à la figure suivante.</p>
+</li>
+<li id="r-1610446" data-claire-element-id="30948182">
+<p id="r-1610445" data-claire-element-id="30948181">Une fenêtre s'ouvre. Dans la zone qui apparaît à droite, faites bouger les curseurs pour sélectionner la couleur qui vous intéresse. Supposons que vous soyez pris d'une envie folle d'écrire vos titres <code data-claire-semantic="html">&lt;h1&gt;</code>  en rose bonbon (supposons seulement). Sélectionnez la couleur dans la fenêtre, comme à la figure suivante.</p>
+</li>
+<li id="r-1610448" data-claire-element-id="1633265">
+<p id="r-1610447" data-claire-element-id="1633264">Relevez les quantités de Rouge-Vert-Bleu correspondantes, indiquées en bas à droite de la fenêtre (ici 240-96-204). Recopiez ces valeurs dans cet ordre dans le fichier CSS, comme dans le code ci-dessous.</p>
+</li>
+</ol>
+<pre id="r-1610450" data-claire-element-id="6250330">
+<code data-claire-semantic="css">p
+{
+    color: rgb(240,96,204);
+}</code>
+</pre>
+<p id="r-1610457" data-claire-element-id="30948231">Comme vous avez pu le constater dans l'exemple, pour utiliser la méthode RGB, il faut taper <code data-claire-semantic="text">rgb(Rouge, Vert, Bleu)</code>  en remplaçant « Rouge, Vert, Bleu » par les nombres correspondants. Pour information, ces quantités sont toujours comprises entre 0 et 255.</p>
+<h4 id="r-1610465" data-claire-element-id="32718561">Et en Bonus Track…</h4>
+<p id="r-1610459" data-claire-element-id="30948233">Je vous conseille de taper &quot;Color Picker&quot; sur Google, et vous trouverez plusieurs outils et sites qui vous aident à choisir une couleur.</p>
+<p id="r-3301976" data-claire-element-id="4993383">Par exemple, <a href="http://www.colorpicker.com/">http://www.colorpicker.com</a> permet de trouver la valeur hexadécimale d'une couleur très facilement :</p>
+<p id="r-3301980" data-claire-element-id="4993387">C'est tout simple, mais ça fait le travail !</p>
+<p id="r-3301981" data-claire-element-id="4993388">Vous pouvez aussi trouver des extensions de navigateur qui permettent de &quot;récupérer&quot; n'importe quelle couleur qui vous plaît sur un site web :</p>
+<ul id="r-3301986" data-claire-element-id="30948288">
+<li id="r-3301983" data-claire-element-id="30948285">
+<p id="r-3301982" data-claire-element-id="30948284">
+<a href="https://addons.mozilla.org/fr/firefox/addon/colorpicker/">ColorPicker</a> pour Firefox ;</p>
+</li>
+<li id="r-3301985" data-claire-element-id="30948287">
+<p id="r-3301984" data-claire-element-id="30948286">
+<a href="https://chrome.google.com/webstore/detail/colorzilla/bhlhnicpbhignbdhedgjhgdocnmhomnp">ColorZilla</a> pour Chrome.</p>
+</li>
+</ul>
+<h3 id="r-1605436" data-claire-element-id="32718568">Couleur de fond</h3>
+<p id="r-1610466" data-claire-element-id="30948291">Pour indiquer une couleur de fond, on utilise la propriété CSS <code data-claire-semantic="css">background-color</code>  . Elle s'utilise de la même manière que la propriété <code data-claire-semantic="css">color</code>  , c'est-à-dire que vous pouvez taper le nom d'une couleur, l'écrire en notation hexadécimale ou encore utiliser la méthode RGB.</p>
+<p id="r-1610467" data-claire-element-id="30948292">Pour indiquer la couleur de fond de la page web, il faut travailler sur la balise <code data-claire-semantic="html">&lt;body&gt;</code>  . Eh oui, <code data-claire-semantic="html">&lt;body&gt;</code>  correspond à l'ensemble de la page web ; c'est donc en modifiant sa couleur de fond que l'on changera la couleur d'arrière-plan de la page.</p>
+<p id="r-1610468" data-claire-element-id="1633286">Regardez très attentivement ce fichier CSS :</p>
+<pre id="r-1610469" data-claire-element-id="6250340">
+<code data-claire-semantic="css">/* On travaille sur la balise body, donc sur TOUTE la page */
+body
+{
+    background-color: black; /* Le fond de la page sera noir */
+    color: white; /* Le texte de la page sera blanc */
+}</code>
+</pre>
+<p id="r-1610470" data-claire-element-id="4718172">Voici le rendu de ce code :</p>
+<div id="r-1610475" data-claire-element-id="30948339" data-claire-semantic="question">
+<p id="r-1610474" data-claire-element-id="30948338">Eh, mais tu as demandé à ce que le texte de la balise <code data-claire-semantic="html">&lt;body&gt;</code>  soit écrit en blanc, et tous les paragraphes <code data-claire-semantic="html">&lt;p&gt;</code>  et titres <code data-claire-semantic="html">&lt;h1&gt;</code>  ont pris cette couleur. Comment cela se fait-il ?</p>
+</div>
+<p id="r-1610476" data-claire-element-id="30948340">Je voulais justement profiter de l'occasion pour vous en parler. Ce phénomène s'appelle <strong>l'<em>héritage</em>
+</strong>. Je vous rassure tout de suite, personne n'est mort.</p>
+<h4 id="r-1610485" data-claire-element-id="30948389">Le CSS et l'héritage</h4>
+<p id="r-1610477" data-claire-element-id="1633295">En CSS, si vous appliquez un style à une balise, toutes les balises qui se trouvent à l'intérieur prendront le même style.</p>
+<p id="r-1610478" data-claire-element-id="30948341">C'est en fait simple à comprendre et intuitif. La balise <code data-claire-semantic="html">&lt;body&gt;</code>  , vous le savez, contient entre autres les balises de paragraphe <code data-claire-semantic="html">&lt;p&gt;</code>  et de titre <code data-claire-semantic="html">&lt;h1&gt;</code>  .</p>
+<p id="r-1610479" data-claire-element-id="30948342">Si j'applique une couleur de fond noire et une couleur de texte blanche à la balise <code data-claire-semantic="html">&lt;body&gt;</code>  , tous mes titres et paragraphes auront eux aussi un arrière-plan de couleur noire et un texte de couleur blanche… C'est ce phénomène qu'on appelle <em>l'héritage</em> : on dit que les balises qui se trouvent à l'intérieur d'une autre balise « héritent » de ses propriétés.</p>
+<aside id="r-1610481" data-claire-element-id="1633299" data-claire-semantic="information">
+<p id="r-1610480" data-claire-element-id="1633298">C'est d'ailleurs de là que vient le nom « CSS », qui signifie « <em>Cascading Style Sheets</em> », c'est-à-dire « Feuilles de style en cascade ». Les propriétés CSS sont héritées en cascade : si vous donnez un style à un élément, tous les sous-éléments auront le même style.</p>
+</aside>
+<div id="r-1610483" data-claire-element-id="1633301" data-claire-semantic="question">
+<p id="r-1610482" data-claire-element-id="1633300">Cela veut dire que TOUT le texte de ma page web sera forcément écrit en blanc ?</p>
+</div>
+<p id="r-1610484" data-claire-element-id="30948388">Non, pas obligatoirement. Si vous dites par la suite que vous voulez vos titres en rouge, ce style aura la priorité et vos titres seront donc en rouge. En revanche, si vous n'indiquez rien de particulier (comme on l'a fait tout à l'heure), alors vos titres hériteront de la couleur blanche.<br /> Cela ne fonctionne pas uniquement pour la couleur, entendons-nous bien. Toutes les propriétés CSS seront héritées : vous pouvez par exemple demander une mise en gras dans la balise <code data-claire-semantic="html">&lt;body&gt;</code>  , et tous vos titres et paragraphes seront en gras.</p>
+<h4 id="r-1610502" data-claire-element-id="32718567">Exemple d'héritage avec la balise <code data-claire-semantic="html">&lt;mark&gt;</code>
+</h4>
+<p id="r-1610486" data-claire-element-id="1633304">On a tendance à croire qu'on ne peut modifier que la couleur de fond de la page. C'est faux : vous pouvez changer le fond de n'importe quel élément : vos titres, vos paragraphes, certains mots… Dans ce cas, ils apparaîtront surlignés (comme si on avait mis un coup de marqueur dessus).</p>
+<p id="r-1610487" data-claire-element-id="30948438">Vous vous souvenez par exemple de la balise <code data-claire-semantic="html">&lt;mark&gt;</code>  qui permet de mettre en valeur certains mots ? Utilisons-la à nouveau ici :</p>
+<pre id="r-1610488" data-claire-element-id="6250343">
+<code data-claire-semantic="html">&lt;h1&gt;Qui a éteint la lumière ?&lt;/h1&gt;
+
+&lt;p&gt;Brr, il fait tout noir sur ce site, c'est un peu &lt;mark&gt;inquiétant&lt;/mark&gt; comme ambiance non vous trouvez pas ?&lt;/p&gt;</code>
+</pre>
+<p id="r-1610489" data-claire-element-id="1633307">Par défaut, le texte s'affiche sur un fond jaune. Vous pouvez changer ce comportement en CSS :</p>
+<pre id="r-1610490" data-claire-element-id="6250344">
+<code data-claire-semantic="css">body
+{
+    background-color: black;
+    color: white;
+}
+
+mark
+{
+    /* La couleur de fond prend le pas sur celle de toute la page */
+    background-color: red;
+    color: black;
+}</code>
+</pre>
+<p id="r-1610491" data-claire-element-id="30948518">Sur le texte de la balise <code data-claire-semantic="html">&lt;mark&gt;</code>  , c'est la couleur de fond rouge qui s'applique. En effet, même si le fond de la page est noir, c'est la propriété CSS de l'élément le plus précis qui a la priorité (figure suivante).</p>
+<p id="r-1610495" data-claire-element-id="1633313">Le même principe vaut pour toutes les balises HTML et toutes les propriétés CSS ! Si vous dites :</p>
+<ul id="r-1610500" data-claire-element-id="30948562">
+<li id="r-1610497" data-claire-element-id="1633315">
+<p id="r-1610496" data-claire-element-id="1633314">mes paragraphes ont une taille de 1.2 em ;</p>
+</li>
+<li id="r-1610499" data-claire-element-id="30948561">
+<p id="r-1610498" data-claire-element-id="30948560">mes textes importants ( <code data-claire-semantic="html">&lt;strong&gt;</code>  ) ont une taille de 1.4 em ;</p>
+</li>
+</ul>
+<p id="r-1610501" data-claire-element-id="30948563">… on pourrait penser qu'il y a un conflit. Le texte important fait partie d'un paragraphe, quelle taille lui donner ? 1.2 em ou 1.4 em ? Le CSS décide que c'est la déclaration la plus précise qui l'emporte : comme <code data-claire-semantic="html">&lt;strong&gt;</code>  correspond à un élément plus précis que les paragraphes, le texte sera écrit en 1.4 em.</p>
+<h3 id="r-1605514" data-claire-element-id="32718579">Images de fond</h3>
+<p id="r-1610503" data-claire-element-id="1633322">Dans les exemples qui suivent, je vais modifier l'image de fond de la page. Cependant, tout comme pour la couleur de fond, n'oubliez pas que l'image de fond ne s'applique pas forcément à la page entière. On peut aussi mettre une image de fond derrière les titres, paragraphes, etc.</p>
+<h4 id="r-1610513" data-claire-element-id="32718571">Appliquer une image de fond</h4>
+<p id="r-1610504" data-claire-element-id="30948612">La propriété permettant d'indiquer une image de fond est <code data-claire-semantic="css">background-image</code>  . Comme valeur, on doit renseigner <code data-claire-semantic="text">url(&quot;nom_de_l_image.png&quot;)</code>  . Par exemple :</p>
+<pre id="r-1610505" data-claire-element-id="6250349">
+<code data-claire-semantic="css">body
+{
+    background-image: url(&quot;neige.png&quot;);
+}</code>
+</pre>
+<p id="r-1610506" data-claire-element-id="1633325">Ce qui nous donne la figure suivante.</p>
+<p id="r-1610510" data-claire-element-id="30948654">Bien entendu, votre fond n'est pas forcément en PNG, il peut aussi être en JPEG ou en GIF.<br /> L'adresse indiquant où se trouve l'image de fond peut être écrite en absolu ( <code data-claire-semantic="text">http://…</code>  ) ou en relatif ( <code data-claire-semantic="text">fond.png</code>  ).</p>
+<aside id="r-1610512" data-claire-element-id="30948656" data-claire-semantic="error">
+<p id="r-1610511" data-claire-element-id="30948655">Attention lorsque vous écrivez une adresse en relatif dans le fichier CSS ! L'adresse de l'image doit être indiquée <em>par rapport au fichier <code data-claire-semantic="text">.css</code>
+</em> et non pas par rapport au fichier <code data-claire-semantic="text">.html</code>  . Pour simplifier les choses, je vous conseille de placer l'image de fond dans le même dossier que le fichier <code data-claire-semantic="text">.css</code>  (ou dans un sous-dossier).</p>
+</aside>
+<h4 id="r-1610559" data-claire-element-id="32718575">Options disponibles pour l'image de fond</h4>
+<p id="r-1610514" data-claire-element-id="30948658">On peut compléter la propriété <code data-claire-semantic="css">background-image</code>  que nous venons de voir par plusieurs autres propriétés qui permettent de changer le comportement de l'image de fond.</p>
+<h5 id="r-1610522" data-claire-element-id="30948710">
+<code data-claire-semantic="text">background-attachment</code>  : fixer le fond</h5>
+<p id="r-1610515" data-claire-element-id="30948659">La propriété CSS <code data-claire-semantic="css">background-attachment</code>  permet de « fixer » le fond. L'effet obtenu est intéressant, car on voit alors le texte « glisser » par-dessus le fond. Deux valeurs sont disponibles :</p>
+<ul id="r-1610520" data-claire-element-id="30948709">
+<li id="r-1610517" data-claire-element-id="30948706">
+<p id="r-1610516" data-claire-element-id="30948705">
+<code data-claire-semantic="text">fixed</code>  : l'image de fond reste fixe ;</p>
+</li>
+<li id="r-1610519" data-claire-element-id="30948708">
+<p id="r-1610518" data-claire-element-id="30948707">
+<code data-claire-semantic="text">scroll</code>  : l'image de fond défile avec le texte (par défaut).</p>
+</li>
+</ul>
+<pre id="r-1610521" data-claire-element-id="6250353">
+<code data-claire-semantic="css">body
+{
+    background-image: url(&quot;neige.png&quot;);
+    background-attachment: fixed; /* Le fond restera fixe */
+}</code>
+</pre>
+<h5 id="r-1610535" data-claire-element-id="30948771">
+<code data-claire-semantic="text">background-repeat</code>  : répétition du fond</h5>
+<p id="r-1610523" data-claire-element-id="30948765">Par défaut, l'image de fond est répétée en mosaïque. Vous pouvez changer cela avec la propriété <code data-claire-semantic="css">background-repeat</code>  :</p>
+<ul id="r-1610532" data-claire-element-id="30948770">
+<li id="r-1610525" data-claire-element-id="30948713">
+<p id="r-1610524" data-claire-element-id="30948712">
+<code data-claire-semantic="text">no-repeat</code>  : le fond ne sera pas répété. L'image sera donc unique sur la page ;</p>
+</li>
+<li id="r-1610527" data-claire-element-id="30948715">
+<p id="r-1610526" data-claire-element-id="30948714">
+<code data-claire-semantic="text">repeat-x</code>  : le fond sera répété uniquement sur la première ligne, horizontalement ;</p>
+</li>
+<li id="r-1610529" data-claire-element-id="30948767">
+<p id="r-1610528" data-claire-element-id="30948766">
+<code data-claire-semantic="text">repeat-y</code>  : le fond sera répété uniquement sur la première colonne, verticalement ;</p>
+</li>
+<li id="r-1610531" data-claire-element-id="30948769">
+<p id="r-1610530" data-claire-element-id="30948768">
+<code data-claire-semantic="text">repeat</code>  : le fond sera répété en mosaïque (par défaut).</p>
+</li>
+</ul>
+<p id="r-1610533" data-claire-element-id="1633352">Exemple d'utilisation :</p>
+<pre id="r-1610534" data-claire-element-id="6250355">
+<code data-claire-semantic="css">body
+{
+    background-image: url(&quot;soleil.png&quot;);
+    background-repeat: no-repeat;
+}</code>
+</pre>
+<h5 id="r-1610558" data-claire-element-id="32718574">
+<code data-claire-semantic="text">background-position</code>  : position du fond</h5>
+<p id="r-1610536" data-claire-element-id="30948815">On peut indiquer où doit se trouver l'image de fond avec <code data-claire-semantic="css">background-position</code>  . Cette propriété n'est intéressante que si elle est combinée avec <code data-claire-semantic="css">background-repeat: no-repeat;</code>  (un fond qui ne se répète pas).</p>
+<p id="r-1610537" data-claire-element-id="30948816">Vous devez donner à <code data-claire-semantic="css">background-position</code>  deux valeurs en pixels pour indiquer la position du fond par rapport au coin supérieur gauche de la page (ou du paragraphe, si vous appliquez le fond à un paragraphe). Ainsi, si vous tapez :</p>
+<pre id="r-1610538" data-claire-element-id="2256278">
+<code data-claire-semantic="css">background-position: 30px 50px;</code>
+</pre>
+<p id="r-1610539" data-claire-element-id="1633358">… votre fond sera placé à 30 pixels de la gauche et à 50 pixels du haut. Il est aussi possible d'utiliser ces valeurs en anglais :</p>
+<ul id="r-1610550" data-claire-element-id="30948827">
+<li id="r-1610541" data-claire-element-id="30948818">
+<p id="r-1610540" data-claire-element-id="30948817">
+<code data-claire-semantic="text">top</code>  : en haut ;</p>
+</li>
+<li id="r-1610543" data-claire-element-id="30948820">
+<p id="r-1610542" data-claire-element-id="30948819">
+<code data-claire-semantic="text">bottom</code>  : en bas ;</p>
+</li>
+<li id="r-1610545" data-claire-element-id="30948822">
+<p id="r-1610544" data-claire-element-id="30948821">
+<code data-claire-semantic="text">left</code>  : à gauche ;</p>
+</li>
+<li id="r-1610547" data-claire-element-id="30948824">
+<p id="r-1610546" data-claire-element-id="30948823">
+<code data-claire-semantic="text">center</code>  : centré ;</p>
+</li>
+<li id="r-1610549" data-claire-element-id="30948826">
+<p id="r-1610548" data-claire-element-id="30948825">
+<code data-claire-semantic="text">right</code>  : à droite.</p>
+</li>
+</ul>
+<p id="r-1610551" data-claire-element-id="1633370">Il est possible de combiner ces mots. Par exemple, pour aligner une image en haut à droite, vous taperez :</p>
+<pre id="r-1610552" data-claire-element-id="2256279">
+<code data-claire-semantic="css">background-position: top right;</code>
+</pre>
+<p id="r-1610553" data-claire-element-id="30948875">Ainsi, si je veux afficher un soleil en image de fond (figure suivante), en un unique exemplaire ( <code data-claire-semantic="text">no-repeat</code>  ), toujours visible ( <code data-claire-semantic="text">fixed</code>  ) et positionné en haut à droite ( <code data-claire-semantic="text">top right</code>  ), je vais écrire ceci :</p>
+<pre id="r-1610554" data-claire-element-id="6250357">
+<code data-claire-semantic="css">body
+{
+    background-image: url(&quot;soleil.png&quot;);
+    background-attachment: fixed; /* Le fond restera fixe */
+    background-repeat: no-repeat; /* Le fond ne sera pas répété */
+    background-position: top right; /* Le fond sera placé en haut à droite */
+}</code>
+</pre>
+<h4 id="r-1610569" data-claire-element-id="30948972">Combiner les propriétés</h4>
+<p id="r-1610560" data-claire-element-id="30948919">Si vous utilisez beaucoup de propriétés en rapport avec le fond (comme c'est le cas sur ce dernier exemple), vous pouvez utiliser une sorte de « super-propriété » appelée <code data-claire-semantic="css">background</code>  , dont la valeur peut combiner plusieurs des propriétés vues précédemment :<code data-claire-semantic="css">background-image</code>  , <code data-claire-semantic="css">background-repeat</code>  , <code data-claire-semantic="css">background-attachment</code>  et <code data-claire-semantic="css">background-position</code>  .</p>
+<p id="r-1610561" data-claire-element-id="1633380">On peut donc tout simplement écrire :</p>
+<pre id="r-1610562" data-claire-element-id="6250362">
+<code data-claire-semantic="css">body
+{
+    background: url(&quot;soleil.png&quot;) fixed no-repeat top right;
+}</code>
+</pre>
+<p id="r-1610563" data-claire-element-id="1633382">C'est la première « super-propriété » que je vous montre, il y en aura d'autres. Il faut savoir que :</p>
+<ul id="r-1610568" data-claire-element-id="30948971">
+<li id="r-1610565" data-claire-element-id="30948921">
+<p id="r-1610564" data-claire-element-id="30948920">l'ordre des valeurs n'a pas d'importance. Vous pouvez combiner les valeurs dans n'importe quel ordre ;</p>
+</li>
+<li id="r-1610567" data-claire-element-id="30948970">
+<p id="r-1610566" data-claire-element-id="30948969">vous n'êtes pas obligé de mettre toutes les valeurs. Ainsi, si vous ne voulez pas écrire <code data-claire-semantic="text">fixed</code>  , vous pouvez l'enlever sans problème.</p>
+</li>
+</ul>
+<h4 id="r-1610579" data-claire-element-id="32718578">Plusieurs images de fond</h4>
+<p id="r-1610570" data-claire-element-id="1633389">Depuis CSS3, il est possible de donner plusieurs images de fond à un élément. Pour cela, il suffit de séparer les déclarations par une virgule, comme ceci :</p>
+<pre id="r-1610571" data-claire-element-id="6250364">
+<code data-claire-semantic="css">body
+{
+    background: url(&quot;soleil.png&quot;) fixed no-repeat top right, url(&quot;neige.png&quot;) fixed;
+}</code>
+</pre>
+<p id="r-1610572" data-claire-element-id="1633391">La première image de cette liste sera placée par-dessus les autres (figure suivante). Attention donc, l'ordre de déclaration des images a son importance : si vous inversez le soleil et la neige dans le code CSS précédent, vous ne verrez plus le soleil !</p>
+<p id="r-1610576" data-claire-element-id="1633395">À noter que les images de fond multiples fonctionnent sur tous les navigateurs sauf sur les anciennes versions d'Internet Explorer, qui ne reconnaît cette fonctionnalité qu'à partir de la version 9 (IE9).</p>
+<aside id="r-1610578" data-claire-element-id="30949022" data-claire-semantic="information">
+<p id="r-1610577" data-claire-element-id="30949021">Une dernière chose avant d'en terminer avec les images de fond : dans tous ces exemples, j'ai appliqué un fond à la page entière ( <code data-claire-semantic="text">body</code>  ). Mais cela ne doit pas vous faire oublier qu'on peut appliquer un fond à n'importe quel élément (un titre, un paragraphe, certains mots d'un paragraphe, etc.).<br /> Je vous conseille donc, pour vous entraîner, d'essayer d'appliquer un fond à vos titres ou paragraphes. Si vous avez un peu de goût (contrairement à moi !) vous arriverez certainement à donner une très belle allure à votre page web.</p>
+</aside>
+<h3 id="r-1605550" data-claire-element-id="32718583">La transparence</h3>
+<p id="r-1610580" data-claire-element-id="30949025">Le CSS nous permet de jouer très facilement avec les niveaux de transparence des éléments ! Pour cela, nous allons utiliser des fonctionnalités de CSS3 : la propriété <code data-claire-semantic="css">opacity</code>  et la notation RGBa.</p>
+<h4 id="r-1610598" data-claire-element-id="32718582">La propriété <code data-claire-semantic="text">opacity</code>
+</h4>
+<p id="r-1610581" data-claire-element-id="30949026">La propriété <code data-claire-semantic="css">opacity</code>  , très simple, permet d'indiquer le niveau d'opacité (c'est l'inverse de la transparence).</p>
+<ul id="r-1610586" data-claire-element-id="1633406">
+<li id="r-1610583" data-claire-element-id="1633403">
+<p id="r-1610582" data-claire-element-id="1633402">Avec une valeur de 1, l'élément sera totalement opaque : c'est le comportement par défaut.</p>
+</li>
+<li id="r-1610585" data-claire-element-id="1633405">
+<p id="r-1610584" data-claire-element-id="1633404">Avec une valeur de 0, l'élément sera totalement transparent.</p>
+</li>
+</ul>
+<p id="r-1610587" data-claire-element-id="30949027">Il faut donc choisir une valeur comprise entre 0 et 1. Ainsi, avec une valeur de 0.6, votre élément sera opaque à 60 %… et on verra donc à travers !</p>
+<p id="r-1610588" data-claire-element-id="1633408">Voici comment on peut l'utiliser :</p>
+<pre id="r-1610589" data-claire-element-id="6250369">
+<code data-claire-semantic="css">p
+{
+    opacity: 0.6;
+}</code>
+</pre>
+<p id="r-1610590" data-claire-element-id="1633410">Voici un exemple qui va nous permettre d'apprécier la transparence. Vous en trouverez le rendu à la figure suivante.</p>
+<pre id="r-1610591" data-claire-element-id="6250370">
+<code data-claire-semantic="css">body
+{
+    background: url('neige.png');
+}
+
+p
+{
+    background-color: black;
+    color: white;
+    opacity: 0.3;
+}</code>
+</pre>
+<p id="r-1610595" data-claire-element-id="1633415">Notez que la transparence fonctionne sur tous les navigateurs récents, y compris Internet Explorer à partir de IE9.</p>
+<aside id="r-1610597" data-claire-element-id="30949031" data-claire-semantic="warning">
+<p id="r-1610596" data-claire-element-id="30949030">Si vous appliquez la propriété <code data-claire-semantic="css">opacity</code>  à un élément de la page, <em>tout</em> le contenu de cet élément sera rendu transparent (même les images, les autres blocs à l'intérieur, etc.). Si vous voulez juste rendre la couleur de fond transparente, utilisez plutôt la notation RGBa que nous allons découvrir.</p>
+</aside>
+<h4 id="r-1610604" data-claire-element-id="30949035">La notation RGBa</h4>
+<p id="r-1610599" data-claire-element-id="30949033">CSS3 nous propose une autre façon de jouer avec la transparence : la notation RGBa. Il s'agit en fait de la notation RGB que nous avons vue précédemment, mais avec un quatrième paramètre : le niveau de transparence (appelé « canal alpha »). De la même façon que précédemment, avec une valeur de 1, le fond est complètement opaque. Avec une valeur inférieure à 1, il est transparent.</p>
+<pre id="r-1610600" data-claire-element-id="6250374">
+<code data-claire-semantic="css">p
+{
+    background-color: rgba(255, 0, 0, 0.5); /* Fond rouge à moitié transparent */
+}</code>
+</pre>
+<p id="r-1610601" data-claire-element-id="30949034">C'est aussi simple que cela. Vous pouvez obtenir exactement le même effet qu'avec <code data-claire-semantic="css">opacity</code>  juste en jouant avec la notation RGBa ; essayez !</p>
+<p id="r-1610602" data-claire-element-id="1633422">Cette notation est connue de tous les navigateurs récents, y compris Internet Explorer (à partir de IE9). Pour les navigateurs plus anciens, il est recommandé d'indiquer la notation RGB classique en plus de RGBa. <br /> Pour ces navigateurs, le fond ne sera alors pas transparent mais, au moins, il y aura bien une couleur d'arrière-plan.</p>
+<pre id="r-1610603" data-claire-element-id="6250375">
+<code data-claire-semantic="css">p
+{
+    background-color: rgb(255,0,0); /* Pour les navigateurs anciens */
+    background-color: rgba(255,0,0,0.5); /* Pour les navigateurs plus récents */
+}</code>
+</pre>

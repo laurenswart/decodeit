@@ -1,0 +1,493 @@
+<p id="r-4800718" data-claire-element-id="8796563">Nous arrivons maintenant à un chapitre qui devrait beaucoup vous intéresser.</p>
+<p id="r-1610135" data-claire-element-id="2256203">Non, le « formatage du texte » n'a rien à voir avec la destruction de toutes les données présentes sur votre disque dur ! Cela signifie simplement que l'on va modifier l'apparence du texte (on dit qu'on le « met en forme »).</p>
+<p id="r-1610136" data-claire-element-id="30946852">Pas de surprise particulière : nous sommes toujours dans le CSS, et nous allons réutiliser ce que nous venons d'apprendre dans le chapitre précédent. Nous allons donc travailler directement au sein du fichier <code data-claire-semantic="text">.css</code>  que nous avons créé.</p>
+<p id="r-1610137" data-claire-element-id="1632948">Ce chapitre va être l'occasion de découvrir de nombreuses propriétés CSS : nous allons voir comment modifier la taille du texte, changer la police, aligner le texte…</p>
+<aside id="r-6314133" data-claire-element-id="30946854" data-claire-semantic="information">
+<p id="r-6314132" data-claire-element-id="30946853">Pour valider vos compétences avec un diplôme bac+2, suivez la <a href="/fr/paths/185-developpeur-web">formation Développeur web</a> avec OpenClassrooms. 6 mois en moyenne sont nécessaires pour finaliser cette <a href="/fr/">formation à distance</a>, qui peut aussi être suivie en <a href="/fr/apprenticeship">alternance ou contrat d’apprentissage</a>.</p>
+</aside>
+<h3 id="r-6413165" data-claire-element-id="30303405">
+</h3>
+<p id="r-6413163" data-claire-element-id="30303404">
+<a href="/fr/paths/185-developpeur-web">
+</a>
+</p>
+<p id="r-6413164" data-claire-element-id="29575884">
+</p>
+<h3 id="r-1605118" data-claire-element-id="32718526">La taille</h3>
+<p id="r-1610138" data-claire-element-id="30946892">Pour modifier la taille du texte, on utilise la propriété CSS <code data-claire-semantic="css">font-size</code>  . Mais comment indiquer la taille du texte ? C'est là que les choses se corsent, car plusieurs techniques vous sont proposées :</p>
+<ul id="r-1610143" data-claire-element-id="30946897">
+<li id="r-1610140" data-claire-element-id="30946894">
+<p id="r-1610139" data-claire-element-id="30946893">indiquer une <strong>taille absolue</strong> : en pixels, en centimètres ou millimètres. Cette méthode est très précise, mais il est conseillé de ne l'utiliser que si c'est absolument nécessaire, car on risque d'indiquer une taille trop petite pour certains lecteurs ;</p>
+</li>
+<li id="r-1610142" data-claire-element-id="30946896">
+<p id="r-1610141" data-claire-element-id="30946895">indiquer une <strong>taille relative</strong> : en pourcentage, « em » ou « ex », cette technique a l'avantage d'être plus souple. Elle s'adapte plus facilement aux préférences de taille des visiteurs.</p>
+</li>
+</ul>
+<h4 id="r-1610158" data-claire-element-id="32718525">Une taille absolue</h4>
+<p id="r-1610144" data-claire-element-id="30946898">Pour indiquer une taille absolue, on utilise généralement les pixels. Pour avoir un texte de 16 pixels de hauteur, vous devez donc écrire :</p>
+<pre id="r-1610145" data-claire-element-id="2256204">
+<code data-claire-semantic="css">font-size: 16px;</code>
+</pre>
+<p id="r-1610146" data-claire-element-id="1632957">Les lettres auront une taille de 16 pixels, comme le montre la figure suivante.</p>
+<p id="r-1610150" data-claire-element-id="30946934">Voici un exemple d'utilisation (placez ce code dans votre fichier <code data-claire-semantic="text">.css</code>  ) :</p>
+<pre id="r-1610151" data-claire-element-id="8113897">
+<code data-claire-semantic="css">
+p{
+    font-size: 14px; /* Paragraphes de 14 pixels */
+}
+h1
+{
+    font-size: 40px; /* Titres de 40 pixels */
+}</code>
+</pre>
+<p id="r-1610152" data-claire-element-id="1632963">Et le résultat est visible à la figure suivante.</p>
+<aside id="r-1610157" data-claire-element-id="1632968" data-claire-semantic="information">
+<p id="r-1610156" data-claire-element-id="1632967">Si vous le souhaitez, vous pouvez également définir des tailles en centimètres ou millimètres. Remplacez « px » par « cm » ou « mm ». Ces unités sont cependant moins bien adaptées aux écrans.</p>
+</aside>
+<h4 id="r-1610191" data-claire-element-id="30947108">Une valeur relative</h4>
+<p id="r-1610159" data-claire-element-id="30946977">C'est la méthode recommandée, car le texte s'adapte alors plus facilement aux préférences de tous les visiteurs.</p>
+<p id="r-1610160" data-claire-element-id="1632971">Il y a plusieurs moyens d'indiquer une valeur relative. Vous pouvez par exemple écrire la taille avec des mots en anglais comme ceux-ci :</p>
+<ul id="r-1610175" data-claire-element-id="30946992">
+<li id="r-1610162" data-claire-element-id="30946979">
+<p id="r-1610161" data-claire-element-id="30946978">
+<code data-claire-semantic="css">xx-small</code>  : minuscule ;</p>
+</li>
+<li id="r-1610164" data-claire-element-id="30946981">
+<p id="r-1610163" data-claire-element-id="30946980">
+<code data-claire-semantic="css">x-small</code>  : très petit ;</p>
+</li>
+<li id="r-1610166" data-claire-element-id="30946983">
+<p id="r-1610165" data-claire-element-id="30946982">
+<code data-claire-semantic="css">small</code>  : petit ;</p>
+</li>
+<li id="r-1610168" data-claire-element-id="30946985">
+<p id="r-1610167" data-claire-element-id="30946984">
+<code data-claire-semantic="css">medium</code>  : moyen ;</p>
+</li>
+<li id="r-1610170" data-claire-element-id="30946987">
+<p id="r-1610169" data-claire-element-id="30946986">
+<code data-claire-semantic="css">large</code>  : grand ;</p>
+</li>
+<li id="r-1610172" data-claire-element-id="30946989">
+<p id="r-1610171" data-claire-element-id="30946988">
+<code data-claire-semantic="css">x-large</code>  : très grand ;</p>
+</li>
+<li id="r-1610174" data-claire-element-id="30946991">
+<p id="r-1610173" data-claire-element-id="30946990">
+<code data-claire-semantic="css">xx-large</code>  : euh… gigantesque.</p>
+</li>
+</ul>
+<p id="r-1610176" data-claire-element-id="1632987">Vous pouvez tester l'utilisation de ces valeurs dans votre code CSS :</p>
+<pre id="r-1610177" data-claire-element-id="8113916">
+<code data-claire-semantic="css">p
+{
+    font-size: small;
+}
+h1
+{
+    font-size: large;
+}</code>
+</pre>
+<p id="r-1610178" data-claire-element-id="30947027">Bon, cette technique a un défaut : il n'y a que sept tailles disponibles (car il n'y a que sept noms). Heureusement, il existe d'autres moyens. Ma technique préférée consiste à indiquer la taille en « em ».</p>
+<ul id="r-1610185" data-claire-element-id="30947034">
+<li id="r-1610180" data-claire-element-id="30947029">
+<p id="r-1610179" data-claire-element-id="30947028">Si vous écrivez <code data-claire-semantic="text">1em</code>  , le texte a une taille normale.</p>
+</li>
+<li id="r-1610182" data-claire-element-id="30947031">
+<p id="r-1610181" data-claire-element-id="30947030">Si vous voulez grossir le texte, vous pouvez inscrire une valeur supérieure à 1, comme <code data-claire-semantic="text">1.3em</code>  .</p>
+</li>
+<li id="r-1610184" data-claire-element-id="30947033">
+<p id="r-1610183" data-claire-element-id="30947032">Si vous voulez réduire le texte, inscrivez une valeur inférieure à 1, comme <code data-claire-semantic="text">0.8em</code>  .</p>
+</li>
+</ul>
+<aside id="r-1610187" data-claire-element-id="1632998" data-claire-semantic="warning">
+<p id="r-1610186" data-claire-element-id="1632997">Faites attention : pour les nombres décimaux, il faut mettre un point et non une virgule. Vous devez donc écrire « 1.4em » et non pas « 1,4em » !</p>
+</aside>
+<p id="r-1610188" data-claire-element-id="1632999">Exemple :</p>
+<pre id="r-1610189" data-claire-element-id="8113924">
+<code data-claire-semantic="css">p
+{
+    font-size: 0.8em;
+}
+h1
+{
+    font-size: 1.3em;
+}</code>
+</pre>
+<p id="r-1610190" data-claire-element-id="30947107">D'autres unités sont disponibles. Vous pouvez essayer le « ex » (qui fonctionne sur le même principe que le em, mais qui est plus petit de base) et le pourcentage (80 %, 130 %…).</p>
+<h3 id="r-1605200" data-claire-element-id="32718533">La police</h3>
+<p id="r-1610192" data-claire-element-id="30947148">Ah… la police… On touche un point sensible.</p>
+<p id="r-1610193" data-claire-element-id="1633005">En effet, il se pose un problème : pour qu'une police s'affiche correctement, il faut que tous les internautes l'aient. Si un internaute n'a pas la même police que vous, son navigateur prendra une police par défaut (une police standard) qui n'aura peut-être rien à voir avec ce à quoi vous vous attendiez.</p>
+<p id="r-1610194" data-claire-element-id="1633006">La bonne nouvelle, c'est que depuis CSS 3, il est possible de faire télécharger automatiquement une police au navigateur. Je vous expliquerai dans un second temps comment faire cela.</p>
+<h4 id="r-1610232" data-claire-element-id="32718529">Modifier la police utilisée</h4>
+<p id="r-1610195" data-claire-element-id="30947070">La propriété CSS qui permet d'indiquer la police à utiliser est <code data-claire-semantic="css">font-family</code>  . Vous devez écrire le nom de la police comme ceci :</p>
+<pre id="r-1610196" data-claire-element-id="8113928">
+<code data-claire-semantic="css">balise
+{
+    font-family: police;
+}</code>
+</pre>
+<p id="r-1610197" data-claire-element-id="1633009">Seulement, pour éviter les problèmes si l'internaute n'a pas la même police que vous, on précise en général <em>plusieurs</em> noms de police, séparés par des virgules :</p>
+<pre id="r-1610198" data-claire-element-id="8113929">
+<code data-claire-semantic="css">balise
+{
+    font-family: police1, police2, police3, police4;
+}</code>
+</pre>
+<p id="r-1610199" data-claire-element-id="30947188">Le navigateur essaiera d'abord d'utiliser la <code data-claire-semantic="text">police1</code>  . S'il ne l'a pas, il essaiera la <code data-claire-semantic="text">police2</code>  . S'il ne l'a pas, il passera à la <code data-claire-semantic="text">police3</code>  , et ainsi de suite.<br /> En général, on indique en tout dernier <code data-claire-semantic="text">serif</code>  , ce qui correspond à une police par défaut (qui ne s'applique que si aucune autre police n'a été trouvée).</p>
+<aside id="r-1610201" data-claire-element-id="30947190" data-claire-semantic="information">
+<p id="r-1610200" data-claire-element-id="30947189">Il existe aussi une autre police par défaut appelée <code data-claire-semantic="text">sans-serif</code>  . La différence entre les deux est la présence de petites pattes de liaison en bas des lettres, que la police <code data-claire-semantic="text">sans-serif</code>  n'a pas. Oui, c'est subtil.</p>
+</aside>
+<p id="r-1610202" data-claire-element-id="1633014">Oui, mais quelles sont les polices les plus courantes qu'on a le « droit » d'utiliser, me direz-vous ?<br /> Voici une liste de polices qui fonctionnent bien sur la plupart des navigateurs :</p>
+<ul id="r-1610221" data-claire-element-id="1633033">
+<li id="r-1610204" data-claire-element-id="1633016">
+<p id="r-1610203" data-claire-element-id="1633015">Arial ;</p>
+</li>
+<li id="r-1610206" data-claire-element-id="1633018">
+<p id="r-1610205" data-claire-element-id="1633017">Arial Black ;</p>
+</li>
+<li id="r-1610208" data-claire-element-id="1633020">
+<p id="r-1610207" data-claire-element-id="1633019">Comic Sans MS ;</p>
+</li>
+<li id="r-1610210" data-claire-element-id="1633022">
+<p id="r-1610209" data-claire-element-id="1633021">Courier New ;</p>
+</li>
+<li id="r-1610212" data-claire-element-id="1633024">
+<p id="r-1610211" data-claire-element-id="1633023">Georgia ;</p>
+</li>
+<li id="r-1610214" data-claire-element-id="1633026">
+<p id="r-1610213" data-claire-element-id="1633025">Impact ;</p>
+</li>
+<li id="r-1610216" data-claire-element-id="1633028">
+<p id="r-1610215" data-claire-element-id="1633027">Times New Roman ;</p>
+</li>
+<li id="r-1610218" data-claire-element-id="1633030">
+<p id="r-1610217" data-claire-element-id="1633029">Trebuchet MS ;</p>
+</li>
+<li id="r-1610220" data-claire-element-id="1633032">
+<p id="r-1610219" data-claire-element-id="1633031">Verdana.</p>
+</li>
+</ul>
+<p id="r-1610222" data-claire-element-id="1633034">La figure suivante vous montre à quoi ressemblent ces polices.</p>
+<p id="r-1610226" data-claire-element-id="1633038">Ainsi, si j'écris :</p>
+<pre id="r-1610227" data-claire-element-id="8113935">
+<code data-claire-semantic="css">p
+{
+    font-family: Impact, &quot;Arial Black&quot;, Arial, Verdana, sans-serif;
+}</code>
+</pre>
+<p id="r-1610228" data-claire-element-id="30947270">… cela signifie : « <em>Mets la police Impact ou, si elle n'y est pas, Arial Black, ou sinon Arial, ou sinon Verdana, ou si rien n'a marché, mets une police standard (Sans Serif)</em> ».</p>
+<p id="r-1610229" data-claire-element-id="30947271">En général, il est bien d'indiquer un choix de trois ou quatre polices (+ Serif ou Sans Serif), afin de s'assurer qu'au moins l'une d'entre elles aura été trouvée sur l'ordinateur du visiteur.</p>
+<aside id="r-1610231" data-claire-element-id="1633043" data-claire-semantic="warning">
+<p id="r-1610230" data-claire-element-id="1633042">Si le nom de la police comporte des espaces, je conseille de l'entourer de guillemets, comme je l'ai fait pour « Arial Black ».</p>
+</aside>
+<h4 id="r-1610272" data-claire-element-id="32718532">Utiliser une police personnalisée avec <code data-claire-semantic="text">@font-face</code>
+</h4>
+<div id="r-1610234" data-claire-element-id="1633046" data-claire-semantic="question">
+<p id="r-1610233" data-claire-element-id="1633045">Je trouve le choix des polices trop limité. <br /> Comment puis-je utiliser ma police préférée sur mon site web ?</p>
+</div>
+<p id="r-1610235" data-claire-element-id="1633047">Pendant longtemps, cela n'était pas possible. Aujourd'hui, avec CSS 3, il existe heureusement un moyen d'utiliser n'importe quelle police sur son site. Cela fonctionne bien avec la plupart des navigateurs.</p>
+<p id="r-1610236" data-claire-element-id="30947232">Mais attention, il y a des défauts (ce serait trop beau, sinon) :</p>
+<ul id="r-1610243" data-claire-element-id="30947317">
+<li id="r-1610238" data-claire-element-id="30947312">
+<p id="r-1610237" data-claire-element-id="30947311">il faudra que le navigateur de vos visiteurs <em>télécharge</em> automatiquement le fichier de la police, dont le poids peut atteindre, voire dépasser 1 Mo… ;</p>
+</li>
+<li id="r-1610240" data-claire-element-id="30947314">
+<p id="r-1610239" data-claire-element-id="30947313">la plupart des polices sont soumises au droit d'auteur, il n'est donc <em>pas légal</em> de les utiliser sur son site. Heureusement, il existe des sites comme <a href="http://www.fontsquirrel.com/">fontsquirrel.com</a> et <a href="https://www.dafont.com/fr/">dafont.com</a> qui proposent en téléchargement un certain nombre de polices libres de droits. Je recommande en particulier <a href="http://www.fontsquirrel.com/">fontsquirrel.com</a>, car il permet de télécharger des packs prêts à l'emploi pour CSS 3 ;</p>
+</li>
+<li id="r-1610242" data-claire-element-id="30947316">
+<p id="r-1610241" data-claire-element-id="30947315">il existe <em>plusieurs formats</em> de fichiers de polices, et ceux-ci ne fonctionnent pas sur tous les navigateurs.</p>
+</li>
+</ul>
+<p id="r-1610244" data-claire-element-id="1633056">Voici les différents formats de fichiers de polices qui existent et qu'il faut connaître :</p>
+<ul id="r-1610255" data-claire-element-id="30947328">
+<li id="r-1610246" data-claire-element-id="30947319">
+<p id="r-1610245" data-claire-element-id="30947318">
+<code data-claire-semantic="text">.ttf</code>  : <em>TrueType Font</em>. Fonctionne sur IE9 et tous les autres navigateurs ;</p>
+</li>
+<li id="r-1610248" data-claire-element-id="30947321">
+<p id="r-1610247" data-claire-element-id="30947320">
+<code data-claire-semantic="text">.eot</code>  : <em>Embedded OpenType</em>. Fonctionne sur Internet Explorer uniquement, toutes versions. Ce format est propriétaire, produit par Microsoft ;</p>
+</li>
+<li id="r-1610250" data-claire-element-id="30947323">
+<p id="r-1610249" data-claire-element-id="30947322">
+<code data-claire-semantic="text">.otf</code>  : <em>OpenType Font</em>. Ne fonctionne pas sur Internet Explorer ;</p>
+</li>
+<li id="r-1610252" data-claire-element-id="30947325">
+<p id="r-1610251" data-claire-element-id="30947324">
+<code data-claire-semantic="text">.svg</code>  : <em>SVG Font</em>. Le seul format reconnu sur les iPhone et iPad pour le moment ;</p>
+</li>
+<li id="r-1610254" data-claire-element-id="30947327">
+<p id="r-1610253" data-claire-element-id="30947326">
+<code data-claire-semantic="text">.woff</code>  : <em>Web Open Font Format</em>. Nouveau format conçu pour le Web, qui fonctionne sur IE9 et tous les autres navigateurs.</p>
+</li>
+</ul>
+<p id="r-1610256" data-claire-element-id="1633068">En CSS, pour définir une nouvelle police, vous devez la déclarer comme ceci :</p>
+<pre id="r-1610257" data-claire-element-id="8113948">
+<code data-claire-semantic="css">@font-face {
+    font-family: 'MaSuperPolice';
+    src: url('MaSuperPolice.eot');
+}</code>
+</pre>
+<p id="r-1610258" data-claire-element-id="1633070">Le fichier de police (ici <em>MaSuperPolice.eot</em>) doit ici être situé dans le même dossier que le fichier CSS (ou dans un sous-dossier, si vous utilisez un chemin relatif).</p>
+<div id="r-1610260" data-claire-element-id="1633072" data-claire-semantic="question">
+<p id="r-1610259" data-claire-element-id="1633071">Je croyais qu'il y avait plusieurs formats de police ?</p>
+</div>
+<p id="r-1610261" data-claire-element-id="8114091">Oui, d'ailleurs les <code data-claire-semantic="text">.eot</code> ne fonctionnent que sur Internet Explorer. L'idéal est de proposer plusieurs formats pour la police : le navigateur téléchargera celui qu'il sait lire. Voici comment indiquer plusieurs formats :</p>
+<pre id="r-1610262" data-claire-element-id="8113950">
+<code data-claire-semantic="css">@font-face {
+    font-family: 'MaSuperPolice';
+    src: url('MaSuperPolice.eot') format('eot'),
+         url('MaSuperPolice.woff') format('woff'),
+         url('MaSuperPolice.ttf') format('truetype'),
+         url('MaSuperPolice.svg') format('svg');
+}</code>
+</pre>
+<p id="r-1610263" data-claire-element-id="8114151">Pour tester le fonctionnement, je vous propose de télécharger une police sur Font Squirrel, par exemple <a href="https://www.fontsquirrel.com/fonts/CAC-Champagne">CAC Champagne</a>. Cliquez sur « Webfont Kit », cela vous permettra de télécharger un kit prêt à l'emploi avec tous les formats pour cette police. N'oubliez pas de cocher toutes les cases (WOFF, TTF, EOT et SVG).</p>
+<aside id="r-6377366" data-claire-element-id="30947362" data-claire-semantic="information">
+<p id="r-6377365" data-claire-element-id="30947361">La police CAC Champagne n'est plus disponible, mais vous pouvez télécharger une autre police que vous aimez bien ! ;)</p>
+</aside>
+<aside id="r-4538386" data-claire-element-id="8114153" data-claire-semantic="warning">
+<p id="r-4538385" data-claire-element-id="8114152">Pour trouver les polices qui vous permettent de télécharger un &quot;pack CSS&quot; comme je le décris ici, activez le filtre &quot;Webfont&quot; dans le menu Font Filter.</p>
+</aside>
+<p id="r-1610264" data-claire-element-id="1633076">Votre fichier CSS ressemblera au final à ceci :</p>
+<pre id="r-1610265" data-claire-element-id="8113952">
+<code data-claire-semantic="css">@font-face { /* Définition d'une nouvelle police nommée CAC Champagne */
+    font-family: 'cac_champagneregular';
+    src: url('cac_champagne-webfont.eot');
+    src: url('cac_champagne-webfont.eot?#iefix') format('embedded-opentype'),
+         url('cac_champagne-webfont.woff') format('woff'),
+         url('cac_champagne-webfont.ttf') format('truetype'),
+         url('cac_champagne-webfont.svg#cac_champagneregular') format('svg');
+}
+
+h1 /* Utilisation de la police qu'on vient de définir sur les titres */
+{
+    font-family: 'cac_champagneregular', Arial, serif;
+}</code>
+</pre>
+<p id="r-1610266" data-claire-element-id="30947401">La première (grosse) section <code data-claire-semantic="css">@font-face</code> permet de définir un nouveau nom de police qui pourra être utilisé dans le fichier CSS. Ensuite, nous utilisons ce nom de police avec la propriété <code data-claire-semantic="css">font-family</code>  , que nous connaissons, pour modifier l'apparence des titres <code data-claire-semantic="html">&lt;h1&gt;</code>  . Vous pouvez voir le résultat à la figure suivante.</p>
+<aside id="r-1610271" data-claire-element-id="30947444" data-claire-semantic="information">
+<p id="r-1610270" data-claire-element-id="30947443">Vous noterez quelques bizarreries dans le CSS généré par le site Font Squirrel. Le but est de pallier certains bugs sur Internet Explorer, car les anciennes versions ne comprennent pas quand on définit plusieurs formats. Cela explique donc la présence d'un <code data-claire-semantic="text">?#iefix</code>  dans le code.</p>
+</aside>
+<h3 id="r-1605248" data-claire-element-id="32718537">Italique, gras, souligné…</h3>
+<p id="r-1610273" data-claire-element-id="1633086">Il existe en CSS une série de propriétés classiques de mise en forme du texte. Nous allons découvrir ici comment afficher le texte en gras, italique, souligné… et au passage nous verrons qu'il est même possible d'aller jusqu'à le faire clignoter !</p>
+<h4 id="r-1610290" data-claire-element-id="30947576">Mettre en italique</h4>
+<div id="r-1610275" data-claire-element-id="30947448" data-claire-semantic="question">
+<p id="r-1610274" data-claire-element-id="30947447">Attends un peu là ! Je croyais que la balise <code data-claire-semantic="html">&lt;em&gt;</code>  permettait de mettre un texte en italique ?!</p>
+</div>
+<p id="r-1610276" data-claire-element-id="30947535">Je n'ai jamais dit cela. <br /> Retournez voir les chapitres précédents si vous avez des doutes, mais je n'ai <em>jamais</em> dit que la balise <code data-claire-semantic="html">&lt;em&gt;</code>  était faite pour mettre le texte en italique (de même que je n'ai jamais dit que <code data-claire-semantic="html">&lt;strong&gt;</code>  était faite pour mettre en gras).</p>
+<p id="r-1610277" data-claire-element-id="30947486">
+<code data-claire-semantic="html">&lt;em&gt;</code>  , mettez-vous bien cela dans la tête, est faite pour insister sur des mots. Cela veut dire que les mots qu'elle entoure sont assez importants.<br /> Pour représenter cette importance, la plupart des navigateurs choisissent d'afficher le texte en italique, mais ce n'est pas une obligation.</p>
+<p id="r-1610278" data-claire-element-id="1633091">Le CSS lui, permet de dire réellement : « Je veux que ce texte soit en italique ». Rien ne vous empêche, par exemple, de décider que tous vos titres seront en italique.</p>
+<p id="r-1610279" data-claire-element-id="30947487">Concrètement, en CSS, pour mettre en italique, on utilise <code data-claire-semantic="css">font-style</code>  qui peut prendre trois valeurs :</p>
+<ul id="r-1610286" data-claire-element-id="30947494">
+<li id="r-1610281" data-claire-element-id="30947489">
+<p id="r-1610280" data-claire-element-id="30947488">
+<code data-claire-semantic="text">italic</code>  : le texte sera mis en italique ;</p>
+</li>
+<li id="r-1610283" data-claire-element-id="30947491">
+<p id="r-1610282" data-claire-element-id="30947490">
+<code data-claire-semantic="text">oblique</code>  : le texte sera passé en oblique (les lettres sont penchées, le résultat est légèrement différent de l'italique proprement dit) ;</p>
+</li>
+<li id="r-1610285" data-claire-element-id="30947493">
+<p id="r-1610284" data-claire-element-id="30947492">
+<code data-claire-semantic="text">normal</code>  : le texte sera normal (par défaut). Cela vous permet d'annuler une mise en italique. Par exemple, si vous voulez que les textes entre <code data-claire-semantic="html">&lt;em&gt;</code>  ne soient plus en italique, vous devrez écrire :</p>
+</li>
+</ul>
+<pre id="r-1610287" data-claire-element-id="8113971">
+<code data-claire-semantic="css">em
+{
+    font-style: normal;
+}</code>
+</pre>
+<p id="r-1610288" data-claire-element-id="30947575">Ainsi, dans l'exemple suivant, je me sers de <code data-claire-semantic="css">font-style</code>  pour mettre en italique tous mes titres <code data-claire-semantic="html">&lt;h2&gt;</code>  :</p>
+<pre id="r-1610289" data-claire-element-id="8113973">
+<code data-claire-semantic="css">h2
+{
+    font-style: italic;
+}</code>
+</pre>
+<h4 id="r-1610300" data-claire-element-id="30947584">Mettre en gras</h4>
+<p id="r-1610291" data-claire-element-id="30947577">Et si nous passions à la mise en gras ?<br /> Alors, là encore, n'oubliez pas que ce n'est pas <code data-claire-semantic="html">&lt;strong&gt;</code>  qui permet de mettre en gras (son rôle est d'indiquer que le texte est important, <em>donc</em> le navigateur l'affiche généralement en gras). La mise en gras en CSS peut par exemple s'appliquer aux titres, à certains paragraphes entiers, etc. C'est à vous de voir.</p>
+<p id="r-1610292" data-claire-element-id="30947578">La propriété CSS pour mettre en gras est <code data-claire-semantic="css">font-weight</code>  et prend les valeurs suivantes :</p>
+<ul id="r-1610297" data-claire-element-id="30947583">
+<li id="r-1610294" data-claire-element-id="30947580">
+<p id="r-1610293" data-claire-element-id="30947579">
+<code data-claire-semantic="text">bold</code>  : le texte sera en gras ;</p>
+</li>
+<li id="r-1610296" data-claire-element-id="30947582">
+<p id="r-1610295" data-claire-element-id="30947581">
+<code data-claire-semantic="text">normal</code>  : le texte sera écrit normalement (par défaut).</p>
+</li>
+</ul>
+<p id="r-1610298" data-claire-element-id="1633111">Voici par exemple comment écrire les titres en gras :</p>
+<pre id="r-1610299" data-claire-element-id="8113982">
+<code data-claire-semantic="css">h1
+{
+    font-weight: bold;
+}</code>
+</pre>
+<h4 id="r-1610319" data-claire-element-id="32718536">Soulignement et autres décorations</h4>
+<p id="r-1610301" data-claire-element-id="30947615">La propriété CSS associée porte bien son nom : <code data-claire-semantic="css">text-decoration</code>  . Elle permet, entre autres, de souligner le texte, mais pas seulement. Voici les différentes valeurs qu'elle peut prendre :</p>
+<ul id="r-1610312" data-claire-element-id="31757615">
+<li id="r-1610303" data-claire-element-id="30947617">
+<p id="r-1610302" data-claire-element-id="30947616">
+<code data-claire-semantic="text">underline</code>  : souligné ;</p>
+</li>
+<li id="r-1610305" data-claire-element-id="30947619">
+<p id="r-1610304" data-claire-element-id="30947618">
+<code data-claire-semantic="text">line-through</code>  : barré ;</p>
+</li>
+<li id="r-1610307" data-claire-element-id="30947621">
+<p id="r-1610306" data-claire-element-id="30947620">
+<code data-claire-semantic="text">overline</code>  : ligne au-dessus ;</p>
+</li>
+<li id="r-1610311" data-claire-element-id="30947625">
+<p id="r-1610310" data-claire-element-id="30947624">
+<code data-claire-semantic="text">none</code>  : normal (par défaut).</p>
+</li>
+</ul>
+<p id="r-1610313" data-claire-element-id="30947627">Ce CSS va vous permettre de tester les effets de <code data-claire-semantic="text">text-decoration</code>  :</p>
+<pre id="r-1610314" data-claire-element-id="8113997">
+<code data-claire-semantic="css">h1
+{
+    text-decoration: blink;
+}
+.souligne
+{
+    text-decoration: underline;
+}
+.barre
+{
+    text-decoration: line-through;
+}
+.ligne_dessus
+{
+    text-decoration: overline;
+}</code>
+</pre>
+<p id="r-1610315" data-claire-element-id="1633128">Et le résultat est visible à la figure suivante.</p>
+<h3 id="r-1605268" data-claire-element-id="32718540">L'alignement</h3>
+<p id="r-1610320" data-claire-element-id="1633134">Le langage CSS nous permet de faire tous les alignements connus : à gauche, centré, à droite et justifié.</p>
+<p id="r-1610321" data-claire-element-id="30947669">C'est tout simple. On utilise la propriété <code data-claire-semantic="css">text-align</code>  et on indique l'alignement désiré :</p>
+<ul id="r-1610330" data-claire-element-id="30947678">
+<li id="r-1610323" data-claire-element-id="30947671">
+<p id="r-1610322" data-claire-element-id="30947670">
+<code data-claire-semantic="text">left</code>  : le texte sera aligné à gauche (c'est le réglage par défaut) ;</p>
+</li>
+<li id="r-1610325" data-claire-element-id="30947673">
+<p id="r-1610324" data-claire-element-id="30947672">
+<code data-claire-semantic="text">center</code>  : le texte sera centré ;</p>
+</li>
+<li id="r-1610327" data-claire-element-id="30947675">
+<p id="r-1610326" data-claire-element-id="30947674">
+<code data-claire-semantic="text">right</code>  : le texte sera aligné à droite ;</p>
+</li>
+<li id="r-1610329" data-claire-element-id="30947677">
+<p id="r-1610328" data-claire-element-id="30947676">
+<code data-claire-semantic="text">justify</code>  : le texte sera « justifié ». Justifier le texte permet de faire en sorte qu'il prenne toute la largeur possible sans laisser d'espace blanc à la fin des lignes. Les textes des journaux, par exemple, sont toujours justifiés.</p>
+</li>
+</ul>
+<p id="r-1610331" data-claire-element-id="1633145">Regardez les différents alignements sur cet exemple :</p>
+<pre id="r-1610332" data-claire-element-id="8114012">
+<code data-claire-semantic="css">h1
+{
+    text-align: center;
+}
+
+p
+{
+    text-align: justify;
+}
+
+.signature
+{
+    text-align: right;
+}</code>
+</pre>
+<p id="r-1610333" data-claire-element-id="30947709">Le résultat est visible sur la figure suivante.</p>
+<aside id="r-1610338" data-claire-element-id="30947752" data-claire-semantic="error">
+<p id="r-1610337" data-claire-element-id="30947751">Vous ne pouvez pas modifier l'alignement du texte d'une balise <em>inline</em> (comme <code data-claire-semantic="html">&lt;span&gt;</code>  , <code data-claire-semantic="html">&lt;a&gt;</code>  , <code data-claire-semantic="html">&lt;em&gt;</code>  , <code data-claire-semantic="html">&lt;strong&gt;</code>  …). L'alignement ne fonctionne que sur des balises de type <em>block</em> ( <code data-claire-semantic="html">&lt;p&gt;</code>  , <code data-claire-semantic="html">&lt;div&gt;</code>  , <code data-claire-semantic="html">&lt;h1&gt;</code>  , <code data-claire-semantic="html">&lt;h2&gt;</code>  …) et c'est un peu logique, quand on y pense : on ne peut pas modifier l'alignement de quelques mots au milieu d'un paragraphe !<br /> C'est donc en général le paragraphe entier qu'il vous faudra aligner.</p>
+</aside>
+<h3 id="r-1605328" data-claire-element-id="32718546">Les flottants</h3>
+<p id="r-1610339" data-claire-element-id="30947754">Le CSS nous permet de faire flotter un élément autour du texte. On dit aussi qu'on fait un « habillage ».</p>
+<p id="r-1610340" data-claire-element-id="1633155">Pour que vous voyiez bien de quoi on parle, la figure suivante vous montre ce que nous allons apprendre à faire.</p>
+<p id="r-1610344" data-claire-element-id="30947794">J'imagine que, maintenant, la question qui vous brûle les lèvres est : « <em>Mais quelle est donc la propriété magique qui fait flotter ?</em> ».<br /> La réponse est… <code data-claire-semantic="css">float</code>  (« flottant » en anglais). Cette propriété peut prendre deux valeurs très simples :</p>
+<ul id="r-1610349" data-claire-element-id="30947799">
+<li id="r-1610346" data-claire-element-id="30947796">
+<p id="r-1610345" data-claire-element-id="30947795">
+<code data-claire-semantic="text">left</code>  : l'élément flottera à gauche ;</p>
+</li>
+<li id="r-1610348" data-claire-element-id="30947798">
+<p id="r-1610347" data-claire-element-id="30947797">
+<code data-claire-semantic="text">right</code>  : l'élément flottera… à droite ! Oui, bravo.</p>
+</li>
+</ul>
+<p id="r-1610350" data-claire-element-id="1633165">L'utilisation des flottants est très simple :</p>
+<ol id="r-1610355" data-claire-element-id="30947802">
+<li id="r-1610352" data-claire-element-id="30947801">
+<p id="r-1610351" data-claire-element-id="30947800">Vous appliquez un <code data-claire-semantic="css">float</code>  à une balise.</p>
+</li>
+<li id="r-1610354" data-claire-element-id="1633169">
+<p id="r-1610353" data-claire-element-id="1633168">Puis vous continuez à écrire du texte à la suite normalement.</p>
+</li>
+</ol>
+<aside id="r-1610357" data-claire-element-id="30947804" data-claire-semantic="information">
+<p id="r-1610356" data-claire-element-id="30947803">On peut aussi bien utiliser la propriété <code data-claire-semantic="css">float</code>  sur des balises <em>block</em> que sur des balises <em>inline</em>. Il est courant de faire flotter une image pour qu'elle soit habillée par du texte, comme dans l'exemple précédent.</p>
+</aside>
+<h4 id="r-1610365" data-claire-element-id="30947845">Faire flotter une image</h4>
+<p id="r-1610358" data-claire-element-id="1633173">Nous allons apprendre ici à faire flotter une image. Voici le code HTML que nous devons taper dans un premier temps :</p>
+<pre id="r-1610359" data-claire-element-id="2256237">
+<code data-claire-semantic="html">&lt;p&gt;&lt;img src=&quot;flash.gif&quot; class=&quot;imageflottante&quot; alt=&quot;Image flottante&quot; /&gt; Ceci est un texte normal de paragraphe, écrit à la suite de l'image et qui l'habillera car l'image est flottante.&lt;/p&gt;</code>
+</pre>
+<aside id="r-1610361" data-claire-element-id="1633176" data-claire-semantic="error">
+<p id="r-1610360" data-claire-element-id="1633175">Vous devez placer l'élément flottant en premier dans le code HTML. Si vous placez l'image après le paragraphe, l'effet ne fonctionnera pas.</p>
+</aside>
+<p id="r-1610362" data-claire-element-id="1633177">Voici le seul bout de code CSS qu'on ait besoin de taper, qui permet de faire flotter l'image à gauche :</p>
+<pre id="r-1610363" data-claire-element-id="8114031">
+<code data-claire-semantic="css">.imageflottante
+{
+    float: left;
+}</code>
+</pre>
+<p id="r-1610364" data-claire-element-id="30947844">Amusez-vous aussi à faire flotter l'image à droite, c'est tout bête : il suffit d'indiquer la valeur <code data-claire-semantic="text">right</code>  , et le tour est joué !</p>
+<h4 id="r-1610385" data-claire-element-id="32718545">Stopper un flottant</h4>
+<p id="r-1610366" data-claire-element-id="30947884">Quand vous mettez en place un flottant, le texte autour l'habille. Mais comment faire si vous voulez qu'au bout d'un moment le texte continue <em>en dessous</em> du flottant ? On pourrait enchaîner plusieurs <code data-claire-semantic="html">&lt;br /&gt;</code>  à la suite, mais cela ne serait ni élégant ni très propre…</p>
+<p id="r-1610367" data-claire-element-id="1633182">En gros, on aimerait pouvoir obtenir le même résultat qu'à la figure suivante.</p>
+<p id="r-1610371" data-claire-element-id="30947887">Il existe en fait une propriété CSS qui permet de dire : « <em>Stop, ce texte doit être en-dessous du flottant et non plus à côté</em> ». C'est la propriété <code data-claire-semantic="css">clear</code>  , qui peut prendre ces trois valeurs :</p>
+<ul id="r-1610378" data-claire-element-id="30947932">
+<li id="r-1610373" data-claire-element-id="30947927">
+<p id="r-1610372" data-claire-element-id="30947926">
+<code data-claire-semantic="text">left</code>  : le texte se poursuit en dessous après un <code data-claire-semantic="css">float: left;</code>
+</p>
+</li>
+<li id="r-1610375" data-claire-element-id="30947929">
+<p id="r-1610374" data-claire-element-id="30947928">
+<code data-claire-semantic="text">right</code>  : le texte se poursuit en dessous après un <code data-claire-semantic="css">float: right;</code>
+</p>
+</li>
+<li id="r-1610377" data-claire-element-id="30947931">
+<p id="r-1610376" data-claire-element-id="30947930">
+<code data-claire-semantic="text">both</code>  : le texte se poursuit en dessous, que ce soit après un <code data-claire-semantic="css">float: left;</code>  ou après un <code data-claire-semantic="css">float: right;</code>  .</p>
+</li>
+</ul>
+<p id="r-1610379" data-claire-element-id="30947895">Pour simplifier, on va utiliser tout le temps le <code data-claire-semantic="css">clear: both</code>  , qui marche après un flottant à gauche et après un flottant à droite (cela fonctionne donc à tous les coups). Pour illustrer son fonctionnement, on va prendre ce code HTML :</p>
+<pre id="r-1610380" data-claire-element-id="8114046">
+<code data-claire-semantic="html">&lt;p&gt;&lt;img src=&quot;flash.gif&quot; class=&quot;imageflottante&quot; alt=&quot;Image flottante&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Ce texte est écrit à côté de l'image flottante.&lt;/p&gt;
+&lt;p class=&quot;dessous&quot;&gt;Ce texte est écrit sous l'image flottante.&lt;/p&gt;</code>
+</pre>
+<p id="r-1610381" data-claire-element-id="1633196">Et ce code CSS :</p>
+<pre id="r-1610382" data-claire-element-id="8114047">
+<code data-claire-semantic="css">.imageflottante
+{
+    float: left;
+}
+.dessous
+{
+    clear: both;
+}</code>
+</pre>
+<p id="r-1610383" data-claire-element-id="1633198">Et voilà le travail.</p>
+<p id="r-1610384" data-claire-element-id="30947933">On applique un <code data-claire-semantic="css">clear: both;</code>  au paragraphe que l'on veut voir continuer sous l'image flottante, et le tour est joué !</p>

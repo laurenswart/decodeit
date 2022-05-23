@@ -1,0 +1,104 @@
+<h3 id="r-7317296" data-claire-element-id="31793602">
+<strong>Pourquoi écrire du code de façon structurée est si important ?</strong>
+</h3>
+<p id="r-7296458" data-claire-element-id="31744073">Avant de plonger dans les méthodes de programmation, voyons pourquoi il faut garder le code structuré autant que possible.</p>
+<p id="r-7296459" data-claire-element-id="31744074">Pensez à l’endroit chez vous le moins bien rangé et moins bien organisé. Un tiroir, un placard ou même une pièce entière. C’est difficile de trouver quelque chose au milieu de tout ça, n’est-ce pas ? Si vous venez de vous en servir, ça peut encore aller, mais quand ça fait un moment, ça peut devenir compliqué.</p>
+<p id="r-7296460" data-claire-element-id="31744075">Avec le code, c’est pareil... ou pire. Si vous n’y avez pas touché depuis plusieurs mois et que vous ne l’avez pas écrit avec rigueur, vous allez perdre du temps à vous rappeler des différentes fonctions et de leur structure.</p>
+<p id="r-7296461" data-claire-element-id="31744076">Maintenant, imaginez que vous avez hérité du tiroir/placard/de la pièce d’une personne désorganisée et qui ne vit plus ici. C’est à ça que ça ressemble de travailler avec le code de quelqu’un d’autre qui n’a pas été rigoureux !</p>
+<p id="r-7296462" data-claire-element-id="31744077">Vous devriez avoir une définition partagée avec d’autres développeurs sur ce que signifie « avoir un code structuré ». De cette façon, vous comprendrez mieux le code sans avoir à connaître la personne qui l’a écrit.</p>
+<p id="r-7296463" data-claire-element-id="31744078">Vous comprenez maintenant <strong>pourquoi</strong> vous devez coder correctement. Voyons <strong>comment</strong> faire.</p>
+<h3 id="r-7312492" data-claire-element-id="31809741">
+<strong>Ne vous répétez pas</strong>
+</h3>
+<p id="r-7296465" data-claire-element-id="31744080">Le premier commandement de la programmation est le <strong>DRY</strong> : ne vous répétez pas (<strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself en anglais). En tant que développeur, vous voulez que tout soit aussi rapide et efficace que possible et automatiser autant que vous pouvez. Si vous vous retrouvez à copier et coller souvent des morceaux de code, c’est un signe que vous pouvez isoler ce à quoi servent ces lignes de code.  </p>
+<p id="r-7296466" data-claire-element-id="31744482">Admettons que vous voulez calculer le taux de conversion et l’afficher dans plusieurs campagnes. Vous pouvez le copier et coller pour chaque campagne comme dans le code ci-dessous :</p>
+<pre id="r-7296656" data-claire-element-id="31779433">
+<code data-claire-semantic="python">taux_de_conversion1 = premiere_campagne['visiteurs'] / premiere_campagne['conversions']
+taux_de_conversion2 = seconde_campagne['visiteurs'] / seconde_campagne['conversions']
+taux_de_conversion3 = troisieme_campagne['visiteurs'] / troisieme_campagne['conversions']</code>
+</pre>
+<p id="r-7296473" data-claire-element-id="31809721">Si vous commencez à écrire du code comme ça, la première chose à faire est de le transformer en fonction. Vous pouvez écrire une fonction appelée <code data-claire-semantic="text">calculer_taux_de_conversion</code> et tout faire en une fois.</p>
+<pre id="r-7308366" data-claire-element-id="31809041">
+<code data-claire-semantic="python">def calculer_taux_de_conversion(campagne):
+    taux_de_conversion = campagne['visiteurs'] / campagne['conversions']
+    return taux_de_conversion
+
+calculer_taux_de_conversion(premiere_campagne)
+calculer_taux_de_conversion(seconde_campagne)
+calculer_taux_de_conversion(troisieme_campagne)</code>
+</pre>
+<p id="r-7296665" data-claire-element-id="31744494">Les deux extraits de code ci-dessus font la même chose, mais il y en a un mieux structuré que l’autre et qui suit le principe DRY !</p>
+<h3 id="r-7325406" data-claire-element-id="31809742">
+<strong>Le principe de responsabilité unique</strong>
+</h3>
+<p id="r-7296488" data-claire-element-id="31744103">Quand vous organisez quelque chose, il vaut mieux avoir un endroit où ranger chaque objet, car vous savez qu’il sera plus facile à retrouver. C’est pareil pour écrire des fonctions. Chaque fonction doit être responsable d’une seule et unique fonctionnalité, et rien de plus.</p>
+<p id="r-7296489" data-claire-element-id="31744496">Disons que vous voulez calculer les taux de conversion pour plusieurs campagnes et sauvegarder les données dans un fichier CSV.</p>
+<aside id="r-7296666" data-claire-element-id="31744497" data-claire-semantic="information">
+<p id="r-7296490" data-claire-element-id="31744105">
+<strong>CSV</strong> signifie <strong>comma-separated values</strong> (valeurs séparées par des virgules). Le format de fichier CSV est utilisé pour enregistrer des données tabulaires (c’est-à-dire des informations structurées dans un tableau), comme un tableur ou une base de données. </p>
+</aside>
+<p id="r-7296491" data-claire-element-id="31744498">Au lieu d’appeler une fonction  <code data-claire-semantic="text">calculer_taux_de_conversion_sauvegarder_csv()</code>, nous allons séparer deux tâches en fonctions séparées :</p>
+<ul id="r-7296496" data-claire-element-id="31769148">
+<li id="r-7296493" data-claire-element-id="31769145">
+<p id="r-7296492" data-claire-element-id="31769144">
+<code data-claire-semantic="text">calculer_taux_de_conversion()</code>
+</p>
+</li>
+<li id="r-7296495" data-claire-element-id="31769147">
+<p id="r-7296494" data-claire-element-id="31769146">
+<code data-claire-semantic="text">sauvegarder_csv()</code>
+</p>
+</li>
+</ul>
+<p id="r-7296497" data-claire-element-id="31744112">Chaque fonction doit être responsable d’une seule tâche. Dès que vous essayez d’accomplir plus d’une chose dans une seule fonction, vous risquez de ne plus comprendre ce que vous vouliez faire à l’origine.</p>
+<p id="r-7296498" data-claire-element-id="31744113">Le fait de séparer les responsabilités vous permet de définir un nom plus descriptif pour la fonction, de débugger le code plus facilement et de mieux comprendre le code.</p>
+<h3 id="r-7325407" data-claire-element-id="31809751">
+<strong>Commentez votre code</strong>
+</h3>
+<p id="r-7296500" data-claire-element-id="31744115">Les commentaires sont un moyen très pratique de rappeler, à vous et aux autres développeurs, ce qu’un morceau de code est censé faire.</p>
+<p id="r-7296501" data-claire-element-id="31744116">Il y a différents standards pour les commentaires. Votre code doit être suffisamment lisible pour ne pas avoir besoin de trop de commentaires pour que quelqu’un d’autre le comprenne.</p>
+<p id="r-7296502" data-claire-element-id="31744117">Dans Python, on trouve des commentaires à ligne unique et multiple.</p>
+<p id="r-7296503" data-claire-element-id="31769150">Les commentaires à ligne unique sont indiqués par  <code data-claire-semantic="text">#</code>  avant et après. La phrase juste en-dessous est un commentaire à ligne unique à propos d’une méthode.</p>
+<pre id="r-7296667" data-claire-element-id="31744505">
+<code data-claire-semantic="python">#ceci est un commentaire</code>
+</pre>
+<p id="r-7296506" data-claire-element-id="31769151">Les commentaires à lignes multiples sont entourés de trois guillemets  <code data-claire-semantic="text">&quot;&quot;&quot;</code>  :</p>
+<pre id="r-7308368" data-claire-element-id="31779881">
+<code data-claire-semantic="python">&quot;&quot;&quot;
+Ceci est un
+commentaire à lignes multiples
+&quot;&quot;&quot;</code>
+</pre>
+<aside id="r-7312581" data-claire-element-id="31809723" data-claire-semantic="information">
+<p id="r-7296515" data-claire-element-id="31744130">
+<em>« Les commentaires qui contredisent le code sont pires qu’aucun commentaire. Gardez en priorité les commentaires à jour quand le code change ! »</em>
+</p>
+<p id="r-7296516" data-claire-element-id="31809722">- PEP 8 guide de style pour le code Python</p>
+</aside>
+<h3 id="r-7325411" data-claire-element-id="31809752">
+<strong>Respectez les standards du code</strong>
+</h3>
+<p id="r-7296518" data-claire-element-id="31744133">En général, vous lisez du code bien plus souvent que vous n’en écrivez. C’est pour ça que c’est important d’avoir des lignes directrices pour améliorer sa lisibilité et le rendre aussi cohérent que possible.</p>
+<p id="r-7296519" data-claire-element-id="31809725">Le guide de style officiel pour le code Python est un document appelé <a href="https://www.python.org/dev/peps/pep-0008/">PEP 8</a> (ressource en anglais). Il contient des règles et des bonnes pratiques qui aident à standardiser l’écriture en Python par les développeurs.</p>
+<p id="r-7296520" data-claire-element-id="31809726">Globalement, les philosophies derrière l’écriture correcte en Python sont répertoriées dans un document appelé <a href="https://www.python.org/dev/peps/pep-0020/">PEP 20</a> (ressource en anglais) : </p>
+<blockquote id="r-7312582" data-claire-element-id="31779884">
+<p id="r-7296521" data-claire-element-id="31744136">
+<em>Explicite vaut mieux qu’implicite.</em>
+</p>
+<p id="r-7296522" data-claire-element-id="31744137">
+<em>La simplicité est meilleure que la complexité.</em>
+</p>
+<p id="r-7296523" data-claire-element-id="31744138">
+<em>(...)</em>
+</p>
+<p id="r-7296524" data-claire-element-id="31744139">
+<em>LA LISIBILITÉ COMPTE AUSSI.</em>
+</p>
+</blockquote>
+<p id="r-7296525" data-claire-element-id="31744140">Il est vital de connaître ces préceptes du « Zen de Python » comme on les appelle. Je vous recommande aussi de consulter le PEP quand vous avez des questions qui surviennent dans vos projets de programmation en Python.</p>
+<aside id="r-7325402" data-claire-element-id="31809728" data-claire-semantic="information">
+<p id="r-7325401" data-claire-element-id="31809727">Même si les PEP sont des ressources en anglais, il existe aussi des ressources en français basées sur les PEP, comme la traduction française de <a href="https://python-guide-fr.readthedocs.io/fr/latest/writing/style.html">The Hitchhiker's Guide to Python</a>.</p>
+</aside>
+<aside id="r-7296673" data-claire-element-id="31777152" data-claire-semantic="information">
+<p id="r-7296526" data-claire-element-id="31777151">Vous en apprendrez plus sur les standards de programmation de Python dans le cours <a href="/en/courses/7160741-ecrivez-du-code-python-maintenable">Écrivez du code Python maintenable</a>.</p>
+</aside>

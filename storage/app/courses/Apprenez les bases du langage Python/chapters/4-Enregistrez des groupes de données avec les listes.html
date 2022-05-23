@@ -1,0 +1,88 @@
+<h3 id="r-7325367" data-claire-element-id="31809632">
+<strong>Qu’est-ce qu’une liste et pourquoi l’utiliser ?</strong>
+</h3>
+<p id="r-7290441" data-claire-element-id="31776033">Les pommes, les oranges, les poires. 🍎🍊🍐 Les chiens, les chats, les lapins. 🐕🐈🐇  Vous utilisez les listes tout le temps dans votre vie quotidienne et c’est pareil dans Python. Vous devez avoir une liste pour y enregistrer une collection d’objets auxquels vous voulez accéder plus tard.</p>
+<p id="r-7290442" data-claire-element-id="31758511">Dans Python, on utilise des crochets  <code data-claire-semantic="text"> [ ]</code>  pour indiquer une liste. Le code suivant crée une liste de différentes plateformes de réseaux sociaux et la sauvegarde dans une variable appelée  <code data-claire-semantic="text">plateformes_sociales</code>.</p>
+<pre id="r-7290556" data-claire-element-id="31734651">
+<code data-claire-semantic="python">plateformes_sociales = [&quot;Facebook&quot;, &quot;Instagram&quot;, &quot;Snapchat&quot;, &quot;Twitter&quot;]</code>
+</pre>
+<aside id="r-7290557" data-claire-element-id="31734652" data-claire-semantic="information">
+<p id="r-7290445" data-claire-element-id="31734505">Savez-vous quel type de données est utilisé dans cette liste ? Si vous avez vu les guillemets, vous avez peut-être immédiatement identifié ces valeurs comme des chaînes de caractères. Les listes acceptent n’importe quel type de données aussi, et même des combinaisons de types de données.</p>
+</aside>
+<p id="r-7290446" data-claire-element-id="31734506">Maintenant que la liste est sauvegardée, il faut que vous puissiez accéder aux éléments à l’intérieur.</p>
+<h3 id="r-7325368" data-claire-element-id="31820266">
+<strong>Accédez aux éléments d’une liste</strong>
+</h3>
+<p id="r-7290448" data-claire-element-id="31758513">Pour accéder aux éléments d’une liste, on utilise un <em>indice</em>. Chaque élément a un indice qui lui correspond, selon sa position dans la liste. Vous obtenez la valeur de cet indice avec la syntaxe suivante :  <code data-claire-semantic="text">liste[indice]</code>. Elle vous renverra la valeur de la liste qui est à la position de l’indice.</p>
+<p id="r-7290449" data-claire-element-id="31734509">L’important est de noter que dans la plupart des langages de programmation, y compris Python, l’indice commence à 0, pas 1. Donc si vous voulez accéder au <strong>premier</strong> élément dans la liste ci-dessus, vous devez taper :</p>
+<pre id="r-7312549" data-claire-element-id="31779824">
+<code data-claire-semantic="python">&gt;&gt; plateformes_sociales[0]
+&quot;Facebook&quot;</code>
+</pre>
+<p id="r-7290454" data-claire-element-id="31734514">Pour accéder au deuxième élément, tapez :</p>
+<pre id="r-7312551" data-claire-element-id="31802422">
+<code data-claire-semantic="python">&gt;&gt; plateformes_sociales[1]
+&quot;Instagram&quot;</code>
+</pre>
+<p id="r-7290459" data-claire-element-id="31734519">... et ainsi de suite.</p>
+<p id="r-7290460" data-claire-element-id="31734520">En particulier dans Python, vous pouvez aussi accéder aux éléments en sens inverse, en utilisant des nombres négatifs. Pour accéder au dernier élément de la liste, utilisez l’indice -1.</p>
+<pre id="r-7312553" data-claire-element-id="31802423">
+<code data-claire-semantic="python">&gt;&gt; plateformes_sociales[-1]
+&quot;Twitter&quot;</code>
+</pre>
+<h4 id="r-7318312" data-claire-element-id="31820265">
+<strong>Accédez aux caractères d’une chaîne comme un élément d’une liste</strong>
+</h4>
+<p id="r-7290465" data-claire-element-id="31734525">Les indices fonctionnent aussi avec les chaînes de caractères ! En fait, les chaînes de caractères sont juste des listes de caractères. Chaque caractère correspond à un indice qui va de zéro à la longueur de la chaîne.</p>
+<p id="r-7312554" data-claire-element-id="31802425">Par exemple, dans la chaîne  <code data-claire-semantic="text">langage  = &quot;PYTHON&quot;</code>  ,  <code data-claire-semantic="text">langage[2]</code>  vous renverra  <code data-claire-semantic="text">&quot;T&quot;</code> . Tout simplement parce que l’indice 2 dans le mot &quot;PYTHON&quot; est le &quot;T&quot;. Ou bien, avec l’indice de la position inverse, vous devez utiliser  <code data-claire-semantic="text">langage[-4]</code>  pour accéder à  <code data-claire-semantic="text">&quot;T&quot;</code>  .</p>
+<pre id="r-7312555" data-claire-element-id="31802426">
+<code data-claire-semantic="python">&gt;&gt; langage_de_programmation = &quot;PYTHON&quot;
+&gt;&gt; langage_de_programmation[2]
+&quot;T&quot;
+&gt;&gt; langage_de_programmation[-4]
+&quot;T&quot;</code>
+</pre>
+<h3 id="r-7325369" data-claire-element-id="31809636">
+<strong>Modifiez, retirez et triez les listes</strong>
+</h3>
+<p id="r-7290482" data-claire-element-id="31734542">Dans Python, c’est très simple de réaliser toutes sortes d’opérations avec les listes. À la place de créer une toute nouvelle liste à chaque fois que vous voulez ajouter, retirer ou trier des éléments, vous pouvez faire appel à une <strong>méthode de liste</strong>. Nous allons voir les méthodes plus tard, mais pour l’instant, vous devez juste savoir qu’une méthode est une façon de réaliser une opération spécifique sur un élément.  </p>
+<p id="r-7290483" data-claire-element-id="31802472">Par exemple, pour ajouter une plateforme de réseau social à la fin de la liste existante, vous pouvez utiliser la méthode<code data-claire-semantic="text">append()</code>  :</p>
+<pre id="r-7312561" data-claire-element-id="31802428">
+<code data-claire-semantic="python">&gt;&gt; plateformes_sociales.append(&quot;TikTok&quot;)
+&gt;&gt; print(plateformes_sociales)
+[&quot;Facebook&quot;, &quot;Instagram&quot;, &quot;Snapchat&quot;, &quot;Twitter&quot;, &quot;TikTok&quot;]</code>
+</pre>
+<p id="r-7312563" data-claire-element-id="31802429">Pour retirer un élément spécifique d’une liste, vous pouvez utiliser la méthode<code data-claire-semantic="text">remove()</code>.</p>
+<pre id="r-7312564" data-claire-element-id="31802430">
+<code data-claire-semantic="python">&gt;&gt; plateformes_sociales.remove(&quot;Snapchat&quot;)
+&gt;&gt; print(plateformes_sociales)
+[&quot;Facebook&quot;, &quot;Instagram&quot;, &quot;Twitter&quot;, &quot;TikTok&quot;]</code>
+</pre>
+<p id="r-7312565" data-claire-element-id="31802473">
+<code data-claire-semantic="text">remove()</code> retire uniquement la première instance du terme que vous saisissez.</p>
+<p id="r-7312566" data-claire-element-id="31802474">Pour connaître la longueur de la liste, utilisez la méthode<code data-claire-semantic="text">len()</code>.</p>
+<pre id="r-7312567" data-claire-element-id="31802431">
+<code data-claire-semantic="python">&gt;&gt; len(plateformes_sociales)
+4</code>
+</pre>
+<p id="r-7312569" data-claire-element-id="31802475">La dernière méthode que nous allons voir est<code data-claire-semantic="text">sort()</code>. Elle trie les éléments de la liste. Le tri se fait alphabétiquement pour les listes de chaînes et numériquement pour les listes de nombres.</p>
+<pre id="r-7290714" data-claire-element-id="31735058">
+<code data-claire-semantic="python">&gt;&gt; plateformes_sociales.sort()</code>
+</pre>
+<aside id="r-7290716" data-claire-element-id="31809635" data-claire-semantic="information">
+<p id="r-7290508" data-claire-element-id="31809634">Il y a beaucoup d’autres méthodes que vous pouvez utiliser avec les listes. Vous les trouverez dans la <a href="https://docs.python.org/fr/3/tutorial/datastructures.html">
+<strong>documentation Python</strong>
+</a>.</p>
+</aside>
+<h3 id="r-7325371" data-claire-element-id="31820268">
+<strong>Découvrez les tuples</strong>
+</h3>
+<p id="r-7290510" data-claire-element-id="31758611">Les tuples sont une autre structure de Python qui sert à enregistrer des données. Au lieu des crochets  <code data-claire-semantic="text">[ ]</code>  , ils se caractérisent par les parenthèses  <code data-claire-semantic="text">()</code>  .</p>
+<pre id="r-7290717" data-claire-element-id="31735063">
+<code data-claire-semantic="python">plateformes_sociales_tuple = (&quot;Facebook&quot;, &quot;Instagram&quot;, &quot;TikTok&quot;, &quot;Twitter&quot;)</code>
+</pre>
+<p id="r-7290513" data-claire-element-id="31776035">Beaucoup des propriétés des tuples sont similaires à celles des listes normales. Par exemple, les listes et tuples utilisent tous deux les indices. La principale différence est que les tuples sont <strong>immuables</strong> (ne peuvent pas être modifiés), alors que les listes sont <strong>modifiables</strong>. </p>
+<p id="r-7290515" data-claire-element-id="31776863">Voici quelques éléments où vous pourrez mettre vos nouvelles connaissances sur les listes en pratique ! ✅  ✅  ✅</p>
+<h3 id="r-7325372" data-claire-element-id="31809639">
+<strong>À vous de jouer !</strong>
+</h3>

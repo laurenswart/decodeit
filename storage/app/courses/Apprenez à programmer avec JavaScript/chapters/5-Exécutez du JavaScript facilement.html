@@ -1,0 +1,35 @@
+<h3 id="r-7180117" data-claire-element-id="31481173">
+<strong>Découvrez l'avantage de JavaScript : un langage, de nombreux environnements</strong>
+</h3>
+<p id="r-7178651" data-claire-element-id="31477521">L'avantage du JavaScript, c'est que ce langage vous permet de programmer dans de nombreux environnements différents. Gardez cependant en tête que la façon d'exécuter le code est légèrement différente dans chaque environnement. Nous allons ici explorer brièvement trois environnements différents : JSBin, les pages web et les serveurs.</p>
+<h3 id="r-7178664" data-claire-element-id="31785703">
+<strong>Découvrez JSBin</strong>
+</h3>
+<p id="r-7178653" data-claire-element-id="31477523">JSBin est un excellent outil pour tester des extraits de code en JavaScript : c'est pour cette raison que je l'ai utilisé pour démontrer certains outils ou principes. Voyons comment il exécute le code.</p>
+<p id="r-7178654" data-claire-element-id="31477524">Dans JSBin, vous pouvez écrire du code ligne par ligne dans le volet JavaScript, et utiliser le bouton Run pour l'exécuter. JSBin parcourt alors vos lignes de code et les exécute l'une après l'autre. L'ordre est donc important.</p>
+<p id="r-7178655" data-claire-element-id="31477525">Par exemple, ce morceau de code :</p>
+<pre id="r-7178691" data-claire-element-id="31785652">
+<code data-claire-semantic="javascript">let numberOfGuests = 20;
+console.log(numberOfGuests); // 20</code>
+</pre>
+<p id="r-7178660" data-claire-element-id="31477563">... n'est pas identique à :</p>
+<pre id="r-7178693" data-claire-element-id="31785702">
+<code data-claire-semantic="javascript">console.log(numberOfGuests); // undefined
+let numberOfGuests = 20;</code>
+</pre>
+<h3 id="r-7179461" data-claire-element-id="31785706">
+<strong>Écrivez du code pour des pages web</strong>
+</h3>
+<p id="r-7178665" data-claire-element-id="31477535">Si vous avez suivi les exercices jusqu'ici, vous avez écrit du code JavaScript pour une page web. Mais vous n'avez pas encore vu comment votre code est interprété en arrière-plan !</p>
+<div id="r-7178695" data-claire-element-id="31477567" data-claire-semantic="question">
+<p id="r-7178666" data-claire-element-id="31477536">Dans les exercices des chapitres précédents, j'ai ajouté du code à un fichier JavaScript. Mais comment ce code a-t-il été ensuite <em>exécuté</em> dans le navigateur intégré ?</p>
+</div>
+<p id="r-7178667" data-claire-element-id="31477581">Eh bien, il y avait d'autres fichiers (auxquels vous n'aviez pas accès) qui effectuaient ce travail pour vous.  En effet, il y avait un autre fichier JavaScript qui importait votre tableau d'épisodes et produisait les éléments qu'il ajoutait ensuite à la page web. Ce fichier était ensuite importé par le fichier HTML (qui indique au navigateur ce qu'il devrait y avoir sur la page), et exécutait automatiquement le code.</p>
+<p id="r-7178668" data-claire-element-id="31477538">C'est plus ou moins de cette façon que JavaScript fonctionne sur le web. Vous écrivez du code, l'enregistrez dans un ou plusieurs fichiers, puis <strong>importez</strong> ces fichiers par une balise spéciale dans votre fichier HTML. Le navigateur <strong>exécute</strong> ensuite automatiquement le code dans ces fichiers, en général dans l'ordre de leur importation.</p>
+<h3 id="r-7178701" data-claire-element-id="31477602">
+<strong>Écrivez du JavaScript pour des serveurs</strong>
+</h3>
+<p id="r-7178672" data-claire-element-id="31477542">Il fut un temps où JavaScript ne pouvait s'utiliser que dans des pages web (en avant-plan), mais ce n'est plus vrai ! Il peut maintenant aussi s'utiliser en <strong>arrière-plan</strong>, pour gérer l'accès à certaines ressources.</p>
+<p id="r-7178673" data-claire-element-id="31477543">Prenez par exemple un service de messagerie mail. Vous avez une page web qui vous permet d'accéder à vos messages, mais ils ne sont pas <strong>enregistrés</strong> dans cette page. Ils sont enregistrés dans une base de données, et la page que vous utilisez accède à cette base de données à travers un serveur, qui peut être écrit en JavaScript !</p>
+<p id="r-7178674" data-claire-element-id="31477544">Néanmoins, les serveurs doivent être actifs à tout moment, et seuls certains éléments de code doivent être exécutés à certains moments. Par exemple, le code qui vous permet d'accéder à vos messages ne doit être exécuté <strong>que</strong> si et quand vous décidez d'ouvrir votre client de messagerie !</p>
+<p id="r-7178675" data-claire-element-id="31477601">Dans ce cas, un environnement (tel que <strong>Node</strong>), couplé à un code JavaScript particulier, fait que cela se produit. Le serveur <strong>réagit</strong> à votre ouverture du client de messagerie, <strong>vérifie</strong> l'authentification et <strong>envoie</strong> vos messages. </p>

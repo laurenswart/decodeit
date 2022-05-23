@@ -1,0 +1,467 @@
+<p id="r-4800703" data-claire-element-id="8796433">Après avoir passé toute une première partie du cours à ne travailler que sur le HTML, nous allons maintenant découvrir le CSS que j'avais volontairement mis à l'écart. Le CSS n'est pas plus compliqué que le HTML. Il vient le compléter pour vous aider à mettre en forme votre page web.</p>
+<p id="r-1609875" data-claire-element-id="30945282">Dans ce premier chapitre sur le CSS, nous allons voir la théorie sur le CSS : qu'est-ce que c'est ? À quoi cela ressemble-t-il ? Où est-ce qu'on écrit du code CSS ? Ces aspects théoriques ne sont pas bien compliqués, mais vous devez obligatoirement les connaître car c'est la base du CSS. C'est d'ailleurs la seule chose que je vous demanderai de retenir par cœur en CSS, vous pourrez retrouver le reste dans le mémo en annexe.</p>
+<p id="r-1609876" data-claire-element-id="1632681">Allez, ne traînons pas, je vois que vous brûlez d'impatience !</p>
+<h3 id="r-1604836" data-claire-element-id="32718488">La petite histoire du CSS</h3>
+<p id="r-1609877" data-claire-element-id="30945283">Je vous avais averti dès le début de ce cours : nous allons apprendre deux langages. Nous avons déjà bien entamé notre découverte du HTML, même s'il reste encore de nombreuses choses à apprendre (nous y reviendrons dans quelques chapitres). En revanche, il est temps maintenant de nous intéresser au CSS.</p>
+<p id="r-1609878" data-claire-element-id="1632683">CSS (<em>Cascading Style Sheets</em>), c'est cet autre langage qui vient compléter le HTML.<br /> Vous vous souvenez de son rôle ? <em>Gérer la mise en forme de votre site.</em>
+</p>
+<h4 id="r-1609886" data-claire-element-id="32718487">Petit rappel : à quoi sert CSS ?</h4>
+<p id="r-1609879" data-claire-element-id="1632684">CSS ? C'est lui qui vous permet de choisir la couleur de votre texte.<br /> Lui qui vous permet de sélectionner la police utilisée sur votre site.<br /> Lui encore qui permet de définir la taille du texte, les bordures, le fond…</p>
+<p id="r-1609880" data-claire-element-id="1632685">Et aussi, c'est lui qui permet de faire la mise en page de votre site. Vous pourrez dire : je veux que mon menu soit à gauche et occupe telle largeur, que l'en-tête de mon site soit calé en haut et qu'il soit toujours visible, etc.</p>
+<p id="r-1609881" data-claire-element-id="1632686">Souvenez-vous de ce petit comparatif que nous avions vu dès le premier chapitre (figure suivante).</p>
+<p id="r-1609885" data-claire-element-id="30945324">Grâce au HTML, nous avons pu rédiger le contenu de notre site, mais il est brut de décoffrage. Le CSS vient compléter ce code pour mettre en forme tout cela et donner au contenu l'apparence que l'on souhaite.</p>
+<h4 id="r-1609890" data-claire-element-id="30945506">CSS : des débuts difficiles</h4>
+<p id="r-1609887" data-claire-element-id="30945375">Il faut savoir qu'aux débuts du Web, CSS n'existait pas. En fait, il n'y avait initialement que le langage HTML.<br /> Le HTML est né en 1991, et CSS en 1996. Alors, vous vous dites sûrement : comment faisait-on la mise en forme, de 1991 à 1996 ? Eh bien, uniquement en HTML ! Il y avait en effet des balises HTML dédiées à la mise en forme. <code data-claire-semantic="html">&lt;font color=&quot;#aab1c3&quot;&gt;</code>  , par exemple, permettait de définir la couleur du texte.</p>
+<p id="r-1609888" data-claire-element-id="1632693">Cependant, les pages HTML commençaient à devenir assez complexes. Il y avait de plus en plus de balises et c'était un joyeux mélange entre le fond et la forme, qui rendait la mise à jour des pages web de plus en plus complexe. C'est pour cela que l'on a créé le langage CSS.</p>
+<p id="r-1609889" data-claire-element-id="30945505">Cependant, le CSS n'a pas été adopté immédiatement par les webmasters, loin de là. Il fallait se défaire de certaines mauvaises habitudes et cela a pris du temps. Encore aujourd'hui, on peut trouver des sites web avec des balises HTML de mise en forme anciennes et obsolètes, comme <code data-claire-semantic="html">&lt;font&gt;</code>  !</p>
+<h4 id="r-1609915" data-claire-element-id="30945548">CSS : la prise en charge des navigateurs</h4>
+<p id="r-1609891" data-claire-element-id="1632696">Tout comme le HTML, le CSS a évolué. Je vous avais indiqué qu'il y avait quatre versions importantes de CSS :</p>
+<ul id="r-1609900" data-claire-element-id="1632705">
+<li id="r-1609893" data-claire-element-id="1632698">
+<p id="r-1609892" data-claire-element-id="1632697">CSS 1 ;</p>
+</li>
+<li id="r-1609895" data-claire-element-id="1632700">
+<p id="r-1609894" data-claire-element-id="1632699">CSS 2.0 ;</p>
+</li>
+<li id="r-1609897" data-claire-element-id="1632702">
+<p id="r-1609896" data-claire-element-id="1632701">CSS 2.1 ;</p>
+</li>
+<li id="r-1609899" data-claire-element-id="1632704">
+<p id="r-1609898" data-claire-element-id="1632703">CSS 3.</p>
+</li>
+</ul>
+<p id="r-1609901" data-claire-element-id="28367595">Ce sont les navigateurs web qui font le travail le plus complexe : ils doivent <em>lire </em>le code CSS et <em>comprendre </em>comment afficher la page.</p>
+<p id="r-1609904" data-claire-element-id="30945417">Au début des années 2000, Internet Explorer était le navigateur le plus répandu, mais sa gestion du CSS est longtemps restée assez médiocre (pour ne pas dire carrément mauvaise). C'était la grande époque de la version 6 (IE6).</p>
+<p id="r-1609905" data-claire-element-id="30945545">Depuis, de nombreux navigateurs sont arrivés et ont chahuté Internet Explorer : Mozilla Firefox bien sûr, mais aussi Google Chrome. Et je ne vous parle pas du succès des Mac et iPhone avec leur navigateur Safari. Cela a incité Microsoft à réagir et publier (après une longue période d'inactivité) IE 7, puis IE 8 et IE 9, 10, 11... et maintenant, Edge.</p>
+<div id="r-1609907" data-claire-element-id="30945547" data-claire-semantic="question">
+<p id="r-1609906" data-claire-element-id="30945546">Bon, ton cours d'histoire, c'est bien joli, mais en quoi cela me concerne-t-il aujourd'hui ?</p>
+</div>
+<p id="r-1609908" data-claire-element-id="1632713">
+<em>Que faut-il retenir de tout cela ?</em> Que les navigateurs ne connaissent pas toutes les propriétés CSS qui existent. Plus le navigateur est vieux, moins il connaît de fonctionnalités CSS.</p>
+<p id="r-1609909" data-claire-element-id="1632714">Je vais vous présenter dans ce cours un certain nombre de fonctionnalités de CSS qui ne marchent pas forcément sur les navigateurs les plus vieux. Je ne peux pas l'éviter, c'est comme cela : <em>aucun navigateur ne connaît parfaitement toutes les fonctionnalités CSS</em> de toute façon ! Au pire, si le navigateur ne connaît pas une propriété CSS, il l'ignore et ne met pas en forme, mais cela ne fait pas planter votre page : celle-ci sera donc toujours lisible.</p>
+<p id="r-1609910" data-claire-element-id="30945328">Je vous recommande fortement de mettre dans vos favoris le site <a href="https://www.caniuse.com">www.caniuse.com</a> qui propose des tables de compatibilité des fonctionnalités de HTML et CSS sur différents navigateurs (et sur leurs différentes versions) :</p>
+<aside id="r-6314039" data-claire-element-id="30303556" data-claire-semantic="information">
+<p id="r-6314038" data-claire-element-id="30303555">Pour valider vos compétences avec un diplôme bac+2, suivez la <a href="/fr/paths/185-developpeur-web">formation développeur web</a> avec OpenClassrooms. 6 mois en moyenne sont nécessaires pour finaliser cette <a href="/fr/paths">formation à distance</a>, qui peut aussi être suivie en <a href="/fr/apprenticeship">alternance ou contrat d’apprentissage</a>.</p>
+</aside>
+<h3 id="r-1604895" data-claire-element-id="32718504">Où écrit-on le CSS ?</h3>
+<p id="r-1609916" data-claire-element-id="1632722">Vous avez le choix car on peut écrire du code en langage CSS à trois endroits différents :</p>
+<ul id="r-1609923" data-claire-element-id="30945602">
+<li id="r-1609918" data-claire-element-id="30945597">
+<p id="r-1609917" data-claire-element-id="30945596">dans un fichier <code data-claire-semantic="text">.css</code>  (<em>méthode la plus recommandée</em>) ;</p>
+</li>
+<li id="r-1609920" data-claire-element-id="30945599">
+<p id="r-1609919" data-claire-element-id="30945598">dans l'en-tête <code data-claire-semantic="html">&lt;head&gt;</code>  du fichier HTML ;</p>
+</li>
+<li id="r-1609922" data-claire-element-id="30945601">
+<p id="r-1609921" data-claire-element-id="30945600">directement dans les balises du fichier HTML <em>via</em> un attribut <code data-claire-semantic="text">style</code>  (<em>méthode la moins recommandée</em>).</p>
+</li>
+</ul>
+<p id="r-1609924" data-claire-element-id="30945603">Je vais vous présenter ces trois méthodes, mais sachez d'ores et déjà que la première… est la meilleure.</p>
+<h4 id="r-1609949" data-claire-element-id="32718495">Dans un fichier <code data-claire-semantic="text">.css</code>  (recommandé)</h4>
+<p id="r-1609925" data-claire-element-id="30945646">Comme je viens de vous le dire, on écrit le plus souvent le code CSS dans un fichier spécial ayant l'extension <code data-claire-semantic="text">.css</code>  (contrairement aux fichiers HTML qui ont l'extension <code data-claire-semantic="text">.html</code>  ). C'est la méthode la plus pratique et la plus souple. Cela nous évite de tout mélanger dans un même fichier. J'utiliserai cette technique dans toute la suite de ce cours.</p>
+<p id="r-1609926" data-claire-element-id="1632732">Commençons à pratiquer dès maintenant ! Nous allons partir du fichier HTML suivant :</p>
+<pre id="r-1609927" data-claire-element-id="6187266">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+        &lt;title&gt;Premiers tests du CSS&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Mon super site&lt;/h1&gt;
+        
+        &lt;p&gt;Bonjour et bienvenue sur mon site !&lt;/p&gt;
+        &lt;p&gt;Pour le moment, mon site est un peu &lt;em&gt;vide&lt;/em&gt;. Patientez encore un peu !&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<p id="r-1609928" data-claire-element-id="30945686">Vous noterez le contenu de la ligne 5, <code data-claire-semantic="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;</code>  : c'est elle qui indique que ce fichier HTML est associé à un fichier appelé <code data-claire-semantic="text">style.css</code>  et chargé de la mise en forme.</p>
+<p id="r-1609929" data-claire-element-id="30945687">Enregistrez ce fichier sous le nom que vous voulez (par exemple, <code data-claire-semantic="text">page.html</code>  ). Pour le moment, rien d'extraordinaire à part la nouvelle balise que nous avons ajoutée.</p>
+<p id="r-1609930" data-claire-element-id="4718056">Maintenant, créez un <em>nouveau</em> fichier vide dans votre éditeur de texte (par exemple Sublime Text) et copiez-y ce bout de code CSS (rassurez-vous, je vous expliquerai tout à l'heure ce qu'il veut dire) :</p>
+<pre id="r-1609931" data-claire-element-id="6187267">
+<code data-claire-semantic="css">p
+{
+    color: blue;
+}</code>
+</pre>
+<aside id="r-1609933" data-claire-element-id="30945689" data-claire-semantic="information">
+<p id="r-1609932" data-claire-element-id="30945688">Pour obtenir la coloration du code dans Sublime Text, enregistrez bien votre fichier avec l'extension <code data-claire-semantic="text">.css</code>  d'abord.</p>
+</aside>
+<p id="r-1609934" data-claire-element-id="30945736">Enregistrez le fichier en lui donnant un nom qui se termine par <code data-claire-semantic="text">.css</code>  , comme <code data-claire-semantic="text">style.css</code>  . Placez ce fichier <code data-claire-semantic="text">.css</code>  dans le même dossier que votre fichier <code data-claire-semantic="text">.html</code>  .</p>
+<p id="r-1609935" data-claire-element-id="4717847">Dans Sublime Text, vous devriez observer quelque chose de similaire à la figure suivante.</p>
+<p id="r-1609939" data-claire-element-id="30945778">Dans votre explorateur de fichiers, vous devriez les voir apparaître côte à côte. D'un côté le <code data-claire-semantic="text">.html</code>  , de l'autre le <code data-claire-semantic="text">.css</code>  , comme à la figure suivante.</p>
+<p id="r-1609943" data-claire-element-id="30945820">Ouvrez maintenant votre fichier <code data-claire-semantic="text">page.html</code>  dans votre navigateur pour le tester, comme vous le faites d'habitude. Regardez, c'est magique : vos paragraphes sont écrits en bleu, comme dans la figure suivante !</p>
+
+<aside id="r-1609948" data-claire-element-id="30945863" data-claire-semantic="warning">
+<p id="r-1609947" data-claire-element-id="30945862">Il est inutile d'ouvrir directement le fichier <code data-claire-semantic="text">style.css</code>  dans le navigateur. Il faut ouvrir le fichier <code data-claire-semantic="text">page.html</code>  (il fera automatiquement appel au fichier <code data-claire-semantic="text">style.css</code>  ).</p>
+</aside>
+<h4 id="r-1609954" data-claire-element-id="30945867">Dans l'en-tête <code data-claire-semantic="html">&lt;head&gt;</code>  du fichier HTML</h4>
+<p id="r-1609950" data-claire-element-id="30945865">Il existe une autre méthode pour utiliser du CSS dans ses fichiers HTML : cela consiste à insérer le code CSS directement dans une balise <code data-claire-semantic="html">&lt;style&gt;</code>  à l'intérieur de l'en-tête <code data-claire-semantic="html">&lt;head&gt;</code>  .</p>
+<p id="r-1609951" data-claire-element-id="30945866">Voici comment on peut obtenir exactement le même résultat avec un seul fichier <code data-claire-semantic="text">.html</code>  qui contient le code CSS (lignes 5 à 10) :</p>
+<pre id="r-1609952" data-claire-element-id="6187275">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;style&gt;
+            p
+            {
+                color: blue;
+            }
+        &lt;/style&gt;
+        &lt;title&gt;Premiers tests du CSS&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Mon super site&lt;/h1&gt;
+        
+        &lt;p&gt;Bonjour et bienvenue sur mon site !&lt;/p&gt;
+        &lt;p&gt;Pour le moment, mon site est un peu &lt;em&gt;vide&lt;/em&gt;. Patientez encore un peu !&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<p id="r-1609953" data-claire-element-id="1632759">Testez, vous verrez que le résultat est le même.</p>
+<h4 id="r-1609961" data-claire-element-id="32718498">Directement dans les balises (non recommandé)</h4>
+<p id="r-1609955" data-claire-element-id="30945913">Dernière méthode, à manipuler avec précaution : vous pouvez ajouter un attribut <code data-claire-semantic="text">style</code>  à n'importe quelle balise. Vous insérerez votre code CSS directement dans cet attribut :</p>
+<pre id="r-1609956" data-claire-element-id="6187277">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;Premiers tests du CSS&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Mon super site&lt;/h1&gt;
+        
+        &lt;p style=&quot;color: blue;&quot;&gt;Bonjour et bienvenue sur mon site !&lt;/p&gt;
+        &lt;p&gt;Pour le moment, mon site est un peu &lt;em&gt;vide&lt;/em&gt;. Patientez encore un peu !&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<p id="r-1609957" data-claire-element-id="1632763">Cette fois, seul le texte du premier paragraphe (ligne 11), dont la balise contient le code CSS, sera coloré en bleu (figure suivante).</p>
+
+<h4 id="r-1609973" data-claire-element-id="32718503">Quelle méthode choisir ?</h4>
+<div id="r-1609963" data-claire-element-id="30945957" data-claire-semantic="question">
+<p id="r-1609962" data-claire-element-id="30945956">Je trouve que la première méthode que tu recommandes est plus compliquée que les deux autres ! Pourquoi nous conseilles-tu de créer deux fichiers, j'étais bien, moi, avec juste un fichier <code data-claire-semantic="text">.html</code>  !</p>
+</div>
+<p id="r-1609964" data-claire-element-id="1632770">Je vous recommande fortement de prendre l'habitude de travailler avec la première méthode parce que c'est celle utilisée par la majorité des webmasters… Pourquoi ?</p>
+<p id="r-1609965" data-claire-element-id="1632771">Pour le moment, vous faites vos tests sur un seul fichier HTML. Cependant, votre site sera plus tard constitué de plusieurs pages HTML, on est d'accord ?<br /> Imaginez : si vous placez le code CSS directement dans le fichier HTML, il faudra copier ce code dans tous les fichiers HTML de votre site ! Et si demain vous changez d'avis, par exemple si vous voulez que vos paragraphes soient écrits en rouge et non en bleu, il faudra modifier chaque fichier HTML un à un, comme le montre la figure suivante.</p>
+
+<p id="r-1609969" data-claire-element-id="1632775">Si vous travaillez avec un fichier CSS externe, vous n'aurez besoin d'écrire cette instruction qu'une seule fois pour tout votre site, comme le montre la figure suivante.</p>
+<h3 id="r-1604942" data-claire-element-id="32718512">Appliquer un style : sélectionner une balise</h3>
+<p id="r-1609974" data-claire-element-id="1632781">Maintenant que nous savons où placer le code CSS, intéressons-nous de plus près à ce code. Je vous ai donné, sans vous l'expliquer, un premier bout de code CSS :</p>
+<pre id="r-1609975" data-claire-element-id="6187287">
+<code data-claire-semantic="css">p
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1609976" data-claire-element-id="1632783">Dans un code CSS comme celui-ci, on trouve trois éléments différents :</p>
+<ul id="r-1609983" data-claire-element-id="30946054">
+<li id="r-1609978" data-claire-element-id="30946003">
+<p id="r-1609977" data-claire-element-id="30946002">
+<strong>des noms de balises</strong> : on écrit les noms des balises dont on veut modifier l'apparence. Par exemple, si je veux modifier l'apparence de tous les paragraphes <code data-claire-semantic="html">&lt;p&gt;</code>  , je dois écrire <code data-claire-semantic="text">p</code>  ;</p>
+</li>
+<li id="r-1609980" data-claire-element-id="30946005">
+<p id="r-1609979" data-claire-element-id="30946004">
+<strong>des propriétés CSS</strong> : les « effets de style » de la page sont rangés dans des propriétés. Il y a par exemple la propriété <code data-claire-semantic="css">color</code>  qui permet d'indiquer la couleur du texte, <code data-claire-semantic="css">font-size</code>  qui permet d'indiquer la taille du texte, etc. Il y a beaucoup de propriétés CSS et, comme je vous l'ai dit, je ne vous obligerai pas à les connaître toutes par cœur ;</p>
+</li>
+<li id="r-1609982" data-claire-element-id="30946053">
+<p id="r-1609981" data-claire-element-id="30946052">
+<strong>les valeurs</strong> : pour chaque propriété CSS, on doit indiquer une valeur. Par exemple, pour la propriété <code data-claire-semantic="css">color</code>  , il faut indiquer le nom de la couleur. Pour <code data-claire-semantic="css">font-size</code>  , il faut indiquer quelle taille on veut, etc.</p>
+</li>
+</ul>
+<p id="r-1609984" data-claire-element-id="1632791">Schématiquement, une feuille de style CSS ressemble donc à cela :</p>
+<pre id="r-1609985" data-claire-element-id="6187288">
+<code data-claire-semantic="css">balise1
+{
+    propriete1: valeur1;
+    propriete2: valeur2;
+    propriete3: valeur3;
+}
+
+balise2
+{
+    propriete1: valeur1;
+    propriete2: valeur2;
+    propriete3: valeur3;
+    propriete4: valeur4;
+}
+
+balise3
+{
+    propriete1: valeur1;
+}</code>
+</pre>
+<p id="r-1609986" data-claire-element-id="1632793">Vous repérez dans cet extrait de code les balises, propriétés et valeurs dont je viens de vous parler.</p>
+<p id="r-1609987" data-claire-element-id="30946102">Comme vous le voyez, on écrit le nom de la balise (par exemple <code data-claire-semantic="text">h1</code>  ) et on ouvre des accolades pour, à l'intérieur, mettre les propriétés et valeurs que l'on souhaite. On peut mettre autant de propriétés que l'on veut à l'intérieur des accolades. Chaque propriété est suivie du symbole « deux-points » ( : ) puis de la valeur correspondante. Enfin, chaque ligne se termine par un point-virgule ( ; ).</p>
+<p id="r-1609988" data-claire-element-id="1632795">Je vous apprendrai de nombreuses propriétés dans les chapitres suivants. Pour le moment, dans les exemples, on va juste changer la couleur pour s'entraîner.</p>
+<p id="r-1609989" data-claire-element-id="1632796">Le code CSS que nous avons utilisé jusqu'ici :</p>
+<pre id="r-1609990" data-claire-element-id="6187289">
+<code data-claire-semantic="css">p
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1609991" data-claire-element-id="1632798">… signifie donc en français : « <em>Je veux que tous mes paragraphes soient écrits en bleu.</em> ». Le résultat est visible à la figure suivante.</p>
+<p id="r-1609995" data-claire-element-id="30946144">Essayez de changer le nom de la balise affectée par le code CSS. Par exemple, si j'écris <code data-claire-semantic="text">h1</code>  , c'est le titre qui sera écrit en bleu. Modifiez votre fichier <code data-claire-semantic="text">style.css</code>  comme ceci :</p>
+<pre id="r-1609996" data-claire-element-id="6187292">
+<code data-claire-semantic="css">h1
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1609997" data-claire-element-id="1632804">Maintenant, ouvrez à nouveau votre page HTML (souvenez-vous, c'est la page HTML qu'on ouvre dans le navigateur, pas le fichier CSS !) : vous devriez voir son titre s'afficher en bleu (figure suivante) !</p>
+<h4 id="r-1610012" data-claire-element-id="32718511">Appliquer un style à plusieurs balises</h4>
+<p id="r-1610001" data-claire-element-id="1632808">Prenons le code CSS suivant :</p>
+<pre id="r-1610002" data-claire-element-id="6187295">
+<code data-claire-semantic="css">h1
+{
+    color: blue;
+}
+
+em
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1610003" data-claire-element-id="30946186">Il signifie que nos titres <code data-claire-semantic="html">&lt;h1&gt;</code>  et nos textes importants <code data-claire-semantic="html">&lt;em&gt;</code>  doivent s'afficher en bleu. Par contre, c'est un peu répétitif, vous ne trouvez pas ?</p>
+<p id="r-1610004" data-claire-element-id="1632811">Heureusement, il existe un moyen en CSS d'aller plus vite si les deux balises doivent avoir la même présentation. Il suffit de combiner la déclaration en séparant les noms des balises par une virgule, comme ceci :</p>
+<pre id="r-1610005" data-claire-element-id="6187296">
+<code data-claire-semantic="css">h1, em
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1610006" data-claire-element-id="1632813">Le résultat se trouve à la figure suivante.</p>
+<p id="r-1610010" data-claire-element-id="30946228">Cela signifie : « <em>Je veux que le texte de mes <code data-claire-semantic="html">&lt;h1&gt;</code>  et <code data-claire-semantic="html">&lt;em&gt;</code>  soit écrit en bleu</em> ».</p>
+<p id="r-1610011" data-claire-element-id="1632818">Vous pouvez indiquer autant de balises à la suite que vous le désirez.</p>
+<h4 id="r-1610019" data-claire-element-id="30946280">Des commentaires dans du CSS</h4>
+<p id="r-1610013" data-claire-element-id="1632820">Comme en HTML, il est possible de mettre des commentaires. Les commentaires ne seront pas affichés, ils servent simplement à indiquer des informations pour vous, par exemple pour vous y retrouver dans un looong fichier CSS.</p>
+<p id="r-1610014" data-claire-element-id="1632821">D'ailleurs, vous allez vous en rendre compte, en général le fichier HTML est assez court et la feuille CSS assez longue (si elle contient tous les éléments de style de votre site, c'est un peu normal). Notez qu'il est possible de créer plusieurs fichiers CSS pour votre site si vous ressentez le besoin de séparer un peu votre code CSS (en fonction des différentes sections de votre site, par exemple).</p>
+<p id="r-1610015" data-claire-element-id="1632822">… De quoi on parlait déjà ? Ah oui, les commentaires en CSS.</p>
+<p id="r-1610016" data-claire-element-id="30946230">Donc, pour faire un commentaire, c'est facile ! Tapez <code data-claire-semantic="text">/*</code>  , suivi de votre commentaire, puis <code data-claire-semantic="text">*/</code>  pour terminer votre commentaire.<br /> Vos commentaires peuvent être écrits sur une ou plusieurs lignes. Par exemple :</p>
+<pre id="r-1610017" data-claire-element-id="6187300">
+<code data-claire-semantic="css">/*
+style.css
+---------
+ 
+Par Mathieu Nebra
+*/
+ 
+p
+{
+    color: blue; /* Les paragraphes seront en bleu */
+}</code>
+</pre>
+<p id="r-1610018" data-claire-element-id="30946279">Il est possible que j'utilise les commentaires dans la suite du cours, pour vous donner des explications à l'intérieur même des fichiers <code data-claire-semantic="text">.css</code>  .</p>
+<h3 id="r-1604993" data-claire-element-id="32718518">Appliquer un style : class et id</h3>
+<p id="r-1610020" data-claire-element-id="30946282">Ce que je vous ai montré jusqu'ici a quand même un défaut : cela implique par exemple que TOUS les paragraphes possèdent la même présentation (ici, ils seront donc tous écrits en bleu).<br /> Comment faire pour que certains paragraphes seulement soient écrits d'une manière différente ? On pourrait placer le code CSS dans un attribut <code data-claire-semantic="text">style</code>  sur la balise que l'on vise (c'est la technique que je vous ai présentée un peu plus tôt) mais, comme je vous l'ai dit, ce n'est pas recommandé (il vaut mieux utiliser un fichier CSS externe).</p>
+<p id="r-1610021" data-claire-element-id="1632829">Pour résoudre le problème, on peut utiliser ces attributs spéciaux <em>qui fonctionnent sur toutes les balises</em> :</p>
+<ul id="r-1610026" data-claire-element-id="30946287">
+<li id="r-1610023" data-claire-element-id="30946284">
+<p id="r-1610022" data-claire-element-id="30946283">l'attribut <code data-claire-semantic="text">class</code>  ;</p>
+</li>
+<li id="r-1610025" data-claire-element-id="30946286">
+<p id="r-1610024" data-claire-element-id="30946285">l'attribut <code data-claire-semantic="text">id</code>  .</p>
+</li>
+</ul>
+<p id="r-1610027" data-claire-element-id="30946330">Que les choses soient claires dès le début : les attributs <code data-claire-semantic="text">class</code>  et <code data-claire-semantic="text">id</code>  sont quasiment identiques. Il y a seulement une petite différence que je vous dévoilerai plus bas.<br /> Pour le moment, et pour faire simple, on ne va s'intéresser qu'à l'attribut <code data-claire-semantic="text">class</code>  .</p>
+<p id="r-1610028" data-claire-element-id="1632836">Comme je viens de vous le dire, c'est un attribut que l'on peut mettre sur n'importe quelle balise, aussi bien titre que paragraphe, image, etc.</p>
+<pre id="r-1610029" data-claire-element-id="6187303">
+<code data-claire-semantic="html">&lt;h1 class=&quot;&quot;&gt; &lt;/h1&gt;
+&lt;p class=&quot;&quot;&gt; &lt;/p&gt;
+&lt;img class=&quot;&quot; /&gt;</code>
+</pre>
+<div id="r-1610031" data-claire-element-id="30946381" data-claire-semantic="question">
+<p id="r-1610030" data-claire-element-id="30946380">Oui, mais que met-on comme valeur à l'attribut <code data-claire-semantic="text">class</code>  ?</p>
+</div>
+<p id="r-1610032" data-claire-element-id="1632840">En fait, vous devez écrire un nom qui sert à identifier la balise. Ce que vous voulez, du moment que le nom commence par une lettre.</p>
+<p id="r-1610033" data-claire-element-id="30946382">Par exemple, je vais associer la classe <code data-claire-semantic="text">introduction</code>  à mon premier paragraphe (ligne 12) :</p>
+<pre id="r-1610034" data-claire-element-id="6187304">
+<code data-claire-semantic="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot; /&gt;
+        &lt;title&gt;Premiers tests du CSS&lt;/title&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+        &lt;h1&gt;Mon super site&lt;/h1&gt;
+        
+        &lt;p class=&quot;introduction&quot;&gt;Bonjour et bienvenue sur mon site !&lt;/p&gt;
+        &lt;p&gt;Pour le moment, mon site est un peu &lt;em&gt;vide&lt;/em&gt;. Patientez encore un peu !&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+</pre>
+<p id="r-1610035" data-claire-element-id="30946430">Maintenant que c'est fait, votre paragraphe est identifié. Il a un nom : <code data-claire-semantic="text">introduction</code>  . Vous allez pouvoir réutiliser ce nom dans le fichier CSS pour dire : « <em>Je veux que seules les balises qui ont comme nom 'introduction' soient affichées en bleu</em> ».</p>
+<p id="r-1610036" data-claire-element-id="1632844">Pour faire cela en CSS, indiquez le nom de votre classe en commençant par un point, comme ci-dessous :</p>
+<pre id="r-1610037" data-claire-element-id="6187305">
+<code data-claire-semantic="css">.introduction
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1610038" data-claire-element-id="30946431">Testez le résultat : seul votre paragraphe appelé <code data-claire-semantic="text">introduction</code>  va s'afficher en bleu (figure suivante) !</p>
+<div id="r-1610043" data-claire-element-id="30946473" data-claire-semantic="question">
+<p id="r-1610042" data-claire-element-id="30946472">Et l'attribut <code data-claire-semantic="text">id</code>  , alors ?</p>
+</div>
+<p id="r-1610044" data-claire-element-id="30946474">Lui, il fonctionne exactement de la même manière que <code data-claire-semantic="text">class</code>  , à un détail près : il ne peut être utilisé <em>qu'une fois</em> dans le code.</p>
+<p id="r-1610045" data-claire-element-id="30946475">Quel intérêt ? Il y en a assez peu pour tout vous dire ; cela vous sera utile si vous faites du JavaScript plus tard, pour reconnaître certaines balises. D'ailleurs, nous avons déjà vu l'attribut <code data-claire-semantic="text">id</code>  dans le chapitre sur les liens (pour réaliser des ancres). En pratique, nous ne mettrons des <code data-claire-semantic="text">id</code>  que sur des éléments qui sont uniques dans la page, comme par exemple le logo :</p>
+<pre id="r-1610046" data-claire-element-id="6187552">
+<code data-claire-semantic="html">&lt;img src=&quot;images/logo.png&quot; alt=&quot;Logo du site&quot; id=&quot;logo&quot;&gt;</code>
+</pre>
+<p id="r-1610047" data-claire-element-id="30946476">Si vous utilisez des <code data-claire-semantic="text">id</code>  , lorsque vous définirez leurs propriétés dans le fichier CSS, il faudra faire précéder le nom de l' <code data-claire-semantic="text">id</code>  par un dièse (#) :</p>
+<pre id="r-1610048" data-claire-element-id="6187309">
+<code data-claire-semantic="css">#logo
+{
+    /* Indiquez les propriétés CSS ici */
+}</code>
+</pre>
+<p id="r-1610049" data-claire-element-id="30946522">Je ne vous propose pas de le tester, cela fonctionne exactement comme <code data-claire-semantic="text">class</code>  .</p>
+<aside id="r-1610051" data-claire-element-id="30946524" data-claire-semantic="information">
+<p id="r-1610050" data-claire-element-id="30946523">Si vous vous emmêlez les pinceaux entre <code data-claire-semantic="text">class</code>  et <code data-claire-semantic="text">id</code>  , retenez que deux balises peuvent avoir le même nom avec l'attribut <code data-claire-semantic="text">class</code>  . Un nom d' <code data-claire-semantic="text">id</code>  doit en revanche être unique dans la page HTML.</p>
+</aside>
+<h4 id="r-1610069" data-claire-element-id="32718517">Les balises universelles</h4>
+<p id="r-1610052" data-claire-element-id="30946525">Il arrivera parfois que vous ayez besoin d'appliquer une <code data-claire-semantic="text">class</code>  (ou un <code data-claire-semantic="text">id</code>  ) à certains mots qui, à l'origine, ne sont pas entourés par des balises.</p>
+<p id="r-1610053" data-claire-element-id="30946526">En effet, le problème de <code data-claire-semantic="text">class</code>  , c'est qu'il s'agit d'un attribut. Vous ne pouvez donc en mettre que sur une balise. Si, par exemple, je veux modifier uniquement « bienvenue » dans le paragraphe suivant :</p>
+<pre id="r-1610054" data-claire-element-id="2256157">
+<code data-claire-semantic="html">&lt;p&gt;Bonjour et bienvenue sur mon site !&lt;/p&gt;</code>
+</pre>
+<p id="r-1610055" data-claire-element-id="30946572">Cela serait facile à faire s'il y avait une balise autour de « bienvenue » , mais malheureusement, il n'y en a pas. Par chance, on a inventé… la balise-qui-ne-sert-à-rien.</p>
+<p id="r-1610056" data-claire-element-id="30946573">En fait, on a inventé deux balises dites <strong>
+<em>universelles</em>
+</strong>, qui n'ont aucune signification particulière (elles n'indiquent pas que le mot est important, par exemple). Il y a une différence minime (mais significative !) entre ces deux balises :</p>
+<ul id="r-1610061" data-claire-element-id="30946674">
+<li id="r-1610058" data-claire-element-id="30946623">
+<p id="r-1610057" data-claire-element-id="30946622">
+<code data-claire-semantic="html">&lt;span&gt; &lt;/span&gt;</code>  : c'est une balise de type <strong>inline</strong>, c'est-à-dire une balise que l'on place au sein d'un paragraphe de texte pour sélectionner certains mots uniquement. Les balises <code data-claire-semantic="html">&lt;strong&gt;</code>  et <code data-claire-semantic="html">&lt;em&gt;</code>  sont de la même famille. Cette balise s'utilise donc au milieu d'un paragraphe et c'est celle dont nous allons nous servir pour colorer « bienvenue » ;</p>
+</li>
+<li id="r-1610060" data-claire-element-id="30946673">
+<p id="r-1610059" data-claire-element-id="30946672">
+<code data-claire-semantic="html">&lt;div&gt; &lt;/div&gt;</code>  : c'est une balise de type <strong>block</strong>, qui entoure un bloc de texte. Les balises <code data-claire-semantic="html">&lt;p&gt;</code>  ,  <code data-claire-semantic="html">&lt;h1&gt;</code>  , etc., sont de la même famille. Ces balises ont quelque chose en commun : elles créent un nouveau « bloc » dans la page et provoquent donc obligatoirement un retour à la ligne. <code data-claire-semantic="html">&lt;div&gt;</code>  est une balise fréquemment utilisée dans la construction d'un design, comme nous le verrons plus tard.</p>
+</li>
+</ul>
+<p id="r-1610062" data-claire-element-id="30946675">Pour le moment donc, nous allons utiliser plutôt la balise <code data-claire-semantic="html">&lt;span&gt;</code>  . On la met autour de « bienvenue », on lui ajoute une classe (du nom qu'on veut), on crée le CSS et c'est gagné !</p>
+<pre id="r-1610063" data-claire-element-id="2256158">
+<code data-claire-semantic="html">&lt;p&gt;Bonjour et &lt;span class=&quot;salutations&quot;&gt;bienvenue&lt;/span&gt; sur mon site !&lt;/p&gt;</code>
+</pre>
+<pre id="r-1610064" data-claire-element-id="6187310">
+<code data-claire-semantic="css">.salutations
+{
+    color: blue;
+}</code>
+</pre>
+<p id="r-1610065" data-claire-element-id="1632873">Vous pouvez voir le résultat à la figure suivante.</p>
+<h3 id="r-1605059" data-claire-element-id="30946790">Appliquer un style : les sélecteurs avancés</h3>
+<p id="r-1610070" data-claire-element-id="30946726">En CSS, le plus difficile est de savoir cibler le texte dont on veut changer la forme. Pour cibler (on dit « sélectionner ») les éléments de la page à modifier, on utilise ce qu'on appelle des <strong>
+<em>sélecteurs</em>
+</strong>. Vous en avez déjà utilisé quelques-uns un peu plus tôt dans ce chapitre, résumons-les pour commencer.</p>
+<h4 id="r-1610080" data-claire-element-id="30946778">Les sélecteurs que vous connaissez déjà</h4>
+<p id="r-1610071" data-claire-element-id="1632880">Ces sélecteurs, que nous avons vus précédemment, sont de loin les plus couramment utilisés. Il faut les connaître par cœur. Commençons par la base de la base :</p>
+<pre id="r-1610072" data-claire-element-id="6187315">
+<code data-claire-semantic="css">p
+{
+
+}</code>
+</pre>
+<p id="r-1610073" data-claire-element-id="1632882">… signifie « Je veux toucher tous les paragraphes ». Après, c'est à vous de dire ce que vous faites à ces paragraphes (vous les écrivez en bleu, par exemple).</p>
+<p id="r-1610074" data-claire-element-id="1632883">Nous avons aussi vu :</p>
+<pre id="r-1610075" data-claire-element-id="6187316">
+<code data-claire-semantic="css">h1, em
+{
+
+}</code>
+</pre>
+<p id="r-1610076" data-claire-element-id="1632885">… qui signifie « Tous les titres et tous les textes importants ». Nous avons sélectionné deux balises d'un coup.</p>
+<p id="r-1610077" data-claire-element-id="30946776">Et enfin, nous avons vu comment sélectionner des balises précises à qui nous avons donné un nom, grâce aux attributs <code data-claire-semantic="text">class</code>  et <code data-claire-semantic="text">id</code>  :</p>
+<pre id="r-1610078" data-claire-element-id="6187317">
+<code data-claire-semantic="css">.class
+{
+
+}
+
+#id
+{
+
+}</code>
+</pre>
+<p id="r-1610079" data-claire-element-id="30946777">Vous savez quoi ? Il existe des dizaines d'autres façons de cibler des balises en CSS ! Nous n'allons pas toutes les voir car il y en a beaucoup et certaines sont complexes, mais voici déjà de quoi vous permettre d'être plus efficace en CSS !</p>
+<h4 id="r-1610109" data-claire-element-id="30946787">Les sélecteurs avancés</h4>
+<h5 id="r-1610083" data-claire-element-id="30946780">* : sélecteur universel</h5>
+<pre id="r-1610081" data-claire-element-id="6187319">
+<code data-claire-semantic="css">*
+{
+
+}</code>
+</pre>
+<p id="r-1610082" data-claire-element-id="30946779">Sélectionne toutes les balises sans exception. On l'appelle le <em>sélecteur universel</em>.</p>
+<h5 id="r-1610088" data-claire-element-id="30946782">A B : une balise contenue dans une autre</h5>
+<pre id="r-1610084" data-claire-element-id="6187321">
+<code data-claire-semantic="css">h3 em
+{
+
+}</code>
+</pre>
+<p id="r-1610085" data-claire-element-id="30946781">Sélectionne toutes les balises <code data-claire-semantic="html">&lt;em&gt;</code>  situées à l'intérieur d'une balise <code data-claire-semantic="html">&lt;h3&gt;</code>  . Notez qu'il n'y a pas de virgule entre les deux noms de balises.</p>
+<p id="r-1610086" data-claire-element-id="1632895">Exemple de code HTML correspondant :</p>
+<pre id="r-1610087" data-claire-element-id="2256170">
+<code data-claire-semantic="html">&lt;h3&gt;Titre avec &lt;em&gt;texte important&lt;/em&gt;&lt;/h3&gt;</code>
+</pre>
+<h5 id="r-1610093" data-claire-element-id="30946784">A + B : une balise qui en suit une autre</h5>
+<pre id="r-1610089" data-claire-element-id="6187323">
+<code data-claire-semantic="css">h3 + p
+{
+
+}</code>
+</pre>
+<p id="r-1610090" data-claire-element-id="30946783">Sélectionne la première balise <code data-claire-semantic="html">&lt;p&gt;</code>  située après un titre <code data-claire-semantic="html">&lt;h3&gt;</code>  .</p>
+<p id="r-1610091" data-claire-element-id="1632900">Exemple :</p>
+<pre id="r-1610092" data-claire-element-id="6187324">
+<code data-claire-semantic="html">&lt;h3&gt;Titre&lt;/h3&gt;
+
+&lt;p&gt;Paragraphe&lt;/p&gt;</code>
+</pre>
+<h5 id="r-1610098" data-claire-element-id="30946786">A[attribut] : une balise qui possède un attribut</h5>
+<pre id="r-1610094" data-claire-element-id="6187326">
+<code data-claire-semantic="css">a[title]
+{
+
+}</code>
+</pre>
+<p id="r-1610095" data-claire-element-id="30946785">Sélectionne tous les liens <code data-claire-semantic="html">&lt;a&gt;</code>  qui possèdent un attribut <code data-claire-semantic="text">title</code>  .</p>
+<p id="r-1610096" data-claire-element-id="1632905">Exemple :</p>
+<pre id="r-1610097" data-claire-element-id="2256176">
+<code data-claire-semantic="html">&lt;a href=&quot;http://site.com&quot; title=&quot;Infobulle&quot;&gt;</code>
+</pre>
+<h5 id="r-1610103" data-claire-element-id="6187329">A[attribut=&quot;Valeur&quot;] : une balise, un attribut et une valeur exacte</h5>
+<pre id="r-1610099" data-claire-element-id="6187328">
+<code data-claire-semantic="css">a[title=&quot;Cliquez ici&quot;]
+{
+
+}</code>
+</pre>
+<p id="r-1610100" data-claire-element-id="1632909">Idem, mais l'attribut doit en plus avoir exactement pour valeur « Cliquez ici ».</p>
+<p id="r-1610101" data-claire-element-id="1632910">Exemple :</p>
+<pre id="r-1610102" data-claire-element-id="2256179">
+<code data-claire-semantic="html">&lt;a href=&quot;http://site.com&quot; title=&quot;Cliquez ici&quot;&gt;</code>
+</pre>
+<h5 id="r-1610108" data-claire-element-id="6187331">A[attribut*=&quot;Valeur&quot;] : une balise, un attribut et une valeur</h5>
+<pre id="r-1610104" data-claire-element-id="6187330">
+<code data-claire-semantic="css">a[title*=&quot;ici&quot;]
+{
+
+}</code>
+</pre>
+<p id="r-1610105" data-claire-element-id="1632914">Idem, l'attribut doit cette fois contenir dans sa valeur le mot « ici » (peu importe sa position).</p>
+<p id="r-1610106" data-claire-element-id="1632915">Exemple :</p>
+<pre id="r-1610107" data-claire-element-id="2256182">
+<code data-claire-semantic="html">&lt;a href=&quot;http://site.com&quot; title=&quot;Quelque part par ici&quot;&gt;</code>
+</pre>
+<h4 id="r-1610112" data-claire-element-id="30946789">D'autres sélecteurs existent !</h4>
+<p id="r-1610110" data-claire-element-id="30946788">Je ne vous ai présenté ici qu'une partie des sélecteurs CSS, mais sachez qu'il en existe beaucoup d'autres. Si vous voulez une liste complète, vous pouvez vous renseigner directement à la source : sur le <a href="https://www.w3.org/Style/css3-selectors-updates/WD-css3-selectors-20010126.fr.html#selectors">site du W3C</a> ! C'est très complet.</p>
+<p id="r-1610111" data-claire-element-id="1632920">Sachez que nous découvrirons certains de ces autres sélecteurs dans la suite de ce cours !</p>

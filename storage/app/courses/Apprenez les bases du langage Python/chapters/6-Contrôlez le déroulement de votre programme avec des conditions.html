@@ -1,0 +1,171 @@
+<h3 id="r-7312197" data-claire-element-id="31778652">
+<strong>Qu’est-ce que le déroulement du programme ?</strong>
+</h3>
+<p id="r-7296171" data-claire-element-id="31743681">
+<strong>Le déroulement du programme</strong> est l’ordre dans lequel les lignes de code sont exécutées. Certaines lignes seront lues une fois seulement, d’autres plusieurs fois. D’autres encore pourraient être complètement ignorées, tout dépend de la façon dont vous les avez codées.</p>
+<p id="r-7296172" data-claire-element-id="31743682">Dans ce premier chapitre sur le déroulement du programme, nous allons regarder comment programmer votre code avec des instructions conditionnelles.</p>
+<p id="r-7296173" data-claire-element-id="31743683">
+<strong>Les instructions conditionnelles</strong> sont un moyen de contrôler la logique et le déroulement de votre code avec des conditions. Vous prenez tout le temps des décisions d’après des conditions dans votre vie quotidienne.</p>
+<p id="r-7296174" data-claire-element-id="31743684">Par exemple : <em>S’il fait beau dehors, je vais à la plage.</em> Dans ce scénario, votre décision d’aller à la plage dépend du climat. Le climat est donc la condition. </p>
+<p id="r-7296175" data-claire-element-id="31743685">Voyons comment ce type de logique fonctionne dans le code.</p>
+<h3 id="r-7312200" data-claire-element-id="31809704">
+<strong>Définissez des conditions avec les instructions if/else</strong>
+</h3>
+<p id="r-7296177" data-claire-element-id="31743687">L’un des blocs essentiels à la structure d’un déroulement conditionnel est l’instruction <strong>if.</strong>
+</p>
+<p id="r-7296178" data-claire-element-id="31743688">Avec une instruction <strong>if</strong>, vous pouvez exécuter certaines lignes de code uniquement si une certaine condition est <strong>vraie (True).</strong> Si cette condition est <strong>fausse (False),</strong> le code ne s’exécutera pas. </p>
+<p id="r-7296179" data-claire-element-id="31743689">Voici un exemple sur le climat :</p>
+<pre id="r-7311356" data-claire-element-id="31808982">
+<code data-claire-semantic="python">if ensoleille:
+    print(&quot;on va à la plage !&quot;)</code>
+</pre>
+<p id="r-7311357" data-claire-element-id="31778654">La ligne 2 s’exécute uniquement si la condition<code data-claire-semantic="text">ensoleille</code>  est True.</p>
+<aside id="r-7296185" data-claire-element-id="31809703" data-claire-semantic="information">
+<p id="r-7296184" data-claire-element-id="31809702"> Nous avons vu les instructions vrai et faux dans la Partie 1
+<strong>quand nous avons vu les booléens</strong>
+. 😉</p>
+</aside>
+<p id="r-7296186" data-claire-element-id="31743697">Ça a l’air assez simple, alors quand est-ce que « else » entre en jeu ?</p>
+<p id="r-7296187" data-claire-element-id="31743698">Gardons l’exemple du climat et allons plus loin pour y ajouter une instruction « <strong>else</strong> » :</p>
+<blockquote id="r-7312198" data-claire-element-id="31778655">
+<p id="r-7296188" data-claire-element-id="31743699">
+<em>S’il fait beau dehors, je vais à la plage.</em>
+</p>
+<p id="r-7296189" data-claire-element-id="31743700">
+<em>Sinon (par exemple s’il pleut), je reste à la maison !</em>
+</p>
+</blockquote>
+<p id="r-7296190" data-claire-element-id="31743701">Avec les <strong>instructions if/else</strong> dans Python, la syntaxe ressemble à ça :</p>
+<pre id="r-7308178" data-claire-element-id="31808983">
+<code data-claire-semantic="python">if mon_booleen:
+   # exécuter le code quand mon_booleen est vrai
+else:
+   # exécuter le code quand mon_booleen est faux</code>
+</pre>
+<p id="r-7296199" data-claire-element-id="31743710">Donc pour afficher une instruction sous une certaine condition, vous pouvez suivre les étapes suivantes :</p>
+<pre id="r-7308180" data-claire-element-id="31778657">
+<code data-claire-semantic="python">ensoleille = True
+
+if ensoleille:
+   print(&quot;on va à la plage !&quot;)
+else:
+   print(&quot;on reste à la maison !&quot;)</code>
+</pre>
+<p id="r-7296210" data-claire-element-id="31809682"> Dans cet extrait de code, puisque <code data-claire-semantic="text">ensoleille</code> est vrai, vous verrez  <code data-claire-semantic="text">on va à la plage !</code>  s’afficher dans votre terminal. Si sa valeur était fausse, le code afficherait  <code data-claire-semantic="text">on reste à la maison !</code>
+</p>
+<h3 id="r-7312207" data-claire-element-id="31809686">
+<strong>Définissez des conditions alternatives en ajoutant une clause elif</strong>
+</h3>
+<p id="r-7296212" data-claire-element-id="31809684">Les <strong>instructions if/elif/else</strong> vous permettent de définir des conditions multiples. Le mot-clé <code data-claire-semantic="text">
+<strong>elif</strong>
+</code> vous permet d’ajouter autant de conditions que vous voulez. Vous devez ensuite terminer avec une instruction <strong>else</strong>.</p>
+<p id="r-7296213" data-claire-element-id="31743724">Disons que vous voulez aller à la plage s’il fait chaud dehors, et que vous voulez faire un bonhomme de neige s’il neige. Et sinon, vous restez à la maison. Vous pouvez coder tout ça avec la syntaxe ci-dessous :</p>
+<pre id="r-7296214" data-claire-element-id="31778659">
+<code data-claire-semantic="python">ensoleille = False
+neige = True
+
+if ensoleille:
+   print(&quot;on va à la plage !&quot;)
+elif neige:
+   print(&quot;on fait un bonhomme de neige&quot;)
+else:
+   print(&quot;on reste à la maison !&quot;)</code>
+</pre>
+<p id="r-7296217" data-claire-element-id="31809685">Ce code va vérifier si <code data-claire-semantic="text">ensoleille</code> est vrai, et parce que c’est faux, il va vérifier si  <code data-claire-semantic="text">neige</code> est vrai. Comme <code data-claire-semantic="text">neige</code> est vrai, le code va afficher <code data-claire-semantic="text">faire un bonhomme de neige</code>. Mais si <code data-claire-semantic="text">neige</code> était aussi faux, le programme aurait exécuté l’instruction finale <strong>else</strong> et affiché <code data-claire-semantic="text">on reste à la maison !</code>  .</p>
+<h3 id="r-7312208" data-claire-element-id="31793542">
+<strong>Définissez des conditions multiples avec des opérateurs logiques</strong>
+</h3>
+<p id="r-7296219" data-claire-element-id="31743730">Si vous voulez vérifier plusieurs conditions pour un seul résultat dans la même instruction if, vous pouvez utiliser les <strong>opérateurs logiques </strong>:</p>
+<ul id="r-7296226" data-claire-element-id="31768727">
+<li id="r-7296221" data-claire-element-id="31768722">
+<p id="r-7296220" data-claire-element-id="31768721">
+<code data-claire-semantic="text">
+<strong>and </strong>
+</code>: vérifie si deux conditions sont toutes les deux vraies.</p>
+</li>
+<li id="r-7296223" data-claire-element-id="31768724">
+<p id="r-7296222" data-claire-element-id="31768723">
+<code data-claire-semantic="text">
+<strong>or </strong>
+</code>: vérifie si <em>au moins une</em> condition est vraie.</p>
+</li>
+<li id="r-7296225" data-claire-element-id="31768726">
+<p id="r-7296224" data-claire-element-id="31768725">
+<code data-claire-semantic="text">
+<strong>not </strong>
+</code>: vérifie si une condition n’est pas vraie (c’est-à-dire fausse). </p>
+</li>
+</ul>
+<p id="r-7296227" data-claire-element-id="31743738">Ces opérateurs peuvent être combinés et mélangés selon vos besoins.</p>
+<p id="r-7296228" data-claire-element-id="31743739">Admettons que vous voulez aller à la plage seulement s’il y a du soleil <em>et </em>que c’est le weekend. Mais s’il y a du soleil et que nous sommes au milieu de la semaine, vous devez être au travail.</p>
+<pre id="r-7296229" data-claire-element-id="31778695">
+<code data-claire-semantic="python">avec_soleil = True
+en_semaine = False
+
+if avec_soleil and not en_semaine:
+   print(&quot;on va à la plage !&quot;)
+elif avec_soleil and en_semaine:
+   print(&quot;on va au travail !&quot;)
+else:
+   print(&quot;on reste à la maison !&quot;)</code>
+</pre>
+<h3 id="r-7312210" data-claire-element-id="31809706">
+<strong>Définissez des conditions complexes avec des expressions comparatives</strong>
+</h3>
+<p id="r-7296232" data-claire-element-id="31743743">Les expressions comparatives vous permettent de comparer différentes expressions entre elles et d’évaluer si une expression est vraie ou fausse.</p>
+<p id="r-7296233" data-claire-element-id="31809687">Si vous avez deux valeurs, <code data-claire-semantic="text">
+<strong>a</strong>
+</code> et <code data-claire-semantic="text">
+<strong>b</strong>
+</code>, vous pouvez utiliser les opérateurs de comparaison suivants dans Python : </p>
+<ul id="r-7296246" data-claire-element-id="31778709">
+<li id="r-7296235" data-claire-element-id="31778698">
+<p id="r-7296234" data-claire-element-id="31778697">Égal à : a  <code data-claire-semantic="text">==</code>  b</p>
+</li>
+<li id="r-7296237" data-claire-element-id="31778700">
+<p id="r-7296236" data-claire-element-id="31778699">Non égal à : a  <code data-claire-semantic="text"> !=</code>  b</p>
+</li>
+<li id="r-7296239" data-claire-element-id="31778702">
+<p id="r-7296238" data-claire-element-id="31778701">Moins que : a  <code data-claire-semantic="text">&lt;</code>  b</p>
+</li>
+<li id="r-7296241" data-claire-element-id="31778704">
+<p id="r-7296240" data-claire-element-id="31778703">Moins que ou égal à : a  <code data-claire-semantic="text">&lt;=</code>  b</p>
+</li>
+<li id="r-7296243" data-claire-element-id="31778706">
+<p id="r-7296242" data-claire-element-id="31778705">Plus que : a  <code data-claire-semantic="text">&gt;</code>  b</p>
+</li>
+<li id="r-7296245" data-claire-element-id="31778708">
+<p id="r-7296244" data-claire-element-id="31778707">Plus que ou égal à : a  <code data-claire-semantic="text">&gt;=</code>  b </p>
+</li>
+</ul>
+<p id="r-7296247" data-claire-element-id="31743758">Par exemple :</p>
+<pre id="r-7296248" data-claire-element-id="31778752">
+<code data-claire-semantic="python">nombre_de_sieges = 30
+nombre_dinvites = 25
+
+if nombre_dinvites &lt; nombre_de_sieges:
+   # autoriser plus d’invités
+else: 
+   # ne pas autoriser plus d’invités</code>
+</pre>
+<aside id="r-7312235" data-claire-element-id="31809688" data-claire-semantic="information">
+<p id="r-7296250" data-claire-element-id="31778753">Attention à ne pas vous tromper avec le comparateur « égal à »  <code data-claire-semantic="text">==</code>. Quand vous testez si une variable est égale à une autre, vous devez utiliser<code data-claire-semantic="text">==</code>au lieu de  <code data-claire-semantic="text">=</code>. Quand vous voulez assigner une valeur à une variable, vous devez utiliser un « égal à »  <code data-claire-semantic="text">=</code>. </p>
+<p id="r-7296252" data-claire-element-id="31743763">Assigner à une variable :</p>
+<div id="r-7312229" data-claire-element-id="31778783">
+<pre id="r-7312242" data-claire-element-id="31778782">
+<code data-claire-semantic="python"> nombre_de_sieges = 30</code>
+</pre>
+</div>
+<p id="r-7296256" data-claire-element-id="31778784">Tester si  <code data-claire-semantic="text">nombre_de_sieges</code>  est égal à 30 :</p>
+<pre id="r-7312243" data-claire-element-id="31778785">
+<code data-claire-semantic="python">nombre_de_sieges == 30</code>
+</pre>
+</aside>
+<p id="r-7296262" data-claire-element-id="31743773">Vous pouvez mélanger et combiner autant de ces outils que vous voulez pour avoir du code et des fonctionnalités plus complexes.</p>
+<h4 id="r-7312263" data-claire-element-id="31778833">
+<strong>Remarque rapide sur les indentations :</strong>
+</h4>
+<p id="r-7296264" data-claire-element-id="31743775">Vous avez vu un format spécifique d’indentation dans les exemples de code précédents. Après une instruction if, tout le code qui suit doit être indenté, c’est-à-dire qu’il doit être décalé par rapport à la marge. Sinon Python ne fait pas la différence entre l’instruction et le code à exécuter.</p>
+<h3 id="r-7312264" data-claire-element-id="31778839">
+<strong>À vous de jouer ! </strong>
+</h3>

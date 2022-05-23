@@ -1,0 +1,59 @@
+<h3 id="r-7312596" data-claire-element-id="31823186">
+<strong>C’est quoi les packages ?</strong>
+</h3>
+<p id="r-7296689" data-claire-element-id="31744544">Un <strong>package</strong> (une bibliothèque en français) est une collection de fonctions qui peuvent être ajoutées au code Python et appelées au besoin, comme n’importe quelle autre fonction. Il n’y a aucune raison de réécrire du code pour réaliser une tâche standard. Avec les packages, vous pouvez importer des fonctions préexistantes et étendre efficacement les fonctionnalités de votre code.</p>
+<p id="r-7296690" data-claire-element-id="31744545">Voici quelques exemples de packages populaires et leurs fonctions :</p>
+<ul id="r-7296697" data-claire-element-id="31823185">
+<li id="r-7296692" data-claire-element-id="31823122">
+<p id="r-7296691" data-claire-element-id="31823121">
+<strong>
+<a href="https://fr.python-requests.org/en/latest/">Requests</a>
+</strong>: un package HTTP élégant et simple pour Python. Fréquemment utilisé pour les appels d’interface REST. </p>
+</li>
+<li id="r-7296694" data-claire-element-id="31823182">
+<p id="r-7296693" data-claire-element-id="31823181">
+<strong>
+<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup</a> </strong>(ressource anglais) : un package pour récupérer des données de fichiers HTML et XML.  </p>
+</li>
+<li id="r-7296696" data-claire-element-id="31823184">
+<p id="r-7296695" data-claire-element-id="31823183">
+<strong>
+<a href="https://pandas.pydata.org/">Pandas</a> </strong>(ressource anglais)<strong> </strong>: un outil open source rapide, puissant et accessible pour l’analyse et la manipulation de données. </p>
+</li>
+</ul>
+<p id="r-7296698" data-claire-element-id="31744701">Des milliers de packages Python sont disponibles pour votre code !</p>
+<h3 id="r-7312598" data-claire-element-id="31823188">
+<strong>Installez les packages avec Pip</strong>
+</h3>
+<p id="r-7296700" data-claire-element-id="31744555">Pip est un gestionnaire de packages Python.</p>
+<div id="r-7296761" data-claire-element-id="31744703" data-claire-semantic="question">
+<p id="r-7296701" data-claire-element-id="31744556">Qu’est-ce qu’un gestionnaire de packages ?</p>
+</div>
+<p id="r-7296702" data-claire-element-id="31744704">Un <strong>gestionnaire de packages</strong> est un outil qui permet d’installer et de gérer des packages supplémentaires dans votre terminal. Pip est déjà installé dans Python, comme ça vous êtes prêt à vous y mettre !</p>
+<p id="r-7296703" data-claire-element-id="31744558">Pour installer un package avec pip dans votre terminal, utilisez la méthode suivante :</p>
+<pre id="r-7296762" data-claire-element-id="31744705">
+<code data-claire-semantic="python">pip install &lt;nom-du-package&gt;</code>
+</pre>
+<p id="r-7296771" data-claire-element-id="31744732">Pour voir les packages déjà installés, vous pouvez écrire le code qui suit :</p>
+<pre id="r-7296763" data-claire-element-id="31744706">
+<code data-claire-semantic="python">pip freeze</code>
+</pre>
+<p id="r-7296709" data-claire-element-id="31744564">Il va afficher une liste de tous les packages existants, qu’on appelle dépendances, dans votre terminal.</p>
+<p id="r-7296710" data-claire-element-id="31744565">Regardez la capture vidéo ci-dessous pour savoir comment installer et voir vos packages Python avec pip !</p>
+<h3 id="r-7312587" data-claire-element-id="31822455">
+<strong>Importez les packages dans votre code</strong>
+</h3>
+<p id="r-7296713" data-claire-element-id="31744709">Pour <em>importer</em> une fonctionnalité du package dans votre code, utilisez le mot-clé  <code data-claire-semantic="text">import</code>  . (C’est surprenant je sais 😄 )</p>
+<p id="r-7296714" data-claire-element-id="31769421">En utilisant le mot-clé  <code data-claire-semantic="text">import</code>  tout en haut de votre fichier de code, vous pourrez importer certaines fonctions d’un package ou le package entier d’un coup. Par exemple, pour importer le package <strong>Requests </strong>entier, vous devez d’abord installer <strong>Requests</strong> avec votre terminal en utilisant  <code data-claire-semantic="text">pip install requests</code>. Ensuite vous pouvez écrire le code suivant dans votre éditeur de texte : </p>
+<pre id="r-7296765" data-claire-element-id="31744711">
+<code data-claire-semantic="python">import requests</code>
+</pre>
+<p id="r-7296717" data-claire-element-id="31822453">Après, pour appeler la fonction <code data-claire-semantic="text">get()</code>dans le package Requests, écrivez :</p>
+<pre id="r-7296766" data-claire-element-id="31744713">
+<code data-claire-semantic="python">requests.get()</code>
+</pre>
+<p id="r-7296720" data-claire-element-id="31822454">Si vous voulez importer une seule fonction appelée <code data-claire-semantic="text">get</code> à partir du package Requests, écrivez ceci :</p>
+<pre id="r-7296767" data-claire-element-id="31744715">
+<code data-claire-semantic="python">from requests import get</code>
+</pre>
+<p id="r-7296723" data-claire-element-id="31822445">Maintenant vous n’avez plus besoin d’écrire <em>requests</em> avant <code data-claire-semantic="text">get()</code>parce que la méthode elle-même a déjà été importée.</p>

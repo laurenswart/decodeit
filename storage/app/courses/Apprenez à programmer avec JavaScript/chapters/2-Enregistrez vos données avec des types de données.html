@@ -1,0 +1,98 @@
+<p id="r-7179857" data-claire-element-id="31480473">Une variable est composée de plusieurs éléments. Découvrons le type !</p>
+<h3 id="r-7178155" data-claire-element-id="31478982">
+<strong>Qu'est-ce qu'un type ?</strong>
+</h3>
+<p id="r-7178082" data-claire-element-id="31478981">Le <strong>type</strong> d'une variable ou d'une constante est tout simplement le genre des données qu'elle enregistre. En JavaScript, il y a trois types primitifs principaux :</p>
+<ul id="r-7178089" data-claire-element-id="31476539">
+<li id="r-7178084" data-claire-element-id="31476534">
+<p id="r-7178083" data-claire-element-id="31476533">number (nombre) ;</p>
+</li>
+<li id="r-7178086" data-claire-element-id="31476536">
+<p id="r-7178085" data-claire-element-id="31476535">string (chaîne de caractères) ;</p>
+</li>
+<li id="r-7178088" data-claire-element-id="31476538">
+<p id="r-7178087" data-claire-element-id="31476537">boolean (valeur logique).</p>
+</li>
+</ul>
+<div id="r-7178156" data-claire-element-id="31476611" data-claire-semantic="question">
+<p id="r-7178090" data-claire-element-id="31476540">
+<em>Qu'est-ce qu'un type primitif ?</em>
+</p>
+</div>
+<p id="r-7178091" data-claire-element-id="31476541">Les types primitifs sont les briques de base de chaque structure de données en JavaScript. Peu importe la complexité finale de votre application, à sa base se trouveront ces trois types primitifs.</p>
+<p id="r-7178092" data-claire-element-id="31476542">Bien qu'il ne soit pas nécessaire de déclarer le type d'une variable en JavaScript (plus de détails à ce sujet un peu plus tard), il est important de comprendre leur existence et leur importance.</p>
+<h3 id="r-7178158" data-claire-element-id="31786606">
+<strong>Découvrez le type &quot;number&quot;</strong>
+</h3>
+<p id="r-7178093" data-claire-element-id="31476621">Toutes les variables que vous avez créées jusqu'à maintenant dans ce cours étaient du type  <code data-claire-semantic="text">number</code>  (<em>nombre</em>, en français).  Comme vous l'avez vu, elles peuvent être manipulées de nombreuses façons.</p>
+<p id="r-7178095" data-claire-element-id="31476622">Les variables de type   <code data-claire-semantic="text">number</code>  peuvent être positives ou négatives. Elles peuvent aussi être des nombres entiers (1, 2, 3, etc.) ou décimaux (1,4 ; 67,34 ; etc.).</p>
+<aside id="r-7178161" data-claire-element-id="31476623" data-claire-semantic="information">
+<p id="r-7178096" data-claire-element-id="31476546">En programmation, les nombres entiers sont aussi appelés <strong>
+<em>entiers</em>
+</strong>
+<strong> ou </strong>
+<strong>
+<em>integers</em>
+</strong> ; les nombres avec des chiffres après la virgule sont aussi appelés <em>nombres en </em>
+<strong>
+<em>virgule flottante</em>
+</strong>
+<strong> ou </strong>
+<strong>
+<em>floating-point</em>
+</strong>.</p>
+</aside>
+<h4 id="r-7178157" data-claire-element-id="31786603">
+<strong>Attention à l'arithmétique en virgule flottante !</strong>
+</h4>
+<p id="r-7178097" data-claire-element-id="31476547">L'arithmétique en virgule flottante peut déclencher des erreurs très gênantes dans tous les langages de programmation :</p>
+<pre id="r-7178166" data-claire-element-id="31786602">
+<code data-claire-semantic="javascript">let integerCalculation = 1 + 2;  // donne 3
+let weirdCalculation = 0.1 + 0.2;  // on attend 0.3, réponse réelle 0.30000000000000004</code>
+</pre>
+<p id="r-7178102" data-claire-element-id="31476552">Chaque fois que c'est possible, utilisez plutôt des calculs entiers (pour le calcul de prix, vous pouvez par exemple calculer en centimes, et non pas en euros ou en dollars).</p>
+<h4 id="r-7178112" data-claire-element-id="31786605">
+<strong>Appréhendez les valeurs logiques</strong>
+</h4>
+<p id="r-7178105" data-claire-element-id="31476651">Les valeurs logiques (booleans) sont le plus simple des types primitifs : elles ne peuvent avoir que deux valeurs,   <code data-claire-semantic="text">true</code>  ou   <code data-claire-semantic="text">false</code>  (vrai ou faux). Elles s'utilisent dans toutes sortes de cas : pour indiquer si un utilisateur est connecté ou non, si une case est cochée ou non, ou si un ensemble de conditions particulières est réuni.</p>
+<p id="r-7178107" data-claire-element-id="31476652">Les variables de type boolean peuvent avoir une des deux valeurs   <code data-claire-semantic="text">true</code>  ou   <code data-claire-semantic="text">false</code>  .</p>
+<pre id="r-7178171" data-claire-element-id="31786604">
+<code data-claire-semantic="javascript">let userIsSignedIn = true;
+let userIsAdmin = false;</code>
+</pre>
+<h3 id="r-7178176" data-claire-element-id="31820863">
+<strong>Découvrez les chaînes de caractères</strong>
+</h3>
+<p id="r-7178113" data-claire-element-id="31478991">Les chaînes de caractères (chaînes, ou <em>strings</em>, en anglais) sont la façon d'enregistrer du <strong>texte</strong> dans des variables JavaScript. On peut enregistrer dans une variable de type string  n'importe quelle chaîne de caractères, allant d'une seule lettre à un très grand nombre de lettres (plus de 134 millions, même dans des navigateurs anciens).</p>
+<p id="r-7178115" data-claire-element-id="31478992">Les variables de type string sont encadrées par des guillemets simples ou doubles –<code data-claire-semantic="text">'</code>  ou   <code data-claire-semantic="text">&quot;</code>  :</p>
+<pre id="r-7178181" data-claire-element-id="31786612">
+<code data-claire-semantic="javascript">let firstName = &quot;Will&quot;;
+let lastName = 'Alexander';</code>
+</pre>
+<p id="r-7178120" data-claire-element-id="31476701">Les chaînes peuvent aussi être <strong>concaténées</strong> (ajoutées à la fin l'une de l'autre) par l'opérateur   <code data-claire-semantic="text">+</code>  :</p>
+<pre id="r-7178186" data-claire-element-id="31476702">
+<code data-claire-semantic="javascript">let wholeName = firstName + &quot; &quot; + lastName;  // valeur: &quot;Will Alexander&quot;</code>
+</pre>
+<p id="r-7180097" data-claire-element-id="31481122">
+</p>
+<p id="r-7180098" data-claire-element-id="31820862">Il est possible depuis quelques années d’utiliser une nouvelle écriture qui simplifie la concaténation des variables et des chaînes de caractère : <strong>la string interpolation</strong>. Pour créer une string interpolation on écrit du texte encadrée par le signe  <code data-claire-semantic="text"> `</code>  et si on veut injecter une variable dans ce code on utilise l’expression  <code data-claire-semantic="text">${maVariable}. </code>
+</p>
+<p id="r-7180099" data-claire-element-id="31481124">Un exemple vaut mieux que de longs discours :</p>
+<pre id="r-7180100" data-claire-element-id="31820052">
+<code data-claire-semantic="javascript">const myName = `Alexander`;
+const salutation = `Bienvenue sur mon site ${myName}!`;
+console.log(salutation);   //retournera “Bienvenue sur mon site Alexander!” </code>
+</pre>
+<p id="r-7180101" data-claire-element-id="31481126">
+</p>
+<aside id="r-7180103" data-claire-element-id="31481128" data-claire-semantic="information">
+<p id="r-7180102" data-claire-element-id="31481127">Il existe d'autres opérateurs plus évolués pour les chaînes ; nous les explorerons dans les chapitres suivants.</p>
+</aside>
+<h3 id="r-7178196" data-claire-element-id="31476742">
+<strong>Comprenez les types en JavaScript</strong>
+</h3>
+<p id="r-7178139" data-claire-element-id="31476589">JavaScript est un langage dit <em>à types dynamiques et à </em>
+<strong>
+<em>typage faible</em>
+</strong>. Cela signifie que vous pouvez initialiser une variable en tant que nombre, puis la réaffecter comme chaîne, ou tout autre type de variable. Ceci offre une grande souplesse, mais peut aussi conduire à un comportement inattendu si vous opérez sans précaution.</p>
+<p id="r-7178140" data-claire-element-id="31476590">La morale de l'histoire : prenez garde aux types de vos variables, et en général, utilisez des constantes chaque fois que c'est possible.</p>

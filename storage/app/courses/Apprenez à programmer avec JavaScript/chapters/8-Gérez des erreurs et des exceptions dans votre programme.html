@@ -1,0 +1,85 @@
+<p id="r-7179912" data-claire-element-id="31480612">Ne pas faire d'erreur lorsque l'on code est pratiquement impossible. Dans ce chapitre, vous allez découvrir les différents types d'erreur.</p>
+<h3 id="r-7179540" data-claire-element-id="32830488">
+<strong>Découvrez trois types d'erreur</strong>
+</h3>
+<p id="r-7179237" data-claire-element-id="31478642">En JavaScript, comme dans beaucoup d'autres langages de programmation, on distingue généralement trois types d'erreur.</p>
+<h4 id="r-7179537" data-claire-element-id="32830485">
+<strong>Appréhendez les erreurs de syntaxe</strong>
+</h4>
+<p id="r-7179239" data-claire-element-id="31479424">Les erreurs de <strong>syntaxe</strong> (ou <em>erreurs d'</em>
+<strong>
+<em>analyse</em>
+</strong>) surviennent quand vous avez fait une faute d'écriture dans votre code. Il peut s'agir de l'oubli ou de l'ajout d'un crochet ou d'une accolade, d'une faute d'orthographe sur un mot clé, <em>else</em> ou <em>switch</em>, par exemple. Elles sont généralement assez faciles à corriger (même si vous pouvez passer beaucoup de temps à retrouver les parenthèses manquantes !), et beaucoup d'éditeurs de texte ou d'environnements de développement intégrés mettent automatiquement en évidence les erreurs de syntaxe.</p>
+<aside id="r-7179532" data-claire-element-id="31479434" data-claire-semantic="information">
+<p id="r-7179240" data-claire-element-id="31478645">Un environnement de développement intégré ou <strong>
+<em>IDE</em>
+</strong> (<strong>I</strong>ntegrated <strong>D</strong>evelopment <strong>E</strong>nvironment) est un logiciel fournissant un ensemble d'outils aux développeurs. Il est généralement spécifique à un langage, à une architecture ou à un domaine, et certains sont gratuits (par exemple Visual Studio Code), alors que d'autres ne le sont pas (par exemple la suite JetBrains).</p>
+</aside>
+<p id="r-7179241" data-claire-element-id="31479435">Voici quelques exemples d'erreurs de syntaxe – pourrez-vous les trouver ?</p>
+<pre id="r-7179342" data-claire-element-id="32830484">
+<code data-claire-semantic="javascript">if (seatsRemaining) {
+    passengersBoarded+;
+}
+
+while (seatsRemaining &gt; 0 {
+    passengersBoarded++;
+}
+
+if (seatsRemaining &gt; 0) {
+    passengersBoarded++;
+} else {
+    passengersStillToBoard = 0;</code>
+</pre>
+<aside id="r-7179533" data-claire-element-id="31479436" data-claire-semantic="information">
+<p id="r-7179262" data-claire-element-id="31478667">Solutions : 1) il manque un +, 2) la parenthèse n'est pas fermée, 3) l'accolade n'est pas fermée !</p>
+</aside>
+<h4 id="r-7179538" data-claire-element-id="32830487">
+<strong>Découvrez les erreurs logiques</strong>
+</h4>
+<p id="r-7179264" data-claire-element-id="31478669">Les erreurs logiques sont un peu plus vicieuses. Elles surviennent quand vous avez fait des erreurs dans la logique de votre programme. Voici quelques exemples :</p>
+<ul id="r-7179271" data-claire-element-id="31478855">
+<li id="r-7179266" data-claire-element-id="31478671">
+<p id="r-7179265" data-claire-element-id="31478670">affectation d'une valeur erronée à une variable ;</p>
+</li>
+<li id="r-7179268" data-claire-element-id="31478854">
+<p id="r-7179267" data-claire-element-id="31478853">mélange de conditions dans les instructions   <code data-claire-semantic="text">if</code>  ;</p>
+</li>
+<li id="r-7179270" data-claire-element-id="31478675">
+<p id="r-7179269" data-claire-element-id="31478674">ordre incorrect d'écriture des lignes ou des blocs de code.</p>
+</li>
+</ul>
+<p id="r-7179272" data-claire-element-id="31478677">Avec ce genre d'erreur, votre programme pourra avoir un comportement inattendu dans le meilleur des cas, ou planter dans le pire des cas ! Les erreurs logiques sont aussi plus difficiles à trouver et à corriger parce que le code n'est pas faux ; il ne fait simplement pas ce que vous souhaitez qu'il fasse !</p>
+<p id="r-7179273" data-claire-element-id="31478678">Exemple d’un code avec une erreur de logique :</p>
+<pre id="r-7179331" data-claire-element-id="32830486">
+<code data-claire-semantic="javascript">//On simule avoir 22 ans donc être majeur
+const monAge = 22;
+
+if(monAge &lt; 18) {
+    console.log(&quot;vous êtes majeur&quot;);
+}else{
+    console.log(&quot;vous êtes mineur&quot;);
+}</code>
+</pre>
+<p id="r-7179281" data-claire-element-id="31479453">Le code a pour objectif d’afficher “vous êtes majeur” quand vous avez 18 ans ou plus, ou alors “vous êtes mineur” si vous avez moins de 18 ans. Mais ce code comporte une erreur de logique sur la condition if et affiche “vous êtes mineur” alors que l'âge de comparaison est 22 ans. La difficulté ici est que rien ne vous indiquera que c’est une erreur de logique. Seules l’analyse et la relecture de votre code permettront de déceler le souci.</p>
+<h4 id="r-7179539" data-claire-element-id="31785940">
+<strong>Gérez les erreurs d'exécution</strong>
+</h4>
+<p id="r-7179284" data-claire-element-id="31478689">Les erreurs d'exécution sont un peu différentes. Elles tendent à survenir quand quelque chose d'inattendu se produit dans votre application. Il s'agit souvent de quelque chose associé aux ressources extérieures (connexions réseau, appareils physiques, etc.) ou à une saisie/erreur humaine.</p>
+<p id="r-7179285" data-claire-element-id="31478690">Mais il y a des situations où vous savez par avance que ce type d'erreur est susceptible de survenir. Dans ces situations, vous pouvez prévoir du code de <strong>traitement d'erreur</strong>. De cette façon, une erreur ne fera pas planter votre programme, et pourra être corrigée.</p>
+<p id="r-7179286" data-claire-element-id="31478782">Une façon de traiter les erreurs potentielles consiste à utiliser une instruction   <code data-claire-semantic="text">if</code>  /  <code data-claire-semantic="text">else</code>  pour vérifier la validité des données :</p>
+<pre id="r-7179326" data-claire-element-id="31785938">
+<code data-claire-semantic="javascript">if (dataExists &amp;&amp; dataIsValid) {
+// utiliser les données ici
+} else {
+// gérer l'erreur ici
+}</code>
+</pre>
+<p id="r-7179297" data-claire-element-id="31478751">Vous pouvez aussi utiliser des blocs   <code data-claire-semantic="text">try</code>  /  <code data-claire-semantic="text">catch</code>  pour essayer (<strong>try</strong>) un code pouvant potentiellement renvoyer une erreur, et détecter (<strong>catch</strong>) les erreurs éventuelles survenues :</p>
+<pre id="r-7179321" data-claire-element-id="31785939">
+<code data-claire-semantic="javascript">try {
+// code susceptible à l'erreur ici
+} catch (error) {
+// réaction aux erreurs ici
+}</code>
+</pre>
+<p id="r-7180134" data-claire-element-id="31481206">Quand vous aurez plus d'expérience en développement JavaScript, vous saurez où les erreurs peuvent survenir, et comment vous y préparer et les traiter correctement.</p>

@@ -1,0 +1,89 @@
+<p id="r-7179882" data-claire-element-id="31480543">Imaginez que vous soyez responsable de la communication d'un théâtre à la mode. Une de vos responsabilités essentielles est la gestion du premier rang, qui revient à s'assurer que les amis et connaissances des artistes, ainsi que d'autres VIP, aient la meilleure vision du spectacle.</p>
+<p id="r-7178477" data-claire-element-id="31477232">Si vous n'aviez à gérer que deux invitations pour l'artiste principal, vous pourriez imaginer utiliser seulement deux variables avec les noms des invités. Le code pourrait se présenter comme ceci :</p>
+<pre id="r-7178591" data-claire-element-id="31786972">
+<code data-claire-semantic="javascript">let firstFrontRowGuest;
+let secondFrontRowGuest;</code>
+</pre>
+<p id="r-7178482" data-claire-element-id="31477237">Ensuite, quand l'artiste vous donne l'information, vous pourriez vous contenter d'affecter un nom à chaque variable. Par exemple, vous pourriez avoir :</p>
+<pre id="r-7178596" data-claire-element-id="31786973">
+<code data-claire-semantic="javascript">firstFrontRowGuest = &quot;Sarah Kate&quot;;
+secondFrontRowGuest = &quot;Audrey Simon&quot;;</code>
+</pre>
+<p id="r-7178487" data-claire-element-id="31477242">Mais si le premier rang a 30 sièges ? Ne serait-il pas plus facile d'utiliser une seule variable contenant toutes ces informations ?</p>
+<p id="r-7178488" data-claire-element-id="31477243">Il existe un type pour cela en JavaScript : le <strong>tableau (array)</strong>.</p>
+<h3 id="r-7178608" data-claire-element-id="31786975">
+<strong>Utilisez un tableau pour enregistrer une liste ordonnée d'éléments</strong>
+</h3>
+<p id="r-7178490" data-claire-element-id="31477391">Pour créer un tableau vide et l'enregistrer dans une variable, utilisez une paire de crochets :</p>
+<pre id="r-7178601" data-claire-element-id="31477392">
+<code data-claire-semantic="javascript">let guests = [];</code>
+</pre>
+<p id="r-7178493" data-claire-element-id="31477393">Vous pouvez aussi créer un tableau rempli en plaçant les éléments voulus à l'intérieur de ces crochets :</p>
+<pre id="r-7178602" data-claire-element-id="31477394">
+<code data-claire-semantic="javascript">let guests = [&quot;Sarah Kate&quot;, &quot;Audrey Simon&quot;, &quot;Will Alexander&quot;];</code>
+</pre>
+<p id="r-7178496" data-claire-element-id="31477251">Vous pouvez ensuite accéder aux éléments de ce tableau par leur indice :</p>
+<pre id="r-7178603" data-claire-element-id="31786974">
+<code data-claire-semantic="javascript">let firstGuest = guests[0]; // &quot;Sarah Kate&quot;
+let thirdGuest = guests[2]; // &quot;Will Alexander&quot;
+let undefinedGuest = guests[12] // undefined</code>
+</pre>
+<aside id="r-7178606" data-claire-element-id="31477411" data-claire-semantic="warning">
+<p id="r-7178503" data-claire-element-id="31477258">N'oubliez pas de démarrer à l'indice  0  !</p>
+</aside>
+<h3 id="r-7178609" data-claire-element-id="32830423">
+<strong>Utilisez des valeurs plutôt que des références</strong>
+</h3>
+<p id="r-7178517" data-claire-element-id="31477272">En JavaScript, les types primitifs tels que les nombres, les valeurs logiques et les chaînes sont passés par <strong>valeur</strong>. Ceci signifie que quand vous faites quelque chose comme :</p>
+<pre id="r-7178611" data-claire-element-id="31786976">
+<code data-claire-semantic="javascript">let numberOfGuests = 20;
+let totalNumberOfGuests = numberOfGuests; // 20</code>
+</pre>
+<p id="r-7178522" data-claire-element-id="31477433">... c'est la <strong>valeur</strong> 20 qui est copiée dans la nouvelle variable (totalNumberOfGuests), et aucun lien n'est maintenu entre les deux variables.</p>
+<p id="r-7178523" data-claire-element-id="31477278">Ce n'est pas le cas avec les objets et tableaux, qui sont passés par <strong>référence</strong>. Si vous n'y prenez pas garde, cela peut conduire à des comportements inattendus. Par exemple :</p>
+<pre id="r-7178613" data-claire-element-id="32830422">
+<code data-claire-semantic="javascript">let artistProfile = {
+    name: &quot;Tao Perkington&quot;,
+    age: 27,
+    available: true
+};
+let allProfiles = [artistProfile]; // nouveau tableau contenant l'objet ci-dessus
+artistProfile.available = false; // modification de l'objet
+console.log(allProfiles) // affiche { nom: &quot;Tao Perkington&quot;, âge: 27, disponible: false }</code>
+</pre>
+<p id="r-7178540" data-claire-element-id="31536142">Bien que nous ayons créé le tableau et passé l'objet <strong>avant</strong> la modification de cet objet, vous la voyez dans le tableau. C'est parce que quand on utilise des tableaux et des objets, on passe des <strong>références</strong> aux objets plutôt que la valeur des données qu'ils contiennent. Les variables<code data-claire-semantic="text">artistProfile</code>et  <code data-claire-semantic="text">allProfiles</code> présentées ci-dessus contiennent des références à l'objet et au tableau en mémoire.</p>
+<p id="r-7178541" data-claire-element-id="31477296">Cela peut sembler un peu compliqué à comprendre, mais avec la pratique, vous vous y ferez !</p>
+<aside id="r-7178616" data-claire-element-id="31477441" data-claire-semantic="information">
+<p id="r-7178542" data-claire-element-id="31477297">Pour en savoir plus sur les types à passage par valeur et les types à passage par référence en JavaScript, <a href="https://codeburst.io/explaining-value-vs-reference-in-javascript-647a975e12a0">
+<strong>voici un article</strong>
+</a> (en anglais) que je trouve très bien écrit et facile à comprendre.</p>
+</aside>
+<h3 id="r-7178623" data-claire-element-id="31786981">
+<strong>Travaillez sur les tableaux</strong>
+</h3>
+<p id="r-7178544" data-claire-element-id="31477299">Les tableaux en JavaScript sont très puissants et ont beaucoup d'attributs et de méthodes très utiles. Voici une brève introduction à quelques-uns d'entre eux.</p>
+<h4 id="r-7178622" data-claire-element-id="31786980">
+<strong>Le comptage d'éléments</strong>
+</h4>
+<p id="r-7178546" data-claire-element-id="31479191">La propriété   <code data-claire-semantic="text">length</code>  d'un tableau indique le nombre d'éléments qu'il contient :</p>
+<pre id="r-7178617" data-claire-element-id="31786979">
+<code data-claire-semantic="javascript">let guests = [&quot;Will Alexander&quot;, &quot;Sarah Kate&quot;, &quot;Audrey Simon&quot;];
+let howManyGuests = guests.length; // 3</code>
+</pre>
+<p id="r-7178551" data-claire-element-id="31477445">Utilisez la notation dot pour accéder à la propriété   <code data-claire-semantic="text">length</code>  de votre tableau. Ce n'est peut-être pas très utile dans cet exemple (parce que nous savons combien nous avons mis d'invités dans le tableau !), mais dans beaucoup de cas, vous ne saurez pas à l'avance combien il y a d'éléments dans un tableau.</p>
+<h4 id="r-7179456" data-claire-element-id="31479202">
+<strong>L'ajout et la suppression d'éléments</strong>
+</h4>
+<p id="r-7178553" data-claire-element-id="31477308">Pour ajouter un élément à la fin d'un tableau, utilisez sa méthode push :</p>
+<pre id="r-7178619" data-claire-element-id="31477446">
+<code data-claire-semantic="javascript">guests.push(&quot;Tao Perkington&quot;); // ajoute &quot;Tao Perkington&quot; à la fin de notre tableau guests</code>
+</pre>
+<p id="r-7178556" data-claire-element-id="31477447">Vous pouvez utiliser la notation dot pour accéder à la méthode   <code data-claire-semantic="text">push</code>  du tableau, et placer l'élément à ajouter entre parenthèses.</p>
+<p id="r-7178557" data-claire-element-id="31477448">Pour ajouter votre élément au début du tableau plutôt qu'à la fin, utilisez la méthode   <code data-claire-semantic="text">unshift</code>  :</p>
+<pre id="r-7178620" data-claire-element-id="31477449">
+<code data-claire-semantic="javascript">guests.unshift(&quot;Tao Perkington&quot;); // &quot;Tao Perkington&quot; est ajouté au début du tableau guests</code>
+</pre>
+<p id="r-7178560" data-claire-element-id="31477450">Pour supprimer le dernier élément d'un tableau, appelez sa méthode  <code data-claire-semantic="text">pop</code>  , sans passer aucun argument :</p>
+<pre id="r-7178621" data-claire-element-id="31477451">
+<code data-claire-semantic="javascript">guests.pop(); // supprimer le dernier élément du tableau</code>
+</pre>

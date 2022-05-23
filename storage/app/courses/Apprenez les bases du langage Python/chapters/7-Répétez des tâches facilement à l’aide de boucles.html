@@ -1,0 +1,79 @@
+<h3 id="r-7312287" data-claire-element-id="31778882">
+<strong>Quand utiliser des boucles</strong>
+</h3>
+<p id="r-7296291" data-claire-element-id="31743811">En programmation, il y a des ensembles d’instructions qu’il faut répéter plusieurs fois. Par exemple, si vous voulez réaliser une même tâche sur tous les éléments d’une liste. Et si vous avez une liste de campagnes et que vous voulez les afficher toutes ?</p>
+<p id="r-7296292" data-claire-element-id="31743812">Quand vous avez besoin de répéter un ensemble d’instructions, parfois vous savez combien de fois vous allez le répéter, d’autres fois vous ne savez pas. Parfois, le nombre de répétitions n’est pas important et vous voulez répéter le code jusqu’à ce qu’une certaine condition soit remplie.</p>
+<p id="r-7296293" data-claire-element-id="31743813">Pour tous ces usages, vous allez utiliser des <strong>boucles</strong>.<strong> </strong>
+</p>
+<h3 id="r-7312290" data-claire-element-id="31809018">
+<strong>La boucle </strong>
+<code data-claire-semantic="text">
+<strong>for</strong>
+</code>
+</h3>
+<p id="r-7296295" data-claire-element-id="31768901">La <strong>boucle </strong>
+<code data-claire-semantic="text">
+<strong>for</strong>
+</code>est le type de boucle centrale dans Python. Une boucle  <code data-claire-semantic="text">for</code>  est utilisée pour itérer sur une séquence. Ça peut être une liste, un tuple, un dictionnaire ou même une chaîne de caractères. Avec une boucle<code data-claire-semantic="text">for</code>, vous pouvez exécuter le même code pour chaque élément dans cette séquence. </p>
+<p id="r-7296296" data-claire-element-id="31743816">Avec Python, c’est très facile de créer des boucles. Si vous voulez afficher tous les éléments dans une liste, le code ressemblera à ça :</p>
+<pre id="r-7296371" data-claire-element-id="31809012">
+<code data-claire-semantic="python">races_de_chien = [&quot;golden retriever&quot;, &quot;chihuahua&quot;, &quot;terrier&quot;, &quot;carlin&quot;]
+for chien in races_de_chien:
+    print(chien)</code>
+</pre>
+<p id="r-7296303" data-claire-element-id="31743934">Dans ce code, chaque élément dans  <code data-claire-semantic="text">races_de_chien</code>  sera affiché dans le terminal.  <code data-claire-semantic="text">chien</code>  est un nom de variable qui se met à jour pour être l’élément suivant à chaque fois que la boucle se répète. Vous pouvez modifier  <code data-claire-semantic="text">chien</code>  en  <code data-claire-semantic="text">cocorico</code>  et il s’exécutera toujours de la même façon, mais cela n’a pas bien d’intérêt !</p>
+<p id="r-7296307" data-claire-element-id="31778886">Vous pouvez faire le même genre de boucle<code data-claire-semantic="text">for</code>si vous voulez passer en boucle chaque caractère d’une chaîne.</p>
+<p id="r-7296308" data-claire-element-id="31768904">Pour boucler un certain nombre de fois, vous pouvez utiliser la fonction<code data-claire-semantic="text">range()</code>. Elle renverra une séquence de nombres qui vont de 0 à un nombre de fin déterminé.</p>
+<aside id="r-7296376" data-claire-element-id="31778888" data-claire-semantic="information">
+<p id="r-7296309" data-claire-element-id="31778887">Vous n’avez pas encore appris les fonctions, mais ça ne va pas tarder ! Pour l’instant, vous devez juste savoir qu’on peut saisir un nombre dans la fonction<code data-claire-semantic="text">range()</code>et qu’elle renvoie une séquence de nombres allant de 0 à ce nombre moins un.</p>
+</aside>
+<pre id="r-7296377" data-claire-element-id="31809015">
+<code data-claire-semantic="python">for x in range(5):
+    print(x)</code>
+</pre>
+<p id="r-7296314" data-claire-element-id="31743834">Ce code affichera 0, 1, 2, 3, 4 en séquence.</p>
+<pre id="r-7296379" data-claire-element-id="31809016">
+<code data-claire-semantic="python">for x in range(100):
+    print(f&quot;{x} bouteilles de bières au mur !&quot;)</code>
+</pre>
+<p id="r-7296319" data-claire-element-id="31808964">Les accolades<code data-claire-semantic="text">{}</code>ci-dessus prennent n’importe quelle valeur dans la variable  <code data-claire-semantic="text">x</code>  et la remplace (n’oubliez pas le  <code data-claire-semantic="text">“f”</code>au début de la string qui signifie<code data-claire-semantic="text">format</code>). Donc dans cet exemple, le code va afficher :</p>
+<pre id="r-7296381" data-claire-element-id="31778892">
+<code data-claire-semantic="python">0 bouteilles de bières au mur !
+1 bouteilles de bières au mur !
+…
+99 bouteilles de bières au mur !</code>
+</pre>
+<p id="r-7296328" data-claire-element-id="31808965">La fonction  <code data-claire-semantic="text">range()</code>  est réglée sur 0 par défaut pour la valeur de début. Vous pouvez la modifier en ajoutant un autre nombre entier comme ça :  <code data-claire-semantic="text">range(4, 10) !</code>
+</p>
+<p id="r-7296329" data-claire-element-id="31743849">Cette plage renvoie les valeurs de 4 à 9 (sans inclure 10).</p>
+<h3 id="r-7312355" data-claire-element-id="31809023">
+<strong>La boucle </strong>
+<code data-claire-semantic="text">
+<strong>while</strong>
+</code>
+</h3>
+<p id="r-7296332" data-claire-element-id="31743953">La boucle  <code data-claire-semantic="text">for</code>  vous permet d’exécuter du code un nombre spécifique de fois, alors que la <strong>boucle </strong>
+<code data-claire-semantic="text">
+<strong>while</strong>
+</code>continue de s’exécuter jusqu’à ce qu’une certaine condition soit remplie.  </p>
+<p id="r-7296333" data-claire-element-id="31743954">
+Dans le chapitre précédent, vous avez découvert des conditions, ou instructions, qui évaluent si une expression est vraie ou fausse. C’est la même chose ici : le code dans l’instruction  <code data-claire-semantic="text">while</code>  s’exécute jusqu’à ce que la condition devienne fausse.</p>
+<p id="r-7296334" data-claire-element-id="31778895">L’extrait de code ci-dessous vérifie la capacité actuelle et l’augmente d’une unité jusqu’à ce que la capacité maximale soit atteinte (<code data-claire-semantic="text">+= 1</code>augmente la valeur actuelle de 1).</p>
+<pre id="r-7296384" data-claire-element-id="31809019">
+<code data-claire-semantic="python">capacite_maximale = 10
+capacite_actuelle = 3
+while capacite_actuelle &lt; capacite_maximale:
+    capacite_actuelle += 1</code>
+</pre>
+<p id="r-7296343" data-claire-element-id="31778936"> Comme cette  <code data-claire-semantic="text">capacite_actuelle</code>  commence à 3, ce code s’exécute 7 fois jusqu’à ce que  <code data-claire-semantic="text">capacite_actuelle</code>  atteigne 10.</p>
+<p id="r-7296347" data-claire-element-id="31808948">C’est important de connaître les <strong>boucles infinies</strong>. Si la condition que vous avez réglée est toujours vraie, la boucle va s’exécuter pour toujours !</p>
+<p id="r-7296348" data-claire-element-id="31743868">Par exemple :</p>
+<pre id="r-7296390" data-claire-element-id="31809022">
+<code data-claire-semantic="python">x = 0
+while x != 5:
+    x += 2</code>
+</pre>
+<p id="r-7296355" data-claire-element-id="31743875">Dans cette situation, x n’atteindra jamais 5 !</p>
+<h3 id="r-7312293" data-claire-element-id="31778901">
+<strong>À vous de jouer ! </strong>
+</h3>

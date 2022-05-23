@@ -1,0 +1,143 @@
+<p id="r-7179907" data-claire-element-id="31480602">En programmation, il y a des ensembles d'instructions à répéter plusieurs fois. Parfois, vous connaîtrez à l'avance le nombre de répétitions, d'autres fois non. Il est aussi possible que le nombre de fois n'importe pas, et que vous souhaitiez répéter le code jusqu'à atteindre une certaine condition. Pour tous ces cas, nous utiliserons des <strong>boucles</strong>.</p>
+<h3 id="r-7179221" data-claire-element-id="32830444">
+<strong>Utilisez la boucle for pour savoir &quot;combien de fois ?&quot;</strong>
+</h3>
+<p id="r-7179024" data-claire-element-id="31479371">Supposons que vous ayez à faire embarquer 10 passagers, et que pour l'instant vous n'accordiez pas d'importance à l'ordre de leur embarquement. Utilisez une boucle <code data-claire-semantic="text">for</code>  pour les embarquer un par un jusqu'à atteindre 10 :</p>
+<pre id="r-7179216" data-claire-element-id="31785882">
+<code data-claire-semantic="javascript">const numberOfPassengers = 10;
+for (let i = 0; i &lt; numberOfPassengers; i++) {
+   console.log(&quot;Passager embarqué !&quot;);
+}</code>
+</pre>
+<p id="r-7179033" data-claire-element-id="31479381">Pour cette boucle <code data-claire-semantic="text">for</code>  , créez une variable d'indice <code data-claire-semantic="text">i</code>  qui sert de compteur pour le nombre d'exécutions de la boucle. C'est pour cette raison qu'elle démarrera à zéro, car on n'a pas encore parcouru la boucle.</p>
+<p id="r-7179034" data-claire-element-id="31478522">La deuxième commande dans les parenthèses   <code data-claire-semantic="text">for</code>  est la condition de poursuite de la boucle : dès qu'elle s'évalue comme   <code data-claire-semantic="text">false</code>  , on quitte la boucle. Dans ce cas, vous souhaitez l'exécuter autant de fois qu'il y a de passagers, donc quand l'indice  <code data-claire-semantic="text"> i</code>  atteint 10 (après 10 boucles), vous souhaitez l'arrêter, car il n'y a plus de passager.</p>
+<p id="r-7179035" data-claire-element-id="31478523">La troisième commande demande à la boucle   <code data-claire-semantic="text">for</code>  d'incrémenter   <code data-claire-semantic="text">i</code>  (ajouter 1) à chaque exécution. C'est ce qui permet de suivre le nombre d'exécutions de la boucle.</p>
+<p id="r-7179036" data-claire-element-id="31478266">JavaScript termine la boucle avant d'exécuter tout autre code, donc si vous deviez écrire ceci :</p>
+<pre id="r-7179218" data-claire-element-id="31785885">
+<code data-claire-semantic="javascript">const numberOfPassengers = 10;
+for (let i = 0; i &lt; numberOfPassengers; i++) {
+   console.log(&quot;Passager embarqué !&quot;);
+}
+
+console.log(&quot;Tous les passagers sont embarqués !&quot;);</code>
+</pre>
+<p id="r-7179047" data-claire-element-id="31478531"> ... la dernière sortie de console s'imprimerait <em>après</em> l'embarquement des 10 passagers.</p>
+<p id="r-7179048" data-claire-element-id="31478541">Le travail sur des indices, c'est bien, mais si vous souhaitiez utiliser un tableau de passagers pour les embarquer dans un ordre précis ?</p>
+<h3 id="r-7179223" data-claire-element-id="32830450">
+<strong>Travaillez sur des tableaux :  </strong>
+<code data-claire-semantic="text">
+<strong>for</strong>
+<strong>… </strong>
+<strong>of</strong>
+</code>
+<strong> et </strong>
+<code data-claire-semantic="text">
+<strong>for</strong>
+<strong>… </strong>
+<strong>in</strong>
+</code>
+</h3>
+<p id="r-7179050" data-claire-element-id="31478280">Dans beaucoup de cas, vous aurez un tableau et devrez le parcourir, pour faire quelque chose sur chaque élément. Il peut s'agir de mettre à jour les prix sur un menu, de traiter les données d'une base de données, ou d'embarquer des passagers dans l'ordre.</p>
+<p id="r-7179051" data-claire-element-id="31478561">L'ancienne façon de parcourir un tableau dans une boucle était d'utiliser la boucle   <code data-claire-semantic="text">for</code>  vue précédemment avec sa propriété   <code data-claire-semantic="text">length</code>  . Par exemple, avec un tableau appelé   <code data-claire-semantic="text">passengers</code>  :</p>
+<pre id="r-7179211" data-claire-element-id="31785887">
+<code data-claire-semantic="javascript">for (let i = 0; i &lt; passengers.length; i++) {
+   console.log(&quot;Passager embarqué !&quot;);
+}</code>
+</pre>
+<p id="r-7179058" data-claire-element-id="31478288">Bien que ceci fonctionne, il y a deux façons plus faciles de parcourir en boucle des tableaux (ou de faire une itération sur leurs éléments).</p>
+<h4 id="r-7179222" data-claire-element-id="32830446">
+<strong>La boucle </strong>
+<code data-claire-semantic="text">
+<strong>for</strong>
+<strong>… </strong>
+<strong>in</strong>
+</code>
+</h4>
+<p id="r-7179059" data-claire-element-id="31478572">La boucle   <code data-claire-semantic="text">for…  in</code>  est très comparable à l'exemple de boucle   <code data-claire-semantic="text">for</code>  normale, mais elle est plus facile à lire, et effectue tout le travail d'itération pour vous :</p>
+<pre id="r-7179206" data-claire-element-id="32830445">
+<code data-claire-semantic="javascript">const passengers = [
+    &quot;Will Alexander&quot;,
+    &quot;Sarah Kate'&quot;,
+    &quot;Audrey Simon&quot;,
+    &quot;Tao Perkington&quot;
+]
+
+for (let i in passengers) {
+   console.log(&quot;Embarquement du passager &quot; + passengers[i]);
+}</code>
+</pre>
+<p id="r-7179078" data-claire-element-id="31479391">Comme dans l'exemple précédent,   <code data-claire-semantic="text">i</code>  démarre automatiquement à zéro, et s'incrémente à chaque boucle. Vous imprimez donc   <code data-claire-semantic="text">passengers[0]</code>  , puis  <code data-claire-semantic="text">passengers[1]</code>  , puis   <code data-claire-semantic="text">passengers[2]</code>  , etc., jusqu'à terminer l'itération sur tous les passagers. Vous pouvez bien sûr imprimer chaque élément sur la console, car chacun est une chaîne contenant le nom du passager.</p>
+<h4 id="r-7179203" data-claire-element-id="32830449">
+<strong>La boucle </strong>
+<code data-claire-semantic="text">
+<strong>for</strong>
+<strong>… </strong>
+<strong>of</strong>
+</code>
+</h4>
+<p id="r-7179080" data-claire-element-id="31478581">Pour les cas où l'indice précis d'un élément n'est pas nécessaire pendant l'itération, vous pouvez utiliser une boucle   <code data-claire-semantic="text">for… of</code>  :</p>
+<p id="r-7179081" data-claire-element-id="31478582">En reprenant l'exemple précédent et en utilisant à la place une boucle   <code data-claire-semantic="text">for… of</code>  , vous obtenez :</p>
+<pre id="r-7179201" data-claire-element-id="32830447">
+<code data-claire-semantic="javascript">const passengers = [
+    &quot;Will Alexander&quot;,
+    &quot;Sarah Kate&quot;,
+    &quot;Audrey Simon&quot;,
+    &quot;Tao Perkington&quot;
+]
+
+for (let passenger of passengers) {
+   console.log(&quot;Embarquement du passager &quot; + passenger);
+}</code>
+</pre>
+<p id="r-7179100" data-claire-element-id="31478330">Ceci produit exactement le même résultat, mais de façon plus lisible, car vous n'avez pas à vous inquiéter des indices et des tableaux : vous recevez simplement chaque élément dans l'ordre. C'est encore plus utile si le tableau est un peu plus complexe et contient par exemple des objets :</p>
+<pre id="r-7179196" data-claire-element-id="32830448">
+<code data-claire-semantic="javascript">const passengers = [
+    {
+        name: &quot;Will Alexander&quot;,
+        ticketNumber: 209542
+    },
+    
+    {
+        name: &quot;Sarah Kate&quot;,
+        ticketNumber: 169336
+    },
+    
+    {
+        name: &quot;Audrey Simon&quot;,
+        ticketNumber: 779042
+    },
+    
+    {
+        name: &quot;Tao Perkington&quot;,
+        ticketNumber: 703911
+    }
+]
+
+for (let passenger of passengers) {
+   console.log('Embarquement du passager ' + passenger.name + ' avec le ticket numéro ' + passenger.ticketNumber);
+}</code>
+</pre>
+
+<p id="r-7179156" data-claire-element-id="31478386">Ces types de boucles fonctionnent très bien pour un nombre fixe d'itérations. Mais vous ne pouvez pas toujours savoir combien de fois une boucle doit être exécutée.</p>
+<h3 id="r-7179194" data-claire-element-id="32830452">
+<strong>Utilisez la boucle</strong>
+<strong>
+<code data-claire-semantic="text">while</code>
+</strong>
+<strong>  </strong>
+</h3>
+<p id="r-7179159" data-claire-element-id="31478601">Une boucle   <code data-claire-semantic="text">while</code>  vérifie si une condition est vraie. Si c'est le cas, la boucle se poursuit ; sinon elle s'arrête. En revenant à l'exemple de l'embarquement d'avion : supposons que vous ayez des variables représentant le nombre de sièges restants et le nombre de passagers restants. Vous souhaitez continuer l'embarquement jusqu'à l'épuisement du nombre de sièges ou de passagers :</p>
+<pre id="r-7179192" data-claire-element-id="32830451">
+<code data-claire-semantic="javascript">let seatsLeft = 10;
+let passengersStillToBoard = 8;
+let passengersBoarded = 0;
+
+while (seatsLeft &gt; 0 &amp;&amp; passengersStillToBoard &gt; 0) {
+    passengersBoarded++; // un passager embarque
+    passengersStillToBoard--; // donc il y a un passager de moins à embarquer
+    seatsLeft--; // et un siège de moins
+}
+
+console.log(passengersBoarded); // imprime 8, car il y a 8 passagers pour 10 sièges</code>
+</pre>
+<p id="r-7179177" data-claire-element-id="31478611">Cette boucle   <code data-claire-semantic="text">while</code>  poursuit son exécution jusqu'à ce que l'un des nombres   <code data-claire-semantic="text">seatsLeft</code>  et   <code data-claire-semantic="text">passengersStillToBoard</code>  atteigne zéro, et à ce point elle se termine.</p>

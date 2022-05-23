@@ -1,0 +1,107 @@
+<h3 id="r-7325154" data-claire-element-id="32763084">
+<strong>Qu’est-ce qu’un dictionnaire ?</strong>
+</h3>
+<p id="r-7290746" data-claire-element-id="31735161">Parfois vous avez besoin de représenter des données plus complexes que des nombres, des chaînes ou des listes.</p>
+<p id="r-7290747" data-claire-element-id="31809662">Un dictionnaire est une structure de données qui enregistre des données dans des <strong>paires clés-valeurs.</strong>  Voici un exemple d’une clé et d’une valeur :  <code data-claire-semantic="text">responsable_de_campagne: &quot;Jeanne d'Arc&quot;</code>  . La <strong>clé</strong> est  <code data-claire-semantic="text">&quot;responsable_de_campagne&quot;</code>  et la <strong>valeur</strong> est  <code data-claire-semantic="text">&quot;Jeanne d'Arc&quot;</code>  .<strong> </strong>
+</p>
+<p id="r-7290748" data-claire-element-id="31778462">Les dictionnaires sont indiqués par des accolades<code data-claire-semantic="text">{}</code>au début et à la fin. Chaque paire clé-valeur comprend un deux-points<code data-claire-semantic="text">:</code>placé entre la clé et la valeur et une virgule <code data-claire-semantic="text"> ,</code>à la fin. Chaque dictionnaire doit être composé de clés uniques.</p>
+<p id="r-7290750" data-claire-element-id="31778463">Dans le diagramme ci-dessous, le dictionnaire défini a trois éléments et chaque élément est une paire clé-valeur.</p>
+<h3 id="r-7325156" data-claire-element-id="31809667">
+<strong>Créez un dictionnaire</strong>
+</h3>
+<p id="r-7290756" data-claire-element-id="31735171">Imaginons que vous voulez enregistrer des informations à propos d’une nouvelle campagne pour une entreprise de nourriture pour chien. Vous allez probablement devoir sauvegarder un nom de campagne, des dates de début et de fin, le nom d’un responsable de campagne et des influenceurs importants. Vous pouvez sauvegarder toutes ces informations dans une variable avec un dictionnaire.</p>
+<p id="r-7290757" data-claire-element-id="31735172">Pour enregistrer tout cela, vous pouvez sauvegarder un dictionnaire comme ça :</p>
+<pre id="r-7302712" data-claire-element-id="31809666">
+<code data-claire-semantic="python">nouvelle_campagne = {
+    &quot;responsable_de_campagne&quot;: &quot;Jeanne d'Arc&quot;,
+    &quot;nom_de_campagne&quot;: &quot;Campagne nous aimons les chiens&quot;,
+    &quot;date_de_début&quot;: &quot;01/01/2020&quot;,
+    &quot;influenceurs_importants&quot;: [&quot;@MonAmourDeChien&quot;, &quot;@MeilleuresFriandisesPourChiens&quot;]
+}</code>
+</pre>
+<p id="r-7325155" data-claire-element-id="31808927">  Vous pouvez aussi créer un nouveau dictionnaire avec des accolades vides  <code data-claire-semantic="text">{}</code>  ou la fonction  <code data-claire-semantic="text">dict()</code>  et avec des paires clés-valeurs comme indiqué ci-dessous :</p>
+<pre id="r-7302714" data-claire-element-id="31778469">
+<code data-claire-semantic="python">taux_de_conversion = {}
+taux_de_conversion['facebook'] = 3.4
+taux_de_conversion['instagram'] = 1.2
+taux_de_conversion = dict()
+taux_de_conversion['facebook'] = 3.4
+taux_de_conversion['instagram'] = 1.2</code>
+</pre>
+<h3 id="r-7312145" data-claire-element-id="31809669">
+<strong>Accédez à une valeur dans un dictionnaire</strong>
+</h3>
+<p id="r-7290789" data-claire-element-id="31735204">Pour accéder aux différentes valeurs, vous pouvez utiliser la clé pour chacune des paires clés-valeurs.</p>
+<pre id="r-7302727" data-claire-element-id="31809668">
+<code data-claire-semantic="python">&gt;&gt; nouvelle_campagne['responsable_de_campagne']
+&quot;Jeanne d'Arc&quot;
+&gt;&gt; taux_de_conversion['facebook']
+3.4</code>
+</pre>
+<p id="r-7302747" data-claire-element-id="31758805">Essayez dans l’activité ci-dessous ! 😁</p>
+<h3 id="r-7325160" data-claire-element-id="32763088">
+<strong>Réalisez des opérations courantes avec les dictionnaires</strong>
+</h3>
+<p id="r-7290802" data-claire-element-id="31735217">Comme pour les listes, plusieurs méthodes (ou opérations) intégrées à Python vous permettent de manipuler les données dans les dictionnaires.</p>
+<h4 id="r-7325159" data-claire-element-id="32763087">
+<strong>Ajoutez une paire clé-valeur</strong>
+</h4>
+<p id="r-7290803" data-claire-element-id="31735399">Pour ajouter une paire clé-valeur à un dictionnaire, ajoutez juste une nouvelle clé dans le dictionnaire existant. Si la clé existe déjà, vous l’écraserez en définissant une valeur. Le code suivant crée un dictionnaire appelé  <code data-claire-semantic="text"> infos_labradoodle</code>  et enregistre des informations à propos du poids et de l’origine des labradoodles, un croisement de chiens.</p>
+<pre id="r-7302730" data-claire-element-id="31808929">
+<code data-claire-semantic="python">infos_labradoodle = {
+    &quot;poids&quot;: &quot;13 à 16 kg&quot;,
+    &quot;origine&quot;: &quot;États-Unis&quot;
+}</code>
+</pre>
+<p id="r-7290812" data-claire-element-id="31735227">Pour ajouter une nouvelle clé-valeur comme le nom scientifique du labradoodle, ajoutez simplement :</p>
+<pre id="r-7290925" data-claire-element-id="31735404">
+<code data-claire-semantic="python">infos_labradoodle['nom_scientifique'] = &quot;Canis lupus familiaris&quot;</code>
+</pre>
+<p id="r-7290815" data-claire-element-id="31778474"> Maintenant,  <code data-claire-semantic="text">infos_labradoodle</code>  renvoie :</p>
+<pre id="r-7302731" data-claire-element-id="31808930">
+<code data-claire-semantic="python">infos_labradoodle = {
+    &quot;poids&quot;: &quot;13 à 16 kg&quot;,
+    &quot;origine&quot;: &quot;États-Unis&quot;,
+    &quot;nom_scientifique&quot;: &quot;Canis lupus familiaris&quot;
+}</code>
+</pre>
+<p id="r-7290826" data-claire-element-id="31957735">Si vous écrivez  <code data-claire-semantic="text">infos_labradoodle[&quot;poids&quot;] = &quot;45 kg&quot;</code>  , la valeur existante sera écrasée et le résultat sera donc :</p>
+<pre id="r-7302733" data-claire-element-id="31957825">
+<code data-claire-semantic="python">&gt;&gt; infos_labradoodle[&quot;poids&quot;]
+&quot;45 kg&quot;</code>
+</pre>
+<h5 id="r-7290843" data-claire-element-id="31778536">
+<strong>Supprimez une paire clé-valeur</strong>
+</h5>
+<p id="r-7290832" data-claire-element-id="31778535">Pour supprimer une paire clé-valeur, vous pouvez utiliser le mot-clé<code data-claire-semantic="text">del</code>et la clé que vous voulez supprimer ou encore la méthode  <code data-claire-semantic="text">pop</code>. Pour supprimer la paire clé-valeur<code data-claire-semantic="text">&quot;origine&quot;</code>de la <code>paire clé-valeur</code>, écrivez :</p>
+<pre id="r-7302748" data-claire-element-id="31778477">
+<code data-claire-semantic="python">&gt;&gt; del infos_labradoodle[&quot;origine&quot;]
+&gt;&gt; print(infos_labradoodle)
+{ &quot;poids&quot;: &quot;13 à 16 kg&quot;,
+&quot;nom_scientifique&quot;: &quot;Canis lupus familiaris&quot;}</code>
+</pre>
+<div id="r-7302752" data-claire-element-id="31758824" data-claire-semantic="question">
+<p id="r-7290841" data-claire-element-id="31735256">Qu’est-ce qu’un <strong>mot-clé ? </strong>
+</p>
+</div>
+<p id="r-7290842" data-claire-element-id="31758825">Certains mots font partie du langage Python et ne peuvent pas être utilisés comme noms de variables. Par exemple,<code data-claire-semantic="text">
+<strong>del</strong>
+</code>,<code data-claire-semantic="text">
+<strong>if</strong>
+</code>et<code data-claire-semantic="text">
+<strong>else</strong>
+</code>. Ces mots sont connus comme étant des <strong>mots réservés</strong> ou des <strong>mots-clés</strong>.<strong> </strong>
+</p>
+<h5 id="r-7325158" data-claire-element-id="32763086">
+<strong>Vérifiez l’existence d’une clé spécifique</strong>
+</h5>
+<p id="r-7290844" data-claire-element-id="31778537">Vous pouvez utiliser le mot-clé<code data-claire-semantic="text">in</code>pour vérifier si une clé spécifique existe dans un dictionnaire. Pour faire cela, spécifiez la <strong>clé</strong> que vous voulez rechercher, écrivez le mot-clé<code data-claire-semantic="text">in</code>et le nom de la variable du dictionnaire que vous examinez. Le résultat renvoie un booléen qui indique si la clé est dans ce dictionnaire. Par exemple, si vous voulez voir si la clé « poids » existe dans votre dictionnaire  <code data-claire-semantic="text">infos_labradoodle</code>  , écrivez le code qui suit : </p>
+<pre id="r-7302753" data-claire-element-id="31778538">
+<code data-claire-semantic="python">&gt;&gt; &quot;poids&quot; in infos_labradoodle
+True
+&gt;&gt; &quot;race&quot; in infos_labradoodle
+False</code>
+</pre>
+<h3 id="r-7312164" data-claire-element-id="32579600">
+<strong>À vous de jouer ! </strong>
+</h3>

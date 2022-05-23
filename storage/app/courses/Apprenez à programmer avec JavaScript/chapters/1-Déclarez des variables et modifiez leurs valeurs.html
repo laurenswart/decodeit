@@ -1,0 +1,129 @@
+<p id="r-7179852" data-claire-element-id="31480463">Pour pouvoir coder dans de bonnes conditions, un certain nombre de notions de base sont indispensables. Commençons par découvrir les variables et en modifier les valeurs.</p>
+<h3 id="r-7177939" data-claire-element-id="32823984">
+<strong>Qu'est-ce qu'une variable ?</strong>
+</h3>
+<p id="r-7177797" data-claire-element-id="31475982">L'objectif d'un programme informatique est de faire quelque chose avec des données. Votre programme utilise des <strong>variables</strong> pour enregistrer et manipuler ces données. Plus précisément, une variable est un <strong>contenant</strong> utilisé pour enregistrer une donnée spécifique dont votre programme a besoin pour travailler. Un nom d'utilisateur, le nombre de billets restants pour un vol, la disponibilité ou non d'un certain produit en stock, toutes ces données sont enregistrées dans des variables.</p>
+<p id="r-7177799" data-claire-element-id="31476143">Une donnée placée dans une variable s'appelle une <em>
+<strong>valeur</strong>
+</em>. Si on reprend l'analogie du &quot;carton dans un entrepôt&quot;, des cartons différents peuvent enregistrer des valeurs différentes. Vous pouvez par exemple utiliser un carton pour stocker de l'argent pour des dépenses courantes, et un autre pour des économies pour une occasion particulière, par exemple un voyage. Vous pouvez aussi vider les cartons ou modifier leur contenu, en ajoutant par exemple de l'argent ou en en prélevant.</p>
+<p id="r-7177800" data-claire-element-id="31475985">Pour savoir à quoi sert chaque carton, vous devez les étiqueter. En programmation, c'est la même chose : vous attribuez un <strong>nom</strong> à votre variable. Le nom d'une variable doit indiquer ce qui se trouve  à l'intérieur, tout comme les étiquettes sur les cartons. Voici quelques règles générales pour la création de noms :</p>
+<ul id="r-7177807" data-claire-element-id="31476150">
+<li id="r-7177802" data-claire-element-id="31476145">
+<p id="r-7177801" data-claire-element-id="31476144">
+<strong>utilisez des noms descriptifs dans l'ensemble de votre code.</strong>
+<br />Avez-vous déjà eu à fouiller dans un ancien classeur, stocké dans un carton étiqueté &quot;Administratif&quot; sur la couverture ? Vous rappelez-vous à quel point c'était frustrant ? En étant descriptif et précis dans les noms de variables, la vie devient bien plus facile : votre code devient plus facile à lire et à maintenir. Plutôt que   <code data-claire-semantic="text">quantity</code>  (ou encore pire,   <code data-claire-semantic="text">qty</code>  ), ajoutez des détails :   <code data-claire-semantic="text">quantityInStock</code>  ,   <code data-claire-semantic="text">currentAccountBalance</code>  , etc. ;</p>
+</li>
+<li id="r-7177804" data-claire-element-id="31476147">
+<p id="r-7177803" data-claire-element-id="31476146">
+<strong>mettez les points sur les i.</strong>
+<br />Évitez d'utiliser des abréviations ou de raccourcir des mots à chaque fois que c'est possible, même si une version plus courte semble évidente. Par exemple,   <code data-claire-semantic="text">annualRevenue</code>  sera mieux que   <code data-claire-semantic="text">annualRev</code>  ;</p>
+</li>
+<li id="r-7177806" data-claire-element-id="31476149">
+<p id="r-7177805" data-claire-element-id="31476148">
+<strong>suivez une convention de nommage constante.</strong>
+<br />La convention de nommage la plus courante est <strong>camel case</strong>. Dans cette convention, les noms sont constitués de plusieurs mots dont l'initiale est en capitale. Par exemple   <code data-claire-semantic="text">numberOfCats</code>  ,   <code data-claire-semantic="text">finalAnswer</code>  ,   <code data-claire-semantic="text">howLongCanThisVariableNameGet</code>  , etc.</p>
+</li>
+</ul>
+<h3 id="r-7177984" data-claire-element-id="31786446">
+<strong>Créez une variable en la déclarant</strong>
+</h3>
+<p id="r-7177809" data-claire-element-id="31475994">Pour utiliser une variable dans votre code, vous devez la créer. C'est ce qu'on appelle <strong>
+<em>déclarer</em>
+</strong>
+<em> une variable</em>.</p>
+<p id="r-7177811" data-claire-element-id="31475996">En JavaScript, la déclaration d'une variable se limite au mot clé <em>let</em>, suivi du nom de variable choisi :</p>
+<pre id="r-7177947" data-claire-element-id="31786445">
+<code data-claire-semantic="javascript">let numberOfCats = 2;
+let numberOfDogs = 4;</code>
+</pre>
+<p id="r-7177816" data-claire-element-id="31476183">Ici, nous déclarons (créons) et initialisons (donnons une valeur à) deux variables :   <code data-claire-semantic="text">numberOfCats</code>  et   <code data-claire-semantic="text">numberOfDogs</code>  .</p>
+<aside id="r-7177982" data-claire-element-id="31476255" data-claire-semantic="warning">
+<p id="r-7177827" data-claire-element-id="31476254">Attention : dans beaucoup de démonstrations JavaScript, vous pourrez croiser le mot clé   <code data-claire-semantic="text">var</code>  plutôt que   <code data-claire-semantic="text">let</code>  . Bien qu'il y ait une différence subtile entre les deux (que nous détaillerons dans le chapitre sur la portée), pour l'instant vous pouvez simplement voir   <code data-claire-semantic="text">var</code>  comme l'ancienne version de   <code data-claire-semantic="text">let</code>  : c'est une autre façon de créer une variable.</p>
+</aside>
+<h3 id="r-7177985" data-claire-element-id="32823987">
+<strong>Modifiez la valeur d'une variable</strong>
+</h3>
+<p id="r-7177830" data-claire-element-id="31476259">La façon la plus simple de modifier la valeur d'une variable est simplement de la réaffecter :</p>
+<pre id="r-7177987" data-claire-element-id="31786455">
+<code data-claire-semantic="javascript">let numberOfCats = 3;
+numberOfCats = 4;</code>
+</pre>
+<p id="r-7177835" data-claire-element-id="31476294">Ici, nous déclarons la variable   <code data-claire-semantic="text">numberOfCats</code>  et l'initialisons à la valeur 3. Nous lui réaffectons ensuite la valeur 4 (sans le mot clé   <code data-claire-semantic="text">let</code>  , parce que la variable a déjà été déclarée).</p>
+<p id="r-7177836" data-claire-element-id="31476021">Néanmoins, si c'était la seule façon de modifier une valeur de variable, vous ne pourriez pas en faire grand-chose. Voyons maintenant quelques <strong>opérateurs</strong>.</p>
+<h4 id="r-7177997" data-claire-element-id="31786588">
+<strong>Opérateurs arithmétiques – travail sur des nombres</strong>
+</h4>
+<p id="r-7177837" data-claire-element-id="31476022">Les opérateurs arithmétiques vous permettent d'effectuer des opérations mathématiques de base telles que l'addition, la soustraction, la multiplication et la division. Toutes ces opérations peuvent être extrêmement utiles, même en dehors des contextes mathématiques.</p>
+<h5 id="r-7177871" data-claire-element-id="31786526">
+<strong>Addition et soustraction</strong>
+</h5>
+<p id="r-7177839" data-claire-element-id="31476364">Pour ajouter deux variables, utilisez le signe   <code data-claire-semantic="text">+</code>  :</p>
+<pre id="r-7178002" data-claire-element-id="31786465">
+<code data-claire-semantic="javascript">let totalCDs = 67;
+let totalVinyls = 34;
+let totalMusic = totalCDs + totalVinyls;</code>
+</pre>
+<p id="r-7177846" data-claire-element-id="31476365">À l'inverse, la soustraction utilise le signe   <code data-claire-semantic="text">-</code>  :</p>
+<pre id="r-7178012" data-claire-element-id="31786485">
+<code data-claire-semantic="javascript">let cookiesInJar = 10;
+let cookiesRemoved = 2;
+let cookiesLeftInJar = cookiesInJar - cookiesRemoved;</code>
+</pre>
+<p id="r-7177853" data-claire-element-id="31476366">Pour ajouter ou soustraire un nombre d'une variable, vous pouvez utiliser les opérateurs   <code data-claire-semantic="text">+=</code>  et   <code data-claire-semantic="text">-=</code>  :</p>
+<pre id="r-7178022" data-claire-element-id="31786505">
+<code data-claire-semantic="javascript">let cookiesInJar = 10;
+/* manger deux cookies */
+cookiesInJar -= 2;  //il reste 8 cookies
+/* cuisson d'un nouveau lot de cookies */
+cookiesInJar += 12; // il y a maintenant 20 cookies dans la boîte</code>
+</pre>
+<p id="r-7177864" data-claire-element-id="31476394">Enfin, vous pouvez utiliser   <code data-claire-semantic="text">++</code>  ou   <code data-claire-semantic="text">--</code>  pour ajouter ou soustraire 1 (incrément ou décrément) :</p>
+<pre id="r-7178032" data-claire-element-id="31786525">
+<code data-claire-semantic="javascript">let numberOfLikes = 10;
+numberOfLikes++;  // cela fait 11
+numberOfLikes--; // et on revient à 10...qui n'a pas aimé mon article ?</code>
+</pre>
+<h5 id="r-7179387" data-claire-element-id="31786587">
+<strong>Multiplication et division</strong>
+</h5>
+<p id="r-7177872" data-claire-element-id="31476398">Les opérations de multiplication et de division utilisent les opérateurs   <code data-claire-semantic="text">*</code>  et   <code data-claire-semantic="text">/</code>  :</p>
+<pre id="r-7178034" data-claire-element-id="31786585">
+<code data-claire-semantic="javascript">let costPerProduct = 20;
+let numberOfProducts = 5;
+let totalCost = costPerProduct * numberOfProducts;
+let averageCostPerProduct = totalCost / numberOfProducts;</code>
+</pre>
+<p id="r-7177881" data-claire-element-id="31476414">Comme pour l'addition et la soustraction, il existe aussi les opérateurs   <code data-claire-semantic="text">*=</code>  et   <code data-claire-semantic="text">/=</code>  pour multiplier ou diviser un nombre :</p>
+<pre id="r-7178047" data-claire-element-id="31786586">
+<code data-claire-semantic="javascript">let numberOfCats = 2;
+numberOfCats *= 6;  // numberOfCats vaut maintenant 2*6 = 12;
+numberOfCats /= 3;  // numberOfCats vaut maintenant 12/3 = 4;</code>
+</pre>
+<aside id="r-7180068" data-claire-element-id="31481065" data-claire-semantic="information">
+<p id="r-7177900" data-claire-element-id="31476085">Sachez qu'il existe beaucoup d'autres façons de manipuler les variables, et vous en verrez beaucoup dans le reste de ce cours !</p>
+</aside>
+<h4 id="r-7180075" data-claire-element-id="31481086">
+<strong>Mutabilité des variables</strong>
+</h4>
+<p id="r-7180069" data-claire-element-id="31481068">Une variable est de base mutable c'est-à-dire qu’elle peut changer au cours du temps. On la déclare avec le mot clé  <code data-claire-semantic="text">let</code>  suivi d’un nom de variable et on lui affecte une valeur de départ. Par la suite, on va pouvoir changer la valeur de cette variable autant de fois que l’on souhaite.</p>
+<blockquote id="r-7180071" data-claire-element-id="31481070">
+<p id="r-7180070" data-claire-element-id="31481069">On crée un compteur à 0. Et, à chaque fois qu’on clique sur un bouton on augmente la valeur de 1 pour connaître à tout instant le nombre de clics réalisés, depuis le début de l'exécution du code.</p>
+</blockquote>
+<p id="r-7180072" data-claire-element-id="31481071">Exemple :</p>
+<pre id="r-7180073" data-claire-element-id="31481085">
+<code data-claire-semantic="javascript">let compteur = 0;
+compteur++;
+compteur = 10;</code>
+</pre>
+<p id="r-7180074" data-claire-element-id="31481073">
+</p>
+<h3 id="r-7178067" data-claire-element-id="32663187">
+<strong>Découvrez les constantes</strong>
+</h3>
+<p id="r-7180078" data-claire-element-id="31481088">Dans de nombreux programmes, certaines données ne seront pas modifiées pendant l'exécution du programme. C'est le cas par exemple du nom d'une entreprise, de la date de naissance d'un utilisateur, ou du nombre d'heures dans une journée. Pour s'assurer de ne pas réaffecter par inadvertance de nouvelles valeurs à ces données, vous allez utiliser des <strong>constantes</strong>.</p>
+<p id="r-7180079" data-claire-element-id="31481089">Ce sont simplement des variables qui ne seront <strong>pas mutables</strong>. On donnera une valeur de départ et on ne pourra plus changer la valeur par la suite. Ainsi s’il y a une erreur de logique dans votre code changeant la valeur du variable (constante) qui ne devait pas changer, javascript retournera une erreur.</p>
+<p id="r-7180080" data-claire-element-id="31481090">Par exemple :</p>
+<pre id="r-7180081" data-claire-element-id="31786590">
+<code data-claire-semantic="javascript">const nombrePostParPage = 20;
+nombrePostParPage = 30; // Retournera une erreur dans la console car on ne peut plus changer sa valeur</code>
+</pre>

@@ -1,0 +1,265 @@
+<p id="r-7179902" data-claire-element-id="31480582">Comme vous allez écrire des programmes de plus en plus évolués, la création de lignes de code qui s'exécutent l'une après l'autre dans un ordre défini ne suffira plus. C'est là que vient la notion de <strong>déroulement du programme</strong>.</p>
+<p id="r-7178707" data-claire-element-id="31477612">Le déroulement du programme est un terme général qui décrit l'<strong>ordre</strong> dans lequel s'exécutent vos lignes de code. Cela signifie que certaines lignes seront lues une seule fois, certaines plusieurs fois, et d'autres complètement ignorées, selon la situation.</p>
+<p id="r-7178708" data-claire-element-id="31477613">Dans ce premier chapitre sur le déroulement du programme, nous allons nous intéresser aux <strong>instructions conditionnelles</strong>.</p>
+<h3 id="r-7178973" data-claire-element-id="31787155">
+<strong>Appréhendez les instructions if/else</strong>
+</h3>
+<p id="r-7178709" data-claire-element-id="31477901">L'instruction   <code data-claire-semantic="text">if</code>  /  <code data-claire-semantic="text">else</code>  est une des plus universelles en programmation. Qu'il s'agisse de réagir à une saisie de l'utilisateur, aux résultats de calculs ou de simplement vérifier si quelqu'un est connecté ou non, vous aurez souvent à utiliser des instructions if/else.</p>
+<p id="r-7178710" data-claire-element-id="31477911">
+<code data-claire-semantic="text">IF (SI) l'utilisateur est connecté, ouvrir sa page d'accueil)</code>
+</p>
+<p id="r-7178711" data-claire-element-id="31477912">
+<code data-claire-semantic="text">ELSE (SINON) revenir à la page de connexion)</code>
+</p>
+<p id="r-7178712" data-claire-element-id="31477921">C'est ce qu'on appelle une <strong>
+<em>instruction conditionnelle</em>
+</strong>, parce qu'elle vérifie si certaines conditions sont réunies, et réagit en conséquence. Voyons les types de conditions qui peuvent être utilisés dans ces instructions.</p>
+<h4 id="r-7178971" data-claire-element-id="31787154">
+<strong>Utilisez des valeurs </strong>
+<strong>
+<code data-claire-semantic="text">boolean</code>
+</strong>
+</h4>
+<p id="r-7178713" data-claire-element-id="31477922">En JavaScript, si on utilise des   <code data-claire-semantic="text">boolean</code>  (<em>bouléens</em>, en français) simples pour les instructions   <code data-claire-semantic="text">if</code>  /  <code data-claire-semantic="text">else</code>  , la syntaxe se présente comme suit :</p>
+<pre id="r-7178976" data-claire-element-id="31787152">
+<code data-claire-semantic="javascript">if (myBoolean) {
+// réaction à la valeur vraie de myBoolean
+} else {
+// réaction à la valeur faux de myBoolean
+}</code>
+</pre>
+<p id="r-7178724" data-claire-element-id="31477629">Donc, pour vérifier si un utilisateur est connecté, vous pouvez procéder comme suit :</p>
+<pre id="r-7178978" data-claire-element-id="31787153">
+<code data-claire-semantic="javascript">let UserLoggedIn = true;
+if (UserLoggedIn) {
+   console.log(&quot;Utilisateur connecté!&quot;);
+} else {
+   console.log(&quot;Alerte, intrus!&quot;);
+}</code>
+</pre>
+<p id="r-7178737" data-claire-element-id="31477927">Dans le cas ci-dessus, vous obtiendrez l'impression sur la console de   <code data-claire-semantic="text">&quot;Utilisateur connecté!&quot;</code>  , car le boolean   <code data-claire-semantic="text">userLoggedIn</code>  a la valeur true. S'il avait la valeur false, vous obtiendriez à la place   <code data-claire-semantic="text">&quot;Alerte, intrus!&quot;</code>  .</p>
+<h4 id="r-7178972" data-claire-element-id="31785807">
+<strong>Utilisez des expressions</strong>
+</h4>
+<p id="r-7178739" data-claire-element-id="31477929">Plutôt qu'une simple variable logique dans une condition   <code data-claire-semantic="text">if</code>  /  <code data-claire-semantic="text">else</code>  , vous pouvez aussi utiliser des <strong>expressions de comparaison</strong>, qui comparent des valeurs entre elles.</p>
+<p id="r-7178740" data-claire-element-id="31477645">Les expressions de comparaison vous permettent de comparer deux valeurs par les opérateurs suivants :</p>
+<ul id="r-7178753" data-claire-element-id="31477942">
+<li id="r-7178742" data-claire-element-id="31477931">
+<p id="r-7178741" data-claire-element-id="31477930">
+<code data-claire-semantic="text">&lt;</code>   inférieur à ;</p>
+</li>
+<li id="r-7178744" data-claire-element-id="31477933">
+<p id="r-7178743" data-claire-element-id="31477932">
+<code data-claire-semantic="text">&lt;=</code>   inférieur ou égal à ;</p>
+</li>
+<li id="r-7178746" data-claire-element-id="31477935">
+<p id="r-7178745" data-claire-element-id="31477934">
+<code data-claire-semantic="text">==</code>   égal à ;</p>
+</li>
+<li id="r-7178748" data-claire-element-id="31477937">
+<p id="r-7178747" data-claire-element-id="31477936">
+<code data-claire-semantic="text">&gt;=</code>   supérieur ou égal à ;</p>
+</li>
+<li id="r-7178750" data-claire-element-id="31477939">
+<p id="r-7178749" data-claire-element-id="31477938">
+<code data-claire-semantic="text">&gt;</code>   supérieur à ;</p>
+</li>
+<li id="r-7178752" data-claire-element-id="31477941">
+<p id="r-7178751" data-claire-element-id="31477940">
+<code data-claire-semantic="text">!=</code>   différent de.</p>
+</li>
+</ul>
+<p id="r-7178754" data-claire-element-id="31477659">Par exemple :</p>
+<pre id="r-7178981" data-claire-element-id="31785805">
+<code data-claire-semantic="javascript">const numberOfSeats = 30;
+const numberOfGuests = 25;
+if (numberOfGuests &lt; numberOfSeats) {
+// autoriser plus d'invités
+} else {
+// ne pas autoriser de nouveaux invités
+}</code>
+</pre>
+<p id="r-7178769" data-claire-element-id="31477953">Vous pouvez aussi <strong>chaîner</strong> les instructions   <code data-claire-semantic="text">if</code>  /  <code data-claire-semantic="text">else</code>  pour réagir à des conditions potentielles multiples :</p>
+<pre id="r-7178983" data-claire-element-id="31785806">
+<code data-claire-semantic="javascript">if (numberOfGuests == numberOfSeats) {
+// tous les sièges sont occupés
+} else if (numberOfGuests &lt; numberOfSeats) {
+// autoriser plus d'invités
+} else {
+// ne pas autoriser de nouveaux invités
+}</code>
+</pre>
+<p id="r-7178784" data-claire-element-id="31477689">Le chaînage d'instructions permet de prévoir différents résultats en fonction des différentes situations.</p>
+<h3 id="r-7179771" data-claire-element-id="32388294">
+<strong>Découvrez l'égalité :  </strong>
+<strong>==</strong>
+<strong>  ou </strong>
+<strong>===</strong>
+</h3>
+<p id="r-7178800" data-claire-element-id="31477705">En JavaScript, toutes les égalités ne sont pas nées égales :</p>
+<p id="r-7178801" data-claire-element-id="31477706">Il y a deux façons de vérifier si deux valeurs sont égales en JavaScript :  ==  et  ===, aussi appelées <em>égalité </em>
+<strong>
+<em>simple</em>
+</strong> et <em>égalité </em>
+<strong>
+<em>stricte </em>
+</strong>:</p>
+<ul id="r-7178806" data-claire-element-id="31479255">
+<li id="r-7178803" data-claire-element-id="31479254">
+<p id="r-7178802" data-claire-element-id="31479253">l'égalité simple vérifie la <strong>valeur</strong>, mais pas le type. Donc ceci renvoie la valeur <code data-claire-semantic="text">true</code>  :<br />
+<code data-claire-semantic="text">5 == &quot;5&quot;</code>
+</p>
+</li>
+<li id="r-7178805" data-claire-element-id="31477991">
+<p id="r-7178804" data-claire-element-id="31477990">par contre, l'égalité stricte vérifie à la fois la <strong>valeur et le type</strong>. Donc :<br />
+<code data-claire-semantic="text">5 === &quot;5&quot;</code>
+<br />renvoie   <code data-claire-semantic="text">false</code>  , car on compare un   <code data-claire-semantic="text">number</code>  à une   <code data-claire-semantic="text">string</code>  .</p>
+</li>
+</ul>
+<p id="r-7178807" data-claire-element-id="31477993">De même, il y a deux opérateurs d'inégalité,   <code data-claire-semantic="text">!=</code>  et   <code data-claire-semantic="text">!==</code>  , avec la même distinction.</p>
+<h5 id="r-7178835" data-claire-element-id="32388293">
+<strong>Comprenez les conditions multiples</strong>
+</h5>
+<p id="r-7178809" data-claire-element-id="31477714">Dans certaines situations, vous souhaitez vérifier plusieurs conditions pour un même résultat ; par exemple dans la même instruction if. Pour cela, il existe des <strong>opérateurs logiques</strong> :</p>
+<ul id="r-7178816" data-claire-element-id="31479277">
+<li id="r-7178811" data-claire-element-id="31479272">
+<p id="r-7178810" data-claire-element-id="31479271">
+<code data-claire-semantic="text">&amp;&amp;</code>  – ET logique – pour vérifier si deux conditions sont<strong> toutes les deux</strong> vraies ;</p>
+</li>
+<li id="r-7178813" data-claire-element-id="31479274">
+<p id="r-7178812" data-claire-element-id="31479273">
+<code data-claire-semantic="text">||</code>    – OU logique – pour vérifier si <strong>au moins une</strong> condition est vraie ;</p>
+</li>
+<li id="r-7178815" data-claire-element-id="31479276">
+<p id="r-7178814" data-claire-element-id="31479275">
+<code data-claire-semantic="text">!</code>    – NON logique – pour vérifier si une condition n'est <strong>pas</strong> vraie. </p>
+</li>
+</ul>
+<pre id="r-7178986" data-claire-element-id="32388292">
+<code data-claire-semantic="javascript">let userLoggedIn = true;
+let UserHasPremiumAccount = true;
+let userHasMegaPremiumAccount = false;
+
+userLoggedIn &amp;&amp; userHasPremiumAccount; // true
+userLoggedIn &amp;&amp; userHasMegaPremiumAccount; // false
+
+userLoggedIn || userHasPremiumAccount; // true
+userLoggedIn || userHasMegaPremiumAccount; // true
+
+!userLoggedIn; // false
+!userHasMegaPremiumAccount; // true</code>
+</pre>
+<p id="r-7178834" data-claire-element-id="31477739">Bien sûr, ces opérateurs peuvent être mélangés et combinés en fonction de vos besoins précis.</p>
+<h3 id="r-7178889" data-claire-element-id="32830435">
+<strong>Appréhendez une notion importante : le scope des variables</strong>
+</h3>
+<p id="r-7178850" data-claire-element-id="31478035">En JavaScript, les variables créées par   <code data-claire-semantic="text">let</code>  ou   <code data-claire-semantic="text">const</code>  ne peuvent être vues ou utilisées qu'à <strong>l'intérieur</strong> du bloc de code dans lequel elles sont déclarées.</p>
+<aside id="r-7178992" data-claire-element-id="31478051" data-claire-semantic="warning">
+<p id="r-7178851" data-claire-element-id="31478036">Vous rencontrerez certainement le mot clé   <code data-claire-semantic="text">var</code>   pour la création de variables au cours de votre carrière de développeur. Les variables déclarées ainsi n'ont pas un scope de bloc mais un scope de <strong>fonction </strong>; donc elles n'ont pas tout à fait le même comportement que celles que je décris dans ce cours. Pour plus d'informations, je vous conseille cet article (en anglais) :</p>
+<p id="r-7178852" data-claire-element-id="31477757">
+<a href="https://www.geeksforgeeks.org/difference-between-var-and-let-in-javascript/">
+<strong>https://www.geeksforgeeks.org/difference-between-var-and-let-in-javascript/</strong>
+</a>
+</p>
+</aside>
+<aside id="r-7178993" data-claire-element-id="31479292" data-claire-semantic="information">
+<p id="r-7178853" data-claire-element-id="31479291">Un <strong>bloc de code</strong>, aussi souvent appelé <em>
+<strong>bloc </strong>
+</em>tout court, est une section de code incluse entre accolades  {}.</p>
+</aside>
+<p id="r-7178854" data-claire-element-id="31477759">Ce phénomène est appelé <strong>
+<em>portée des variables</em>
+</strong> ou <strong>
+<em>block scope </em>
+</strong>
+<em>(en anglais)</em>.  Voici un exemple :</p>
+<pre id="r-7178996" data-claire-element-id="31787212">
+<code data-claire-semantic="javascript">let userLoggedIn = true;
+
+if (userLoggedIn) {
+   let welcomeMessage = 'Welcome back!';
+} else {
+   let welcomeMessage = 'Welcome new user!';
+}
+
+console.log(welcomeMessage); // renvoie une erreur</code>
+</pre>
+<p id="r-7178868" data-claire-element-id="31479301">Dans ce code, nous avons deux blocs de code issus de l'instruction <code data-claire-semantic="text">if</code>  /   <code data-claire-semantic="text">else</code>  . Ils sont mis en évidence dans l'image ci-dessous :</p>
+<p id="r-7178870" data-claire-element-id="31479313">Les deux blocs orange et rose déclarent une variable par <code data-claire-semantic="text">let welcomeMessage</code>  . Néanmoins, ces variables ne sont disponibles qu'à <strong>l'intérieur</strong> des blocs où elles sont déclarées. C'est pourquoi, quand vous essayez d'afficher le contenu de   <code data-claire-semantic="text">welcomeMessage</code>  sur la console, vous obtenez une erreur : pour le code <strong>en dehors</strong> des blocs (aussi appelé <em>portée extérieure</em> ou <em>parente</em>), il n'y a pas de variable   <code data-claire-semantic="text">welcomeMessage</code>  !</p>
+<div id="r-7179497" data-claire-element-id="31479323" data-claire-semantic="question">
+<p id="r-7178871" data-claire-element-id="31477776">Donc, comment obtenir le comportement voulu ? Comment passer des valeurs vers l'extérieur depuis l'intérieur d'un bloc de code ?</p>
+</div>
+<p id="r-7178872" data-claire-element-id="31479333">Pour cette situation, une méthode pourrait être de déclarer la variable dans la portée <strong>extérieure</strong>, puis de la modifier à l'intérieur des blocs <code data-claire-semantic="text">if</code>  /  <code data-claire-semantic="text">else</code>  :</p>
+<pre id="r-7179001" data-claire-element-id="32830434">
+<code data-claire-semantic="javascript">let userLoggedIn = true;
+let welcomeMessage = ''; // déclarer la variable ici
+
+if (userLoggedIn) {
+    welcomeMessage = 'Welcome back!'; // modifier la variable extérieure
+} else {
+    welcomeMessage = 'Welcome new user!'; // modifier la variable extérieure
+}
+
+console.log(welcomeMessage); // imprime 'Welcome back!'</code>
+</pre>
+<p id="r-7178888" data-claire-element-id="31478101">Ici, du fait que la variable soit déclarée dans le scope parent, elle est disponible et accessible partout, et peut être modifiée correctement.</p>
+<h3 id="r-7178949" data-claire-element-id="32830437">
+<strong>Utilisez les instructions switch</strong>
+</h3>
+<p id="r-7178890" data-claire-element-id="31477795">Et si vous souhaitez vérifier la valeur d'une variable par rapport à une liste de valeurs attendues, et réagir en conséquence ? Pour cela, vous pouvez utiliser l'instruction   <code data-claire-semantic="text">switch</code>  :</p>
+<p id="r-7178891" data-claire-element-id="31477796">Supposons que vous ayez quelques objets utilisateurs. Vous souhaitez vérifier quel type de compte a chacun, pour envoyer un message personnalisé :</p>
+<pre id="r-7179006" data-claire-element-id="32830436">
+<code data-claire-semantic="javascript">let firstUser = {
+    name: &quot;Will Alexander&quot;,
+    age: 33,
+    accountLevel: &quot;normal&quot;
+};
+
+let secondUser = {
+    name: &quot;Sarah Kate&quot;,
+    age: 21,
+    accountLevel: &quot;premium&quot;
+};
+
+let thirdUser = {
+    name: &quot;Audrey Simon&quot;,
+    age: 27,
+    accountLevel: &quot;mega-premium&quot;
+};</code>
+</pre>
+<p id="r-7178921" data-claire-element-id="31479344">Vous pouvez ici utiliser une instruction   <code data-claire-semantic="text">switch</code>  , qui prend la variable à vérifier et une liste de valeurs, comme différents cas :</p>
+<pre id="r-7179008" data-claire-element-id="31785818">
+<code data-claire-semantic="javascript">switch (firstUser.accountLevel) {
+case 'normal':
+      console.log('You have a normal account!');
+
+break;
+case 'premium':
+      console.log('You have a premium account!');
+
+break;
+case 'mega-premium':
+      console.log('You have a mega premium account!');
+break;
+
+default:
+      console.log('Unknown account type!');
+}</code>
+</pre>
+<p id="r-7178947" data-claire-element-id="31478151">Après le code à exécuter dans chaque instruction <code data-claire-semantic="text">case</code>  , ajoutez l'instruction <code data-claire-semantic="text">break</code>  . Si vous ne le faites pas, JavaScript continuera l'exécution des cas suivants (<strong>en cascade</strong>) jusqu'à rencontrer une instruction  <code data-claire-semantic="text">break</code>  ou la fin de l'instruction   <code data-claire-semantic="text">switch</code>  . Comme vous pouvez le voir dans l'exemple, vous pouvez aussi ajouter un cas   <code data-claire-semantic="text">default</code>  qui ne sera exécuté que si la variable que vous vérifiez ne correspond à aucune des valeurs répertoriées.</p>
+<p id="r-7180248" data-claire-element-id="31481545">Le switch peut servir dans différents cas mais surtout<strong> rendre plus facile à lire</strong> l'enchaînement de condition  if/else  .</p>
+<p id="r-7180249" data-claire-element-id="31481546">Par exemple voici comment on aurait écrit l’exemple précédent avec des if/else :</p>
+<pre id="r-7180250" data-claire-element-id="31787217">
+<code data-claire-semantic="javascript">if (firstUser.accountLevel === 'normal' ) {
+      console.log('You have a normal account!');
+} else if (firstUser.accountLevel === 'premium' ) {
+      console.log('You have a premium account!');
+} else if (firstUser.accountLevel === 'mega-premium' ) {
+      console.log('You have a mega premium account!');
+}  else {
+      console.log('Unknown account type!');
+}</code>
+</pre>
+<aside id="r-7179512" data-claire-element-id="31479354" data-claire-semantic="warning">
+<p id="r-7178948" data-claire-element-id="31478171">Comme vous pouvez le voir, les instructions   <code data-claire-semantic="text">switch</code>  utilisent aussi des accolades. C'est un autre exemple de bloc de code, donc les variables éventuellement déclarées à l'intérieur d'une instruction <code data-claire-semantic="text">switch</code>  ne seront pas disponibles pour le code environnant !</p>
+</aside>

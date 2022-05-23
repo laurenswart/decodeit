@@ -1,0 +1,83 @@
+<h3 id="r-7311268" data-claire-element-id="31809624">
+<strong>Qu’est-ce qu’une variable ?</strong>
+</h3>
+<p id="r-7289471" data-claire-element-id="31731801">Imaginons qu’on s’apprête à déménager et qu’il faut ranger nos affaires dans des cartons. Il nous faut un carton pour la <strong>vaisselle</strong>, un pour les <strong>vêtements</strong> et un autre pour la <strong>télévision</strong>. Quand vous faites les cartons, la bonne chose à faire est de leur donner un <strong>nom</strong>. Ainsi vous saurez ce qui se trouve à l’intérieur.  </p>
+<p id="r-7289472" data-claire-element-id="31775832">Une <strong>variable</strong>, c’est comme un carton. C’est un moyen d’enregistrer vos données. En tant que développeur, il vous faudra enregistrer certaines informations et leur donner un nom afin de pouvoir les récupérer plus tard. Un nom d’utilisateur, des tickets d’avion encore disponibles, le jour de la semaine, un inventaire... Toutes ces données sont enregistrées dans les variables.  </p>
+<p id="r-7289476" data-claire-element-id="31731806">Il est très facile de déclarer une variable dans Python. Le code ci-dessous permet de déclarer une variable.</p>
+<pre id="r-7289545" data-claire-element-id="31731895">
+<code data-claire-semantic="python">livre = &quot;Gatsby le Magnifique&quot;</code>
+</pre>
+<aside id="r-7289546" data-claire-element-id="31731896" data-claire-semantic="information">
+<p id="r-7289479" data-claire-element-id="31731809">Quand on dit <strong>
+<em>déclarer</em>
+</strong> (ou <strong>
+<em>initialiser</em>
+</strong>) une variable, c’est juste une autre façon de dire « créer une variable ».</p>
+</aside>
+<p id="r-7289480" data-claire-element-id="31731810">Une variable dans Python est constituée de trois éléments : son nom, son type et sa valeur. Dans ce chapitre nous allons voir le <strong>nom</strong> et la <strong>valeur</strong>, puis nous verrons le <strong>type</strong> dans le chapitre suivant.</p>
+<p id="r-7289481" data-claire-element-id="31731897">Ici,  <code data-claire-semantic="text">livre</code>  est le <strong>nom</strong> de la variable (donc le nom du carton) et  <code data-claire-semantic="text"> &quot;Gatsby le Magnifique&quot;</code>  est la <strong>valeur</strong> de la variable (ce qui se trouve dans le carton). Puis, si vous souhaitez retrouver le titre du livre avec Python, vous pouvez écrire  <code data-claire-semantic="text">livre</code>  et vous obtiendrez  <code data-claire-semantic="text">&quot;Gatsby le Magnifique&quot;</code>  en retour.</p>
+<h3 id="r-7311270" data-claire-element-id="31809626">
+<strong>Modifiez une variable</strong>
+</h3>
+<p id="r-7289483" data-claire-element-id="31731899">Il est très simple de modifier la valeur d’une variable. Il suffit simplement d’assigner une nouvelle valeur à la variable. Voici l’extrait de code qui déclare  <code data-claire-semantic="text">livre</code>  avec la valeur  <code data-claire-semantic="text">&quot;Gatsby le Magnifique&quot;</code>  puis qui la modifie avec  <code data-claire-semantic="text">&quot;Beloved&quot;</code>  .</p>
+<pre id="r-7289547" data-claire-element-id="31775836">
+<code data-claire-semantic="python">&gt;&gt; livre = &quot;Gatsby le Magnifique&quot;
+&gt;&gt; print(livre)
+Gatsby le Magnifique
+&gt;&gt; livre = &quot;Beloved&quot;
+&gt;&gt; print(livre)
+Beloved</code>
+</pre>
+<p id="r-7289496" data-claire-element-id="31731826">Maintenant, essayez cet exercice rapide pour vous assurer que vous suivez bien :</p>
+<pre id="r-7289549" data-claire-element-id="31775837">
+<code data-claire-semantic="python">&gt;&gt; nourriture_preferee = &quot;Glace&quot;
+&gt;&gt; nouvelle_nourriture_preferee = &quot;Pizza&quot;
+&gt;&gt; nourriture_preferee = &quot;Pâtes&quot;
+&gt;&gt; print(nourriture_preferee)</code>
+</pre>
+<p id="r-7289505" data-claire-element-id="31731835">Quel va être le résultat de ce programme ? Prenez une minute pour y réfléchir avant de regarder plus bas !</p>
+<pre id="r-7289551" data-claire-element-id="31775838">
+<code data-claire-semantic="python">&gt;&gt; print(nourriture_preferee)
+Pâtes</code>
+</pre>
+<p id="r-7289510" data-claire-element-id="31802205">Si vous aviez deviné  <code data-claire-semantic="text">&quot;Pâtes&quot;</code>, bravo ! L’extrait de code déclare deux variables,  <code data-claire-semantic="text">nourriture_preferee</code>  et  <code data-claire-semantic="text">nouvelle_nourriture_preferee</code>. Il définit ensuite  <code data-claire-semantic="text">nourriture_preferee</code>  comme étant  <code data-claire-semantic="text">&quot;Pâtes&quot;</code>, donc ce qui avait été déclaré avant pour  <code data-claire-semantic="text">nourriture_preferee</code>  n’est plus pris en compte. En réalité, une variable est simplement un raccourci pour aller chercher ou modifier une valeur dans la mémoire vive de l'ordinateur ! Incroyable, non ? </p>
+<h3 id="r-7311271" data-claire-element-id="31796307">
+<strong>Nommez une variable</strong>
+</h3>
+<p id="r-7289513" data-claire-element-id="31731843">Un nom de variable doit refléter son contenu comme le nom sur un carton. Voici quelques recommandations générales pour choisir un nom :</p>
+<ul id="r-7289526" data-claire-element-id="31778173">
+<li id="r-7289515" data-claire-element-id="31778168">
+<p id="r-7289514" data-claire-element-id="31778167">
+<strong>Utilisez des noms descriptifs dans votre code.</strong>
+<br />Vous avez déjà retrouvé un vieux classeur dans un carton avec le nom « Trucs importants » sur la couverture ? C’était frustrant n’est-ce pas ? Les noms de variables descriptifs et spécifiques simplifient la vie et facilitent la lecture et la modification de votre code. Au lieu de  <code data-claire-semantic="text">quantite</code>  (ou pire,<code data-claire-semantic="text">qte</code>), ajoutez des détails :<code data-claire-semantic="text">quantite_en_stock</code>,<code data-claire-semantic="text">solde_actuel</code>, etc.</p>
+</li>
+<li id="r-7289517" data-claire-element-id="31758377">
+<p id="r-7289516" data-claire-element-id="31758376">
+<strong>Utilisez des mots complets.</strong>
+<br />Évitez d’abréger ou de raccourcir les mots autant que possible, même si une alternative plus courte paraît évidente. Par exemple,<code data-claire-semantic="text">revenu_annuel</code>est plus clair que<code data-claire-semantic="text">rev_annuel</code>.</p>
+</li>
+<li id="r-7289519" data-claire-element-id="31778170">
+<p id="r-7289518" data-claire-element-id="31778169">
+<strong>Suivez une convention d’appellation commune.</strong>
+<br />L’une des conventions d’appellation populaires pour Python est le <strong>snake case</strong> : des noms composés de plusieurs mots séparés par des tirets bas<code data-claire-semantic="text">(_)</code>comme<code data-claire-semantic="text">nombre_de_chats</code>,  <code data-claire-semantic="text">reponse_finale</code>  ,  <code data-claire-semantic="text">le_meilleur_developpeur_python_du_monde</code>, etc.</p>
+</li>
+<li id="r-7289521" data-claire-element-id="31731916">
+<p id="r-7289520" data-claire-element-id="31731915">
+<strong>Commencez avec une lettre ou le tiret bas.</strong>
+<br />Un nom de variable ne peut pas commencer par un nombre.</p>
+</li>
+<li id="r-7289523" data-claire-element-id="31778172">
+<p id="r-7289522" data-claire-element-id="31778171">
+<strong>Utilisez uniquement des caractères alphanumériques et des tirets bas... et donc pas d'accents !</strong>
+<br />Par exemple, écrivez<code data-claire-semantic="text">bonjour_1</code>  mais pas<code data-claire-semantic="text">bonjour_#1</code>  .</p>
+</li>
+<li id="r-7289525" data-claire-element-id="31731920">
+<p id="r-7289524" data-claire-element-id="31731919">
+<strong>N’oubliez pas que les noms de variables sont sensibles à la casse.</strong>
+<br />
+<code data-claire-semantic="text">age</code>,  <code data-claire-semantic="text">Age</code>  et  <code data-claire-semantic="text">AGE</code>  sont trois variables différentes. </p>
+</li>
+</ul>
+<h3 id="r-7311272" data-claire-element-id="31776887">
+<strong>À vous de jouer ! </strong>
+</h3>
