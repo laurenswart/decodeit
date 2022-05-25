@@ -31,6 +31,13 @@ class Teacher extends User
     public function chapters(){
         return $this->hasManyThrough( Chapter::class, Course::class,);
     }
+
+    /**
+     * Get all of teacher's assignments
+     */
+    public function assignments(){
+        return $this->hasManyThrough( Assignment::class, Course::class,);
+    }
     
     /**
      * The courses create by this teacher

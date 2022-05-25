@@ -27,7 +27,6 @@ class AssignmentController extends Controller
         
         $studentAssignment = Assignment::find($id)->studentAssignmentByStudent(Auth::id());
         $submissions = $studentAssignment ? $studentAssignment->submissions : [];
-        
     
         return view('student.assignment', [
             'assignment'=>$assignment,
@@ -59,24 +58,27 @@ class AssignmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function teacherCreate(int $id){
-        
-        //if no more available chapters in subscription
         $teacher = Teacher::find(Auth::id());
         $chapter = Chapter::find($id);
-        //dd($chapter->course->teacher_id);
 
         $this->authorize('create',  [Assignment::class, $chapter]);
         $plan = $teacher->currentSubscriptionPlan();
          
+        //rediriger si aucune souscription ou si limite atteinte
         if ($plan === null){
             return redirect( route('chapter_teacherShow', $id)) 
-                ->with('flash_modal', 'You do not have an active subscription. Please choose one of our subscription plans, or renew your previous subscription.');
+                ->with('flash_modal', 'You do not have an active subscription. 
+                    Please choose one of our subscription plans, or renew your previous subscription.');
         } else if (count($chapter->course->assignments) >=  $plan->nb_assignments){
             return redirect( route('course_teacherShow', $id))
-                ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription with a higher number of assignments allowed, or delete one of your current assignments.
+                ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription 
+                    with a higher number of assignments allowed, or delete one of your current assignments.
                     Please be aware that this will remove all associated data, such as student attempts, marks, etc.');
         }
-        return view('teacher.assignment.create', ['chapter'=>$chapter]);
+        return view('teacher.assignment.create', [
+            'chapter' => $chapter, 
+            'plan' => $plan
+        ]);
     }
 
     /**
@@ -84,28 +86,21 @@ class AssignmentController extends Controller
      * 
      * @param \Illuminate\Http\Request $request
      * @param int $id Chapter id
-     * 
      * @return \Illuminate\Http\Response
      */
     public function teacherStore(Request $request, int $id){
         $teacher = Teacher::find(Auth::id());
         $chapter = Chapter::find($id);
-
-        //dd($request->post());
- 
         $this->authorize('store',  [Assignment::class, $chapter]);
-
         //form validation
         $rules = [
             'title' => 'required|max:100',
             'description' => 'required|max:65535',
-            'submissions' => 'required|int|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
+            'submissions' => 'required|int|min:1|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
             'max-mark' => 'required|max:500',
             'weight' => 'required|max:100',
             'start' => 'required|date',
-            'end' => 'required|date|after:start',
-            //'size' => 'max:'.$teacher->currentSubscriptionPlan()->max_upload_size,
-            
+            'end' => 'required|date|after:start',            
             'script' => 'max:65535',
             'executable' => 'required_with:script'
         ];
@@ -120,7 +115,6 @@ class AssignmentController extends Controller
                 Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
             ];
         }
-
         $messages = [];
         //skills validation
         if(!empty($request->post('skills'))){
@@ -129,11 +123,9 @@ class AssignmentController extends Controller
                 $messages['skills.'.$skillId.'.in'] ='Invalid skills selection';
             }
         }
-
         $validated = $request->validate($rules);
-
          try { 
-            //create chapter
+            //create assignment
             $assignment = Assignment::create([
                 'course_id'=>$chapter->course->id,
                 'title' => $validated['title'],
@@ -149,14 +141,13 @@ class AssignmentController extends Controller
                 'submission_size'=> $teacher->currentSubscriptionPlan()->max_upload_size,
                 'language'=>$validated['language'],
             ]);
-
             //attach skills
             $assignment->skills()->attach($validated['skills']);
             //attach chapter
             $assignment->chapters()->attach($id);
-
         } catch (\Illuminate\Database\QueryException $exception) {
-            return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', "Something went wrong and we're sorry to say your new assignment could not be created");    
+            return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', 
+                "Something went wrong and we're sorry to say your new assignment could not be created");    
         }
         return redirect(route('teacher_assignmentShow', [
             'assignment'=>$assignment,

@@ -84,7 +84,9 @@ class Assignment extends Model
             return 'to do';
         } else if($this->end_time_carbon()->lt(now()) && count($studentAssignment->submissions) === 0){
             return 'missed';
-        } 
+        } else if($this->start_time_carbon()->gt(now())){
+            return 'unavailable';
+        }
         return 'undergoing';
         
     }

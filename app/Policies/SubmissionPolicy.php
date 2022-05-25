@@ -45,12 +45,16 @@ class SubmissionPolicy
      */
     public function create(User $user, $assignment)
     {   
-        
         //check student is enroled in this course
-        $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
+        $enrolment = DB::table('enrolments')
+            ->where('course_id', $assignment->course_id)->where('student_id', $user->id)
+            ->first();
         if(empty($enrolment)) return false;
-        $studentAssignment = StudentAssignment::where('assignment_id', $assignment->id)->where('enrolment_id', $enrolment->id)->first();
-        return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) && $assignment->isOpen();
+        $studentAssignment = StudentAssignment::where('assignment_id', $assignment->id)
+            ->where('enrolment_id', $enrolment->id)
+            ->first();
+        return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) 
+                && $assignment->isOpen();
     }
 
     /**

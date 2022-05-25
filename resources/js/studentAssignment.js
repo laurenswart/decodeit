@@ -20,9 +20,10 @@ let btnRun = document.getElementById('btRun');
 
 // If we have an editor element
 if(scriptEditor){
-    // pass options to ace.edit
+    //get language in attribut data-lang
     let lang = scriptEditor.dataset.lang;
     if(acceptedModes.indexOf(lang)!=-1){
+        // pass options to ace.edit
         editor = ace.edit(document.getElementById('scriptEditor'), {
             mode: "ace/mode/"+lang,
             theme: "ace/theme/dracula",
@@ -35,19 +36,24 @@ if(scriptEditor){
             autoScrollEditorIntoView: true,
             copyWithEmptySelection: true,
         });
-
+        //copy code into hidden input on form submission
         document.getElementById("newSubmission").onsubmit = function(evt) {
             hiddenScript.value = editor.getValue();  
         }
 
-        //set up judge0
-        document.getElementById('btClearConsole').addEventListener('click', function(){
-            myConsole.innerHTML = '<li></li>';
-        })
+        //clear console on button press
+        let btnClearConsole = document.getElementById('btClearConsole');
+        if ( btnClearConsole != null){
+            btnClearConsole.addEventListener('click', function(){
+                myConsole.innerHTML = '<li></li>';
+            })
+        }
+        
 
         //load in testScript
         loadTestScript();
 
+        //set up judge0
         //prepare to send submission to judge0
         let headers = {
             "content-type": "application/json",
@@ -61,16 +67,16 @@ if(scriptEditor){
             } else {
 
                 btnRun.addEventListener('click', function(){
-                    
-                    //console.log(editor.getValue());
-
+                    //changer le texte du bouton
                     this.innerText = 'loading..';
                     let languageId = judge0Codes[lang];
                     let inputCode = editor.getValue();
+                    // ne rien faire si pas de code
                     if(inputCode==null || inputCode==''){
                         this.innerText = 'Run';
                         return;
                     }
+                    //préparer l'envoi vers judge0
                     let options = {
                         "method": "POST",
                         "headers": headers,
@@ -93,24 +99,22 @@ if(scriptEditor){
                     };
             
                     sendSubmission(options)
-                    .then(token => {
-                        //console.log(token);
-                        return getSubmissionResponse(token);
-                    })
-                    .then( response => {
-                        //console.log(response);
-                        let li = document.createElement('li');
-                        if (response.status_id == 11){
-                            //error
-                            li.innerText = response.stderr;
-                            codeStatus.innerText = 'Error';
-                        } else {
-                            li.innerText = response.stdout;
-                            codeStatus.innerText = 'Pass';
-                        }
-                        myConsole.appendChild(li);
-                        this.innerText = 'Run';
-                    })
+                        .then(token => {
+                            return getSubmissionResponse(token);
+                        })
+                        .then( response => {
+                            let li = document.createElement('li');
+                            if (response.status_id == 11){
+                                //error
+                                li.innerText = response.stderr;
+                                codeStatus.innerText = 'Error';
+                            } else {
+                                li.innerText = response.stdout;
+                                codeStatus.innerText = 'Pass';
+                            }
+                            myConsole.appendChild(li);
+                            this.innerText = 'Run';
+                        })
                 });
 
                 //save script content and console content on form submission
@@ -124,7 +128,6 @@ if(scriptEditor){
 }
 
 //function declarations
-
 async function sendSubmission(options){
     return await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&fields=*", options)
     .then(response => {
@@ -191,7 +194,6 @@ function loadTestScript(){
 
    
 }
-
 
 //used for judge0
 class CodeSubmission{

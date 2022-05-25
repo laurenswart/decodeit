@@ -25,14 +25,14 @@ class AssignmentPolicy
         return $user->isStudent() && Student::find($user->id)->courses->contains($assignment->course);
     }
 
-   /**
-     * Determine whether the user can create models.
+    /**
+     * Determine whether the teacher can create models.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Chapter  $chapter Chapter to which we are adding an assignment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user, $chapter)
-    {
+    public function create(User $user, $chapter){
         return $user->isTeacher() && $chapter!=null && $chapter->course->teacher_id === $user->id;
     }
 
@@ -48,7 +48,7 @@ class AssignmentPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can save models.
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool

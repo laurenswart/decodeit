@@ -146,49 +146,44 @@
 
 	@if($assignment->nb_submissions > count($submissions) && ($studentAssignment==null || !$studentAssignment->to_mark) && $assignment->isOpen())
 	<form method="post" action="{{ route('submission_studentStore', $assignment->id) }}" id="newSubmission">
-	<section id="submission">
-		
-		@csrf
-		<h2 class="light-card block-title layer-2">New Submission</h2>
+		<section id="submission">
+			@csrf
+			<h2 class="light-card block-title layer-2">New Submission</h2>
 
-		<div class="form-section layer-2">
-			<h3 class="title-3">Code</h3>
-			<input name="script" type="text" hidden id="script">
-			<input name="console" type="text" hidden id="hiddenConsole">
-			<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
-
-			@if($assignment->can_execute)
-			<div class="btn-box centered">
-				<button class="myButton" id="btRun" type="button" value="{{ $assignment->id }}">Run</button>
-			</div>
-			
-
-			<div  class="my-4">
-				<div class="d-flex justify-content-between">
-					<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
-					<p id="codeStatus"></p>
+			<div class="form-section layer-2">
+				<h3 class="title-3">Code</h3>
+				<input name="script" type="text" hidden id="script">
+				<input name="console" type="text" hidden id="hiddenConsole">
+				<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
+				@if($assignment->can_execute)
+					<div class="btn-box centered">
+						<button class="myButton" id="btRun" type="button" value="{{ $assignment->id }}">Run</button>
+					</div>
+					<div  class="my-4">
+						<div class="d-flex justify-content-between">
+							<button type="button" id="btClearConsole"><i class="fas fa-eraser"></i>Clear Console</button>
+							<p id="codeStatus"></p>
+						</div>
+						<ul  id="console" class="my-0 console">
+							<li></li>
+						</ul>
+					</div>
+				@endif
+				<div class="btn-box centered">
+					<button class="myButton" id="newSubmission" type="submit">Submit</button>
 				</div>
-				<ul  id="console" class="my-0 console">
-					<li></li>
-				</ul>
+				@if($errors->any())
+				<div class="form-section errors alert alert-danger">
+					@foreach ($errors->all() as $error)
+						<p>{{ $error }}</p>
+					@endforeach
+				</div>
+				@endif
 			</div>
-			@endif
-			<div class="btn-box centered">
-				<button class="myButton" id="newSubmission" type="submit">Submit</button>
-			</div>
-
-
-			@if($errors->any())
-		<div class="form-section errors alert alert-danger">
-			@foreach ($errors->all() as $error)
-				<p>{{ $error }}</p>
-			@endforeach
-		</div>
-		@endif
 		</section>
-		</form>
-		@endif
-		</div>
+	</form>
+	@endif
+
 
 		
 	@if(($studentAssignment==null || !$studentAssignment->to_mark) && $assignment->isOpen())
