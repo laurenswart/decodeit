@@ -34,7 +34,9 @@ class SubmissionPolicy
     public function studentAddQuestion(User $user, Submission $submission)
     {
         //submission belongs to student, and student assignment has not been marked yet
-        return $submission->studentAssignment->enrolment->student_id == $user->id &&  $submission->studentAssignment->mark == null && $submission->question == null;
+        return $submission->studentAssignment->enrolment->student_id == $user->id 
+                &&  $submission->studentAssignment->mark == null 
+                && $submission->question == null;
     }
 
     /**
@@ -53,6 +55,8 @@ class SubmissionPolicy
         $studentAssignment = StudentAssignment::where('assignment_id', $assignment->id)
             ->where('enrolment_id', $enrolment->id)
             ->first();
+        //student has at least 1 available submission remaining 
+        //and the current date is between the start and end time for this assignment
         return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) 
                 && $assignment->isOpen();
     }

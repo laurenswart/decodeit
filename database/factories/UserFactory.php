@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'role_id' => 2,
             'email_verified_at' => $timestamp,
-            'password' => '$2y$10$FacC.79UhaeugQhEEQRDquwRe97jsgBFk2/C7I.EEuZKFFs7NodfS',
+            'password' => bcrypt('epfcEPFC123!'),
             'created_at' => $timestamp,
             'updated_at' => null,
             'deleted_at' => null,

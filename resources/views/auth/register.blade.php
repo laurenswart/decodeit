@@ -18,6 +18,11 @@
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value=" {{ old('email') ?? '' }}" required >
                 </div>
+                @if($errors->get('email'))
+                    <div class="error-msg">
+                        $errors->first('email')
+                    </div>
+                @endif
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required autocomplete="new-password">
@@ -29,7 +34,7 @@
                 @endif
                 <div class="form-group">
                     <label for="password-conf">Confirm Password</label>
-                    <input type="password" class="form-control" id="password_confirmation-conf" placeholder="Enter confirmation" name="password_confirmation" required>
+                    <input type="password" class="form-control" id="password-conf" placeholder="Enter confirmation" name="password_confirmation" required>
                 </div>
                 @if($errors->get('password_confirmation'))
                     <div class="error-msg">
