@@ -51,18 +51,24 @@ class Chapter extends Model
 
     public function nbAssignmentsDone(){
         $assignmentIds = $this->assignments->pluck('id');
-        $enrolmentId = $this->course->enrolmentForAuth();
-        $nbDone = DB::table('student_assignment')
-            ->join('assignments', 'assignments.id', 'student_assignment.assignment_id')
-            ->where('enrolment_id', $enrolmentId->id)
-            ->whereIn('assignment_id', $assignmentIds)
+        $enrolment = Course::find($this->course_id)->enrolmentForAuth();
+
+        $nbDone = DB::table('assignments')
+           
+            ->whereIn('assignments.id', $assignmentIds)
+            ->leftJoin('student_assignment', 'assignments.id', 'student_assignment.assignment_id')
+            
+           
+            ->where(function ($query) use ($enrolment){
+                $query->where('enrolment_id', $enrolment->id)
+                      ->orWhereNull('enrolment_id');
+            })
+             
             ->where(function ($query){
                 $query->where('to_mark', 1)
                       ->orWhereNotNull('mark')
-                      ->orWhere('end_time', '<=', now());
-            })
-            ->count();
-
+                      ->orWhere('end_time', '<=', now()->format('Y-m-d H:i:s'));
+            })->count();
         return $nbDone;
     }
 

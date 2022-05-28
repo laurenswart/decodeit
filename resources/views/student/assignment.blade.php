@@ -131,7 +131,7 @@
 						
 						<h4>Code</h4>
 						<div>
-							{{ $submission->content }}
+							<pre>{!!  ($submission->content) !!}</pre>
 						</div>
 						
 					</div>
@@ -152,7 +152,7 @@
 
 			<div class="form-section layer-2">
 				<h3 class="title-3">Code</h3>
-				<input name="script" type="text" hidden id="script">
+				<textarea name="script" type="text" hidden id="script" ></textarea>
 				<input name="console" type="text" hidden id="hiddenConsole">
 				<div id="scriptEditor" data-lang="{{ $assignment->language }}"></div>
 				@if($assignment->can_execute)

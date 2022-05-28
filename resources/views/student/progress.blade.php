@@ -28,7 +28,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						@foreach($course->chapters->sortBy('order_id') as $chapter)
+						@foreach($course->chapters->sortBy('order_id')->where('is_active', true) as $chapter)
 							<tr>
 								<td><a href="{{ route('chapter_studentShow', $chapter->id)}}">{{ $chapter->title }}</a></td>
 								<td>@if($chapter->read())<i class="fas fa-check-square greyed no-hover"></i>  @else <i class="fas fa-exclamation-square"></i>@endif</td>
@@ -57,6 +57,7 @@
 						</thead>
 						<tbody>
 						@foreach($course->assignments->sortBy('start_time') as $assignment)
+							@if($assignment->chapters[0]->is_active)
 							<tr>
 								<td><a href="{{ route('assignment_studentShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
 								<td>{{ $assignment->start_time_string() }}</td>
@@ -65,6 +66,7 @@
 								<td>{!! $assignment->statusTextByStudent(Auth::id()) !!}</td>
 								<td>{{$assignment->studentAssignmentByStudent(Auth::id()) !==null && $assignment->studentAssignmentByStudent(Auth::id())->mark !== null ? $assignment->studentAssignmentByStudent(Auth::id())->mark.' / '.$assignment->max_mark : '-'}}</td>
 							</tr>
+							@endif
 						@endforeach
 						</tbody>
 					</table>

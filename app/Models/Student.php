@@ -57,22 +57,29 @@ class Student extends User
 
         //created chapter :Eloquent\Collection
         //chapter is active, course id active, and student is enroled
-        $createdChapters = Chapter::where('created_at', '>',$lastConnection)->where('is_active', true)->whereIn('course_id', $student->courses->pluck('id'))->get();
+        $createdChapters = Chapter::where('created_at', '>',$lastConnection)
+            ->where('is_active', true)
+            ->whereIn('course_id', $student->courses->pluck('id'))
+            ->get();
         
         //updated chapter content
 
         //create assignment:Eloquent\Collection
-        //student is enroled in course
-        $createdAssignments = Assignment::where('created_at', '>',$lastConnection)->whereIn('course_id', $student->courses->pluck('id'))->get();
+        //student is enroled in active course and related chapter is active
+        $createdAssignments = Assignment::where('created_at', '>',$lastConnection)
+            ->whereIn('course_id', $student->courses->pluck('id'))
+            ->get();
         
         
         //got feedback on submission :Eloquent\Collection
         //studentAssignment is for auth student
-        $feedbackedSubmissions = Submission::where('feedback_at', '>',$lastConnection)->whereIn('student_assignment_id', $student->studentAssignments->pluck('id'))->get();
+        $feedbackedSubmissions = Submission::where('feedback_at', '>',$lastConnection)
+            ->whereIn('student_assignment_id', $student->studentAssignments->pluck('id'))->get();
         
         //got mark on student_assignment :Array
         //studentAssignment is for auth student
-        $markedStudentAssignments = $student->studentAssignments->where('marked_at', '>',$lastConnection)->whereIn('id',  $student->studentAssignments->pluck('id'))->all();
+        $markedStudentAssignments = $student->studentAssignments->where('marked_at', '>',$lastConnection)
+            ->whereIn('id',  $student->studentAssignments->pluck('id'))->all();
         
 
         //forum messages :Eloquent\Collection
@@ -122,31 +129,37 @@ class Student extends User
             ];
         }
         foreach($createdAssignments as $createdAssignment){
-            $models[] = [
-                'icon'=>'<i class="fas fa-plus-square"></i>',
-                'route'=> route('assignment_studentShow', $createdAssignment->id),
-                'text'=> 'New Assignment in ',
-                'resource' => ucfirst($createdChapter->course->title),
-                'date'=> Carbon::parse($createdAssignment->created_at)
-            ];
+            if($createdAssignment->chapters[0]->is_active){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-plus-square"></i>',
+                    'route'=> route('assignment_studentShow', $createdAssignment->id),
+                    'text'=> 'New Assignment in ',
+                    'resource' => ucfirst($createdAssignment->course->title),
+                    'date'=> Carbon::parse($createdAssignment->created_at)
+                ];
+            }
         }
         foreach($feedbackedSubmissions as $feedbackedSubmission){
-            $models[] = [
-                'icon'=>'<i class="fad fa-inbox-in"></i>',
-                'route'=> route('assignment_studentShow', $feedbackedSubmission->studentAssignment->assignment_id),
-                'text'=> 'Feedback Received for ',
-                'resource' => ucfirst($feedbackedSubmission->studentAssignment->assignment->title),
-                'date'=> Carbon::parse($feedbackedSubmission->feedback_at)
-            ];
+            if($feedbackedSubmission->studentAssignment->assignment->chapters[0]->is_active){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-inbox-in"></i>',
+                    'route'=> route('assignment_studentShow', $feedbackedSubmission->studentAssignment->assignment_id),
+                    'text'=> 'Feedback Received for ',
+                    'resource' => ucfirst($feedbackedSubmission->studentAssignment->assignment->title),
+                    'date'=> Carbon::parse($feedbackedSubmission->feedback_at)
+                ];
+            }
         }
         foreach($markedStudentAssignments as $markedStudentAssignment){
-            $models[] = [
-                'icon'=>'<i class="fad fa-inbox-in"></i>',
-                'route'=> route('assignment_studentShow', $markedStudentAssignment->assignment_id),
-                'text'=> 'Mark Received for ',
-                'resource' => ucfirst($markedStudentAssignment->assignment->title),
-                'date'=> Carbon::parse($markedStudentAssignment->marked_at)
-            ];
+            if($markedStudentAssignment->assignment->chapters[0]->is_active){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-inbox-in"></i>',
+                    'route'=> route('assignment_studentShow', $markedStudentAssignment->assignment_id),
+                    'text'=> 'Mark Received for ',
+                    'resource' => ucfirst($markedStudentAssignment->assignment->title),
+                    'date'=> Carbon::parse($markedStudentAssignment->marked_at)
+                ];
+            }
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
             if($student->courses->pluck('id')->contains($updatedForumCourse->id)){
@@ -159,18 +172,19 @@ class Student extends User
                 ];
             }
         }
-        foreach($createdEnrolments as $createdEnrolment){
+        foreach($createdEnrolments as $createdEnrolmentCourse){
+           
             $models[] = [
                 'icon'=>'<i class="fas fa-plus-square"></i>',
-                'route'=> route('course_studentShow', $createdEnrolment->id),
+                'route'=> route('course_studentShow', $createdEnrolmentCourse->id),
                 'text'=> 'New Course: ',
-                'resource' => ucfirst($createdEnrolment->course->title),
-                'date'=> Carbon::parse($createdEnrolment->created_at)
+                'resource' => ucfirst($createdEnrolmentCourse->title),
+                'date'=> Carbon::parse($createdEnrolmentCourse->pivot->created_at)
             ];
         }
         foreach($markedEnrolments as $markedEnrolment){
             $models[] = [
-                'icon'=>'<i class="fad fa-inbox-in"></i>',
+                'icon'=>'<i class="fas fa-inbox-in"></i>',
                 'route'=> route('course_studentShow', $markedEnrolment->id),
                 'text'=> 'Final Mark Received for ',
                 'resource' => ucfirst($markedEnrolment->course->title),
@@ -178,13 +192,15 @@ class Student extends User
             ];
         }
         foreach($createdNoteAssignments as $createdNoteAssignment){
-            $models[] = [
-                'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
-                'route'=> route('assignment_studentShow', $createdNoteAssignment->id),
-                'text'=> 'New Assignment Note for ',
-                'resource' => ucfirst($createdNoteAssignment->title),
-                'date'=> Carbon::parse($createdNoteAssignment->created_at)
-            ];
+            if($createdNoteAssignment->chapters[0]->is_active){
+                $models[] = [
+                    'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
+                    'route'=> route('assignment_studentShow', $createdNoteAssignment->id),
+                    'text'=> 'New Assignment Note for ',
+                    'resource' => ucfirst($createdNoteAssignment->title),
+                    'date'=> Carbon::parse($createdNoteAssignment->created_at)
+                ];
+            }
         }
      
         

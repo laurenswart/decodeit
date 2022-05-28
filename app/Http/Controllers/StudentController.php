@@ -29,10 +29,17 @@ class StudentController extends Controller
     public function dashboard(){
         $courses = Student::find(Auth::id())->courses
         ->whereNull('deleted_at');
-        $assignments = Assignment::all()
+        $assignmentsAll = Assignment::all()
         ->sortBy('start_time')
         ->whereIn('course_id', $courses->pluck('id'))
         ->where('end_time', '>=', now());
+
+        $assignments = [];
+        foreach($assignmentsAll as $assignment){
+            if($assignment->chapters[0]->is_active){
+                $assignments[] = $assignment;
+            }
+        }
 
         return view('student.dashboard', [
             'notifications' => Student::find(Auth::id())->notifications(),

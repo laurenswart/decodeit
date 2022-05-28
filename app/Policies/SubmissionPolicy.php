@@ -14,17 +14,6 @@ class SubmissionPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
@@ -36,7 +25,8 @@ class SubmissionPolicy
         //submission belongs to student, and student assignment has not been marked yet
         return $submission->studentAssignment->enrolment->student_id == $user->id 
                 &&  $submission->studentAssignment->mark == null 
-                && $submission->question == null;
+                && $submission->question == null
+                && $submission->studentAssignment->assignment->chapters[0]->is_active;
     }
 
     /**
@@ -58,7 +48,7 @@ class SubmissionPolicy
         //student has at least 1 available submission remaining 
         //and the current date is between the start and end time for this assignment
         return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) 
-                && $assignment->isOpen();
+                && $assignment->isOpen()  && $assignment->chapters[0]->is_active;
     }
 
     /**
@@ -74,39 +64,4 @@ class SubmissionPolicy
         return $submission!=null && $user->isTeacher() && Teacher::find($user->id)->courses->contains($submission->studentAssignment->assignment->course);
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Submission  $submission
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, Submission $submission)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Submission  $submission
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Submission $submission)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Submission  $submission
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Submission $submission)
-    {
-        //
-    }
 }

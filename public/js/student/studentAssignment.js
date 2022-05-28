@@ -914,10 +914,11 @@ var judge0Codes = {
 var btnRun = document.getElementById('btRun'); // If we have an editor element
 
 if (scriptEditor) {
-  // pass options to ace.edit
+  //get language in attribut data-lang
   var lang = scriptEditor.dataset.lang;
 
   if (acceptedModes.indexOf(lang) != -1) {
+    // pass options to ace.edit
     editor = ace.edit(document.getElementById('scriptEditor'), {
       mode: "ace/mode/" + lang,
       theme: "ace/theme/dracula",
@@ -929,18 +930,26 @@ if (scriptEditor) {
     editor.setOptions({
       autoScrollEditorIntoView: true,
       copyWithEmptySelection: true
-    });
+    }); //copy code into hidden input on form submission
 
     document.getElementById("newSubmission").onsubmit = function (evt) {
-      hiddenScript.value = editor.getValue();
-    }; //set up judge0
+      hiddenScript.value = JSON.stringify(editor.getValue());
+      console.log(hiddenScript.value);
+      evt.preventDefault;
+    }; //clear console on button press
 
 
-    document.getElementById('btClearConsole').addEventListener('click', function () {
-      myConsole.innerHTML = '<li></li>';
-    }); //load in testScript
+    var btnClearConsole = document.getElementById('btClearConsole');
 
-    loadTestScript(); //prepare to send submission to judge0
+    if (btnClearConsole != null) {
+      btnClearConsole.addEventListener('click', function () {
+        myConsole.innerHTML = '<li></li>';
+      });
+    } //load in testScript
+
+
+    loadTestScript(); //set up judge0
+    //prepare to send submission to judge0
 
     var headers = {
       "content-type": "application/json",
@@ -955,15 +964,16 @@ if (scriptEditor) {
         btnRun.addEventListener('click', function () {
           var _this = this;
 
-          //console.log(editor.getValue());
+          //changer le texte du bouton
           this.innerText = 'loading..';
           var languageId = judge0Codes[lang];
-          var inputCode = editor.getValue();
+          var inputCode = editor.getValue(); // ne rien faire si pas de code
 
           if (inputCode == null || inputCode == '') {
             this.innerText = 'Run';
             return;
-          }
+          } //préparer l'envoi vers judge0
+
 
           var options = {
             "method": "POST",
@@ -986,10 +996,8 @@ if (scriptEditor) {
             })
           };
           sendSubmission(options).then(function (token) {
-            //console.log(token);
             return getSubmissionResponse(token);
           }).then(function (response) {
-            //console.log(response);
             var li = document.createElement('li');
 
             if (response.status_id == 11) {

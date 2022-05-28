@@ -22,7 +22,7 @@ class ChapterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function studentShow($id){
-        $chapter = Chapter::find($id);
+        $chapter = Chapter::findOrFail($id);
 
         $this->authorize('studentView', $chapter);
     
@@ -238,7 +238,7 @@ class ChapterController extends Controller
             }
 
             //check student is enrolled in course
-            if (!$student->courses->contains($chapter->course)){
+            if (!$student->courses->contains($chapter->course) || !$chapter->is_active){
                 return response()->json([
                     'success' => false, 
                 ], 403);

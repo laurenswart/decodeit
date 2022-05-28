@@ -22,7 +22,7 @@ class ChapterPolicy
      */
     public function StudentView(User $user, Chapter $chapter)
     {
-        return $user->isStudent() && Student::find($user->id)->courses->contains($chapter->course);
+        return $user->isStudent() && Student::find($user->id)->courses->contains($chapter->course) && $chapter->is_active;
     }
 
     /**
@@ -88,29 +88,5 @@ class ChapterPolicy
     public function delete(User $user, Chapter $chapter)
     {
         return $user->isTeacher() && $chapter->course->teacher_id === $user->id;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Chapter  $chapter
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Chapter $chapter)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Chapter  $chapter
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Chapter $chapter)
-    {
-        //
     }
 }

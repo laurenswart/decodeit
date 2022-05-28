@@ -67,7 +67,7 @@
         <div class="row">
           <div class="col-12 col-xl-9 mx-2">
             <h3>Submission on {{ date('D d/m/Y, H:i', strtotime( $submission->created_at)) }}</h3>
-            <div>{{$submission->content}}</div>
+            <div><pre>{!!  ($submission->content) !!}</pre></div>
             @if($studentAssignment->assignment->can_execute && $submission->status)
               <h3>Console</h3>
               <ul class="console"><li></li><li>{{$submission->status ?? 'No console message'}}</li></ul>

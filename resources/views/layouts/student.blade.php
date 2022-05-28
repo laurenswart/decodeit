@@ -50,7 +50,7 @@
                 </form>
 
               </li>
-              <li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>
+              <!--<li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>-->
           </ul>
       </div>
       

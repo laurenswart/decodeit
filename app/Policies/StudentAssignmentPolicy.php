@@ -15,16 +15,6 @@ class StudentAssignmentPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can mark the model as done.
@@ -38,7 +28,7 @@ class StudentAssignmentPolicy
         if(empty($assignment)) return false;
         //check student is enroled in this course
         $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
-        return !empty($enrolment) && $assignment->isOpen();
+        return !empty($enrolment) && $assignment->isOpen() && $assignment->chapters[0]->is_active;
     }
 
     /**
@@ -90,41 +80,5 @@ class StudentAssignmentPolicy
     public function teacherUpdate(User $user, StudentAssignment $studentAssignment)
     {
         return $user->isTeacher() && $studentAssignment!=null && $studentAssignment->canBeMarked() && Teacher::find($user->id)->students->contains($studentAssignment->enrolment->student) && Teacher::find($user->id)->courses->contains($studentAssignment->assignment->course);
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\StudentAssignment  $studentAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function delete(User $user, StudentAssignment $studentAssignment)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\StudentAssignment  $studentAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, StudentAssignment $studentAssignment)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\StudentAssignment  $studentAssignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, StudentAssignment $studentAssignment)
-    {
-        //
     }
 }

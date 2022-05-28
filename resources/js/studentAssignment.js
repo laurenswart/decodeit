@@ -38,7 +38,9 @@ if(scriptEditor){
         });
         //copy code into hidden input on form submission
         document.getElementById("newSubmission").onsubmit = function(evt) {
-            hiddenScript.value = editor.getValue();  
+            hiddenScript.value = JSON.stringify(editor.getValue()); 
+            //console.log(hiddenScript.value);
+            evt.preventDefault;
         }
 
         //clear console on button press

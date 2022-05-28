@@ -6,7 +6,7 @@
 			<a href="{{ route('course_studentShow', $chapter->course_id)}}"><i class="fas fa-arrow-alt-square-left"></i>Back to Course</a>
 		</nav>
 		<section id="chapter-content">
-			<h2 class="light-card block-title layer-2">Chapter Name</h2>
+			<h2 class="light-card block-title layer-2">{{ $chapter->title }}</h2>
 			<div class="listElementContent d-flex flex-col align-items-start layer-2 form-section">
 				{!! clean($chapter->content) !!}
 			</div>

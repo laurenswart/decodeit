@@ -37,27 +37,4 @@ class EnrolmentPolicy
         return $user->isTeacher() && $enrolment->course->teacher_id === $user->id;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Enrolment  $enrolment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Enrolment $enrolment)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Enrolment  $enrolment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Enrolment $enrolment)
-    {
-        //
-    }
 }

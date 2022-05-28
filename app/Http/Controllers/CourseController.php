@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Chapter;
 use App\Models\Course;
 use App\Models\Enrolment;
 use App\Models\Skill;
@@ -11,6 +12,7 @@ use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 use PDF;
@@ -64,6 +66,7 @@ class CourseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function studentShow($id){
+
         $course = Course::find($id);
 
         $this->authorize('studentView', $course);

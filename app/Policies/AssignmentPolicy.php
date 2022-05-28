@@ -22,7 +22,7 @@ class AssignmentPolicy
      */
     public function studentView(User $user, Assignment $assignment)
     {
-        return $user->isStudent() && Student::find($user->id)->courses->contains($assignment->course);
+        return $user->isStudent() && Student::find($user->id)->courses->contains($assignment->course) && $assignment->chapters[0]->is_active;
     }
 
     /**
@@ -89,27 +89,5 @@ class AssignmentPolicy
         return $user->isTeacher() && $assignment!=null && Teacher::find($user->id)->courses->contains($assignment->course);
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, Assignment $assignment)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, Assignment $assignment)
-    {
-        //
-    }
+ 
 }
