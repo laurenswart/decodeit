@@ -35,6 +35,15 @@ Route::get('account/delete', ([TeacherController::class, 'teacherConfirmDelete']
 Route::delete('account/delete', ([TeacherController::class, 'teacherDelete']))
     ->name('teacher_teacherDelete');
 
+//SUBSCRIPTIONS
+Route::get('plans', ([PlanController::class, 'teacherIndex']))
+    ->name('plan_teacherIndex');
+Route::get('subscriptions/payment_failed', ([SubscriptionController::class, 'teacherFail']))
+    ->name('subscription_teacherFail');
+Route::post('create-checkout-session', ([SubscriptionController::class, 'createCheckoutSession']))
+    ->name('create-checkout-session');
+
+
 Route::middleware('subscription')->group(function () {
     Route::get('dashboard', ([TeacherController::class, 'dashboard']))
         ->name('teacherDashboard');
@@ -185,13 +194,6 @@ Route::middleware('subscription')->group(function () {
         ->where('nb', '[0-9]+')
         ->name('studentSkill_teacherUpdate');
 
-
-    Route::get('plans', ([PlanController::class, 'teacherIndex']))
-        ->name('plan_teacherIndex');
-    Route::get('subscriptions/payment_failed', ([SubscriptionController::class, 'teacherFail']))
-        ->name('subscription_teacherFail');
-    Route::post('create-checkout-session', ([SubscriptionController::class, 'createCheckoutSession']))
-        ->name('create-checkout-session');
 
     //TYPEAHEAD
     Route::post('/searchMyStudents', [TypeaheadController::class, 'newEnrolmentByTeacher'])
