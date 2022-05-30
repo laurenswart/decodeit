@@ -28,15 +28,15 @@ class StudentAssignmentPolicy
         if(empty($assignment)) return false;
         //check student is enroled in this course
         $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
-        return !empty($enrolment) && $assignment->isOpen() && $assignment->chapters[0]->is_active;
+        return !empty($enrolment) && $assignment->isOpen() && $assignment->chapters[0]->is_active && $enrolment->course->is_active;
     }
 
     /**
      * Determine whether the teacher can automatically create a student assignment 
      *
      * @param  \App\Models\User  $user
-     *  * @param  \App\Models\Assignment  $assignment
-     *  * @param  \App\Models\Enrolment  $enrolment
+     * @param  \App\Models\Assignment  $assignment
+     * @param  \App\Models\Enrolment  $enrolment
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function teacherStore(User $user, Assignment $assignment, Enrolment $enrolment)

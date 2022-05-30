@@ -237,7 +237,7 @@ class ChapterController extends Controller
                 ], 403);
             }
 
-            //check student is enrolled in course
+            //check student is enrolled in course, course is active and chapter is active
             if (!$student->courses->contains($chapter->course) || !$chapter->is_active){
                 return response()->json([
                     'success' => false, 

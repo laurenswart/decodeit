@@ -27,8 +27,7 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function dashboard(){
-        $courses = Student::find(Auth::id())->courses
-        ->whereNull('deleted_at');
+        $courses = Student::find(Auth::id())->courses;
         $assignmentsAll = Assignment::all()
         ->sortBy('start_time')
         ->whereIn('course_id', $courses->pluck('id'))
@@ -36,6 +35,7 @@ class StudentController extends Controller
 
         $assignments = [];
         foreach($assignmentsAll as $assignment){
+            //chapter is active, student is enrolled in course and course is active
             if($assignment->chapters[0]->is_active){
                 $assignments[] = $assignment;
             }

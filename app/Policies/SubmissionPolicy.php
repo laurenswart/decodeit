@@ -26,7 +26,8 @@ class SubmissionPolicy
         return $submission->studentAssignment->enrolment->student_id == $user->id 
                 &&  $submission->studentAssignment->mark == null 
                 && $submission->question == null
-                && $submission->studentAssignment->assignment->chapters[0]->is_active;
+                && $submission->studentAssignment->assignment->chapters[0]->is_active
+                && $submission->studentAssignment->assignment->course->is_active;
     }
 
     /**
@@ -39,7 +40,8 @@ class SubmissionPolicy
     {   
         //check student is enroled in this course
         $enrolment = DB::table('enrolments')
-            ->where('course_id', $assignment->course_id)->where('student_id', $user->id)
+            ->where('course_id', $assignment->course_id)
+            ->where('student_id', $user->id)
             ->first();
         if(empty($enrolment)) return false;
         $studentAssignment = StudentAssignment::where('assignment_id', $assignment->id)
@@ -48,7 +50,7 @@ class SubmissionPolicy
         //student has at least 1 available submission remaining 
         //and the current date is between the start and end time for this assignment
         return (!$studentAssignment || count($studentAssignment->submissions) < $assignment->nb_submissions) 
-                && $assignment->isOpen()  && $assignment->chapters[0]->is_active;
+                && $assignment->isOpen()  && $assignment->chapters[0]->is_active && $assignment->course->is_active;
     }
 
     /**

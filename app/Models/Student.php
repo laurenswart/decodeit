@@ -107,9 +107,10 @@ class Student extends User
                         ->pluck('assignment_id', DB::raw('min(assignment_notes.created_at) as created_at'))->all();
         $createdNoteAssignments = [];
         
+        $courseIds = $student->courses->pluck('id')->toArray();
         foreach($assignmentIds as $created_at => $assignmentId){
             $assignment = Assignment::find($assignmentId);
-            if(in_array($assignment->course_id, $student->courses->pluck('id')->toArray())){
+            if(in_array($assignment->course_id, $courseIds) && $assignment->chapters[0]->is_active){
                 $assignment->created_at = $created_at;
                 $createdNoteAssignments[] = $assignment;
             }
@@ -140,7 +141,7 @@ class Student extends User
             }
         }
         foreach($feedbackedSubmissions as $feedbackedSubmission){
-            if($feedbackedSubmission->studentAssignment->assignment->chapters[0]->is_active){
+            if($feedbackedSubmission->studentAssignment->assignment->chapters[0]->is_active && $feedbackedSubmission->studentAssignment->assignment->course->is_active){
                 $models[] = [
                     'icon'=>'<i class="fas fa-inbox-in"></i>',
                     'route'=> route('assignment_studentShow', $feedbackedSubmission->studentAssignment->assignment_id),
@@ -151,7 +152,7 @@ class Student extends User
             }
         }
         foreach($markedStudentAssignments as $markedStudentAssignment){
-            if($markedStudentAssignment->assignment->chapters[0]->is_active){
+            if($markedStudentAssignment->assignment->chapters[0]->is_active && $markedStudentAssignment->assignment->course->is_active){
                 $models[] = [
                     'icon'=>'<i class="fas fa-inbox-in"></i>',
                     'route'=> route('assignment_studentShow', $markedStudentAssignment->assignment_id),
@@ -192,15 +193,13 @@ class Student extends User
             ];
         }
         foreach($createdNoteAssignments as $createdNoteAssignment){
-            if($createdNoteAssignment->chapters[0]->is_active){
-                $models[] = [
-                    'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
-                    'route'=> route('assignment_studentShow', $createdNoteAssignment->id),
-                    'text'=> 'New Assignment Note for ',
-                    'resource' => ucfirst($createdNoteAssignment->title),
-                    'date'=> Carbon::parse($createdNoteAssignment->created_at)
-                ];
-            }
+            $models[] = [
+                'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
+                'route'=> route('assignment_studentShow', $createdNoteAssignment->id),
+                'text'=> 'New Assignment Note for ',
+                'resource' => ucfirst($createdNoteAssignment->title),
+                'date'=> Carbon::parse($createdNoteAssignment->created_at)
+            ];
         }
      
         

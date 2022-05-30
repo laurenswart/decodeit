@@ -18,7 +18,7 @@
     @else 
         @if(count($notifications)>0)
             @foreach($notifications as $notification)
-            <a href="{{ $notification['route'] }}" class="listElement-h light-card row zoom">
+            <a href="{{ $notification['route'] }}" class="listElement-h light-card row zoom palette-medium">
                 <span class="listElementTitle palette-medium col-12 col-md-4 col-xl-3"><p>{{  $notification['date']->format('H:i:s - D d/m/Y') }}</p></span>
                 <span class="listElementContent col background">
                     <span>

@@ -27,9 +27,8 @@ class CourseController extends Controller
      */
     public function studentIndex(){
         $this->authorize('studentViewAny', Course::class);
-        
-        $courses = Student::find(Auth::id())->courses
-            ->whereNull('deleted_at');
+        //courses in which student is currently enroled and are active
+        $courses = Student::find(Auth::id())->courses;
 
         $assignments = Assignment::all()
             ->sortBy('start_time')
