@@ -5,7 +5,7 @@
     <h1 class="light-card block-title layer-2">Dashboard</h1>
     @if($teacher->isOnFreeTrial())
     <div class="listElement-v light-card row">
-        <span class="listElementTitle palette-medium col-12 col-md-4">Free Trial</span>
+        <span class="listElementTitle palette-medium col-12">Free Trial</span>
         <span class="listElementContent col background">
             <p class="w-100">You don't currently have an active subscription.
             However, you can play around and discover a couple of the awesome functionalities DecodeIt has to offer.<br>

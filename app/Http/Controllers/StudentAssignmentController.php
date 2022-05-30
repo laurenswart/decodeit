@@ -132,6 +132,7 @@ class StudentAssignmentController extends Controller
         $validated = $request->validate($rules);
 
         $studentAssignment->mark = $validated['mark'];
+        $studentAssignment->to_mark = 0;
         $studentAssignment->marked_at = now();
         $studentAssignment->save();
 

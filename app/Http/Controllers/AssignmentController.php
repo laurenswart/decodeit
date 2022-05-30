@@ -61,7 +61,7 @@ class AssignmentController extends Controller
         $teacher = Teacher::find(Auth::id());
         $chapter = Chapter::find($id);
 
-        $this->authorize('create',  [Assignment::class, $chapter]);
+        ///$this->authorize('create',  [Assignment::class, $chapter]);
         $plan = $teacher->currentSubscriptionPlan();
          
         //rediriger si aucune souscription ou si limite atteinte
@@ -70,11 +70,13 @@ class AssignmentController extends Controller
                 ->with('flash_modal', 'You do not have an active subscription. 
                     Please choose one of our subscription plans, or renew your previous subscription.');
         } else if (count($chapter->course->assignments) >=  $plan->nb_assignments){
-            return redirect( route('course_teacherShow', $id))
+            return redirect( route('chapter_teacherShow', $id))
                 ->with('flash_modal', 'You have reached your subscription limit! Please upgrade to a subscription 
                     with a higher number of assignments allowed, or delete one of your current assignments.
                     Please be aware that this will remove all associated data, such as student attempts, marks, etc.');
         }
+
+        
         return view('teacher.assignment.create', [
             'chapter' => $chapter, 
             'plan' => $plan
@@ -142,16 +144,17 @@ class AssignmentController extends Controller
                 'language'=>$validated['language'],
             ]);
             //attach skills
-            $assignment->skills()->attach($validated['skills']);
+            if(!empty($validated['skills'])){
+                $assignment->skills()->attach($validated['skills']);
+            }
+            
             //attach chapter
             $assignment->chapters()->attach($id);
         } catch (\Illuminate\Database\QueryException $exception) {
             return redirect( route('chapter_teacherShow', $id) )->with('flash_modal', 
                 "Something went wrong and we're sorry to say your new assignment could not be created");    
         }
-        return redirect(route('teacher_assignmentShow', [
-            'assignment'=>$assignment,
-        ]));
+        return redirect(route('assignment_teacherShow', $assignment->id));
     }
 
     /**
