@@ -44,7 +44,7 @@
 
 
     <div class="row">
-      <div class="col">
+      <div class="col-12 col-xl-6">
         <div class="form-section layer-2">
           <h3 class="title-3">Add New Students</h3>
           <div class="form-group">
@@ -53,9 +53,6 @@
           </div>
           <div id="options"></div>
         </div>
-      </div>
-      <div class="col-12 col-xl-3 col-md-4 form-section layer-2 ml-4">
-        <h3 class="title-3">Details</h3>
       </div>
     </div>
 @endsection

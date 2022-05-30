@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Teacher;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -33,7 +34,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended( Auth::user()->role->name == 'teacher' ? route('teacherDashboard') : route('studentDashboard'));
+        if(Auth::user()->role->name == 'teacher'){
+            $teacher = Teacher::find(Auth::id());
+            return redirect()->intended( $teacher->currentSubscription() === null && !$teacher->isOnFreeTrial() ? route('teacher_account') : route('teacherDashboard'));
+        }
+        return redirect()->intended( route('studentDashboard'));
     }
 
     /**
