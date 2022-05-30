@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'created_at' => $timestamp,
             'updated_at' => null,
             'deleted_at' => null,
-            'remember_token' => Str::random(10),
+            'remember_token' => null,
         ];
     }
 

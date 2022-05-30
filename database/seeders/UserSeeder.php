@@ -33,16 +33,10 @@ class UserSeeder extends Seeder
         
         //Constant users for testing
         User::factory()->create([
-            'firstname'=>'lauren', 
-            'lastname'=>'swart', 
+            'firstname'=>'Lauren', 
+            'lastname'=>'Swart', 
             'email'=>'lswart@gmail.com', 
             'role_id'=>2
-        ]);
-        User::factory()->create([
-            'firstname'=>'bob', 
-            'lastname'=>'sull', 
-            'email'=>'bsull@gmail.com', 
-            'role_id'=>1
         ]);
     }
 }

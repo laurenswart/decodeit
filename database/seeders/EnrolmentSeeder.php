@@ -29,20 +29,17 @@ class EnrolmentSeeder extends Seeder
         $teachers = Teacher::all();
         $rows = [];
         
-        
-        
-
         foreach($teachers as $teacher){
             $rows = [];
             //get teacher's students
             $students = $teacher->students;
             //get teacher's courses that are not deleted
-            $courses = $teacher->courses->where('deleted_at', NULL)->toArray();
+            $courses = $teacher->courses->toArray();
             if(empty($courses)) continue;
             //enrol each student in a random amount of those courses
             foreach($students as $student){
-                //add lswart to all of bobsull courses
                 if($student->email=='lswart@gmail.com' && $teacher->email=='bsull@gmail.com'){
+                    //add lswart to all of bobsull courses
                     $nbCoursesChosen  = count($courses);
                 } else {
                     $nbCoursesChosen = rand(0,count($courses));

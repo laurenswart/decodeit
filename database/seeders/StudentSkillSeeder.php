@@ -26,9 +26,11 @@ class StudentSkillSeeder extends Seeder
         StudentSkill::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        //find enrolments per teacher to avoid memory size exhaustion
         $enrolments = Enrolment::all();
         foreach($enrolments as $enrolment){
+            //sometimes don't set a mark
+            if(rand(0,10)<7) continue;
+            
             $rows = [];
             //get the skills in that course
             $skills = $enrolment->course->skills;

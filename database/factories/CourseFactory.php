@@ -25,11 +25,11 @@ class CourseFactory extends Factory
      */
     public function definition()
     {
-        $created = $this->faker->dateTimeBetween(new DateTime('-5 months'), new DateTime('-4 months'));
+        $created = $this->faker->dateTimeBetween(new DateTime('-5 months'), new DateTime('-4 months'))->format('Y-m-d H:i:s');
         return [
             'is_active' => $this->faker->boolean(80),
             'created_at' => $created,
-            'updated_at' => rand(0,10)<3 ? $this->faker->dateTimeBetween($created, new DateTime('-4 months')) : null,
+            'updated_at' => rand(0,10)<3 ? $this->faker->dateTimeBetween($created, new DateTime('-4 months'))->format('Y-m-d H:i:s') : null,
             'deleted_at' => null,
         ];
     }

@@ -25,37 +25,30 @@ class ChaptersReadSeeder extends Seeder
         DB::table('chapters_read')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        // //ini_set('memory_limit', '2048M');
-        // //find enrolments per teacher others wise memory exhausted
-        // //$students = Student::all();
-        // //foreach($students as $student){
-        //     $enrolments = Enrolment::all();
-            
-        //     foreach($enrolments as $enrolment){
-        //         $rows = [];
-        //         //get the chapters in that course
-        //         $chapters = $enrolment->course->chapters->where('is_active', 1)->toArray();
-        //         $nbChaptersRead = rand(0, count($chapters));
-        //         if($nbChaptersRead==0) continue;
-        //         //mark some chapters as read
-        //         $chaptersRead = Arr::random($chapters, $nbChaptersRead);
-        //         foreach($chaptersRead as $chapterRead){
-        //             $randomTime = now()
-        //                 ->subMonths(3)
-        //                 ->addDays(rand(1,26))
-        //                 ->addHours(rand(0,23))
-        //                 ->addMinutes(rand(0,59))
-        //                 ->addSeconds(rand(0,59));
-        //             $rows[] = [
-        //                 'enrolment_id'=>$enrolment->id,
-        //                 'chapter_id'=>$chapterRead['id'],
-        //                 'read_at'=> $randomTime,
-        //             ];
-        //         }
-        //         //insert into table
-        //         DB::table('chapters_read')->insert($rows);
-        //     }
-            
-        // //}
+        //get enrolments
+        $enrolments = Enrolment::all();
+        foreach($enrolments as $enrolment){
+            $rows = [];
+            //get the chapters in that course
+            $chapters = $enrolment->course->chapters->where('is_active', 1)->toArray();
+            $nbChaptersRead = rand(0, count($chapters));
+            if($nbChaptersRead==0) continue;
+            //mark some chapters as read
+            for($i=0; $i<$nbChaptersRead; $i++){
+                $randomTime = now()
+                    ->subMonths(3)
+                    ->addDays(rand(1,26))
+                    ->addHours(rand(0,23))
+                    ->addMinutes(rand(0,59))
+                    ->addSeconds(rand(0,59));
+                $rows[] = [
+                    'enrolment_id'=>$enrolment->id,
+                    'chapter_id'=>$chapters[$i]['id'],
+                    'read_at'=> $randomTime,
+                ];
+            }
+            //insert into table
+            DB::table('chapters_read')->insert($rows);
+        }
     }
 }

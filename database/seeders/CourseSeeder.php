@@ -55,21 +55,21 @@ class CourseSeeder extends Seeder
         DB::table('assignment_chapter')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-        //get students and teachers
-        $teachers = Teacher::where('email', '!=', 'bsull@gmail.com')->get();
+        //CREATING RANDOM COURSES FOR SOME TEACHERS
 
+        //teachers other than bob sull
+        $teachers = Teacher::where('email', '!=', 'bsull@gmail.com')->get();
         foreach($teachers as $teacher){
-            //find max number of students for this teacher
+            //find max number of courses for this teacher's subscription
             $subscription = $teacher->currentSubscriptionPlan();
             if(empty($subscription)) continue;
             $max_courses = $subscription->nb_courses;
             //choose a random amount of courses within range
             $nbCourses = rand(1,$max_courses);
             if($nbCourses==0) continue;
-            //choose courses
+            //create the courses
             $courseTitles = array_rand(self::TITLES, $nbCourses);
             $courseTitles = is_int($courseTitles) ? [$courseTitles] : $courseTitles;
-            //create the courses
             foreach($courseTitles as $title){
                 //course code
                 $code = strtoupper(substr(md5(uniqid(mt_rand(), true)) , 0, 5));
@@ -81,11 +81,11 @@ class CourseSeeder extends Seeder
             
         }
         
+        //CREATE PROPER COURSES FOR BOB SULL
         //create some proper courses for bob sull
         $bob = Teacher::firstWhere('email', '=', 'bsull@gmail.com');
 
         //get courses, ie folders in resources/courses
-        //name : coursename.html
         $courses = Storage::disk('local')->directories('courses');
         $subscription = $bob->currentSubscriptionPlan();
         //foreach course, 
@@ -95,7 +95,8 @@ class CourseSeeder extends Seeder
             //create the course
             $newCourse = Course::factory()->create([
                 'teacher_id' => $bob->id,
-                'title'=>$courseName
+                'title'=>$courseName,
+                'is_active'=>1,
             ]);
 
             //create chapters
@@ -141,7 +142,7 @@ class CourseSeeder extends Seeder
                     'submission_size' => $subscription->max_upload_size,
                     'language' => $language
                 ]);
-                //find related chapter
+                //set related chapter
                 $chapter = Chapter::where('course_id',$newCourse->id)->firstWhere('order_id', $chapterOrderId);
                 DB::table('assignment_chapter')->insert([
                     'assignment_id' => $newAssignment->id,
