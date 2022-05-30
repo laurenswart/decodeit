@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('layouts.guest')
+
+@section('content')
     <div class="container padder">    
         <!--form -->
         <div class="guest-form layer-1 light-card">
@@ -25,4 +27,4 @@
             </form>
         </div>
     </div>
-</x-guest-layout>
+@endsection

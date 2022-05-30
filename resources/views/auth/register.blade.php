@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('layouts.guest')
+
+@section('content')
     <div class="container padder">    
         <div class="guest-form  layer-1 light-card">
             <h1>Register</h1>
@@ -61,5 +63,6 @@
             </form>
         </div>
     </div>
-</x-guest-layout>
-<script src="{{ asset('js/register.js') }}"></script>
+    <script src="{{ asset('js/register.js') }}"></script>
+@endsection
+

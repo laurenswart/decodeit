@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends( empty(Auth::user()) ? 'layouts.guest' : (Auth::user()->isTeacher()  ?  'layouts.teacher' : ( Auth::user()->isStudent() ? 'layouts.student' : '' )))
+
+@section('content')
     <!--content-->
     <section class="align-center background  u-section-1" id="section1">
         <div class="u-clearfix u-sheet u-sheet-1 ">
@@ -203,4 +205,4 @@
             </div>
         </div>
     </section>
-</x-guest-layout>         
+@endsection   

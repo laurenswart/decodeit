@@ -32,12 +32,12 @@
       <div class="background">
 
         <header class="navbar-default sticky-top layer-1">
-          <nav class="navbar navbar-expand-lg navbar-light container">
+          <nav class="navbar navbar-expand-xl navbar-light container">
             <a href="{{ route('teacherDashboard') }}" class="logo navbar-header navbar-nav ">
                 <img src="{{ asset('img/logo.png') }}">
             </a>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <div class="collapse navbar-collapse " id="navbarTogglerDemo03">
           <ul class="nav nav-horizontal my-2 my-lg-0">
               <li class="nav-item "><a class="nav-link animate-h" href="{{ route('teacherDashboard') }}">Dashboard</a></li>
               <li class="nav-item"><a class="nav-link animate-h" href="{{ route('course_teacherIndex')}}">Courses</a></li>
@@ -52,7 +52,7 @@
                 </form>
 
               </li>
-              <li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>
+              <!--<li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>-->
           </ul>
       </div>
       

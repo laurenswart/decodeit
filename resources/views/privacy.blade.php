@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends( empty(Auth::user()) ? 'layouts.guest' : (Auth::user()->isTeacher()  ?  'layouts.teacher' : ( Auth::user()->isStudent() ? 'layouts.student' : '' )))
+
+@section('content')
 <section class="container mb-4 guest">
 <h2 class="light-card block-title layer-2 py-3 px-4">Privacy Policy</h2>
 <div class="d-flex justify-content-end">
@@ -13,7 +15,6 @@
 </p>
 <br/>
 <h3>INFORMATION COLLECTION: PERSONALLY IDENTIFIABLE INFORMATION</h3>
-</>
 <p>
     In the course of using the Services, we collect personally identifiable information, in the form of Persistent Identifiers, including IP Address.
     We collect and stores this personal information solely for the purpose of providing support for the internal operations of our Services and our Site.
@@ -97,4 +98,6 @@
     If you do not agree with any changes to the Privacy Policy, you may terminate your use of the Services.
 </p>
 </section>
-</x-guest-layout>
+
+ @endsection
+

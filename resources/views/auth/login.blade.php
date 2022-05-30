@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('layouts.guest')
+
+@section('content')
     
     <div class="container padder">    
         <!--form -->
@@ -33,4 +35,4 @@
             </form>
         </div>
     </div>
-</x-guest-layout>
+@endsection

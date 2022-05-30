@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends( empty(Auth::user()) ? 'layouts.guest' : (Auth::user()->isTeacher()  ?  'layouts.teacher' : ( Auth::user()->isStudent() ? 'layouts.student' : '' )))
+
+@section('content')
 
 <section class="container guest">
   @foreach($plans as $plan)
@@ -59,7 +61,6 @@
                 <a class="myButton" href="{{ route('register') }}">Register</a>
               </div>
           </div>
-      </div>
   </div>
   @endforeach
 
@@ -73,9 +74,5 @@
               <a href="{{ route('contact') }}" class="highlight"><i class="fas fa-arrow-square-right"></i>Get in Touch</a>
           </div>
       </div>
-
-
-
-
 </section>
-</x-guest-layout>
+@endsection

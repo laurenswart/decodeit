@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.guest')
 
 @section('content')
     <div class="container padder">    

@@ -44,7 +44,7 @@
                         <li class="nav-item"><a class="nav-link animate-h" href="{{ route('welcome') }}#students">Students</a></li>
                         <li class="nav-item"><a class="nav-link animate-h" href="{{ route('welcome') }}#pricing">Pricing</a></li>
                         <li class="nav-item"><a class="nav-link animate-h" href="{{ route('login') }}">Sign In</a></li>
-                        <li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>
+                        <!--<li class="nav-item"><label class="switch"><input type="checkbox" onchange="toggleTheme()"><span class="slider round"></span></label></li>-->
                     </ul>
                 </div>
             
@@ -70,7 +70,7 @@
             </div>
         </header> 
         
-        {{ $slot }}
+        @yield('content')
 
         <x-footer></x-footer>
         <!-- Scripts -->
