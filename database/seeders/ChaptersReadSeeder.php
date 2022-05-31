@@ -36,15 +36,18 @@ class ChaptersReadSeeder extends Seeder
             //mark some chapters as read
             for($i=0; $i<$nbChaptersRead; $i++){
                 $randomTime = now()
+                    ->setHour(0)
                     ->subMonths(3)
-                    ->addDays(rand(1,26))
-                    ->addHours(rand(0,23))
+                    ->addDays(rand(1,28))
+                    ->addHours(rand(3,23))
                     ->addMinutes(rand(0,59))
                     ->addSeconds(rand(0,59));
+                //dd($randomTime);
+                //$randomTime = new \DateTime($randomTime, new \DateTimeZone('UTC'));
                 $rows[] = [
                     'enrolment_id'=>$enrolment->id,
                     'chapter_id'=>$chapters[$i]['id'],
-                    'read_at'=> $randomTime,
+                    'read_at'=> $randomTime->format('Y-m-d H:i:s'),
                 ];
             }
             //insert into table

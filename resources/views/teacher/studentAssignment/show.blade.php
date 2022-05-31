@@ -70,7 +70,7 @@
             <div><pre>{!!  ($submission->content) !!}</pre></div>
             @if($studentAssignment->assignment->can_execute && $submission->status)
               <h3>Console</h3>
-              <ul class="console"><li></li><li>{{$submission->status ?? 'No console message'}}</li></ul>
+              <ul class="console"><li></li><li>{{$submission->console ?? 'No console message'}}</li></ul>
             @endif
           </div>
           @if($submission->question)

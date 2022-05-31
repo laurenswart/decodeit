@@ -48,11 +48,11 @@ class EnrolmentSeeder extends Seeder
                 if($nbCoursesChosen == 0) continue;
                 $chosenCourses = Arr::random($courses, $nbCoursesChosen);
                 foreach($chosenCourses as $chosenCourse){
-                    $minDate = Carbon::today()->subMonth(4);
+                    $minDate = Carbon::today()->subMonth(4)->setHour(0);
                     $maxDate = date_create($teacher->currentSubscription()->expires);
                     $randomCreationTime = $minDate
                         ->addDays(rand(1,28))
-                        ->addHours(rand(0,23))
+                        ->addHours(rand(3,23))
                         ->addMinutes(rand(0,59))
                         ->addSeconds(rand(0,59));
                     $randomCreationTime = min($randomCreationTime, $maxDate);
@@ -60,7 +60,6 @@ class EnrolmentSeeder extends Seeder
                     if ($mark) {
                         $randomMarkedTime = $randomCreationTime
                         ->addDays(rand(1,28))
-                        ->addHours(rand(0,23))
                         ->addMinutes(rand(0,59))
                         ->addSeconds(rand(0,59));
                         $randomMarkedTime = min($randomMarkedTime , $maxDate);
@@ -69,9 +68,9 @@ class EnrolmentSeeder extends Seeder
                     $rows[] = [
                         'course_id' => $chosenCourse['id'],
                         'student_id'=> $student['id'],
-                        'created_at' => $randomCreationTime,
-                        'marked_at' => $mark ? $randomMarkedTime : null,
-                        'updated_at' => $mark ? $randomMarkedTime : null,
+                        'created_at' => $randomCreationTime->format('Y-m-d H:i:s'),
+                        'marked_at' => $mark ? $randomMarkedTime->format('Y-m-d H:i:s') : null,
+                        'updated_at' => $mark ? $randomMarkedTime->format('Y-m-d H:i:s') : null,
                         'final_mark' => $mark ? rand(10,100) : null,
                     ];
                 }

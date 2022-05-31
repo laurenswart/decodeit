@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Chapter;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,11 +26,15 @@ class ChapterFactory extends Factory
      */
     public function definition()
     {
-        $created = $this->faker->dateTimeBetween(new DateTime('-3 months'), new DateTime('-2 months'));
+        $created = $this->faker->dateTimeBetween(new DateTime('-3 months'), new DateTime('-2 months -1 days'));
+        $created->setTime(rand(3,23), rand(0,59));
+        $updated = $this->faker->dateTimeBetween($created, new DateTime('-2 months'));
+        $updated->setTime(rand(3,23), rand(0,59));
+        
         return [
             'is_active' => $this->faker->boolean(80),
-            'created_at' => $created,
-            'updated_at' => rand(0,10)<3 ? $this->faker->dateTimeBetween($created, new DateTime('-2 months')) : null,
+            'created_at' => $created->format('Y-m-d H:i:s'),
+            'updated_at' => rand(0,10)<3 ? $updated->format('Y-m-d H:i:s') : null,
             'deleted_at' => null,
         ];
     }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Payment;
 use App\Models\Plan;
+use App\Models\Teacher;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,6 +22,7 @@ class StripeSeeder extends Seeder
     public function run()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        User::truncate();
         Payment::truncate();
         DB::table('subscriptions')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
@@ -29,13 +31,10 @@ class StripeSeeder extends Seeder
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $customers = $stripe->customers->all(['limit'=>100]);
 
+        //dd($customers);
+        $paymentsToCreate = [];
+        $subscriptionsToCreate = [];
         foreach($customers as $customer){
-            $subscriptions = $stripe->subscriptions->all(['customer' => $customer->id, 'limit'=>1]);
-            if(empty($subscriptions->data)){
-                continue;
-            }
-            //var_dump( $customer->email);
-            //continue;
             //create teacher
             $teacher = User::factory()->role('teacher')->create([
                 'email'=> $customer->email, 
@@ -43,6 +42,10 @@ class StripeSeeder extends Seeder
                 'role_id'=>1
             ]);
 
+            $subscriptions = $stripe->subscriptions->all(['customer' => $customer->id, 'limit'=>1]);
+            if(empty($subscriptions->data)){
+                continue;
+            }
             
             $item = $subscriptions->data[0];
             //get relevant plan in our db
@@ -54,23 +57,11 @@ class StripeSeeder extends Seeder
             });
             $planName = $plan ? $plan->title : 'unknown';
             $planName = str_replace(' ', '_', strtolower($planName));
-            //create subscription
-            $subscriptionsToCreate[] = [
-                'teacher_id' =>  $teacher->id,
-                'name' => $planName,
-                'stripe_id' => $item->items->data[0]->subscription,
-                'stripe_status' => $item->status,
-                'stripe_price' => $stripe_price_id,
-                'quantity' => $item->quantity,
-                'trial_ends_at' => NULL,
-                'ends_at' =>Carbon::createFromTimestamp( $item->current_period_end),
-                'created_at' => Carbon::createFromTimestamp($item->current_period_start),
-                'updated_at' => Carbon::createFromTimestamp($item->start_date)
-            ];
 
             //create payments
             $invoices = $stripe->invoices->all(['customer' => $customer->id]);
             foreach($invoices as $invoice){
+                //var_dump('invoice ', Carbon::createFromTimestamp($invoice->created));
                 $paymentsToCreate[] = [
                     'teacher_id' => $teacher->id,
                     'amount_due' => $invoice->amount_due,
@@ -84,6 +75,22 @@ class StripeSeeder extends Seeder
                     'subscription_stripe_id' => $invoice->subscription,
                 ];
             }
+
+            //create subscription
+            $subscriptionsToCreate[] = [
+                'teacher_id' =>  $teacher->id,
+                'name' => $planName,
+                'stripe_id' => $item->items->data[0]->subscription,
+                'stripe_status' => $item->status,
+                'stripe_price' => $stripe_price_id,
+                'quantity' => $item->quantity,
+                'trial_ends_at' => NULL,
+                'ends_at' =>Carbon::createFromTimestamp( $item->current_period_end),
+                'created_at' => Carbon::createFromTimestamp($item->start_date),
+                'updated_at' => Carbon::createFromTimestamp($item->start_date)
+            ];
+
+            
         }
         //return;
         DB::table('payments')->insert($paymentsToCreate);

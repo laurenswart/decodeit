@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Course;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -25,13 +26,21 @@ class CourseFactory extends Factory
      */
     public function definition()
     {
-        $created = $this->faker->dateTimeBetween(new DateTime('-5 months'), new DateTime('-4 months'))->format('Y-m-d H:i:s');
-        return [
+
+        $created = $this->faker->dateTimeBetween(new DateTime('-5 months'), new DateTime('-4 months -1 days'));
+        $created->setTime(rand(3,23), rand(0,59));
+
+        $updated = $this->faker->dateTimeBetween($created, new DateTime('-4 months'));
+        $updated->setTime(rand(3,23), rand(0,59));
+        
+
+        $var = [
             'is_active' => $this->faker->boolean(80),
-            'created_at' => $created,
-            'updated_at' => rand(0,10)<3 ? $this->faker->dateTimeBetween($created, new DateTime('-4 months'))->format('Y-m-d H:i:s') : null,
+            'created_at' => $created->format('Y-m-d H:i:s'),
+            'updated_at' => rand(0,10)<3 ? $updated->format('Y-m-d H:i:s') : null,
             'deleted_at' => null,
         ];
+        return $var;
     }
 
     

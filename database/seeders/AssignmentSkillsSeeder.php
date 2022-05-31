@@ -25,10 +25,12 @@ class AssignmentSkillsSeeder extends Seeder
         foreach($courses as $course){
             //get assignments and skills
             $assignments = $course->assignments;
-            $skills = $course->skills->pluck('skills.id')->toArray();
+            $skills = $course->skills->pluck('id')->toArray();
+            if(empty($skills)) continue;
             //link a random amount of skills to each assignment
             foreach($assignments as $assignment){
                 $chosenSkills = Arr::random($skills, rand(0,count($skills)));
+                if(empty($chosenSkills)) continue;
                 $assignment->skills()->syncWithPivotValues($chosenSkills, ['assignment_id' =>  $assignment->id]);
             }
         }

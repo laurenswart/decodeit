@@ -91,7 +91,6 @@ class CourseSeeder extends Seeder
         //foreach course, 
         foreach($courses as $coursePath){
             $courseName = explode('/',$coursePath)[1];
-
             //create the course
             $newCourse = Course::factory()->create([
                 'teacher_id' => $bob->id,
@@ -114,7 +113,6 @@ class CourseSeeder extends Seeder
                     'order_id'=>$chapterOrderId,
                 ]);
             }
-
             //create assignments
             $assignments = Storage::disk('local')->files($coursePath.'/assignments');
             foreach($assignments as $assignmentPath){
@@ -131,7 +129,6 @@ class CourseSeeder extends Seeder
                     : (stripos('python', $courseName)!=-1
                     ? 'python'
                     : null)));
-                    
                 $newAssignment = Assignment::factory()->create([
                     'course_id' => $newCourse->id,
                     'title' => $assignmentName,

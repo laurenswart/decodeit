@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -18,7 +19,7 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $timestamp = $this->faker->dateTimeBetween(new DateTime('-6 months'), new DateTime('-5 months'));
+        $timestamp = Carbon::createFromTimestamp($this->faker->dateTimeBetween(new DateTime('-6 months'), new DateTime('-5 months'))->getTimestamp())->setHour(rand(3,23));
         return [
             'firstname' => $this->faker->firstname(),
             'lastname' => $this->faker->lastname(),
@@ -26,7 +27,7 @@ class UserFactory extends Factory
             'role_id' => 2,
             'email_verified_at' => $timestamp,
             'password' => bcrypt('epfcEPFC123!'),
-            'created_at' => $timestamp,
+            'created_at' => $timestamp->format('Y-m-d H:i:s'),
             'updated_at' => null,
             'deleted_at' => null,
             'remember_token' => null,
@@ -48,7 +49,7 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Indicate the model's role
      *
      * @return static
      */

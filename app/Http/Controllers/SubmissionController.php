@@ -57,7 +57,8 @@ class SubmissionController extends Controller
         Submission::create([
             'student_assignment_id'=>$studentAssignment->id, 
             'content'=>$validated['script'],
-            'console'=>$validated['console']
+            'console'=>$validated['console'],
+            'status'=>'ran'
         ]);
 
         return redirect(route('assignment_studentShow', $id));

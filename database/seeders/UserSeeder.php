@@ -16,10 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //Empty the table first
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        User::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         
         // INSERT STUDENTS
         User::factory()
