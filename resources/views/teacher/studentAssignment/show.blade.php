@@ -35,7 +35,7 @@
         </div>
         <div class="label-value">
           <span class="label">Course</span>
-          <span><a href="{{ route('course_teacherShow', $studentAssignment->id) }}">{{ $studentAssignment->assignment->course->title }}</a></span>
+          <span><a href="{{ route('course_teacherShow', $studentAssignment->assignment->course_id) }}">{{ $studentAssignment->assignment->course->title }}</a></span>
         </div>
        
         <div class="label-value">

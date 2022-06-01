@@ -74,8 +74,6 @@ document.querySelector('#newMessage button').addEventListener('click', function 
 
   xhr.onload = function () {
     //Fonction de rappel
-    createFlashPopUp('Oops, Something went wrong', true);
-
     if (this.status === 200) {
       var _data = JSON.parse(this.responseText);
 
@@ -99,7 +97,19 @@ document.querySelector('#newMessage button').addEventListener('click', function 
 function createMessage(content, date) {
   var div = document.createElement('div');
   div.classList.add('layer-2', 'forum-msg', 'form-section', 'right');
-  div.innerHTML = '<div class="msg-header"><span>Me</span><span class="date">' + date + '</span></div><p>' + content + '</p>';
+  var innerDiv = document.createElement('div');
+  div.classList.add('msg-header');
+  var divSpan1 = document.createElement('span');
+  divSpan1.innerText = 'Me';
+  var divSpan2 = document.createElement('span');
+  divSpan2.classList.add('date');
+  divSpan2.innerText = date;
+  var p = document.createElement('p');
+  p.innerText = content;
+  innerDiv.appendChild(divSpan1);
+  innerDiv.appendChild(divSpan2);
+  div.appendChild(innerDiv);
+  div.appendChild(p);
   document.querySelector('.forum').appendChild(div);
   document.querySelector('.forum').scrollTop = document.querySelector('.forum').scrollHeight;
 }
