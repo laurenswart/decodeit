@@ -40,7 +40,7 @@
 
 
 		<h2 class="light-card block-title layer-2">Assignments</h2>
-        @foreach($chapter->course->assignments->sortBy('start_time') as $assignment)
+        @foreach($course->assignments->sortBy('start_time') as $assignment)
 			@if($assignment->chapters[0]->is_active)
 			<a href="{{ route('assignment_studentShow', $assignment->id)}}" class="listElement-h light-card row zoom palette-medium">
 				<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $assignment->title }}</p></span>

@@ -14,8 +14,8 @@ class SubmissionFactory extends Factory
     const CODES = [
         'javascript' => [
 'let name="Henry";
-    let age = 6;
-    console.log(name+" is "+age)',
+let age = 6;
+console.log(name+" is "+age)',
 "function welcome(){
     console.log('Hello!');
 }
