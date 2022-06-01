@@ -120,22 +120,27 @@ class CourseSeeder extends Seeder
                 $bits = explode('-',$assignmentFullName);
                 $chapterOrderId = $bits[0];
                 $assignmentName =  explode('.',$bits[2])[0];
-                $language = stripos('javascript', $courseName)!=-1 
-                    ? 'javascript'
-                    : (stripos('php', $courseName)!=-1 
-                    ? 'php'
-                    : (stripos('java', $courseName)!=-1 
-                    ? 'java'
-                    : (stripos('python', $courseName)!=-1
-                    ? 'python'
-                    : null)));
+                
+                switch($courseName){
+                    case "Apprenez à programmer avec JavaScript":
+                        $language = 'javascript';
+                        $can_execute = true;
+                        break;
+                    case "Apprenez à créer votre site web avec HTML5 et CSS3":
+                        $language = 'html';
+                        $can_execute = false;
+                        break;
+                    default:
+                    $language = null;
+                    $can_execute = false;
+                }
                 $newAssignment = Assignment::factory()->create([
                     'course_id' => $newCourse->id,
                     'title' => $assignmentName,
                     'description' => Storage::disk('local')->get($assignmentPath),
                     'nb_submissions' => rand(1,$subscription->nb_submissions),
                     'test_script' => null,
-                    'can_execute' => !empty($language),
+                    'can_execute' => $can_execute,
                     'submission_size' => $subscription->max_upload_size,
                     'language' => $language
                 ]);
