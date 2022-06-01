@@ -69,7 +69,7 @@
 							</tr>
 						</thead>
 						<tbody>
-						@foreach($assignments as $assignment)
+						@foreach($assignments->sortBy('start_time') as $assignment)
 							<tr>
 								<td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ $assignment->title }}</a></td>
 								<td>{{  $assignment->start_time_string() }}</td>

@@ -39,7 +39,9 @@ class DatabaseSeeder extends Seeder
             
             StudentAssignmentSeeder::class,
             SubmissionSeeder::class,
+            AdminSeeder::class
         ]);
+        
         
         
     }

@@ -131,16 +131,13 @@ class Teacher extends User
             ->get();
             
         //forum messages :Array
-        //student is enroled in course and course is active
         $updatedForumCourseIds = Message::
-                        select('course_id', DB::raw("min(forum_messages.created_at) as 'created_at'"), 'title')
+                        where('user_id', '!=', $this->id)
+                        ->where('forum_messages.created_at', '>',$lastConnection)
+                        ->select('course_id', DB::raw("min(forum_messages.created_at) as 'created_at'"), 'title')
                         ->join('courses', 'courses.id', 'forum_messages.course_id')
                         ->groupBy('course_id', 'title')
-                        ->where('forum_messages.created_at', '>',$lastConnection)
                         ->get();
-                        
-        //dd($assignmentsWithNewSubmissions);
-        
 
         //make a collection
         $models = [];

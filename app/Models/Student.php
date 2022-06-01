@@ -85,12 +85,13 @@ class Student extends User
         //forum messages :Eloquent\Collection
         //student is enroled in course and course is active
         $updatedForumCourseIds = Message::
-                        select('course_id', DB::raw("min(forum_messages.created_at) as 'created_at'"), 'title')
+                        where('user_id', '!=', $this->id)
+                        ->where('forum_messages.created_at', '>',$lastConnection)
+                        ->select('course_id', DB::raw("min(forum_messages.created_at) as 'created_at'"), 'title')
                         ->join('courses', 'courses.id', 'forum_messages.course_id')
                         ->groupBy('course_id', 'title')
-                        ->where('forum_messages.created_at', '>',$lastConnection)
                         ->get();
-        
+        //dd($updatedForumCourseIds);
         //new enrolment :Eloquent\Collection
         //student is enroled in course and course is active
         $createdEnrolments = $student->courses()->wherePivot('created_at', '>',$lastConnection)->get();
@@ -163,7 +164,7 @@ class Student extends User
             }
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
-            if($student->courses->pluck('id')->contains($updatedForumCourse->id)){
+            if($student->courses->pluck('id')->contains($updatedForumCourse['course_id'])){
                 $models[] = [
                     'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
                     'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),

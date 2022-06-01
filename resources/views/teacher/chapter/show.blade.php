@@ -16,7 +16,7 @@
 					@else
 						<table class="table">
 							<tbody>
-							@foreach($assignments->sortBy('start_time')->sortBy('end_time') as $assignment)
+							@foreach($assignments->sortBy('start_time') as $assignment)
 								<tr>
 									<td><a href="{{ route('assignment_teacherShow', $assignment->id)}}" class="label">{{ $assignment->title }}</a></td>
 									<td>{{  $assignment->start_time_string() }}</td>

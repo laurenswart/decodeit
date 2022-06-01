@@ -89,7 +89,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($teacher->payments->sortBy('create_at') as $payment)
+                @foreach($teacher->payments->sortBy('created_at') as $payment)
                     <td>{{ $payment->created_at}}</td>
                     <td>{{ $payment->amount_due / 100}}</td>
                     <td>{{ $payment->amount_paid / 100}}</td>

@@ -43,8 +43,7 @@ class ChapterController extends Controller
         $this->authorize('teacherView', $chapter);
 
         $assignments = $chapter->assignments
-            ->sortBy('start_time')
-            ->sortBy('end_time');
+            ->sortBy('start_time');
 
         return view('teacher.chapter.show', [
             'chapter'=>$chapter,
