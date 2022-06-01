@@ -55,11 +55,16 @@ class Student extends User
         $student = Student::find( Auth::id());
         $lastConnection = $student->last_connected;
 
+        //new enrolment :Eloquent\Collection
+        //student is enroled in course and course is active
+        $createdEnrolments = $student->courses()->wherePivot('created_at', '>',$lastConnection)->get();
+
         //created chapter :Eloquent\Collection
         //chapter is active, course id active, and student is enroled
         $createdChapters = Chapter::where('created_at', '>',$lastConnection)
             ->where('is_active', true)
             ->whereIn('course_id', $student->courses->pluck('id'))
+            ->whereNotIn('course_id', $createdEnrolments->pluck('course_id')->toArray())
             ->get();
         
         //updated chapter content
@@ -68,6 +73,7 @@ class Student extends User
         //student is enroled in active course and related chapter is active
         $createdAssignments = Assignment::where('created_at', '>',$lastConnection)
             ->whereIn('course_id', $student->courses->pluck('id'))
+            ->whereNotIn('course_id', $createdEnrolments->pluck('course_id')->toArray())
             ->get();
         
         
@@ -91,10 +97,7 @@ class Student extends User
                         ->join('courses', 'courses.id', 'forum_messages.course_id')
                         ->groupBy('course_id', 'title')
                         ->get();
-        //dd($updatedForumCourseIds);
-        //new enrolment :Eloquent\Collection
-        //student is enroled in course and course is active
-        $createdEnrolments = $student->courses()->wherePivot('created_at', '>',$lastConnection)->get();
+        
         
         //got an enrolment final mark :Eloquent\Collection
         //student is enroled in course and course is active
@@ -164,7 +167,7 @@ class Student extends User
             }
         }
         foreach($updatedForumCourseIds as $updatedForumCourse){
-            if($student->courses->pluck('id')->contains($updatedForumCourse['course_id'])){
+            if($student->courses->pluck('id')->contains($updatedForumCourse['course_id']) && !$createdEnrolments->pluck('course_id')->contains($updatedForumCourse['course_id'])){
                 $models[] = [
                     'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
                     'route'=> route('message_teacherForum', $updatedForumCourse['course_id']),
@@ -194,6 +197,7 @@ class Student extends User
             ];
         }
         foreach($createdNoteAssignments as $createdNoteAssignment){
+            if($createdEnrolments->pluck('course_id')->contains($createdNoteAssignment->assignment->course_id)) continue;
             $models[] = [
                 'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
                 'route'=> route('assignment_studentShow', $createdNoteAssignment->id),

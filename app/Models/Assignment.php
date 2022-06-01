@@ -87,7 +87,7 @@ class Assignment extends Model
             return 'marked';
         } else if($this->start_time_carbon()->gt(now())){
             return 'unavailable';
-        } else if($studentAssignment->to_mark || ($this->end_time_carbon()->lt(now()) && count($studentAssignment->submissions) > 0)){
+        } else if($studentAssignment->to_mark || ($this->end_time_carbon()->lt(now()) && count($studentAssignment->submissions) > 0) || count($studentAssignment->submissions) >= $studentAssignment->assignment->nb_submissions){
             return 'done';
         } else if(count($studentAssignment->submissions) === 0 && $this->end_time_carbon()->gt(now())){
             return 'to do';

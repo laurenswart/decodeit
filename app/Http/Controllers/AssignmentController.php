@@ -99,8 +99,8 @@ class AssignmentController extends Controller
             'title' => 'required|max:100',
             'description' => 'required|max:65535',
             'submissions' => 'required|int|min:1|max:'.$teacher->currentSubscriptionPlan()->nb_submissions,
-            'max-mark' => 'required|max:500',
-            'weight' => 'required|max:100',
+            'max-mark' => 'required|max:500|min:0',
+            'weight' => 'required|max:100|min:0',
             'start' => 'required|date',
             'end' => 'required|date|after:start',            
             'script' => 'max:65535',
@@ -109,12 +109,12 @@ class AssignmentController extends Controller
         if($request->post('executable')== 'on' || !empty($request->post('script'))){
             $rules['language'] = [
                 'required',
-                Rule::in(['javascript', 'python', 'java', 'php']),
+                Rule::in(['javascript', 'python']),
             ];
         } else {
             $rules['language'] = [
                 'nullable',
-                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+                Rule::in(['css', 'html', 'javascript', 'python', 'json', 'xml']),
             ];
         }
         $messages = [];
@@ -203,12 +203,12 @@ class AssignmentController extends Controller
         if($request->post('executable')== 'on' || !empty($request->post('script'))){
             $rules['language'] = [
                 'required',
-                Rule::in(['javascript', 'python', 'java', 'php']),
+                Rule::in(['javascript', 'python', 'php']),
             ];
         } else {
             $rules['language'] = [
                 'nullable',
-                Rule::in(['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml']),
+                Rule::in(['css', 'html', 'javascript', 'python', 'json', 'php', 'xml']),
             ];
         }
 

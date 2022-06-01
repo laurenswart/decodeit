@@ -9,7 +9,7 @@ let testScriptEditor = document.getElementById('testScriptEditor');
 let testLanguage = document.getElementById('language');
 let executableCheck = document.getElementById('executable');
 let editor;
-let acceptedModes = ['javascript', 'python', 'java', 'php'];
+let acceptedModes = ['javascript', 'python'];
 let testScriptInfo = document.getElementById('testScriptInfo');
 let hiddenScript = document.getElementById("script");
 

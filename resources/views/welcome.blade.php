@@ -107,7 +107,7 @@
                         </p>
                     <p>For more advanced learners, setting up specific test scenarios they may not have anticipated will help them improve continuously and become
                         evermore rigorous.</p>
-                    <p>You will be able to set assignments in <strong>CSS, JSON, XML, HTML,</strong> and also allow them to run code in <strong>Javascript, Java, Python, PHP</strong>.<p>
+                    <p>You will be able to set assignments in <strong>CSS, JSON, XML, HTML,</strong> and also allow them to run code in <strong>Javascript and Python</strong>.<p>
                 </div>
                 </div>
                 <div class="u-align-center u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">

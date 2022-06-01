@@ -42,11 +42,11 @@
 				</div>
 				<div class="label-value mt-3">
 					<label for="max-mark">Max. Mark</label>
-					<input type="number" name="max-mark" id="max-mark" value="{{ old('max-mark') ?? '' }}" required>
+					<input type="number" name="max-mark" id="max-mark" value="{{ old('max-mark') ?? '' }}" required min="0" max="500">
 				</div>
 				<div class="label-value mt-3">
 					<label for="weight">Course Weight %</label>
-					<input type="number" name="weight" id="weight" value="{{ old('weight') ?? '' }}" required>
+					<input type="number" name="weight" id="weight" value="{{ old('weight') ?? '' }}" required min="0" max="100">
 				</div>
 				<div class="label-value mt-3">
 					<label for="start">Start</label>
@@ -66,10 +66,8 @@
 						<option value="" {{ old('language') === '' ? 'selected' : '' }}>None</option>
 						<option value="css" {{ old('language') === 'css' ? 'selected' : '' }}>CSS</option>
 						<option value="html" {{ old('language') === 'html' ? 'selected' : '' }}>HTML</option>
-						<option value="java" {{ old('language') === 'java' ? 'selected' : '' }}>Java</option>
 						<option value="javascript" {{ old('language') === 'javascript' ? 'selected' : '' }}>Javascript</option>
 						<option value="json" {{ old('language') === 'json' ? 'selected' : '' }}>JSON</option>
-						<option value="php" {{ old('language') === 'php' ? 'selected' : '' }}>PHP</option>
 						<option value="python" {{ old('language') === 'python' ? 'selected' : '' }}>Python</option>
 						<option value="xml" {{ old('language') === 'xml' ? 'selected' : '' }}>XML</option>
 					</select>
@@ -78,8 +76,8 @@
 					<label for="executable">Allow Code Execution and Provide Console</label>
 					<input type="checkbox" name="executable" id="executable" {{ old('executable') ? 'checked' : '' }}>
 				</div>
-				<p>To enable code execution, select one of the following languages: <strong>Java</strong>,
-				<strong> Javascript</strong>,<strong> PHP</strong>,<strong> Python</strong></p> 
+				<p>To enable code execution, select one of the following languages: 
+				<strong> Javascript</strong> or<strong> Python</strong></p> 
 			</div>
 		</div>
 		<!--SKILLS-->
@@ -102,8 +100,8 @@
 			<h3 class="title-3">Script For Testing</h3>
 			<div class="row justify-content-between">
 				<p id="testScriptInfo">In order to write a code containing tests, you must enable script execution and select one of the 
-					following languages:<strong>Java</strong>,<strong> Javascript</strong>,<strong> PHP</strong>,<strong> Python</strong></p>
-				<input name="script" type="text" hidden id="script" value="{{ old('script') ?? '' }}">
+					following languages:<strong> Javascript</strong> or <strong> Python</strong></p>
+				<textarea name="script" type="text" hidden id="script">{{ old('script') ?? '' }}</textarea>
 				<div id="testScriptEditor"></div>
 			</div>
 		</div>

@@ -131,7 +131,7 @@
 						
 						<h4>Code</h4>
 						<div>
-							<pre>{!!  ($submission->content) !!}</pre>
+							<pre>{{ $submission->content }}</pre>
 						</div>
 						
 					</div>
@@ -186,7 +186,7 @@
 
 
 		
-	@if(($studentAssignment==null || !$studentAssignment->to_mark) && $assignment->isOpen())
+	@if(($studentAssignment==null || (!$studentAssignment->to_mark && count($studentAssignment->submissions)<$assignment->nb_submissions)) && $assignment->isOpen())
 	<div class="btn-box centered">
 		<a href="{{ route('studentAssignment_studentConfirmDone', $assignment->id) }}" class="myButton btn-highlight">Done this assignment</a>		
 	</div>

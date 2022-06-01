@@ -27482,7 +27482,7 @@ var testScriptEditor = document.getElementById('testScriptEditor');
 var testLanguage = document.getElementById('language');
 var executableCheck = document.getElementById('executable');
 var editor;
-var acceptedModes = ['javascript', 'python', 'java', 'php'];
+var acceptedModes = ['javascript', 'python'];
 var testScriptInfo = document.getElementById('testScriptInfo');
 var hiddenScript = document.getElementById("script"); // If we have an editor element
 

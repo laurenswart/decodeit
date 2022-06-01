@@ -898,7 +898,7 @@ __webpack_require__(/*! ./functions.js */ "./resources/js/functions.js");
 
 var scriptEditor = document.getElementById('scriptEditor');
 var editor;
-var acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
+var acceptedModes = ['css', 'html', 'javascript', 'python', 'json', 'xml'];
 var hiddenScript = document.getElementById("script");
 var hiddenConsole = document.getElementById("hiddenConsole");
 var myConsole = document.getElementById('console');
@@ -930,12 +930,14 @@ if (scriptEditor) {
     editor.setOptions({
       autoScrollEditorIntoView: true,
       copyWithEmptySelection: true
-    }); //copy code into hidden input on form submission
+    }); //save script content and console content on form submission
 
     document.getElementById("newSubmission").onsubmit = function (evt) {
-      hiddenScript.value = JSON.stringify(editor.getValue()); //console.log(hiddenScript.value);
+      hiddenScript.value = editor.getValue();
 
-      evt.preventDefault;
+      if (hiddenConsole && myConsole) {
+        hiddenConsole.value = myConsole.lastChild.innerText;
+      }
     }; //clear console on button press
 
 
@@ -948,8 +950,11 @@ if (scriptEditor) {
     } //load in testScript
 
 
-    loadTestScript(); //set up judge0
+    if (btnRun) {
+      loadTestScript();
+    } //set up judge0
     //prepare to send submission to judge0
+
 
     var headers = {
       "content-type": "application/json",
@@ -1012,12 +1017,7 @@ if (scriptEditor) {
             myConsole.appendChild(li);
             _this.innerText = 'Run';
           });
-        }); //save script content and console content on form submission
-
-        document.getElementById("newSubmission").onsubmit = function (evt) {
-          hiddenScript.value = editor.getValue();
-          hiddenConsole.value = myConsole.lastChild.innerText;
-        };
+        });
       }
     }
   }
@@ -1143,19 +1143,21 @@ var CodeSubmission = /*#__PURE__*/function () {
     key: "getCodeSubmission",
     value: function getCodeSubmission() {
       //console.log(this.testScript);
-      if (this.testScript != null && this.testScript != '') {
-        if (Object.keys(CodeSubmission.starts).indexOf(this.language) == -1) {
-          //todo determine what to do
-          return btoa(unescape(encodeURIComponent(this.studentInput)));
-        }
-
-        var start = CodeSubmission.starts[this.language];
-        var end = CodeSubmission.ends[this.language]; //console.log(start+this.studentInput+this.testScript+end);
-
-        return btoa(unescape(encodeURIComponent(start + this.studentInput + this.testScript + end)));
+      return btoa(unescape(encodeURIComponent(this.studentInput)));
+      /*
+      if(this.testScript!=null && this.testScript!=''){
+          if (Object.keys(CodeSubmission.starts).indexOf(this.language)==-1){
+              //todo determine what to do
+              return btoa(unescape(encodeURIComponent(this.studentInput)));
+          }
+          let start = CodeSubmission.starts[this.language];
+          let end = CodeSubmission.ends[this.language];
+          //console.log(start+this.studentInput+this.testScript+end);
+          return btoa(unescape(encodeURIComponent(start+this.studentInput+this.testScript+end)));
       } else {
-        return btoa(unescape(encodeURIComponent(this.studentInput)));
+          return btoa(unescape(encodeURIComponent(this.studentInput)));
       }
+      */
     }
   }]);
 

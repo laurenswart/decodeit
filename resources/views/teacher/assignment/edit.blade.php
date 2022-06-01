@@ -64,10 +64,8 @@
 						<option value="" {{ (old('language') === '' || (!$errors->any() && empty($assignment->language))) ? 'selected' : '' }}>None</option>
 						<option value="css" {{ (old('language') === 'css' || (!$errors->any() && $assignment->language=='css')) ? 'selected' : '' }}>CSS</option>
 						<option value="html" {{ (old('language') === 'html' || (!$errors->any() && $assignment->language=='html')) ? 'selected' : '' }}>HTML</option>
-						<option value="java" {{ (old('language') === 'java' || (!$errors->any() && $assignment->language=='java')) ? 'selected' : '' }}>Java</option>
 						<option value="javascript" {{ (old('language') === 'javascript' || (!$errors->any() && $assignment->language=='javascript')) ? 'selected' : '' }}>Javascript</option>
 						<option value="json" {{ (old('language') === 'json' || (!$errors->any() && $assignment->language=='json')) ? 'selected' : '' }}>JSON</option>
-						<option value="php" {{ (old('language') === 'php' || (!$errors->any() && $assignment->language=='php')) ? 'selected' : '' }}>PHP</option>
 						<option value="python" {{ (old('language') === 'python' || (!$errors->any() && $assignment->language=='python')) ? 'selected' : '' }}>Python</option>
 						<option value="xml" {{ (old('language') === 'xml' || (!$errors->any() && $assignment->language=='xml')) ? 'selected' : '' }}>XML</option>
 					</select>
@@ -76,7 +74,7 @@
 					<label for="executable">Allow Code Execution and Provide Console</label>
 					<input type="checkbox" name="executable" id="executable" {{ (old('executable') || (!$errors->any() && $assignment->can_execute)) ? 'checked' : '' }}>
 				</div>
-				<p>To enable code execution, select one of the following languages: <strong>Java</strong>,<strong> Javascript</strong>,<strong> PHP</strong>,<strong> Python</strong></p> 
+				<p>To enable code execution, select one of the following languages: <strong> Javascript</strong>or <strong> Python</strong></p> 
 			</div>
 		</div>
 		<!--SKILLS-->
@@ -98,7 +96,7 @@
 			<h3 class="title-3">Script For Testing</h3>
 			<div class="row justify-content-between">
 				<p id="testScriptInfo">In order to write a code containing tests, you must enable script execution and select one of the following languages:
-				<strong>Java</strong>,<strong> Javascript</strong>,<strong> PHP</strong>,<strong> Python</strong></p>
+				<strong> Javascript</strong> or <strong> Python</strong></p>
 				<input name="script" type="text" hidden id="script" value="{{ (old('script') ?? (!$errors->any() ? $assignment->test_script : '')) }}">
 				<div id="testScriptEditor"></div>
 			</div>

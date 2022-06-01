@@ -3,7 +3,7 @@ require('./functions.js');
 
 let scriptEditor = document.getElementById('scriptEditor');
 let editor;
-let acceptedModes = ['css', 'html', 'javascript', 'python', 'java', 'json', 'php', 'xml'];
+let acceptedModes = ['css', 'html', 'javascript', 'python', 'json', 'xml'];
 let hiddenScript = document.getElementById("script");
 let hiddenConsole = document.getElementById("hiddenConsole");
 let myConsole = document.getElementById('console');
@@ -36,11 +36,14 @@ if(scriptEditor){
             autoScrollEditorIntoView: true,
             copyWithEmptySelection: true,
         });
-        //copy code into hidden input on form submission
+        
+        //save script content and console content on form submission
         document.getElementById("newSubmission").onsubmit = function(evt) {
-            hiddenScript.value = JSON.stringify(editor.getValue()); 
-            //console.log(hiddenScript.value);
-            evt.preventDefault;
+            hiddenScript.value = editor.getValue();
+            if(hiddenConsole && myConsole){
+                hiddenConsole.value = myConsole.lastChild.innerText;
+            }
+           
         }
 
         //clear console on button press
@@ -53,7 +56,9 @@ if(scriptEditor){
         
 
         //load in testScript
-        loadTestScript();
+        if(btnRun){
+            loadTestScript();
+        }
 
         //set up judge0
         //prepare to send submission to judge0
@@ -119,11 +124,7 @@ if(scriptEditor){
                         })
                 });
 
-                //save script content and console content on form submission
-                document.getElementById("newSubmission").onsubmit = function(evt) {
-                    hiddenScript.value = editor.getValue();
-                    hiddenConsole.value = myConsole.lastChild.innerText;
-                }
+                
             }
         }
     }
@@ -220,6 +221,8 @@ class CodeSubmission{
 
     getCodeSubmission(){
         //console.log(this.testScript);
+        return btoa(unescape(encodeURIComponent(this.studentInput)));
+        /*
         if(this.testScript!=null && this.testScript!=''){
             if (Object.keys(CodeSubmission.starts).indexOf(this.language)==-1){
                 //todo determine what to do
@@ -232,6 +235,7 @@ class CodeSubmission{
         } else {
             return btoa(unescape(encodeURIComponent(this.studentInput)));
         }
+        */
     }
 }
 
