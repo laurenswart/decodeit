@@ -98,7 +98,7 @@ function createMessage(content, date) {
   var div = document.createElement('div');
   div.classList.add('layer-2', 'forum-msg', 'form-section', 'right');
   var innerDiv = document.createElement('div');
-  div.classList.add('msg-header');
+  innerDiv.classList.add('msg-header');
   var divSpan1 = document.createElement('span');
   divSpan1.innerText = 'Me';
   var divSpan2 = document.createElement('span');
