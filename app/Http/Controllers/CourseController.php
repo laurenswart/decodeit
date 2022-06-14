@@ -81,7 +81,10 @@ class CourseController extends Controller
     }
 
     /**
+     * Show participants ofa course to the student
      * 
+     * @param int $id Id of the course
+     * @return \Illuminate\Http\Response
      */
     public function studentParticipants($id){
 
