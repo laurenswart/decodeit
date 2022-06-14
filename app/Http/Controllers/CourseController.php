@@ -81,6 +81,21 @@ class CourseController extends Controller
     }
 
     /**
+     * 
+     */
+    public function studentParticipants($id){
+
+        $course = Course::find($id);
+
+        $this->authorize('studentView', $course);
+
+
+        return view('student.courseParticipants', [
+            'course'=>$course,
+        ]);
+    }
+
+    /**
      * Show a course for the authenticated teacher
      *
      * @param int $id Id of the course

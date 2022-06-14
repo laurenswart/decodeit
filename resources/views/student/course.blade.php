@@ -6,7 +6,7 @@
 		<h1>{{ $course->title }}</h1>
 		<ul>
 			<li><a href="{{ route('message_studentForum', $course->id) }}">Forum</a></li>
-			<li><a href="">Students</a></li>
+			<li><a href="{{ route('course_studentParticipants', $course->id) }}">Students</a></li>
 			<li><a href="{{ route('course_studentProgress', $course->id) }}">My Progress</a></li>
 		</ul>
 	</div>
