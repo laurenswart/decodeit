@@ -2,7 +2,9 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use App\Mail\PaymentSucceeded;
 use App\Models\Payment;
+use App\Models\Teacher;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -12,6 +14,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Subscription;
 use Spatie\WebhookClient\Models\WebhookCall;
@@ -47,7 +50,7 @@ class InvoicePaymentSucceededJob implements ShouldQueue
         $userId = User::where('stripe_id', $charge['customer'])->first()->id;
        
         //save to DB
-        Payment::create([
+        $payment = Payment::create([
             'teacher_id' => $userId,
             'amount_due' => $priceDue,
             'amount_paid' => $pricePaid,
@@ -59,5 +62,10 @@ class InvoicePaymentSucceededJob implements ShouldQueue
             'status' => $status,
             'subscription_stripe_id' => $subscriptionId,
         ]);
+
+        //send email
+        $user = User::find($userId);
+        Mail::to($user->email)
+            ->send(new PaymentSucceeded($user, $payment, Teacher::find($userId)->currentSubscription()));
     }
 }

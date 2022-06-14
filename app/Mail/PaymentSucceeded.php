@@ -2,13 +2,16 @@
 
 namespace App\Mail;
 
+use App\Models\Payment;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Laravel\Cashier\Subscription;
 
-class RegistrationConfirmed extends Mailable
+class PaymentSucceeded extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,15 +21,19 @@ class RegistrationConfirmed extends Mailable
      * @var \App\Models\User
      */
     public $user;
+    public $payment;
+    public $subscription;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Payment $payment, Subscription $subscription)
     {
         $this->user = $user;
+        $this->payment = $payment;
+        $this->subscription = $subscription;
     }
 
     /**
@@ -37,6 +44,6 @@ class RegistrationConfirmed extends Mailable
     public function build()
     {
         return $this->from('information@decodeit.com', 'DecodeIt')
-            ->view('emails.registrationConfirmed');
+            ->view('emails.paymentSucceeded');
     }
 }
