@@ -53,7 +53,7 @@
         <br>{{$student->email}}
     </div>
     <h1>Report</h1>
-    @foreach($student->courses as $course)
+    @foreach($student->courses->where('teacher_id', Auth::id()) as $course)
     
     <h2>{{ ucwords($course->title) }}</h2>
     <p class="final-mark">Final Mark: {{ $course->enrolmentForStudent($student->id)->final_mark ?? '-' }} / 100</p>

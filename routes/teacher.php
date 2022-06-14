@@ -40,6 +40,8 @@ Route::get('plans', ([PlanController::class, 'teacherIndex']))
     ->name('plan_teacherIndex');
 Route::get('subscriptions/payment_failed', ([SubscriptionController::class, 'teacherFail']))
     ->name('subscription_teacherFail');
+Route::get('subscriptions/payment_succeeded', ([SubscriptionController::class, 'teacherSuccess']))
+    ->name('subscription_teacherSuccess');
 Route::post('create-checkout-session', ([SubscriptionController::class, 'createCheckoutSession']))
     ->name('create-checkout-session');
 

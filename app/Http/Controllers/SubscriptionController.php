@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
         $stripeUser = Teacher::find(Auth::id())->createOrGetStripeCustomer();
         $stripe = new StripeClient(env('STRIPE_SECRET'));
         $session = $stripe->checkout->sessions->create([
-            'success_url' => 'http://localhost:8000/teacher/dashboard',
+            'success_url' => 'http://localhost:8000/teacher/subscriptions/payment_succeeded',
             'cancel_url' => 'http://localhost:8000/teacher/subscriptions/payment_failed',
             'line_items' => [
               [
@@ -45,5 +45,9 @@ class SubscriptionController extends Controller
     public function teacherFail(){
         return view('teacher.subscriptions.payment_failed');
     }
+
+    public function teacherSuccess(){
+      return view('teacher.subscriptions.payment_succeeded');
+  }
 
 }

@@ -158,14 +158,27 @@ class TeacherController extends Controller
      */
     public function teacherDelete(){
         $this->authorize('teacherShow', Teacher::class);
-        //remove firstname, lastname, email, password    
+
         $userId = Auth::id();
         $teacher = Teacher::find($userId);
+        //delete data on stripe
+        if($teacher->stripe_id!=null){
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $stripe->customers->delete($teacher->stripe_id);
+        }
+
+        //remove firstname, lastname, email    
         $teacher->firstname = 'firstname_'.$userId;
+        $teacher->stripe_id = null;
         $teacher->lastname = 'lastname_'.$userId;
         $teacher->email = 'email_'.$userId;
         $teacher->save();
         $teacher->delete();
+
+        //delete teacher courses
+        $teacher->courses()->delete();
+
+dd('hi');
         Auth::logout();
         return redirect(route('welcome'));
     }
