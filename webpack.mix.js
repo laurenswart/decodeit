@@ -29,4 +29,5 @@ mix.js('resources/js/teacherCourseManage.js', 'public/js/teacher');
 mix.js('resources/js/teacherCourseEdit.js', 'public/js/teacher');
 mix.js('resources/js/teacherStudentIndex.js', 'public/js/teacher');
 mix.js('resources/js/teacherStudentAssignmentShow.js', 'public/js/teacher');
+mix.js('resources/js/teacherStudentEnrolments.js', 'public/js/teacher');
 mix.js('resources/js/register.js', 'public/js');

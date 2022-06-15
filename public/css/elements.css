@@ -1084,4 +1084,6 @@ body{
 									   color-stop(0.86,  var(--color-mediumPurple)));
 }
 
-
+.smallButton{
+	padding:5px 15px;
+}

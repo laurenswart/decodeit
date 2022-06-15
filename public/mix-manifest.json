@@ -10,6 +10,7 @@
     "/js/teacher/teacherCourseEdit.js": "/js/teacher/teacherCourseEdit.js",
     "/js/teacher/teacherStudentIndex.js": "/js/teacher/teacherStudentIndex.js",
     "/js/teacher/teacherStudentAssignmentShow.js": "/js/teacher/teacherStudentAssignmentShow.js",
+    "/js/teacher/teacherStudentEnrolments.js": "/js/teacher/teacherStudentEnrolments.js",
     "/js/register.js": "/js/register.js",
     "/css/app.css": "/css/app.css",
     "/js/tinymce/.npmignore": "/js/tinymce/.npmignore",

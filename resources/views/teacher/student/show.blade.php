@@ -37,7 +37,7 @@
           
         @endif
         </div>
-        <a class="myButton align-self-end mb-2">Manage Enrolments</a>
+        <a class="myButton align-self-end mb-2" href="{{ route('student_teacherEnrolments', $student->id) }}">Manage Enrolments</a>
       </div>
       
       <div class="col-12 col-xl-5 form-section layer-2 d-flex flex-col">

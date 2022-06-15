@@ -2,6 +2,8 @@
 
 namespace App\Policies;
 
+use App\Models\Course;
+use App\Models\Enrolment;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
@@ -67,6 +69,20 @@ class StudentPolicy
     public function delete(User $user, Student $student)
     {
         return $student!=null && $user->isTeacher() && Teacher::find($user->id)->students->contains($student);
+    }
+
+    /**
+     * Determine whether the teacher can create a new enrolment
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Student  $student
+     * @param \App\Models\Course  $course
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function teacherAddEnrolment(User $user, Student $student, Course $course){
+        $previousEnrolment = Enrolment::where('student_id', $student->id)->where('course_id', $course->id)->count();
+        return $user->isTeacher() && Teacher::find($user->id)->students->contains($student)
+            && $previousEnrolment==0 && $course->teacher_id==$user->id;
     }
 
 }

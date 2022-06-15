@@ -164,6 +164,12 @@ Route::middleware('subscription')->group(function () {
     Route::get('students/{id}/report/download', ([StudentController::class, 'teacherDownloadReport']))
         ->where('id', '[0-9]+')
         ->name('student_teacherDownloadReport');
+    Route::get('students/{id}/enrolments', ([StudentController::class, 'teacherEnrolments']))
+        ->where('id', '[0-9]+')
+        ->name('student_teacherEnrolments');
+    Route::post('students/{id}/enrolments', ([StudentController::class, 'teacherAddEnrolment']))
+        ->where('id', '[0-9]+')
+        ->name('student_teacherAddEnrolment');
 
     //ENROLMENTS
     Route::get('enrolments/{id}/delete', ([EnrolmentController::class, 'teacherConfirmDelete']))

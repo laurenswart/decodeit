@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\AssignmentNote;
 use App\Models\Chapter;
+use App\Models\Course;
 use App\Models\Enrolment;
 use App\Models\Message;
 use App\Models\Student;
@@ -390,5 +391,79 @@ class StudentController extends Controller
         $student->delete();
         Auth::logout();
         return redirect(route('welcome'));
+    }
+
+
+    /**
+     * Display enrolments and form to add new ones for a student
+     * 
+     * @param int $id Student id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherEnrolments($id){
+        $student= Student::find($id);
+        $currentEnrolments = $student->coursesForTeacher();
+        //dd($currentEnrolments->pluck('id'));//74 75 76
+
+        $otherCourses = Teacher::find(Auth::id())->courses->whereNotIn('id',   $currentEnrolments->pluck('id'));
+        return view('teacher.student.enrolments', [
+            'student' => $student,
+            'otherCourses' => $otherCourses
+        ]);
+    }
+
+    /**
+     * Add new enrolment for a student
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $id Student id
+     * @return \Illuminate\Http\Response
+     */
+    public function teacherAddEnrolment(Request $request, $id){
+        if($request->ajax()) {
+            //validate question
+            if(empty($request->post('courseId'))){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'No course received'
+                ], 400);
+            }
+
+            //find student
+            $student = Student::find($id);
+            if(empty($student)){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'User not found.'
+                ], 500);
+            }
+            $courseId = $request->post('courseId');
+            $course = Course::find($courseId);
+            if (empty($course) || $request->user()->cannot('teacherAddEnrolment', [$student, $course])){
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'Unauthorized action'
+                ], 403);
+            }
+
+            //create enrolment
+            $student->courses()->attach([$courseId]);
+
+            if($student->courses->contains($course)){
+                return response()->json([
+                    'success' => true,
+                    'courseName' => $course->title,
+                    'route' => route('course_teacherShow', $course->id),
+                    'created' => date('d/m/Y', now()->timestamp)
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false, 
+                    'msg' => 'Oops, Something went wrong.'
+                ], 500);
+            }
+
+           
+        }
     }
 }
