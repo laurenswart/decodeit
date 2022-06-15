@@ -7,6 +7,16 @@
 		<a href="{{ route('course_studentShow', $course->id)}}" class="listElement-h light-card row zoom">
 			<span class="listElementTitle palette-medium col-12 col-md-4"><p>{{ $course->title }}</p></span>
 			<span class="listElementContent col background">
+				
+				<span class="flex-fill d-flex">
+					@if(count($course->chapters)!= 0)
+					<div class="progressbar layer-1">
+						<div class="progress"  style="width:{{ $course->nbChaptersRead(Auth::id()) / count($course->chapters) * 100}}%"></div>
+					</div>
+					<p>Read {{ $course->nbChaptersRead(Auth::id())}} / {{ count($course->chapters) }} Chapters</p>
+					@endif
+				</span>
+				<span><p>{{ ucfirst($course->teacher->firstname[0]) }}. {{ ucfirst($course->teacher->lastname) }}</p></span>
 			</span>
 		</a>
         @endforeach

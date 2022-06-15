@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
 class Course extends Model
@@ -53,6 +54,11 @@ class Course extends Model
 
     public function students(){
         return $this->belongsToMany(Student::class, 'enrolments','course_id', 'student_id','id','id')->withPivot('id')->whereNull('enrolments.deleted_at');
+    }
+
+    public function nbChaptersRead($studentId){
+        $enrolment = $this->enrolmentForStudent($studentId);
+        return DB::table('chapters_read')->whereIn('chapter_id', $this->chapters->pluck('id'))->where('enrolment_id', $enrolment->id)->count();
     }
 
     public function enrolmentForAuth(){

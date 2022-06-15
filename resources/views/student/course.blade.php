@@ -24,10 +24,9 @@
 				<span class="flex-fill d-flex">
 					@if(count($chapter->assignments)!= 0)
 					<div class="progressbar layer-1">
-						<div class="progress"  style="width:{{ $chapter->nbAssignmentsDone() / count($chapter->assignments) * 100}}%">
-						</div>
-						
-					</div><p>{{ $chapter->nbAssignmentsDone() }} / {{ count($chapter->assignments)}} Assignments</p>
+						<div class="progress"  style="width:{{ $chapter->nbAssignmentsDone() / count($chapter->assignments) * 100}}%"></div>
+					</div>
+					<p>{{ $chapter->nbAssignmentsDone() }} / {{ count($chapter->assignments)}} Assignments</p>
 					@endif
 				</span>
 				
