@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Message;
+use App\Models\Plan;
 use App\Models\StudentAssignment;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Laravel\Cashier\Subscription;
 
 class TeacherController extends Controller
 {
@@ -84,9 +86,10 @@ class TeacherController extends Controller
         $teacher = Teacher::find(Auth::id());
         $plan = $teacher->currentSubscriptionPlan();
         $nbAssignments = Assignment::whereIn('course_id',$teacher->courses->pluck('id'))->count();
+        $previousSubscription = Subscription::orderBy('created_at', 'desc')->firstWhere('teacher_id', Auth::id());
         $subscription = $teacher->currentSubscription();
         return view('teacher.account', [
-            'plan' => $plan,
+            'plan' => $plan ?? ( $previousSubscription ? Plan::irstWhere('title',$previousSubscription->name) : null),
             'subscription' => $subscription,
             'teacher' => Teacher::find(Auth::id()),
             'nbAssignments' => $nbAssignments
