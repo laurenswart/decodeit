@@ -1,6 +1,5 @@
 require('./functions.js');
 window.onload = function(){
-    console.log(document.querySelectorAll('button.add'));
     document.querySelectorAll('button.add').forEach( x => x.addEventListener('click', function(){createEnrolment(x.value);}));
   }
 
