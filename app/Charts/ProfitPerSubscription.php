@@ -15,13 +15,14 @@ class ProfitPerSubscription extends BaseChart
     public ?array $middlewares = ['adminauth'];
 
     /**
-     * Handles the HTTP request for the given chart.
-     * It must always return an instance of Chartisan
-     * and never a string or an array.
+     * Creates a Chart representing the profits per subscription
+     * 
+     * @param Illuminate\Http\Request $request
+     * @return Chartisan\PHP\Chartisan Chart
      */
     public function handler(Request $request): Chartisan
     {
-        //payments
+        //payments grouped by plan
         $datas = DB::table('plans')
             ->select('plans.title', DB::raw('sum(amount_paid) as total'))
             ->leftJoin('subscriptions', 'subscriptions.name', '=', 'plans.title')

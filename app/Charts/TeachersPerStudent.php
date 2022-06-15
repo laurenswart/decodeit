@@ -14,10 +14,13 @@ class TeachersPerStudent extends BaseChart
 
     public ?string $routeName = 'teachersPerStudent';
     public ?array $middlewares = ['adminauth'];
+    
+
     /**
-     * Handles the HTTP request for the given chart.
-     * It must always return an instance of Chartisan
-     * and never a string or an array.
+     * Creates a Chart representing the number of teachers per student
+     * 
+     * @param Illuminate\Http\Request $request
+     * @return Chartisan\PHP\Chartisan Chart
      */
     public function handler(Request $request): Chartisan
     {       
@@ -29,8 +32,8 @@ class TeachersPerStudent extends BaseChart
 
 
         $data = [];
+        //count nb of occurences of each value 
         foreach ($teachersPerStudent as  $value) {
-            //seperate into teacher/student
             $data[$value] = isset($data[$value]) ? ($data[ $value] + 1) : 1;
         }
 

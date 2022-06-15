@@ -19,9 +19,10 @@ class InscriptionsPerMonth extends BaseChart
     public ?array $middlewares = ['adminauth'];
 
     /**
-     * Handles the HTTP request for the given chart.
-     * It must always return an instance of Chartisan
-     * and never a string or an array.
+     * Creates a Chart representing the number of inscriptions per month
+     * 
+     * @param Illuminate\Http\Request $request
+     * @return Chartisan\PHP\Chartisan Chart
      */
     public function handler(Request $request): Chartisan
     {
