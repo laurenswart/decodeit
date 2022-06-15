@@ -2,7 +2,7 @@
 
 @section('content')
     <h2 class="light-card block-title layer-2">My Subscription</h2>
-    @if($plan && $plan->title!='free')
+    @if(!empty($plan) && $plan->title!='free')
     <div class="row">
         <div class="col form-section layer-2">
             
@@ -36,6 +36,7 @@
             
                 <h3 class="title-3">Subscription Details</h3>
                 
+                @if($subscription)
                     <div class="label-value">
                         <span>Created</span>
                         <span>{{ $subscription->created_at }}</span>
@@ -53,10 +54,13 @@
                         You may still use our subscription plan until the end of the billing period.<br>
                         No new automatic payment will be made.</p>
                     @endif
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-5">Manage My Subscription</a>
-                    </div>
-                
+                    
+                @else
+                    <p>Your subscription is no longer active.</p>
+                @endif
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('billingPortal') }}" class="myButton mb-3 mt-5">Manage My Subscription</a>
+                </div>
             
         </div>
             

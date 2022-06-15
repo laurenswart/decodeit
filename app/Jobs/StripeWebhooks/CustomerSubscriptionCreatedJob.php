@@ -2,8 +2,10 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use App\Mail\RegistrationConfirmed;
 use App\Models\Payment;
 use App\Models\Plan;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -12,6 +14,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Subscription;
 use Spatie\WebhookClient\Models\WebhookCall;
@@ -45,8 +48,9 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
         $planName = str_replace(' ', '_', strtolower($planName));
        
         //update our database
+        $user = User::where('stripe_id', $charge['customer'])->first();
         Subscription::create([
-            'teacher_id' =>  User::where('stripe_id', $charge['customer'])->first()->id,
+            'teacher_id' =>  $user->id,
             'name' => $planName,
             'stripe_id' => $charge['id'],
             'stripe_status' => $charge['status'],
@@ -57,5 +61,8 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
             'created_at'=> $charge['start_date'],
             'updated_at' => null
         ]);
+
+        //send email 
+        Mail::to($user->email)->send(new RegistrationConfirmed($user));
     }
 }

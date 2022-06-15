@@ -5,6 +5,7 @@ use App\Jobs\StripeWebhooks\CustomerSubscriptionCreatedJob;
 use App\Jobs\StripeWebhooks\CustomerSubscriptionDeleted;
 use App\Jobs\StripeWebhooks\CustomerSubscriptionDeletedJob;
 use App\Jobs\StripeWebhooks\CustomerSubscriptionUpdatedJob;
+use App\Jobs\StripeWebhooks\InvoicePaymentFailedJob;
 use App\Jobs\StripeWebhooks\InvoicePaymentSucceededJob;
 use App\Jobs\StripeWebhooks\PaymentMethodAttached;
 use App\Jobs\StripeWebhooks\PaymentMethodAttachedJob;
@@ -25,6 +26,7 @@ return [
      */
     'jobs' => [
         'invoice_payment_succeeded' => InvoicePaymentSucceededJob::class,
+        'invoice_payment_failed' => InvoicePaymentFailedJob::class,
         'customer_subscription_created' => CustomerSubscriptionCreatedJob::class,
         'customer_subscription_updated' => CustomerSubscriptionUpdatedJob::class,
         'customer_subscription_deleted' => CustomerSubscriptionDeletedJob::class,

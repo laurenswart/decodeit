@@ -84,7 +84,7 @@ class TeacherController extends Controller
         $teacher = Teacher::find(Auth::id());
         $plan = $teacher->currentSubscriptionPlan();
         $nbAssignments = Assignment::whereIn('course_id',$teacher->courses->pluck('id'))->count();
-        $subscription = Teacher::find(Auth::id())->currentSubscription();
+        $subscription = $teacher->currentSubscription();
         return view('teacher.account', [
             'plan' => $plan,
             'subscription' => $subscription,

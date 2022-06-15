@@ -63,9 +63,12 @@ class InvoicePaymentSucceededJob implements ShouldQueue
             'subscription_stripe_id' => $subscriptionId,
         ]);
 
-        //send email
+        //send email if this is not the first payment
         $user = User::find($userId);
-        Mail::to($user->email)
-            ->send(new PaymentSucceeded($user, $payment, Teacher::find($userId)->currentSubscription()));
+        if($subscription=Teacher::find($userId)->currentSubscription()){
+            Mail::to($user->email)
+            ->send(new PaymentSucceeded($user, $payment, $subscription));
+        }
+        
     }
 }
