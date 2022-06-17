@@ -35,7 +35,7 @@ class Payment extends Model
     public $timestamps = false;
 
     /**
-     * The users that made the payment
+     * The teacher that made the payment
      */
     public function teacher()
     {
@@ -44,8 +44,7 @@ class Payment extends Model
 
     
     /**
-     * The users that made the payment
-     *
+     * The subscription this payment relates to
      */
     public function subscription()
     {

@@ -43,6 +43,7 @@ class TeacherController extends Controller
                 orderBy($sort, $order)
                 ->where(function ($query) use ($filter){
                     $query->where('firstname', 'like', "%$filter%")
+                            ->orWhere('email', 'like',"%$filter%")
                           ->orWhere('lastname', 'like',"%$filter%");
                 })
                 ->paginate(10)

@@ -30,6 +30,9 @@ class Submission extends Model
 
     public $timestamps = true;
 
+    /**
+     * The studentAssignment this submission belongs to
+     */
     public function studentAssignment(){
         return $this->belongsTo(StudentAssignment::class, 'student_assignment_id', 'id');
     }

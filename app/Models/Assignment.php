@@ -42,27 +42,48 @@ class Assignment extends Model
 
     public $timestamps = true;
 
+    /**
+     * The course this assignment belongs to
+     */
     public function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
+    /**
+     * The notes related to this assignment
+     */
     public function notes(){
         return $this->hasMany(AssignmentNote::class, 'assignment_id', 'id');
     }
 
+    /**
+     * The student assignments related to this assignment
+     */
     public function studentAssignments(){
         return $this->hasMany(StudentAssignment::class, 'assignment_id', 'id');
     }
 
+    /**
+     * The chapters this assignment belongs to
+     */
     public function chapters(){
         return $this->belongsToMany(Chapter::class, 'assignment_chapter', 'assignment_id', 'chapter_id', 'id', 'id');
     }
 
+    /**
+     * The skills this assignment relates to
+     */
     public function skills(){
         return $this->belongsToMany(Skill::class, 'assignment_skills', 'assignment_id', 'skill_id', 'id', 'id');
     }
 
     
+    /**
+     * The student assignment for this assignment for a particular student
+     * 
+     * @param Int $studentId The id of the student
+     * @return StudentAssignment|null The student assignment, null if none exist
+     */
     public function studentAssignmentByStudent($studentId){
         $enrolment = Enrolment::where('course_id', $this->course_id)->where('student_id', $studentId)->first();
         
@@ -70,7 +91,10 @@ class Assignment extends Model
     }
 
     /**
-     * returns not done, incomplete, done, marked 
+     * Get a string of the status of an assignment for a student
+     * 
+     * @param Int $studentId Id of the student
+     * @return String "missed"|"unavailable"|"to do"|"missed"|"done"|"marked"|"undergoing"
      */
     public function statusByStudent($studentId){
         $studentAssignment = $this->studentAssignmentByStudent($studentId);
@@ -99,7 +123,10 @@ class Assignment extends Model
     }
 
     /**
-     * returns not done, incomplete, done, marked as well as appropriate icon
+     * Get a string of the status of an assignment for a student with a fontawesome icon in front
+     * 
+     * @param Int $studentId Id of the student
+     * @return String "missed"|"unavailable"|"to do"|"missed"|"done"|"marked"|"undergoing" with appropriate fontawesome icon
      */
     public function statusTextByStudent($studentId){
         $text = $this->statusByStudent($studentId);
@@ -131,7 +158,7 @@ class Assignment extends Model
 
 
     /**
-     * Get all of the submissions for the assignment.
+     * Get all of the submissions for this assignment.
      */
     public function submissions(){
         return $this->hasManyThrough( Submission::class,StudentAssignment::class,);
@@ -139,35 +166,70 @@ class Assignment extends Model
  
 
     
-
+    /**
+     * Get the start time of this assignment in format d/m/Y, H:i
+     * 
+     * @return String Assignment start time in format d/m/Y, H:i
+     */
     public function start_time_string(){
         
         return Carbon::createFromFormat('Y-m-d H:i:s',$this->start_time)->format('d/m/Y, H:i');
     }
 
+    /**
+     * Get the creation time of this assignment in format d/m/Y, H:i
+     * 
+     * @return String Assignment creation time in format d/m/Y, H:i
+     */
     public function created_at_string(){
         
         return Carbon::createFromFormat('Y-m-d H:i:s',$this->created_at)->format('d/m/Y, H:i');
     }
 
+    /**
+     * Get the last update time of this assignment in format d/m/Y, H:i
+     * 
+     * @return String|Null Assignment last update time in format d/m/Y, H:i
+     */
     public function updated_at_string(){
         
         return $this->updated_at ? Carbon::createFromFormat('Y-m-d H:i:s',$this->updated_at)->format('d/m/Y, H:i') : null;
     }
 
+    /**
+     * Get the start time of this assignment as carbon object
+     * 
+     * @return Carbon Assignment creation time
+     */
     public function start_time_carbon(){
         
         return Carbon::createFromFormat('Y-m-d H:i:s',$this->start_time);
     }
 
+    /**
+     * Get the end time of this assignment as carbon object
+     * 
+     * @return Carbon Assignment end time
+     */
     public function end_time_string(){
         return Carbon::createFromFormat('Y-m-d H:i:s',$this->end_time)->format('d/m/Y, H:i');
     }
+
+    /**
+     * Get the last start time of this assignment as carbon object
+     * 
+     * @return Carbon Assignment creation time
+     */
     public function end_time_carbon(){
         
         return Carbon::createFromFormat('Y-m-d H:i:s',$this->end_time);
     }
 
+    /**
+     * Return whether the assignment can be done at this time
+     * 
+     * @return Boolean True if the assignment can be done now, false otherwise
+     */
     public function isOpen(){
         return $this->start_time_carbon()->lt(now()) && $this->end_time_carbon()->gt(now());
     }

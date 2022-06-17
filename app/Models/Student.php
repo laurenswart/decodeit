@@ -13,10 +13,16 @@ class Student extends User
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * This student's teachers
+     */
     public function teachers(){
         return $this->belongsToMany(Student::class, 'teacher_student', 'student_id', 'teacher_id', 'id', 'id', );
     }
 
+    /**
+     * This student's enrolments
+     */
     public function enrolments(){
         return $this->hasMany(Enrolment::class, 'student_id', 'id')->whereNull('enrolments.deleted_at');
     }
@@ -27,6 +33,9 @@ class Student extends User
             ->whereRoleId(2);
     }
 
+    /**
+     * The courses this student is enrolled to
+     */
     public function courses(){
         return $this->belongsToMany(Course::class, 'enrolments', 'student_id', 'course_id', 'id', 'id')
             ->withPivot('final_mark', 'created_at', 'deleted_at')
@@ -34,6 +43,9 @@ class Student extends User
             ->where('courses.is_active', true);
     }
 
+    /**
+     * The authenticated teacher's courses to which this student is enroled to
+     */
     public function coursesForTeacher(){
         return $this->courses->where('teacher_id', Auth::id());
     }
@@ -48,6 +60,7 @@ class Student extends User
 
     
     /**
+     * Notification to display to this student on dashboard
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */

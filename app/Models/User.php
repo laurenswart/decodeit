@@ -59,20 +59,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * The role of the user
+     * The messages written by the user
      */
     public function messages()
     {
         return $this->hasMany(Message::class, 'user_id', 'id');
     }
 
-    public function authorizeRoles($roles)
-    {
-        if ($this->hasAnyRole($roles)) {
-            return true;
-        }
-        abort(401, 'This action is unauthorized.');
-    }
+    /**
+     * Determine if user has one of a list of roles
+     * 
+     * @param Array[String] Array of role names
+     * @return Boolean True if user has one of the roles, false otherwise
+     */
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {
@@ -88,6 +87,13 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return false;
     }
+
+    /**
+     * Determine if user has a certain role
+     * 
+     * @param String The role name
+     * @return Boolean True if user has the role, false otherwise
+     */
     public function hasRole($role)
     {
         if ($this->role->name == $role) {
@@ -96,12 +102,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+    /**
+     * Determine if user is a student
+     * 
+     * @return Boolean True if user is a student, false otherwise
+     */
     public function isStudent(){
-        return $this->role_id === 2;
+        return $this->role->name === 'student';
     }
 
+    /**
+     * Determine if user is a teacher
+     * 
+     * @return Boolean True if user is a teacher, false otherwise
+     */
     public function isTeacher(){
-        return $this->role_id === 1;
+        return $this->role->name === 'teacher';
     }
 
     

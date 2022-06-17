@@ -41,11 +41,18 @@ class Plan extends Model
         'created_at'
     ];
 
-    
+    /**
+     * The subscriptions related to this plan
+     */
     protected function subscriptions(){
         return $this->hasMany( Subscription::class, 'title', 'name');
     }
 
+    /**
+     * The number of users subscribed to this plan
+     * 
+     * @return Int Number of users currently subscribed to this plan
+     */
     public function nbUsers(){
         return Subscription::all()
         ->where('name', '=', $this->title)

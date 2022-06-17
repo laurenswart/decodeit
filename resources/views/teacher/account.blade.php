@@ -53,6 +53,10 @@
                         <p class="text-end w-100">My subscription is canceled?<br>
                         You may still use our subscription plan until the end of the billing period.<br>
                         No new automatic payment will be made.</p>
+                    @elseif($subscription->stripe_status=='past_due')
+                        <p class="text-end w-100">My subscription is past due?<br>
+                        Please update your payment method via the <a href="{{ route('billingPortal') }}"> link below</a><br>
+                        If no successful payment could be made before {{ $subscription->ends_at->addDays(7)->format('D d/m/Y')}}, your subscription will be canceled.</p>
                     @endif
                     
                 @else

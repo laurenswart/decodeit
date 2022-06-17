@@ -17,10 +17,16 @@ class Teacher extends User
 {
     use HasFactory, Billable, SoftDeletes;
 
+    /**
+     * This teacher's students
+     */
     public function students(){
         return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_id', 'student_id', 'id', 'id');
     }
 
+    /**
+     * The payments made by this teacher
+     */
     public function payments(){
         return $this->hasMany(Payment::class, 'teacher_id', 'id' );
     }
@@ -46,6 +52,11 @@ class Teacher extends User
         return $this->hasMany(Course::class, 'teacher_id', 'id' );
     }
 
+    /**
+     * This teacher's current subscription
+     * 
+     * @return Subscription|Null The subscription model instance, even if status is canceled/active/past_due, null if none is found
+     */
     public function currentSubscription(){
         $subscription = Subscription::all()
             ->filter(function($item) {
@@ -64,11 +75,21 @@ class Teacher extends User
             ->whereRoleId(1);
     }
 
+    /**
+     * Know if the teacher is on the free trial
+     * 
+     * @return Boolean True if no current subscription and less than 3 days since teacher created his account, false otherwise.
+     */
     public function isOnFreeTrial(){
         return $this->currentSubscription() == null 
             && $this->created_at->diffInDays(Carbon::now()) <= 3;
     }
 
+    /**
+     * Plan to which teacher is currently subscribed
+     * 
+     * @return Plan|Null The plan model instance, null if none is found
+     */
     public function currentSubscriptionPlan(){
         $plans = Plan::all();
         
@@ -99,6 +120,7 @@ class Teacher extends User
     }
 
     /**
+     * Notifications to display to the teacher on dashboard
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */

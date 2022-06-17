@@ -27,7 +27,7 @@ class Enrolment extends Model
     public $timestamps = true;
 
     /**
-     * The course associated to this enrolment
+     * The course this enrolment belongs to
      */
     protected function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id');
@@ -40,17 +40,17 @@ class Enrolment extends Model
         return $this->belongsTo(Student::class, 'student_id', 'id');
     }
 
-    
 
-    
-    public function studentSkills(){
-        return $this->hasMany(Skill::class, 'skill_id', 'id');
-    }
-
+    /**
+     * The skills associated to this enrolment
+     */
     public function skills(){
         return $this->belongsToMany(Skill::class, 'student_skills', 'enrolment_id', 'skill_id', 'id', 'id')->withPivot('mark');
     }
 
+    /**
+     * The chapters read by this enrolment
+     */
     public function chaptersRead(){
         return $this->belongsToMany(Chapter::class, 'chapters_read', 'enrolment_id', 'chapter_id', 'id', 'id');
     }

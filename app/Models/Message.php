@@ -24,10 +24,16 @@ class Message extends Model
 
     public $timestamps = true;
 
+    /**
+     * The course this message belongs to
+     */
     protected function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id' );
     }
 
+    /**
+     * The user who wrote this message
+     */
     protected function user(){
         return $this->belongsTo(User::class, 'user_id', 'id' );
     }

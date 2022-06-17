@@ -30,14 +30,25 @@ class Chapter extends Model
 
     public $timestamps = true;
 
+    /**
+     * The course this chapter belongs to
+     */
     protected function course(){
         return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 
+    /**
+     * The assignments that are related to this chapter
+     */
     protected function assignments(){
         return $this->belongsToMany(Assignment::class, 'assignment_chapter', 'chapter_id', 'assignment_id', 'id', 'id');
     }
 
+    /**
+     * To know if this chapter has been read by the currently authenticated student
+     * 
+     * @return Boolean True if the chapter has been read, false otherwise
+     */
     public function read(){
         $enrolmentId = $this->course->enrolmentForAuth()->id;
         $read = DB::table('chapters_read')
@@ -46,9 +57,15 @@ class Chapter extends Model
             ->count();
         ;
         
-        return $read == 1;
+        return $read === 1;
     }
 
+
+    /**
+     * Know how many of the assignments related to this chapter can no longer be done by the currently authenticated student
+     * 
+     * @return Int Number of assignments done or passed
+     */
     public function nbAssignmentsDone(){
         $assignmentIds = $this->assignments->pluck('id');
         $enrolment = Course::find($this->course_id)->enrolmentForAuth();
@@ -72,6 +89,12 @@ class Chapter extends Model
         return $nbDone;
     }
 
+    /**
+     * Know if a chapter has been read by a student
+     * 
+     * @param Int $userId Id of the student
+     * @return Boolean True if the chapter has been read by the student, false otherwise
+     */
     public function isRead($userId){
         $enrolment = Enrolment::where('student_id', $userId)
             ->where('course_id', $this->course_id)->first();

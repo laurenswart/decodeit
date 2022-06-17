@@ -28,6 +28,9 @@ class StudentSkill extends Model
 
     public $timestamps = false;
 
+    /**
+     * The skill this studentSkill belongs to
+     */
     protected function skill(){
         return $this->belongsTo(Skill::class, 'skill_id', 'id');
     }

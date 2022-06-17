@@ -27,20 +27,35 @@ class StudentAssignment extends Model
         'marked_at'
     ];
 
+
+    /**
+     * The assignment this studentAssignment belongs to
+     */
     public function assignment(){
         return $this->belongsTo(Assignment::class, 'assignment_id', 'id');
     }
 
+    /**
+     * The subsmissions related to this studentAssignment
+     */
     public function submissions(){
         return $this->hasMany(Submission::class, 'student_assignment_id', 'id');
     }
 
+    /**
+     * The enrolment this studentAssignment belongs to
+     */
     public function enrolment(){
         return $this->belongsTo(Enrolment::class, 'enrolment_id', 'id');
     }
 
+    /**
+     * Know whether or not this student assignment can be marked
+     * 
+     * @return Boolean True if student has marked this assignment as done, or if the end date as passed, or if the number of authorized submissions has been reached. False otherwise.
+     */
     public function canBeMarked(){
-        return $this->to_mark || Carbon::createFromFormat('Y-m-d H:i:s',$this->assignment->end_time)->lt(now()) || count($this->submissions)>=$this->assignment->nb_submissions || $this->to_mark;
+        return $this->to_mark || Carbon::createFromFormat('Y-m-d H:i:s',$this->assignment->end_time)->lt(now()) || count($this->submissions)>=$this->assignment->nb_submissions;
     }
 
     

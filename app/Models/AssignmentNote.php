@@ -26,6 +26,10 @@ class AssignmentNote extends Model
 
     public $timestamps = true;
 
+
+    /**
+     * The assignment this note belongs to
+     */
     protected function assignment(){
         return $this->belongsTo(Assignment::class, 'assignment_id', 'id');
     }
