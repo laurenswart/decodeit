@@ -2,6 +2,8 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use App\Mail\SubscriptionCancelled;
+use App\Mail\SubscriptionReactivated;
 use App\Models\Payment;
 use App\Models\Plan;
 use App\Models\User;
@@ -13,6 +15,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Cashier;
 use Laravel\Cashier\Subscription;
 use Spatie\WebhookClient\Models\WebhookCall;
@@ -37,7 +40,7 @@ class  CustomerSubscriptionUpdatedJob implements ShouldQueue
 
         //get relevant subscription in our db
         $subscription = Subscription::
-            where('stripe_id', $charge['id'] );
+            firstWhere('stripe_id', $charge['id'] );
 
         if(!$subscription){
             //return relevant error code
@@ -51,11 +54,22 @@ class  CustomerSubscriptionUpdatedJob implements ShouldQueue
             $status = 'canceled';
         }
 
+        $oldStatus = $subscription->stripe_status;
         //update our database
         $subscription->update([
             'stripe_status' => $status,
             'ends_at'=> Carbon::createFromTimestamp($charge['current_period_end']),
             'updated_at' => Carbon::now()
         ]);
+
+        //send email
+        $user = User::where('stripe_id', $charge['customer'])->first();
+        if($status=='canceled'){    
+            Mail::to($user->email)
+            ->send(new SubscriptionCancelled($user, $subscription));
+        } else if($oldStatus=='canceled' && $status=='active'){
+            Mail::to($user->email)
+            ->send(new SubscriptionReactivated($user, $subscription));
+        }
     }
 }

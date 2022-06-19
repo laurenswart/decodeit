@@ -63,7 +63,6 @@ var __webpack_exports__ = {};
 __webpack_require__(/*! ./functions.js */ "./resources/js/functions.js");
 
 window.onload = function () {
-  console.log(document.querySelectorAll('button.add'));
   document.querySelectorAll('button.add').forEach(function (x) {
     return x.addEventListener('click', function () {
       createEnrolment(x.value);

@@ -63,6 +63,6 @@ class  CustomerSubscriptionCreatedJob implements ShouldQueue
         ]);
 
         //send email 
-        Mail::to($user->email)->send(new RegistrationConfirmed($user));
+        //Mail::to($user->email)->send(new RegistrationConfirmed($user));
     }
 }

@@ -40,6 +40,8 @@ if(scriptEditor){
         //save script content and console content on form submission
         document.getElementById("newSubmission").onsubmit = function(evt) {
             hiddenScript.value = editor.getValue();
+            console.log('here');
+            evt.preventDefault();
             if(hiddenConsole && myConsole){
                 hiddenConsole.value = myConsole.lastChild.innerText;
             }
