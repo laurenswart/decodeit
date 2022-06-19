@@ -135,5 +135,43 @@ class Course extends Model
         $enrolment = $this->enrolmentForStudent($id);
         return $enrolment ? $enrolment->id : null;
     }
+
+    /**
+     * Know if the course as new messages since the last connection of authenticated user
+     * 
+     * @return Boolean True if there are new messages, false otherwise
+     */
+    public function hasNewMessages(){
+        $teacher = Teacher::find( Auth::id());
+        $lastConnection = $teacher->last_connected;
+        return count($this->messages->where('created_at', '>=', $lastConnection)) > 0 ;
+    }
+
+    /**
+     * Know if the course as new submissions since the last connection of authenticated user
+     * 
+     * @return Boolean True if there are new messages, false otherwise
+     */
+    public function hasNewSubmissions(){
+        $teacher = Teacher::find( Auth::id());
+        $lastConnection = $teacher->last_connected;
+        
+        $assignmentsWithNewSubmissions = StudentAssignment::
+        select('assignment_id', DB::raw("min(submissions.created_at) as 'created_at'"))
+        ->join('submissions', 'submissions.student_assignment_id', 'student_assignment.id')
+        ->where('submissions.created_at', '>',$lastConnection)
+        ->where('submissions.created_at', '=', DB::raw('submissions.updated_at'))
+        ->groupBy('assignment_id')
+        ->having(DB::raw('count(submissions.id)'), '>', 0)
+        ->get();
+
+        foreach($assignmentsWithNewSubmissions as $studentAssignment){
+            if(in_array($studentAssignment->assignment->course_id, $teacher->courses->pluck('id')->toArray())){
+                return true;
+            }
+        }
+
+        return false;
+    }
     
 }

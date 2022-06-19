@@ -210,7 +210,7 @@ class Student extends User
             ];
         }
         foreach($createdNoteAssignments as $createdNoteAssignment){
-            if($createdEnrolments->pluck('course_id')->contains($createdNoteAssignment->assignment->course_id)) continue;
+            if($createdEnrolments->pluck('course_id')->contains($createdNoteAssignment->course_id)) continue;
             $models[] = [
                 'icon'=>'<i class="fas fa-comment-alt-dots"></i>',
                 'route'=> route('assignment_studentShow', $createdNoteAssignment->id),

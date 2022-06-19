@@ -242,7 +242,11 @@ class AssignmentController extends Controller
             $assignment->save();
 
             //attach skills
-            $assignment->skills()->sync($validated['skills']);
+            if(!empty($validated['skills'])){
+                $assignment->skills()->sync($validated['skills']);
+            } else {
+                $assignment->skills()->detach();
+            }
 
 
         } catch (\Illuminate\Database\QueryException $exception) {

@@ -71,7 +71,6 @@
                    <td class="label"><a href="{{ route('assignment_teacherShow', $assignment->id)}}">{{ ucfirst($assignment->title) }}</a></td>
                     @if($assignment->studentAssignmentByStudent($student->id)==null)
                       <td class="cell-center">-</td>
-                      <td class="cell-center">-</td>
                       <td>
                       @if(strtotime($assignment->end_time) < now()->timestamp) 
                         <a href="{{ route('studentAssignment_teacherStore', [$assignment->id, $student->id]) }}"><i class="fas fa-arrow-alt-square-right"></i>View Submissions</a>
