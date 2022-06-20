@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Assignment;
+use App\Models\Course;
 use App\Models\Enrolment;
 use App\Models\Student;
 use App\Models\StudentAssignment;
@@ -28,7 +29,7 @@ class StudentAssignmentPolicy
         if(empty($assignment)) return false;
         //check student is enroled in this course
         $enrolment = DB::table('enrolments')->where('course_id', $assignment->course_id)->where('student_id', $user->id)->first();
-        return !empty($enrolment) && $assignment->isOpen() && $assignment->chapters[0]->is_active && $enrolment->course->is_active;
+        return !empty($enrolment) && $assignment->isOpen() && $assignment->chapters[0]->is_active && Course::find($enrolment->course_id)->is_active;
     }
 
     /**
